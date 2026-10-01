@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Animais perdidos | Patinhas Club</title>
+    <link rel="stylesheet" href="styles/animais-perdidos_styles.css">
+</head>
+<body>
+ 
+  <nav>
+    <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="">Sobre</a></li>
+        <li><a href="">Adoção</a></li>
+        <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
+        <li><a href="">Lista de Espera</a></li>
+        <li><a href="">Denúncia</a></li>
+    </ul>
+ 
+    <img src="img/logo.png" alt="Logo Patinhas Club">
+  </nav>
+ 
+<main class="pagina">
+
+    <!-- Luiz, quando for estilizar, imagine como um mural, use cores que passem a ideia de acolhimento e deixe as fotos de forma como
+     se fossem polaroids, thank u e boa sorte :) -->
+
+
+    <section class="hero">
+      <div class="hero-texto">
+        <h1>Animais perdidos</h1>
+        <p>Mural da comunidade com os animais desaparecidos perto de você. Viu algum? Nos avise!</p>
+      </div>
+
+      <div class="hero-acoes">
+        <a href="reportar-desaparecimento.html" class="botao primario">Reportar animal perdido</a>
+        <a href="index.html" class="botao secundario">Voltar para o início</a>
+      </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filtros">
+      <form class="filtros-form" action="#" method="get">
+
+        <div class="filtro">
+          <label for="busca-local">Localização</label>
+          <input type="text" id="busca-local" name="local" placeholder="Bairro ou cidade">
+        </div>
+
+        <div class="filtro">
+          <label for="filtro-especie">Espécie</label>
+          <select id="filtro-especie" name="especie">
+            <option value="">Todas</option>
+            <option value="cao">Cães</option>
+            <option value="gato">Gatos</option>
+            <option value="outro">Outros</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <label for="filtro-porte">Porte</label>
+          <select id="filtro-porte" name="porte">
+            <option value="">Todos</option>
+            <option value="pequeno">Pequeno</option>
+            <option value="medio">Médio</option>
+            <option value="grande">Grande</option>
+          </select>
+        </div>
+
+        <div class="filtro">
+          <label for="filtro-status">Situação</label>
+          <select id="filtro-status" name="status">
+            <option value="perdido">Ainda perdidos</option>
+            <option value="encontrado">Já encontrados</option>
+            <option value="todos">Todos</option>
+          </select>
+        </div>
+
+        <button type="submit" class="botao primario">Filtrar</button>
+      </form>
+    </section>
+
+    <!-- Mural -->
+    
+    <section class="mural-secao">
+      <h2>Mural de desaparecidos</h2>
+
+      <div class="mural">
+
+        <!-- Card 1 (copiar para cada animal) -->
+        <article class="card-animal">
+
+          <div class="card-foto">
+            <img src="https://placehold.co/400x300?text=Foto+do+animal" alt="Foto do animal desaparecido">
+            <span class="card-status">Perdido</span>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-nome">Nome do animal</h3>
+            <p class="card-detalhes">Cão - Médio - Adulto</p>
+
+            <div class="card-local">
+              <p><strong>Visto pela última vez em:</strong></p>
+              <p>Rua Exemplo, 123 - Bairro, Cidade</p>
+              <p>Data: 28/09/2026 - por volta das 18h</p>
+            </div>
+
+            <p class="card-descricao">Características: pelagem caramelo, coleira azul, mancha branca no peito.</p>
+
+            <p class="card-contato">Contato do tutor: (00) 00000-0000</p>
+          </div>
+
+          <!-- Marcar como encontrado -->
+          <details class="card-encontrado">
+            <summary class="botao secundario">Marcar como encontrado</summary>
+
+            <form class="form-encontrado" action="#" method="post">
+              <h4>Encontrou este animal?</h4>
+
+              <div class="campo">
+                <label for="enc-onde-1">Onde ele foi encontrado?</label>
+                <input type="text" id="enc-onde-1" name="onde" placeholder="Endereço ou ponto de referência" required>
+              </div>
+
+              <div class="campo">
+                <label for="enc-quando-1">Quando?</label>
+                <input type="datetime-local" id="enc-quando-1" name="quando" required>
+              </div>
+
+              <div class="campo">
+                <label for="enc-estado-1">Como ele estava?</label>
+                <select id="enc-estado-1" name="estado" required>
+                  <option value="">Selecione</option>
+                  <option value="bem">Bem, sem ferimentos</option>
+                  <option value="assustado">Assustado</option>
+                  <option value="ferido">Ferido</option>
+                  <option value="desnutrido">Magro ou desidratado</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="enc-obs-1">Conte mais detalhes</label>
+                <textarea id="enc-obs-1" name="observacoes" rows="4" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+              </div>
+
+              <div class="campo">
+                <label for="enc-foto-1">Foto (opcional)</label>
+                <input type="file" id="enc-foto-1" name="foto" accept="image/*">
+              </div>
+
+              <div class="campo">
+                <label for="enc-contato-1">Seu contato</label>
+                <input type="text" id="enc-contato-1" name="contato" placeholder="Telefone ou e-mail" required>
+              </div>
+
+              <div class="form-botoes">
+                <button type="submit" class="botao primario">Confirmar que foi encontrado</button>
+              </div>
+            </form>
+          </details>
+
+        </article>
+        <!-- Fim do Card 1 -->
+
+
+        <!-- Card 2 -->
+        <article class="card-animal">
+
+          <div class="card-foto">
+            <img src="https://placehold.co/400x300?text=Foto+do+animal" alt="Foto do animal desaparecido">
+            <span class="card-status">Perdido</span>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-nome">Nome do animal</h3>
+            <p class="card-detalhes">Gato - Pequeno - Filhote</p>
+
+            <div class="card-local">
+              <p><strong>Visto pela última vez em:</strong></p>
+              <p>Av. Exemplo, 456 - Bairro, Cidade</p>
+              <p>Data: 30/09/2026 - por volta das 07h</p>
+            </div>
+
+            <p class="card-descricao">Características: pelo tigrado cinza, olhos verdes, sem coleira.</p>
+
+            <p class="card-contato">Contato do tutor: (00) 00000-0000</p>
+          </div>
+
+          <details class="card-encontrado">
+            <summary class="botao secundario">Marcar como encontrado</summary>
+
+            <form class="form-encontrado" action="#" method="post">
+              <h4>Encontrou este animal?</h4>
+
+              <div class="campo">
+                <label for="enc-onde-2">Onde ele foi encontrado?</label>
+                <input type="text" id="enc-onde-2" name="onde" placeholder="Endereço ou ponto de referência" required>
+              </div>
+
+              <div class="campo">
+                <label for="enc-quando-2">Quando?</label>
+                <input type="datetime-local" id="enc-quando-2" name="quando" required>
+              </div>
+
+              <div class="campo">
+                <label for="enc-estado-2">Como ele estava?</label>
+                <select id="enc-estado-2" name="estado" required>
+                  <option value="">Selecione</option>
+                  <option value="bem">Bem, sem ferimentos</option>
+                  <option value="assustado">Assustado</option>
+                  <option value="ferido">Ferido</option>
+                  <option value="desnutrido">Magro ou desidratado</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="enc-obs-2">Conte mais detalhes</label>
+                <textarea id="enc-obs-2" name="observacoes" rows="4" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+              </div>
+
+              <div class="campo">
+                <label for="enc-foto-2">Foto (opcional)</label>
+                <input type="file" id="enc-foto-2" name="foto" accept="image/*">
+              </div>
+
+              <div class="campo">
+                <label for="enc-contato-2">Seu contato</label>
+                <input type="text" id="enc-contato-2" name="contato" placeholder="Telefone ou e-mail" required>
+              </div>
+
+              <div class="form-botoes">
+                <button type="submit" class="botao primario">Confirmar que foi encontrado</button>
+              </div>
+            </form>
+          </details>
+
+        </article>
+
+        <!-- Fim do Card 2 -->
+
+
+        <!-- Card 3 -->
+        <article class="card-animal">
+
+          <div class="card-foto">
+            <img src="https://placehold.co/400x300?text=Foto+do+animal" alt="Foto do animal desaparecido">
+            <span class="card-status">Perdido</span>
+          </div>
+
+          <div class="card-info">
+            <h3 class="card-nome">Nome do animal</h3>
+            <p class="card-detalhes">Cão - Grande - Idoso</p>
+
+            <div class="card-local">
+              <p><strong>Visto pela última vez em:</strong></p>
+              <p>Praça Exemplo - Bairro, Cidade</p>
+              <p>Data: 25/09/2026 - por volta das 20h</p>
+            </div>
+
+            <p class="card-descricao">Características: pelagem preta, focinho grisalho, anda devagar.</p>
+
+            <p class="card-contato">Contato do tutor: (00) 00000-0000</p>
+          </div>
+
+          <details class="card-encontrado">
+            <summary class="botao secundario">Marcar como encontrado</summary>
+
+            <form class="form-encontrado" action="#" method="post">
+              <h4>Encontrou este animal?</h4>
+
+              <div class="campo">
+                <label for="enc-onde-3">Onde ele foi encontrado?</label>
+                <input type="text" id="enc-onde-3" name="onde" placeholder="Endereço ou ponto de referência" required>
+              </div>
+
+              <div class="campo">
+                <label for="enc-quando-3">Quando?</label>
+                <input type="datetime-local" id="enc-quando-3" name="quando" required>
+              </div>
+
+              <div class="campo">
+                <label for="enc-estado-3">Como ele estava?</label>
+                <select id="enc-estado-3" name="estado" required>
+                  <option value="">Selecione</option>
+                  <option value="bem">Bem, sem ferimentos</option>
+                  <option value="assustado">Assustado</option>
+                  <option value="ferido">Ferido</option>
+                  <option value="desnutrido">Magro ou desidratado</option>
+                </select>
+              </div>
+
+              <div class="campo">
+                <label for="enc-obs-3">Conte mais detalhes</label>
+                <textarea id="enc-obs-3" name="observacoes" rows="4" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+              </div>
+
+              <div class="campo">
+                <label for="enc-foto-3">Foto (opcional)</label>
+                <input type="file" id="enc-foto-3" name="foto" accept="image/*">
+              </div>
+
+              <div class="campo">
+                <label for="enc-contato-3">Seu contato</label>
+                <input type="text" id="enc-contato-3" name="contato" placeholder="Telefone ou e-mail" required>
+              </div>
+
+              <div class="form-botoes">
+                <button type="submit" class="botao primario">Confirmar que foi encontrado</button>
+              </div>
+            </form>
+          </details>
+
+        </article>
+
+        <!-- Fim do Card 3 -->
+
+      </div>
+      <!-- fim do mural -->
+
+      <!-- Páginas -->
+      <nav class="paginas" aria-label="Páginas do mural">
+        <a href="#">Anterior</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">Próxima</a>
+      </nav>
+    </section>
+
+    <!-- Só pra rir -->
+    <section class="final">
+      <h2>Seu animal sumiu?</h2>
+      <p>Cadastre o desaparecimento e a vizinhança toda ajuda a procurar.</p>
+      <a href="reportar-desaparecimento.html" class="botao primario">Reportar animal perdido</a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <p>Feito por seis estudantes, em projeto integrador.</p>
+      <p>Patinhas Club</p>
+    </div>
+  </footer>
+
+</body>
+</html>
