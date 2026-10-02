@@ -1,98 +1,106 @@
-!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Reportar desaparecimento | Patinhas Club</title>
-    <link rel="stylesheet" href="styles/styles.css">
-</head>
-<body>
-
-  <nav>
-    <ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lista de espera | Patinhas Club</title>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body class="pagina-site pagina-espera">
+    <nav>
+      <ul>
         <li><a href="index.html">Início</a></li>
         <li><a href="#">Sobre</a></li>
         <li><a href="#">Adoção</a></li>
         <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
         <li><a href="lista_de_espera.html">Lista de Espera</a></li>
         <li><a href="#">Denúncia</a></li>
-    </ul>
+      </ul>
 
-    <img src="img/logo.png" alt="Logo Patinhas Club">
-  </nav>
+      <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club" />
+    </nav>
 
-  <main class="pagina">
+    <main class="pagina">
+      <section class="espera-intro">
+        <div>
+          <h1>Não encontrou o pet ideal?</h1>
+          <p>
+            Entre na nossa lista de espera e avisaremos quando um animal com o
+            perfil desejado estiver disponível.
+          </p>
+        </div>
+        <img
+          src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+          alt="Gata olhando para a câmera"
+        />
+      </section>
 
-  <h2>Não encontrou o pet ideal?</h2>
-  <p>Entre na nossa lista de espera e avisaremos quando um animal com o perfil desejado estiver disponivel</p>
+      <form action="obrigado.html" method="get">
+        <p>
+          <label for="nome">Seu nome completo:</label><br />
+          <input type="text" id="nome" name="nome" required />
+        </p>
 
-  <form action="obrigado.html" method="get">
+        <p>
+          <label for="email">E-mail:</label><br />
+          <input type="email" id="email" name="email" required />
+        </p>
 
-    <p>
-      <label for="nome">Seu nome completo:</label><br>
-      <input type="text" id="nome" name="nome" required>
-    </p>
+        <p>
+          <label for="telefone">Telefone:</label><br />
+          <input type="tel" id="telefone" name="telefone" required />
+        </p>
 
-    <p>
-      <label for="email">E-mail:</label><br>
-      <input type="email" id="email" name="email" required>
-    </p>
+        <p>
+          <label for="Porte">Porte:</label><br />
+          <select id="Porte" name="Porte" required>
+            <option value="">Escolha uma categoria</option>
+            <option>Pequeno</option>
+            <option>Médio</option>
+            <option>Grande</option>
+          </select>
+        </p>
+        <p>
+          <label for="Idade">Idade:</label><br />
+          <select id="Idade" name="Idade" required>
+            <option value="">Idade desejada</option>
+            <option>Filhote</option>
+            <option>Jovem</option>
+            <option>Adulto</option>
+            <option>Idoso</option>
+          </select>
+        </p>
+        <p>
+          <label for="sexo">Sexo:</label><br />
+          <select id="sexo" name="sexo" required>
+            <option value="">Sexo desejado</option>
+            <option>Macho</option>
+            <option>Fêmea</option>
+          </select>
+        </p>
 
-    <p>
-      <label for="produto">Telefone:</label><br>
-      <input type="text" id="produto" name="produto" required>
-    </p>
+        <p>
+          <input type="checkbox" id="termos" name="termos" required />
+          <label for="termos"
+            >Confirmo que os dados informados são reais.</label
+          >
+        </p>
 
-    <p>
-      <label for="Porte">Porte:</label><br>
-      <select id="Porte" name="Porte" required>
-        <option value="">Escolha uma categoria</option>
-        <option>Pequeno</option>
-        <option>Médio</option>
-        <option>Grande</option>
-      </select>
-    </p>
-<p>
-      <label for="Idade">Idade:</label><br>
-      <select id="Idade" name="Idade" required>
-        <option value="">Idade desejada</option>
-        <option>Filhote</option>
-        <option>Jovem</option>
-        <option>Adulto</option>
-        <option>Idoso</option>
-      </select>
-    </p>
-<p>
-    <label for="sexo">Sexo:</label><br>
-    <select id="sexo" name="sexo" required>
-        <option value="">Sexo desejado</option>
-        <option>Macho</option>
-        <option>Fêmea</option>
-    </select>
-</p>
+        <p>
+          <button type="submit">Entrar na Lista de Espera</button>
+          <button type="reset">Limpar</button>
+        </p>
+      </form>
+    </main>
 
-    <p>
-      <input type="checkbox" id="termos" name="termos" required>
-      <label for="termos">Confirmo que os dados informados são reais.</label>
-    </p>
-
-    <p>
-      <button type="submit">Entrar na Lista de Espera</button>
-      <button type="reset">Limpar</button>
-    </p>
-
-  </form>
-</main>
-
-<footer>
-  <p>&copy; Feito por seis estudantes, em projeto integrador</p>
-  <p>Patinhas Club</p>
-  <nav>
-    <a href="#">Política de Privacidade</a>
-    <a href="#">Termos de Uso</a>
-    <a href="index.html">Voltar ao topo</a>
-  </nav>
-</footer>
-
-</body>
+    <footer class="footer">
+      <p>&copy; Feito por seis estudantes, em projeto integrador</p>
+      <p>Patinhas Club</p>
+      <nav>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="index.html">Voltar ao topo</a>
+      </nav>
+    </footer>
+  </body>
 </html>
