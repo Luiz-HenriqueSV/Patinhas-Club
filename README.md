@@ -122,34 +122,12 @@ Cadastro e autenticação com perfis próprios para **adotantes** e para **ONGs/
 
 ## 🛠️ Tecnologias
 
-> 🚧 **Preencher:** liste aqui as tecnologias usadas no projeto.
-
 | Camada | Tecnologia |
 |---|---|
-| Front-end | _a definir_ |
+| Front-end | HTML, CSS, JavaScript |
 | Back-end | _a definir_ |
-| Banco de dados | _a definir_ |
-| Design / Prototipação | _a definir_ |
-
----
-
-## 🚀 Como executar
-
-> 🚧 **Preencher:** ajuste os comandos conforme a stack do projeto.
-
-```bash
-# Clone o repositório
-git clone https://github.com/<usuario>/patinhas-club.git
-
-# Acesse a pasta do projeto
-cd patinhas-club
-
-# Instale as dependências
-# (comando conforme a stack)
-
-# Execute o projeto
-# (comando conforme a stack)
-```
+| Banco de dados | MySQL |
+| Design / Prototipação | Figma, INkscape, Photopea |
 
 ---
 
@@ -180,16 +158,6 @@ Sugestões e melhorias são bem-vindas! Para contribuir:
 
 ---
 
-## 📄 Licença
-
-> 🚧 **Preencher:** defina a licença do projeto (ex.: MIT) e adicione o arquivo `LICENSE`.
-
----
-
-<div align="center">
-
 **Feito com 💚 para quem ama os bichinhos.**
 
 🐾 *Patinhas Club: adotar, resgatar e reencontrar.*
-
-</div>****
