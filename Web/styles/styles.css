@@ -72,13 +72,17 @@ body.pagina-site > header > nav li a:focus {
 
 body.pagina-perdidos > nav > img,
 body.pagina-site > nav > img,
-body.pagina-site > header > nav > img {
-  flex: 0 1 120px;
-  width: 120px;
-  height: 68px;
-  object-fit: cover;
-  object-position: center 38%;
-  background: white;
+body.pagina-site > header > nav > img,
+.logo-patinhas {
+  flex: 0 0 auto;
+  display: block;
+  width: 170px;
+  max-width: 100%;
+  height: auto;
+  max-height: 68px;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
 }
 
 body.pagina-perdidos .pagina,
