@@ -3,22 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Animais perdidos | Patinhas Club</title>
-    <link rel="stylesheet" href="styles/reportar-desaparecimento.css">
+    <title>Reportar desaparecimento | Patinhas Club</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
- 
+
   <nav>
     <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="">Sobre</a></li>
-        <li><a href="">Adoção</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="#">Adoção</a></li>
         <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
-        <li><a href="">Lista de Espera</a></li>
-        <li><a href="">Denúncia</a></li>
+        <li><a href="lista_de_espera.html">Lista de Espera</a></li>
+        <li><a href="#">Denúncia</a></li>
     </ul>
- 
+
     <img src="img/logo.png" alt="Logo Patinhas Club">
   </nav>
- 
-<main class="pagina">
+
+  <main class="pagina">
+
+    <section class="hero">
+      <div class="hero-texto">
+        <h1>Reportar animal perdido</h1>
+        <p>Preencha as informações abaixo. Quanto mais detalhes, mais fácil de a comunidade ajudar a encontrar.</p>
+      </div>
+
+      <div class="hero-acoes">
+        <a href="animais-perdidos.html" class="botao secundario">Voltar para o mural</a>
+      </div>
+    </section>
+
+    <!--Willian, fiz assim, se vc achar algo errado, pode mudar, e pode adicionar a parte de denuncias aq msm se quiser.-->
+
+    <!-- Formulário -->
+    <section class="formulario-secao">
+
+      <form id="form-desaparecimento" class="form-desaparecimento" action="#" method="post" enctype="multipart/form-data">
+
+        <!-- Bloco 1: sobre o animal -->
+        <fieldset class="bloco bloco-animal">
+          <legend>Sobre o animal</legend>
+
+          <div class="campo">
+            <label for="nome-animal">Nome do animal</label>
+            <input type="text" id="nome-animal" name="nome_animal" placeholder="Ex.: Thor" required>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="especie">Espécie</label>
+              <select id="especie" name="especie" required>
+                <option value="">Selecione</option>
+                <option value="cao">Cão</option>
+                <option value="gato">Gato</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="raca">Raça</label>
+              <input type="text" id="raca" name="raca" placeholder="Ex.: Vira-lata, Poodle (se não souber, deixe em branco)">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="porte">Porte</label>
+              <select id="porte" name="porte" required>
+                <option value="">Selecione</option>
+                <option value="pequeno">Pequeno</option>
+                <option value="medio">Médio</option>
+                <option value="grande">Grande</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="idade">Idade</label>
+              <select id="idade" name="idade" required>
+                <option value="">Selecione</option>
+                <option value="filhote">Filhote</option>
+                <option value="adulto">Adulto</option>
+                <option value="idoso">Idoso</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="sexo">Sexo</label>
+              <select id="sexo" name="sexo">
+                <option value="">Não sei </option>
+                <option value="macho">Macho</option>
+                <option value="femea">Fêmea</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="cor">Cor da pelagem</label>
+            <input type="text" id="cor" name="cor" placeholder="Ex.: caramelo com mancha branca no peito" required>
+          </div>
+
+          <div class="campo">
+            <label for="caracteristicas">Características e comportamento</label>
+            <textarea id="caracteristicas" name="caracteristicas" rows="4" placeholder="Ex.: coleira azul, manca de uma pata, assustado com estranhos, atende pelo nome..."></textarea>
+          </div>
+
+          <div class="campo campo-checkbox">
+            <input type="checkbox" id="tem-identificacao" name="tem_identificacao">
+            <label for="tem-identificacao">Está com coleira, plaquinha ou microchip</label>
+          </div>
+
+          <div class="campo">
+            <label for="foto">Foto do animal</label>
+            <input type="file" id="foto" name="foto" accept="image/*" required>
+            <small>Use uma foto nítida, de preferência mostrando o rosto e o corpo inteiro.</small>
+          </div>
+        </fieldset>
+
+        <!-- Bloco 2: onde foi visto por último -->
+        <fieldset class="bloco bloco-local">
+          <legend>Onde foi visto pela última vez</legend>
+
+          <div class="campo">
+            <label for="endereco">Endereço ou ponto de referência</label>
+            <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Exemplo, 123, perto da padaria" required>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="bairro">Bairro</label>
+              <input type="text" id="bairro" name="bairro" required>
+            </div>
+
+            <div class="campo">
+              <label for="cidade">Cidade</label>
+              <input type="text" id="cidade" name="cidade" required>
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="data-desaparecimento">Data</label>
+              <input type="date" id="data-desaparecimento" name="data_desaparecimento" required>
+            </div>
+
+            <div class="campo">
+              <label for="hora-desaparecimento">Horário aproximado</label>
+              <input type="time" id="hora-desaparecimento" name="hora_desaparecimento">
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="circunstancias">Como ele desapareceu?</label>
+            <textarea id="circunstancias" name="circunstancias" rows="3" placeholder="Ex.: fugiu pelo portão aberto, se assustou com fogos..."></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Bloco 3: contato -->
+        <fieldset class="bloco bloco-contato">
+          <legend>Seu contato</legend>
+
+          <div class="campo">
+            <label for="nome-tutor">Seu nome</label>
+            <input type="text" id="nome-tutor" name="nome_tutor" required>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="telefone">Telefone / WhatsApp</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+            </div>
+
+            <div class="campo">
+              <label for="email">E-mail (opcional)</label>
+              <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+            </div>
+          </div>
+
+          <div class="campo campo-checkbox">
+            <input type="checkbox" id="autoriza-contato" name="autoriza_contato" required>
+            <label for="autoriza-contato">Autorizo exibir meu contato no mural para quem encontrar o animal</label>
+          </div>
+        </fieldset>
+
+        <p id="mensagem-form" class="mensagem-form" aria-live="polite"></p>
+
+        <div class="form-botoes">
+          <button type="submit" class="botao primario">Publicar no mural</button>
+          <button type="reset" class="botao secundario">Limpar campos</button>
+        </div>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <footer>
+  <p>&copy; Feito por seis estudantes, em projeto integrador</p>
+  <nav>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+    <a href="index.html">Voltar ao topo</a>
+  </nav>
+  </footer>
+
+</body>
+</html>

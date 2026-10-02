@@ -1,0 +1,37 @@
+* {
+    font-family: Arial, Helvetica, sans-serif ;
+    box-sizing: border-box;
+}
+
+main {
+    background-color:aliceblue
+}
+
+body {
+            font-family: Arial, sans-serif;
+            font-size: 1rem; 
+            line-height: 1.5;
+            margin: 0;
+            padding: 1rem;
+            background-color:aliceblue;
+        }
+
+.container {
+            width: 100%;           
+            max-width: 800px;        
+            margin: 0 auto;        
+            background: white;
+            padding: 2rem;          
+            box-sizing: border-box;  
+        }
+
+ img {
+            max-width: 100%;        
+            height: auto;            
+            display: block;
+        }
+
+ h1 {
+            font-size: 2rem;         
+            margin-bottom: 1.5rem;
+        }
