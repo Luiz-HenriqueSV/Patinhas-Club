@@ -1,52 +1,235 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Patinhas Club</title>
-    <link rel="stylesheet" href="styles/styles.css">
-</head>
-<body>
- 
-  <nav>
-    <ul>
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body class="pagina-site pagina-inicial">
+    <nav>
+      <ul>
         <li><a href="index.html" target="_self">Início</a></li>
         <li><a href="sobre.html" target="_self">Sobre</a></li>
         <li><a href="" target="_self">Adoção</a></li>
-        <li><a href="animais-perdidos.html" target="_self">Animais Perdidos</a></li>
-        <li><a href="lista_de_espera.html" target="_self">Lista de Espera</a></li>
+        <li>
+          <a href="animais-perdidos.html" target="_self">Animais Perdidos</a>
+        </li>
+        <li>
+          <a href="lista_de_espera.html" target="_self">Lista de Espera</a>
+        </li>
         <li><a href="" target="_self">Denúncia</a></li>
-    </ul>
- 
-    <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club">
-  </nav>
- 
-<main class="pagina">
+      </ul>
 
-    <section>
+      <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club" />
+    </nav>
 
-    </section>
+    <main class="pagina">
+      <section id="inicio">
+        <h1>Adotar, resgatar e reencontrar num só lugar.</h1>
+        <p>
+          O Patinhas Club junta ONGs, protetores e adotantes num app com filtros
+          de adoção e anúncios de animais perdidos perto de você.
+        </p>
+        <div class="inicio-acoes">
+          <a href="#adote" class="botao primario">Ver animais para adotar</a>
+          <a href="#lista-de-espera" class="botao secundario"
+            >Entrar na lista de espera</a
+          >
+        </div>
+      </section>
 
+      <section id="adote">
+        <h2>Encontre o pet certo para a sua casa.</h2>
 
+        <form action="#" method="get">
+          <fieldset>
+            <legend>Filtros de adoção</legend>
 
+            <div class="filtro-campo">
+              <label for="especie">Espécie</label>
+              <select id="especie" name="especie">
+                <option value="">Todos</option>
+                <option value="cao">Cães</option>
+                <option value="gato">Gatos</option>
+              </select>
+            </div>
 
+            <div class="filtro-campo">
+              <label for="porte">Porte</label>
+              <select id="porte" name="porte">
+                <option value="">Qualquer</option>
+                <option value="pequeno">Pequeno</option>
+                <option value="medio">Médio</option>
+                <option value="grande">Grande</option>
+              </select>
+            </div>
 
+            <div class="filtro-campo">
+              <label for="idade">Idade</label>
+              <select id="idade" name="idade">
+                <option value="">Qualquer</option>
+                <option value="filhote">Filhote</option>
+                <option value="adulto">Adulto</option>
+                <option value="idoso">Idoso</option>
+              </select>
+            </div>
 
+            <div class="filtro-campo">
+              <label for="localizacao">Localização</label>
+              <input
+                type="text"
+                id="localizacao"
+                name="localizacao"
+                placeholder="Cidade ou bairro"
+              />
+            </div>
 
+            <label>
+              <input
+                type="checkbox"
+                name="necessidades-especiais"
+                value="sim"
+              />
+              Necessidades especiais
+            </label>
 
+            <button type="submit">Filtrar</button>
+          </fieldset>
+        </form>
 
+        <ul>
+          <li>
+            <article>
+              <img
+                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Cão disponível para adoção"
+                width="150"
+              />
+              <h3>Churros</h3>
+              <p>Cão · Pequeno · Adulto</p>
+              <p>A 1,2 km de você</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <img
+                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Cão disponível para adoção"
+                width="150"
+              />
+              <h3>Brutus</h3>
+              <p>Cão · Médio · Idoso</p>
+              <p>A 3 km de você</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <img
+                src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Gata disponível para adoção"
+                width="150"
+              />
+              <h3>Mel</h3>
+              <p>Gato · Pequeno · Adulto</p>
+              <p>A 800 m de você</p>
+            </article>
+          </li>
+          <li>
+            <article>
+              <img
+                src="https://images.unsplash.com/photo-1721781010133-8eb0e9b23daf?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Thor, filhote de Shih Tzu branco e marrom"
+                width="150"
+              />
+              <h3>Thor</h3>
+              <p>Cão · Grande · Filhote</p>
+              <p>A 5 km de você</p>
+            </article>
+          </li>
+        </ul>
+      </section>
 
-    
+      <section id="recursos">
+        <h2>Além da adoção, a comunidade toda entra.</h2>
 
-  <footer class="footer">
-    <footer>
-  <p>&copy; Feito por seis estudantes, em projeto integrador</p>
-  <nav>
-    <a href="#">Política de Privacidade</a>
-    <a href="#">Termos de Uso</a>
-    <a href="index.html">Voltar ao topo</a>
-  </nav>
+        <article>
+          <h3>Perdidos e achados perto de você</h3>
+          <p>
+            Anúncios de animais perdidos e encontrados no mapa da sua região.
+          </p>
+        </article>
+
+        <article>
+          <h3>Campanhas para ONGs</h3>
+          <p>Divulgue arrecadações, feiras de adoção e pedidos de ajuda.</p>
+        </article>
+
+        <article>
+          <h3>Um perfil para cada papel</h3>
+          <p>Cadastro próprio para adotantes e para ONGs ou protetores.</p>
+        </article>
+      </section>
+
+      <section id="problema">
+        <h2>Hoje, ajudar um animal dá trabalho:</h2>
+        <ul>
+          <li>Animais demais nas ruas</li>
+          <li>ONGs com pouca visibilidade</li>
+          <li>Adoção espalhada e burocrática</li>
+        </ul>
+      </section>
+
+      <section id="equipe">
+        <h2>Feito por seis estudantes, em projeto integrador.</h2>
+        <ul>
+          <li><strong>Daniel S. Esteves</strong>: QA, análise e design</li>
+          <li><strong>Gabriel Elias da Silva</strong>: Líder e requisitos</li>
+          <li>
+            <strong>Gabriel M. Silva</strong>: Back-end, logotipo, wireframe
+          </li>
+          <li><strong>Gabriel S. Costa</strong>: Full-stack e arquitetura</li>
+          <li>
+            <strong>Luiz Henrique S. Ventura</strong>: Front-end, banco, design
+          </li>
+          <li>
+            <strong>Willian B. A. de Sousa</strong>: Back-end e Scrum Master
+          </li>
+        </ul>
+      </section>
+
+      <section id="lista-de-espera">
+        <h2>Entre na lista de espera</h2>
+        <p>
+          Deixe seu e-mail e avisaremos quando o Patinhas Club estiver no ar.
+        </p>
+
+        <form action="#" method="post">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required />
+
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="perfil">Eu sou</label>
+          <select id="perfil" name="perfil" required>
+            <option value="">Selecione</option>
+            <option value="adotante">Adotante / Tutor</option>
+            <option value="ong">ONG / Protetor</option>
+          </select>
+
+          <button type="submit">Quero entrar na lista</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>&copy; Feito por seis estudantes, em projeto integrador</p>
+      <nav aria-label="Links do rodapé">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="index.html">Voltar ao topo</a>
+      </nav>
     </footer>
-
-</body>
+  </body>
 </html>
