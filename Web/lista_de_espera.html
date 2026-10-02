@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title> Lista de Espera </title>
+<link rel="stylesheet" href="lista-de-espera_styles.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" target="_self">Início</a>
+     <a href="" target="_self">Sobre</a>
+     <a href="" target="_self">Adoção</a>
+     <a href="animais-perdidos.html" target="_self">Animais Perdidos</a>
+     <a href="" target="_self">Lista de Espera</a>
+     <a href="" target="_self">Denúncia</a>
+  </nav>
+</header>
+
+<main>
+  <h2>Não encontrou o pet ideal?</h2>
+  <p>Entre na nossa lista de espera e avisaremos quando um animal com o perfil desejado estiver disponivel</p>
+
+  <form action="obrigado.html" method="get">
+
+    <p>
+      <label for="nome">Seu nome completo:</label><br>
+      <input type="text" id="nome" name="nome" required>
+    </p>
+
+    <p>
+      <label for="email">E-mail:</label><br>
+      <input type="email" id="email" name="email" required>
+    </p>
+
+    <p>
+      <label for="produto">Telefone:</label><br>
+      <input type="text" id="produto" name="produto" required>
+    </p>
+
+    <p>
+      <label for="Porte">Porte:</label><br>
+      <select id="Porte" name="Porte" required>
+        <option value="">Escolha uma categoria</option>
+        <option>Pequeno</option>
+        <option>Médio</option>
+        <option>Grande</option>
+      </select>
+    </p>
+<p>
+      <label for="Idade">Idade:</label><br>
+      <select id="Idade" name="Idade" required>
+        <option value="">Idade desejada</option>
+        <option>Filhote</option>
+        <option>Jovem</option>
+        <option>Adulto</option>
+        <option>Idoso</option>
+      </select>
+    </p>
+<p>
+    <label for="sexo">Sexo:</label><br>
+    <select id="sexo" name="sexo" required>
+        <option value="">Sexo desejado</option>
+        <option>Macho</option>
+        <option>Fêmea</option>
+    </select>
+</p>
+
+    <p>
+      <input type="checkbox" id="termos" name="termos" required>
+      <label for="termos">Confirmo que os dados informados são reais.</label>
+    </p>
+
+    <p>
+      <button type="submit">Entrar na Lista de Espera</button>
+      <button type="reset">Limpar</button>
+    </p>
+
+  </form>
+</main>
+
+<footer>
+  <p>&copy; Feito por seis estudantes, em projeto integrador</p>
+  <nav>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+    <a href="index.html">Voltar ao topo</a>
+  </nav>
+</footer>
+
+</body>
+</html>
