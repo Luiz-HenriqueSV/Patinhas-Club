@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title> Lista de Espera </title>
-<link rel="stylesheet" href="lista-de-espera_styles.css">
+<link rel="stylesheet" href="styles/lista-de-espera_styles.css">
 </head>
 <body>
 
@@ -21,8 +21,8 @@
 <main>
   <h2>Não encontrou o pet ideal?</h2>
   <p>Entre na nossa lista de espera e avisaremos quando um animal com o perfil desejado estiver disponivel</p>
-
-  <form action="obrigado.html" method="get">
+<!--Formulário inicio-->
+  <form action="" method="get">
 
     <p>
       <label for="nome">Seu nome completo:</label><br>
@@ -35,10 +35,20 @@
     </p>
 
     <p>
-      <label for="produto">Telefone:</label><br>
-      <input type="text" id="produto" name="produto" required>
+      <label for="Telefone">Telefone:</label><br>
+      <input type="text" id="Telefone" name="Telfone" required>
     </p>
-
+<!--Luiz = Capivara!!!!!-->
+    <p>
+      <label for="Animal">Qual Animal você procura:</label><br>
+      <select id="Animal" name="Animal" required>
+        <option value="">Escolha um animal</option>
+        <option>Cachorro</option>
+        <option>Gato</option>
+        <option>Outro</option>
+      </select>
+    </p>
+    
     <p>
       <label for="Porte">Porte:</label><br>
       <select id="Porte" name="Porte" required>
@@ -48,6 +58,7 @@
         <option>Grande</option>
       </select>
     </p>
+
 <p>
       <label for="Idade">Idade:</label><br>
       <select id="Idade" name="Idade" required>
@@ -58,6 +69,7 @@
         <option>Idoso</option>
       </select>
     </p>
+    <!--Eita bixo sexo kkkkkkkkkkkkkk-->>
 <p>
     <label for="sexo">Sexo:</label><br>
     <select id="sexo" name="sexo" required>
