@@ -2,8 +2,8 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Reportar desaparecimento | Patinhas Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Denúncias | Patinhas Club</title>
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
   <body class="pagina-site">
@@ -20,55 +20,91 @@
       <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club" />
     </nav>
 
-    <main class="pagina pagina-reportar">
+    <!--Sobre a pagina de denuncia não deveriamos padronizar 
+    os formularios para ficarem iguais ao report?-->
+    <main class="pagina pagina-reportar"> 
       <section class="hero">
         <div class="hero-texto">
-          <h1>Reportar animal perdido</h1>
-          <p>
-            Preencha as informações abaixo. Quanto mais detalhes, mais fácil de
-            a comunidade ajudar a encontrar.
-          </p>
+          <h1>Denúncia Animais</h1>
+          <p>Encontrou um animal em situação de abandono, maus-tratos ou outro problema?</p>
+          <p>Prencha o formulario abaixo. As informações serão Analisadas pela nossa equipe e outras ONGs.</p>
         </div>
 
         <div class="hero-imagem">
           <img
-            src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
-            alt="Cão em um gramado"
+            src="./img/denuncia.jpg"
+            alt="Cachorro em situação de abandono"
           />
         </div>
 
-        <div class="hero-acoes">
-          <a href="animais-perdidos.html" class="botao secundario"
-            >Voltar para o mural</a
-          >
-        </div>
       </section>
 
       <!--Willian, fiz assim, se vc achar algo errado, pode mudar, e pode adicionar a parte de denuncias aq msm se quiser.-->
 
       <!-- Formulário -->
       <section class="formulario-secao">
-        <form
-          id="form-desaparecimento"
-          class="form-desaparecimento"
-          action="#"
-          method="post"
-          enctype="multipart/form-data"
-        >
-          <!-- Bloco 1: sobre o animal -->
-          <fieldset class="bloco bloco-animal">
-            <legend>Sobre o animal</legend>
+        <form id="form-denuncia" class="form-desaparecimento" action="#" method="post" enctype="multipart/form-data">
+      
+        <!-- Bloco 1: Tipo de Denuncia -->
+          <fieldset class="bloco bloco-denuncia">
+            <legend>Tipo de Ocorrência/Denuncia</legend>
+            <div class="linha">
+                <div class="campo">
+                    <div class="tipo-ocorrencia">
+                        <label for="tipo-correncia">Tipo de Ocorrência</label>
+                        <select name="tipo_ocorrencia" id="ocorrencia" required>
+                            <option value="">Selecione o tipo de ocorrência</option>
+                                <option value="abandono">Animal abandonado</option>
+                                <option value="maus-tratos">Suspeita de maus-tratos</option>
+                                <option value="risco">Animal em situação de risco</option>
+                                <option value="adocao-irregular">Adoção irregular</option>
+                                <option value="animal-perdido">Animal perdido/encontrado</option>
+                                <option value="outro">Outro</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="campo">    
+                    <div class="quantidade-animais">
+                        <label for="quantidade-animais">Quantidade animais</label>
+                        <input type="number" 
+                        class="quantidade-animais" 
+                        min="1" 
+                        value="1" 
+                        required>
+                    </div>
+                
+                </div>
+            </div> 
+            
+
+            <div class="descricao-situacao">
+                <label for="situação" class >Conte o que aconteceu</label>
+                <textarea
+                class="situacao"
+                name="situacao_animal"
+                rows="3"
+                placeholder="Descreva a situação que se encontram"></textarea>
+            </div>
 
             <div class="campo">
-              <label for="nome-animal">Nome do animal</label>
+              <label for="foto">Foto do animal</label>
               <input
-                type="text"
-                id="nome-animal"
-                name="nome_animal"
-                placeholder="Ex.: Thor"
+                type="file"
+                id="foto"
+                name="foto"
+                accept="image/*"
                 required
               />
+              <small>Use uma foto nítida, de preferência mostrando o rosto e o corpo
+                inteiro.</small>
             </div>
+
+            </fieldset>
+
+          <!-- Bloco 2:  Informações do animal -->
+          <fieldset class="bloco bloco-animal">
+            <legend>Informações do animal</legend>
 
             <div class="linha">
               <div class="campo">
@@ -113,12 +149,11 @@
                 </select>
               </div>
 
-              <!--Moura nesse campo não seria melhor ter a opção de selecione e colocar o não sei como desconhecido?-->
               <div class="campo">
                 <label for="sexo">Sexo</label>
-                <select id="sexo" name="sexo" required> <!--Adicionado Required-->
+                <select id="sexo" name="sexo" required>
                   <option value="">Selecione</option>
-                  <option value="desconhecido">Não sei</option> <!--Adicionado value = 'desconhecido'-->
+                  <option value="desconhecido">Não sei</option>
                   <option value="macho">Macho</option>
                   <option value="femea">Fêmea</option>
                 </select>
@@ -132,54 +167,33 @@
                 id="cor"
                 name="cor"
                 placeholder="Ex.: caramelo com mancha branca no peito"
-                required
-              />
+                required/>
             </div>
 
             <div class="campo">
-              <label for="caracteristicas"
-                >Características e comportamento</label
-              >
-              <textarea
-                id="caracteristicas"
+              <label for="caracteristicas">Características e comportamento</label>
+              <textarea id="caracteristicas"
                 name="caracteristicas"
                 rows="4"
                 placeholder="Ex.: coleira azul, manca de uma pata, assustado com estranhos, atende pelo nome..."
-              ></textarea>
+                ></textarea>
             </div>
 
             <div class="campo campo-checkbox">
-              <input
-                type="checkbox"
+              <input type="checkbox"
                 id="tem-identificacao"
-                name="tem_identificacao"
-              />
-              <label for="tem-identificacao"
-                >Está com coleira, plaquinha ou microchip</label
-              >
-            </div>
-
-            <div class="campo">
-              <label for="foto">Foto do animal</label>
-              <input
-                type="file"
-                id="foto"
-                name="foto"
-                accept="image/*"
-                required
-              />
-              <small
-                >Use uma foto nítida, de preferência mostrando o rosto e o corpo
-                inteiro.</small
-              >
+                name="tem_identificacao"/>
+                <label for="tem-identificacao">
+                Possuia coleira, plaquinha ou microchip?
+                </label>
             </div>
           </fieldset>
 
-          <!-- Bloco 2: onde foi visto por último -->
-          <fieldset class="bloco bloco-local"> <!--Moura Não seria melhor Dividir o Endereço em numero e CEP?-->
-            <legend>Onde foi visto pela última vez</legend>
+          <!-- Bloco 3: Local da ocorrência -->
+          <fieldset class="bloco bloco-local">
+            <legend>Local da ocorrência</legend>
 
-            <div class="campo">
+            <div class="campo"> <!--Moura Não seria melhor Dividir o Endereço em numero e CEP?-->
               <label for="endereco">Endereço ou ponto de referência</label>
               <input
                 type="text"
@@ -202,7 +216,7 @@
               </div>
             </div>
 
-          <!--Adicionado estado e CEP-->
+
             <div class="linha">
                 <div class="campo">
                     <label for="estado">Estado</label>
@@ -248,23 +262,27 @@
                 </div>
             </div>
 
+
+            
+            
+
             <div class="linha">
               <div class="campo">
-                <label for="data-desaparecimento">Data</label>
+                <label for="data-denuncia">Data</label>
                 <input
                   type="date"
-                  id="data-desaparecimento"
-                  name="data_desaparecimento"
+                  id="data-denuncia"
+                  name="data_denuncia"
                   required
                 />
               </div>
 
               <div class="campo">
-                <label for="hora-desaparecimento">Horário aproximado</label>
+                <label for="hora-denuncia">Horário aproximado</label>
                 <input
                   type="time"
-                  id="hora-desaparecimento"
-                  name="hora_desaparecimento"
+                  id="hora-denuncia"
+                  name="hora_denuncia"
                 />
               </div>
             </div>
@@ -281,7 +299,7 @@
           </fieldset>
 
           <!-- Bloco 3: contato -->
-          <fieldset class="bloco bloco-contato">
+        <fieldset class="bloco bloco-contato">
             <legend>Seu contato</legend>
 
             <div class="campo">
@@ -313,28 +331,32 @@
             </div>
 
             <div class="campo campo-checkbox">
-              <input
-                type="checkbox"
-                id="autoriza-contato"
-                name="autoriza_contato"
-                required
-              />
-              <label for="autoriza-contato"
-                >Autorizo exibir meu contato no mural para quem encontrar o
-                animal</label
-              >
-            </div>
-          </fieldset>
+              <label class="checkbox">
+                        <input type="checkbox">
+                        Desejo receber informações sobre o andamento da denúncia.
+                    </label>
 
-          <p id="mensagem-form" class="mensagem-form" aria-live="polite"></p>
+
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        Desejo realizar esta denúncia anonimamente.
+                    </label>
+
+
+
+            </div>
+        </fieldset>
+
+
 
           <div class="form-botoes">
             <button type="submit" class="botao primario">
-              Publicar no mural
+              Enviar Denúncia
             </button>
             <button type="reset" class="botao secundario">Limpar campos</button>
           </div>
         </form>
+
       </section>
     </main>
 
