@@ -161,6 +161,7 @@ body.pagina-site input[type="tel"],
 body.pagina-site input[type="date"],
 body.pagina-site input[type="time"],
 body.pagina-site input[type="datetime-local"],
+body.pagina-site input[type="number"],
 body.pagina-site select,
 body.pagina-site textarea,
 body.pagina-perdidos input[type="text"],
@@ -1102,3 +1103,6 @@ body.pagina-sobre blockquote {
   font-family: Georgia, "Times New Roman", serif;
   font-size: 18px;
 }
+
+
+
