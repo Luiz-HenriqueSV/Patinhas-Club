@@ -10,12 +10,22 @@
     <nav>
       <ul>
         <li><a href="index.html">Início</a></li>
-        <li><a href="#">Sobre</a></li>
-        <li><a href="#">Adoção</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="adocao.html">Adoção</a></li>
         <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
         <li><a href="lista_de_espera.html">Lista de Espera</a></li>
-        <li><a href="#">Denúncia</a></li>
-      </ul>
+        <li><a href="denuncia.html">Denúncia</a></li>
+    </ul>
+
+    <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club" />
+  </nav>
+
+  <main class="pagina">
+
+  <h2>Não encontrou o pet ideal?</h2>
+  <p>Entre na nossa lista de espera e avisaremos quando um animal com o perfil desejado estiver disponivel</p>
+<!--Formulário inicio-->
+  <form action="" method="get">
 
       <img
         class="logo-patinhas"
@@ -39,16 +49,50 @@
         />
       </section>
 
-      <form action="obrigado.html" method="get">
-        <p>
-          <label for="nome">Seu nome completo:</label><br />
-          <input type="text" id="nome" name="nome" required />
-        </p>
+    <p>
+      <label for="Telefone">Telefone:</label><br>
+      <input type="text" id="Telefone" name="Telfone" required>
+    </p>
+<!--Luiz = Capivara!!!!!-->
+    <p>
+      <label for="Animal">Qual Animal você procura:</label><br>
+      <select id="Animal" name="Animal" required>
+        <option value="">Escolha um animal</option>
+        <option>Cachorro</option>
+        <option>Gato</option>
+        <option>Outro</option>
+      </select>
+    </p>
+    
+    <p>
+      <label for="Porte">Porte:</label><br>
+      <select id="Porte" name="Porte" required>
+        <option value="">Escolha uma categoria</option>
+        <option>Pequeno</option>
+        <option>Médio</option>
+        <option>Grande</option>
+      </select>
+    </p>
 
-        <p>
-          <label for="email">E-mail:</label><br />
-          <input type="email" id="email" name="email" required />
-        </p>
+<p>
+      <label for="Idade">Idade:</label><br>
+      <select id="Idade" name="Idade" required>
+        <option value="">Idade desejada</option>
+        <option>Filhote</option>
+        <option>Jovem</option>
+        <option>Adulto</option>
+        <option>Idoso</option>
+      </select>
+    </p>
+    <!--Eita bixo sexo kkkkkkkkkkkkkk-->
+<p>
+    <label for="sexo">Sexo:</label><br>
+    <select id="sexo" name="sexo" required>
+        <option value="">Sexo desejado</option>
+        <option>Macho</option>
+        <option>Fêmea</option>
+    </select>
+</p>
 
         <p>
           <label for="telefone">Telefone:</label><br />
