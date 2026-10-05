@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="img/favicon_io/favicon.ico" type="image/x-icon">
     <title>Reportar desaparecimento | Patinhas Club</title>
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
@@ -48,9 +49,6 @@
         </div>
       </section>
 
-      <!--Willian, fiz assim, se vc achar algo errado, pode mudar, e pode adicionar a parte de denuncias aq msm se quiser.-->
-
-      <!-- Formulário -->
       <section class="formulario-secao">
         <form
           id="form-desaparecimento"
@@ -59,7 +57,6 @@
           method="post"
           enctype="multipart/form-data"
         >
-          <!-- Bloco 1: sobre o animal -->
           <fieldset class="bloco bloco-animal">
             <legend>Sobre o animal</legend>
 
@@ -117,12 +114,11 @@
                 </select>
               </div>
 
-              <!--Moura nesse campo não seria melhor ter a opção de selecione e colocar o não sei como desconhecido?-->
               <div class="campo">
                 <label for="sexo">Sexo</label>
-                <select id="sexo" name="sexo" required> <!--Adicionado Required-->
+                <select id="sexo" name="sexo" required>
                   <option value="">Selecione</option>
-                  <option value="desconhecido">Não sei</option> <!--Adicionado value = 'desconhecido'-->
+                  <option value="desconhecido">Não sei</option>
                   <option value="macho">Macho</option>
                   <option value="femea">Fêmea</option>
                 </select>
@@ -179,8 +175,7 @@
             </div>
           </fieldset>
 
-          <!-- Bloco 2: onde foi visto por último -->
-          <fieldset class="bloco bloco-local"> <!--Moura Não seria melhor Dividir o Endereço em numero e CEP?-->
+          <fieldset class="bloco bloco-local">
             <legend>Onde foi visto pela última vez</legend>
 
             <div class="campo">
@@ -206,7 +201,6 @@
               </div>
             </div>
 
-          <!--Adicionado estado e CEP-->
             <div class="linha">
                 <div class="campo">
                     <label for="estado">Estado</label>
@@ -284,7 +278,6 @@
             </div>
           </fieldset>
 
-          <!-- Bloco 3: contato -->
           <fieldset class="bloco bloco-contato">
             <legend>Seu contato</legend>
 

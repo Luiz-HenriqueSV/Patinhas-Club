@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Denúncias | Patinhas Club</title>
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="shortcut icon" href="img/favicon_io/favicon.ico" type="image/x-icon">
   </head>
   <body class="pagina-site">
     <nav>
@@ -17,11 +18,9 @@
         <li><a href="denuncia.html">Denúncia</a></li>
       </ul>
 
-      <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club" />
+      <img src="img/path16.svg" alt="Logo Patinhas Club" />
     </nav>
 
-    <!--Sobre a pagina de denuncia não deveriamos padronizar 
-    os formularios para ficarem iguais ao report?-->
     <main class="pagina pagina-reportar"> 
       <section class="hero">
         <div class="hero-texto">
@@ -39,13 +38,9 @@
 
       </section>
 
-      <!--Willian, fiz assim, se vc achar algo errado, pode mudar, e pode adicionar a parte de denuncias aq msm se quiser.-->
-
-      <!-- Formulário -->
       <section class="formulario-secao">
         <form id="form-denuncia" class="form-desaparecimento" action="#" method="post" enctype="multipart/form-data">
       
-        <!-- Bloco 1: Tipo de Denuncia -->
           <fieldset class="bloco bloco-denuncia">
             <legend>Tipo de Ocorrência/Denuncia</legend>
             <div class="linha">
@@ -102,7 +97,6 @@
 
             </fieldset>
 
-          <!-- Bloco 2:  Informações do animal -->
           <fieldset class="bloco bloco-animal">
             <legend>Informações do animal</legend>
 
@@ -189,11 +183,10 @@
             </div>
           </fieldset>
 
-          <!-- Bloco 3: Local da ocorrência -->
           <fieldset class="bloco bloco-local">
             <legend>Local da ocorrência</legend>
 
-            <div class="campo"> <!--Moura Não seria melhor Dividir o Endereço em numero e CEP?-->
+            <div class="campo">
               <label for="endereco">Endereço ou ponto de referência</label>
               <input
                 type="text"
