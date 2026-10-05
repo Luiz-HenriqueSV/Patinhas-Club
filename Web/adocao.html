@@ -3,34 +3,524 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Patinhas Club</title>
+    <title>Adoção | Patinhas Club</title>
+    <meta name="description" content="Adote um cão, gato ou outro bicho de ONGs e protetores perto de você. Filtre por espécie, porte e idade no Patinhas Club." />
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
-  <body class="pagina-site pagina-inicial">
-    <nav>
-      <ul>
-        <li><a href="index.html" target="_self">Início</a></li>
-        <li><a href="sobre.html" target="_self">Sobre</a></li>
-        <li><a href="adocao.html" target="_self">Adoção</a></li>
-        <li><a href="animais-perdidos.html" target="_self">Animais Perdidos</a></li>
-        <li><a href="lista_de_espera.html" target="_self">Lista de Espera</a></li>
-        <li><a href="denuncia.html" target="_self">Denúncia</a></li>
-      </ul>
-      <img src="img/Logo_patinhasclub.png" alt="Logo Patinhas Club" />
-    </nav>
+  <body class="pagina-site pagina-adocao" id="topo">
+    <a href="#conteudo" class="pular-conteudo">Pular para o conteúdo</a>
+    <header>
+      <nav aria-label="Menu principal">
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="adocao.html" aria-current="page">Adoção</a></li>
+          <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
+          <li><a href="lista_de_espera.html">Lista de Espera</a></li>
+          <li><a href="#">Denúncia</a></li>
+        </ul>
 
-    <main class="pagina">
-      <h1>WORK IN PROGRESS</h1>
-      <!--Soares basta aqui fica a cargo de você!-->
+        <img src="img/path16.svg" alt="Logo Patinhas Club" />
+      </nav>
+    </header>
 
-      </main>
+    <main class="pagina" id="conteudo">
+      <!-- Topo da página -->
+      <section class="hero">
+        <div class="hero-texto">
+          <h1>Adoção</h1>
+          <p>
+            Cães, gatos e outros bichos de ONGs e protetores perto de você,
+            esperando uma casa. Filtre, escolha e conheça seu novo amigo.
+          </p>
+        </div>
+
+        <div class="hero-acoes">
+          <a href="#mural" class="botao primario">Ver animais para adotar</a>
+          <a href="#como-adotar" class="botao secundario">Como funciona</a>
+        </div>
+      </section>
+
+      <!-- Filtros de trouxa -->
+      <section class="filtros" aria-labelledby="titulo-filtros">
+        <h2 id="titulo-filtros">Encontre o pet certo para a sua casa</h2>
+
+        <form class="filtros-form" action="#mural" method="get">
+          <fieldset>
+            <legend>Filtros de adoção</legend>
+
+            <div class="filtro">
+              <label for="localizacao">Localização</label>
+              <input type="search" id="localizacao" name="localizacao" placeholder="Cidade ou bairro" />
+            </div>
+
+            <div class="filtro">
+              <label for="especie">Espécie</label>
+              <select id="especie" name="especie">
+                <option value="">Todas</option>
+                <option value="cao">Cães</option>
+                <option value="gato">Gatos</option>
+                <option value="outro">Outros</option>
+              </select>
+            </div>
+
+            <div class="filtro">
+              <label for="porte">Porte</label>
+              <select id="porte" name="porte">
+                <option value="">Qualquer</option>
+                <option value="pequeno">Pequeno</option>
+                <option value="medio">Médio</option>
+                <option value="grande">Grande</option>
+              </select>
+            </div>
+
+            <div class="filtro">
+              <label for="idade">Idade</label>
+              <select id="idade" name="idade">
+                <option value="">Qualquer</option>
+                <option value="filhote">Filhote</option>
+                <option value="adulto">Adulto</option>
+                <option value="idoso">Idoso</option>
+              </select>
+            </div>
+
+            <div class="filtro">
+              <label for="sexo">Sexo</label>
+              <select id="sexo" name="sexo">
+                <option value="">Tanto faz</option>
+                <option value="macho">Macho</option>
+                <option value="femea">Fêmea</option>
+              </select>
+            </div>
+
+            <div class="filtro campo-checkbox">
+              <input type="checkbox" id="necessidades-especiais" name="necessidades-especiais" value="sim" />
+              <label for="necessidades-especiais">Necessidades especiais</label>
+            </div>
+<!--  animais com necessidades especiais ganham destaque no site, fica pro Gabriel do futuro fazer -->
+            <div class="filtro campo-checkbox">
+              <input type="checkbox" id="criancas" name="criancas" value="sim" />
+              <label for="criancas">Convive bem com crianças</label>
+            </div>
+
+            <div class="form-botoes">
+              <button type="submit" class="botao primario">Filtrar</button>
+              <button type="reset" class="botao secundario">Limpar</button>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <!-- Mural de adoção -->
+      <section class="mural-secao" id="mural" aria-labelledby="titulo-mural">
+        <h2 id="titulo-mural">Esperando por você</h2>
+        <p>4 animais disponíveis perto de você.</p>
+
+        <div class="mural">
+          <!-- Card 1 -->
+          <article class="card-animal" id="pet-churros">
+            <div class="card-foto">
+              <img
+                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Churros, cão disponível para adoção"
+                width="400"
+                height="300"
+                loading="lazy"
+              />
+              <span class="card-status">Disponível</span>
+            </div>
+
+            <div class="card-info">
+              <h3 class="card-nome">Churros</h3>
+              <p class="card-detalhes">Cão · Pequeno · Adulto (3 anos) · Macho</p>
+              <p class="card-local">A 1,2 km de você</p>
+              <p class="card-descricao">Brincalhão e dengoso, adora colo e passeio curto.</p>
+              <ul class="card-tags" aria-label="Saúde e convivência de Churros">
+                <li>Vacinado</li>
+                <li>Castrado</li>
+                <li>Convive com crianças</li>
+              </ul>
+              <p class="card-contato">Cuidado por: <strong>ONG Amigos de Patas</strong></p>
+            </div>
+
+            <details class="card-adotar">
+              <summary class="botao primario">Quero adotar o Churros</summary>
+
+              <form class="form-adotar" action="#" method="post">
+                <input type="hidden" name="animal" value="Churros" />
+                <fieldset>
+                  <legend>Conte um pouco sobre você</legend>
+
+                  <div class="campo">
+                    <label for="adotar-nome-1">Seu nome</label>
+                    <input type="text" id="adotar-nome-1" name="nome" autocomplete="name" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-tel-1">Telefone / WhatsApp</label>
+                    <input type="tel" id="adotar-tel-1" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-email-1">E-mail</label>
+                    <input type="email" id="adotar-email-1" name="email" placeholder="voce@email.com" autocomplete="email" />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-moradia-1">Onde você mora?</label>
+                    <select id="adotar-moradia-1" name="moradia" required>
+                      <option value="">Selecione</option>
+                      <option value="casa">Casa</option>
+                      <option value="casa-quintal">Casa com quintal</option>
+                      <option value="apartamento">Apartamento</option>
+                    </select>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-outros-1" name="outros_animais" value="sim" />
+                    <label for="adotar-outros-1">Já tenho outros animais</label>
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-msg-1">Por que quer adotar o Churros?</label>
+                    <textarea id="adotar-msg-1" name="mensagem" rows="3" maxlength="500" placeholder="Ex.: tenho tempo em casa, sempre tive pets..."></textarea>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-termo-1" name="termo" required />
+                    <label for="adotar-termo-1">Li e concordo com o compromisso de adoção responsável</label>
+                  </div>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao primario">Enviar interesse</button>
+                  </div>
+                </fieldset>
+              </form>
+            </details>
+          </article>
+          <!-- Card 2 -->
+          <article class="card-animal" id="pet-brutus">
+            <div class="card-foto">
+              <img
+                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Brutus, cão disponível para adoção"
+                width="400"
+                height="300"
+                loading="lazy"
+              />
+              <span class="card-status">Disponível</span>
+            </div>
+
+            <div class="card-info">
+              <h3 class="card-nome">Brutus</h3>
+              <p class="card-detalhes">Cão · Médio · Idoso (10 anos) · Macho</p>
+              <p class="card-local">A 3 km de você</p>
+              <p class="card-descricao">Calmão e carinhoso, ama sol e soneca. Toma remédio para as articulações.</p>
+              <ul class="card-tags" aria-label="Saúde e convivência de Brutus">
+                <li>Vacinado</li>
+                <li>Castrado</li>
+                <li>Necessidades especiais</li>
+              </ul>
+              <p class="card-contato">Cuidado por: <strong>Lar Patinhas Felizes</strong></p>
+            </div>
+
+            <details class="card-adotar">
+              <summary class="botao primario">Quero adotar o Brutus</summary>
+
+              <form class="form-adotar" action="#" method="post">
+                <input type="hidden" name="animal" value="Brutus" />
+                <fieldset>
+                  <legend>Conte um pouco sobre você</legend>
+
+                  <div class="campo">
+                    <label for="adotar-nome-2">Seu nome</label>
+                    <input type="text" id="adotar-nome-2" name="nome" autocomplete="name" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-tel-2">Telefone / WhatsApp</label>
+                    <input type="tel" id="adotar-tel-2" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-email-2">E-mail</label>
+                    <input type="email" id="adotar-email-2" name="email" placeholder="voce@email.com" autocomplete="email" />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-moradia-2">Onde você mora?</label>
+                    <select id="adotar-moradia-2" name="moradia" required>
+                      <option value="">Selecione</option>
+                      <option value="casa">Casa</option>
+                      <option value="casa-quintal">Casa com quintal</option>
+                      <option value="apartamento">Apartamento</option>
+                    </select>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-outros-2" name="outros_animais" value="sim" />
+                    <label for="adotar-outros-2">Já tenho outros animais</label>
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-msg-2">Por que quer adotar o Brutus?</label>
+                    <textarea id="adotar-msg-2" name="mensagem" rows="3" maxlength="500" placeholder="Ex.: tenho tempo em casa, sempre tive pets..."></textarea>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-termo-2" name="termo" required />
+                    <label for="adotar-termo-2">Li e concordo com o compromisso de adoção responsável</label>
+                  </div>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao primario">Enviar interesse</button>
+                  </div>
+                </fieldset>
+              </form>
+            </details>
+          </article>
+          <!-- Card 3 -->
+          <article class="card-animal" id="pet-mel">
+            <div class="card-foto">
+              <img
+                src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Mel, gata disponível para adoção"
+                width="400"
+                height="300"
+                loading="lazy"
+              />
+              <span class="card-status">Disponível</span>
+            </div>
+
+            <div class="card-info">
+              <h3 class="card-nome">Mel</h3>
+              <p class="card-detalhes">Gato · Pequeno · Adulta (2 anos) · Fêmea</p>
+              <p class="card-local">A 800 m de você</p>
+              <p class="card-descricao">Tranquila e curiosa, perfeita para apartamento. Usa caixinha de areia.</p>
+              <ul class="card-tags" aria-label="Saúde e convivência de Mel">
+                <li>Vacinada</li>
+                <li>Castrada</li>
+                <li>Convive com crianças</li>
+              </ul>
+              <p class="card-contato">Cuidado por: <strong>Protetora Ana Souza</strong></p>
+            </div>
+
+            <details class="card-adotar">
+              <summary class="botao primario">Quero adotar a Mel</summary>
+
+              <form class="form-adotar" action="#" method="post">
+                <input type="hidden" name="animal" value="Mel" />
+                <fieldset>
+                  <legend>Conte um pouco sobre você</legend>
+
+                  <div class="campo">
+                    <label for="adotar-nome-3">Seu nome</label>
+                    <input type="text" id="adotar-nome-3" name="nome" autocomplete="name" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-tel-3">Telefone / WhatsApp</label>
+                    <input type="tel" id="adotar-tel-3" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-email-3">E-mail</label>
+                    <input type="email" id="adotar-email-3" name="email" placeholder="voce@email.com" autocomplete="email" />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-moradia-3">Onde você mora?</label>
+                    <select id="adotar-moradia-3" name="moradia" required>
+                      <option value="">Selecione</option>
+                      <option value="casa">Casa</option>
+                      <option value="casa-quintal">Casa com quintal</option>
+                      <option value="apartamento">Apartamento</option>
+                    </select>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-outros-3" name="outros_animais" value="sim" />
+                    <label for="adotar-outros-3">Já tenho outros animais</label>
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-msg-3">Por que quer adotar a Mel?</label>
+                    <textarea id="adotar-msg-3" name="mensagem" rows="3" maxlength="500" placeholder="Ex.: tenho tempo em casa, sempre tive pets..."></textarea>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-termo-3" name="termo" required />
+                    <label for="adotar-termo-3">Li e concordo com o compromisso de adoção responsável</label>
+                  </div>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao primario">Enviar interesse</button>
+                  </div>
+                </fieldset>
+              </form>
+            </details>
+          </article>
+          <!-- Card 4 -->
+          <article class="card-animal" id="pet-thor">
+            <div class="card-foto">
+              <img
+                src="https://images.unsplash.com/photo-1721781010133-8eb0e9b23daf?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
+                alt="Thor, cão disponível para adoção"
+                width="400"
+                height="300"
+                loading="lazy"
+              />
+              <span class="card-status">Disponível</span>
+            </div>
+
+            <div class="card-info">
+              <h3 class="card-nome">Thor</h3>
+              <p class="card-detalhes">Cão · Grande · Filhote (5 meses) · Macho</p>
+              <p class="card-local">A 5 km de você</p>
+              <p class="card-descricao">Cheio de energia, aprende rápido e precisa de espaço para correr.</p>
+              <ul class="card-tags" aria-label="Saúde e convivência de Thor">
+                <li>Vacinado</li>
+                <li>Vermifugado</li>
+              </ul>
+              <p class="card-contato">Cuidado por: <strong>ONG Amigos de Patas</strong></p>
+            </div>
+
+            <details class="card-adotar">
+              <summary class="botao primario">Quero adotar o Thor</summary>
+
+              <form class="form-adotar" action="#" method="post">
+                <input type="hidden" name="animal" value="Thor" />
+                <fieldset>
+                  <legend>Conte um pouco sobre você</legend>
+
+                  <div class="campo">
+                    <label for="adotar-nome-4">Seu nome</label>
+                    <input type="text" id="adotar-nome-4" name="nome" autocomplete="name" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-tel-4">Telefone / WhatsApp</label>
+                    <input type="tel" id="adotar-tel-4" name="telefone" placeholder="(00) 00000-0000" autocomplete="tel" required />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-email-4">E-mail</label>
+                    <input type="email" id="adotar-email-4" name="email" placeholder="voce@email.com" autocomplete="email" />
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-moradia-4">Onde você mora?</label>
+                    <select id="adotar-moradia-4" name="moradia" required>
+                      <option value="">Selecione</option>
+                      <option value="casa">Casa</option>
+                      <option value="casa-quintal">Casa com quintal</option>
+                      <option value="apartamento">Apartamento</option>
+                    </select>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-outros-4" name="outros_animais" value="sim" />
+                    <label for="adotar-outros-4">Já tenho outros animais</label>
+                  </div>
+
+                  <div class="campo">
+                    <label for="adotar-msg-4">Por que quer adotar o Thor?</label>
+                    <textarea id="adotar-msg-4" name="mensagem" rows="3" maxlength="500" placeholder="Ex.: tenho tempo em casa, sempre tive pets..."></textarea>
+                  </div>
+
+                  <div class="campo campo-checkbox">
+                    <input type="checkbox" id="adotar-termo-4" name="termo" required />
+                    <label for="adotar-termo-4">Li e concordo com o compromisso de adoção responsável</label>
+                  </div>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao primario">Enviar interesse</button>
+                  </div>
+                </fieldset>
+              </form>
+            </details>
+          </article>
+        </div>
+
+        <nav class="paginas" aria-label="Páginas da adoção">
+          <a href="#mural" aria-current="page">1</a>
+          <a href="#mural">2</a>
+          <a href="#mural">Próxima</a>
+        </nav>
+      </section>
+
+      <!-- Passo a passo -->
+      <section id="como-adotar" aria-labelledby="titulo-como">
+        <h2 id="titulo-como">Como adotar</h2>
+        <ol>
+          <li><strong>Escolha um pet</strong> e clique em “Quero adotar”.</li>
+          <li><strong>Preencha o formulário</strong>; a ONG ou protetor entra em contato.</li>
+          <li><strong>Combine uma visita</strong> e converse sobre rotina, espaço e cuidados.</li>
+          <li><strong>Assine o termo</strong> de adoção responsável e leve seu amigo para casa.</li>
+        </ol>
+      </section>
+
+      <!-- Requisitos -->
+      <section id="requisitos" aria-labelledby="titulo-requisitos">
+        <h2 id="titulo-requisitos">O que você precisa para adotar</h2>
+        <ul>
+          <li>Ter 18 anos ou mais.</li>
+          <li>Documento com foto (RG ou CNH) e comprovante de residência.</li>
+          <li>Ambiente seguro (telas em janelas para gatos, portão fechado para cães).</li>
+          <li>Tempo e disposição para cuidar, passear e levar ao veterinário.</li>
+        </ul>
+
+        <aside>
+          <h3>Adoção responsável</h3>
+          <p>
+            Adotar é um compromisso para a vida toda. Antes de decidir, pense
+            em tempo, espaço e custos com alimentação e veterinário.
+          </p>
+        </aside>
+      </section>
+
+      <!-- Dúvidas -->
+      <section id="duvidas" aria-labelledby="titulo-duvidas">
+        <h2 id="titulo-duvidas">Dúvidas frequentes</h2>
+
+        <details>
+          <summary>A adoção tem algum custo?</summary>
+          <p>Não. A adoção é gratuita. Algumas ONGs podem pedir uma contribuição voluntária para ajudar outros animais.</p>
+        </details>
+
+        <details>
+          <summary>Quanto tempo demora para ter resposta?</summary>
+          <p>Normalmente a ONG ou o protetor responde em até 3 dias úteis pelo telefone ou WhatsApp informado.</p>
+        </details>
+
+        <details>
+          <summary>Moro em apartamento. Posso adotar?</summary>
+          <p>Pode! Gatos e cães de porte pequeno ou mais calmos se adaptam muito bem. Use o filtro de porte para encontrar o ideal.</p>
+        </details>
+
+        <details>
+          <summary>E se não der certo?</summary>
+          <p>Fale com quem cuidava do animal. Ele nunca deve ser abandonado; a ONG ou o protetor ajuda a encontrar a melhor solução.</p>
+        </details>
+      </section>
+
+      <!-- Chamada final -->
+      <section id="lista-de-espera" aria-labelledby="titulo-espera">
+        <h2 id="titulo-espera">Não encontrou o pet ideal?</h2>
+        <p>Entre na lista de espera e avisamos quando chegar um animal com o perfil que você procura.</p>
+        <a href="lista_de_espera.html" class="botao primario">Entrar na lista de espera</a>
+      </section>
+    </main>
 
     <footer class="footer">
       <p>&copy; Feito por seis estudantes, em projeto integrador</p>
+      <p>Patinhas Club</p>
       <nav aria-label="Links do rodapé">
         <a href="#">Política de Privacidade</a>
         <a href="#">Termos de Uso</a>
-        <a href="index.html">Voltar ao topo</a>
+        <a href="#topo">Voltar ao topo</a>
+        <!--  preciso definir uns filtros por ong, coloquei algumas ja de exemplo.
+          de onde vem cada animalzinho -->
       </nav>
     </footer>
   </body>
