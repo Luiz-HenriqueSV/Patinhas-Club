@@ -426,7 +426,8 @@ body.pagina-perdidos .form-encontrado h4 {
   color: var(--marrom-escuro);
 }
 
-body.pagina-perdidos .form-encontrado .campo {
+body.pagina-perdidos .form-encontrado .campo, 
+body.pagina-perdidos .pagina-reportar .campo {
   flex: 1 1 200px;
 }
 
@@ -1324,7 +1325,8 @@ body.pagina-site .form-desaparecimento input[type="file"] {
   border-radius: 4px;
 }
 
-body.pagina-site #form-denuncia input[type="file"] {
+body.pagina-site #form-denuncia input[type="file"],
+body.pagina-site #form-desaparecimento input[type="file"] {
   padding: 8px;
   color: var(--texto-suave);
   background: var(--fundo-suave);
@@ -1333,7 +1335,8 @@ body.pagina-site #form-denuncia input[type="file"] {
   cursor: pointer;
 }
 
-body.pagina-site #form-denuncia input[type="file"]::file-selector-button {
+body.pagina-site #form-denuncia input[type="file"]::file-selector-button,
+body.pagina-site #form-desaparecimento input[type="file"]::file-selector-button {
   margin-right: 12px;
   padding: 9px 14px;
   color: white;
