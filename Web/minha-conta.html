@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Minha conta | Patinhas Club</title>
+    <meta name="description" content="Acompanhe seus pedidos de adoção, favoritos e alertas no Patinhas Club." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="area-logada pagina-conta">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="conta-chip" href="minha-conta.html">
+            <span class="avatar bege" aria-hidden="true">JM</span>
+            <span>Juliana Mendes<small>Minha conta</small></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <div class="container painel">
+        <aside class="painel-lateral" aria-label="Menu da conta">
+          <div class="painel-perfil">
+            <span class="avatar bege" aria-hidden="true">JM</span>
+            <div>
+              <strong>Juliana Mendes</strong>
+              <small>Diadema, SP</small>
+            </div>
+          </div>
+
+          <nav class="painel-menu" aria-label="Seções da conta">
+            <ul>
+              <li><a href="#visao-geral" aria-current="true">Visão geral</a></li>
+              <li><a href="#pedidos">Meus pedidos <span class="contador">2</span></a></li>
+              <li><a href="#favoritos">Favoritos</a></li>
+              <li><a href="#alertas">Alertas</a></li>
+              <li><a href="#anuncios">Meus anúncios</a></li>
+            </ul>
+          </nav>
+
+          <a class="painel-sair" href="index.html">Sair da conta</a>
+        </aside>
+
+        <div class="painel-conteudo">
+          <div class="avisos">
+            <div class="aviso" id="boas-vindas" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Conta criada. Boas-vindas ao Patinhas Club!</p>
+                <p>Agora é só escolher quem vai para casa com você. Os pedidos que você enviar aparecem aqui.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso amarelo" id="alerta-pausado" role="status">
+              <img src="img/icones/sino.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Alerta pausado</p>
+                <p>Você não vai receber avisos desse perfil até reativar o alerta.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+          </div>
+
+          <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
+            <div class="painel-topo">
+              <div>
+                <h1 id="titulo-pagina">Olá, Juliana!</h1>
+                <p>A visita para conhecer a Mel está marcada para domingo.</p>
+              </div>
+              <div class="grupo-botoes">
+                <a class="botao escuro" href="adocao.html">Ver animais para adotar</a>
+                <a class="botao secundario" href="cadastro-adotante.html">Editar meus dados</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="painel-secao" id="pedidos" aria-labelledby="titulo-pedidos">
+            <header>
+              <h2 id="titulo-pedidos">Meus pedidos de adoção</h2>
+            </header>
+
+            <article class="pedido-adotante">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Mel" width="150" height="150" loading="lazy" />
+              <div>
+                <h3>Mel <span class="etiqueta visita">Visita marcada</span></h3>
+                <p>Com a Protetora Ana Souza. Pedido enviado em 30/09/2026.</p>
+                <ol class="etapas-pedido" aria-label="Andamento do pedido da Mel">
+                  <li class="feito">Pedido enviado</li>
+                  <li class="feito">Conversa</li>
+                  <li class="agora">Visita em 11/10, às 15h</li>
+                  <li>Adoção</li>
+                </ol>
+                <p class="pedido-proximo"><strong>Próximo passo:</strong> leve um documento com foto e um comprovante de residência na visita.</p>
+              </div>
+            </article>
+
+            <article class="pedido-adotante">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Churros" width="150" height="150" loading="lazy" />
+              <div>
+                <h3>Churros <span class="etiqueta novo">Aguardando a ONG</span></h3>
+                <p>Com a ONG Amigos de Patas. Pedido enviado em 08/10/2026.</p>
+                <ol class="etapas-pedido" aria-label="Andamento do pedido do Churros">
+                  <li class="feito">Pedido enviado</li>
+                  <li class="agora">ONG analisando</li>
+                  <li>Visita</li>
+                  <li>Adoção</li>
+                </ol>
+                <p class="pedido-proximo"><strong>Próximo passo:</strong> a ONG responde em até 3 dias úteis pelo WhatsApp que você informou.</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="painel-secao" id="favoritos" aria-labelledby="titulo-favoritos">
+            <header>
+              <h2 id="titulo-favoritos">Favoritos</h2>
+              <a class="link-seta" href="adocao.html">Ver mais animais</a>
+            </header>
+
+            <ul class="favoritos">
+              <li>
+                <a class="mini-animal" href="adocao.html#pet-brutus">
+                  <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Brutus" width="300" height="255" loading="lazy" />
+                  </div>
+                  <h3>Brutus</h3>
+                  <p>Cão médio, 10 anos, a 3 km</p>
+                </a>
+              </li>
+              <li>
+                <a class="mini-animal" href="adocao.html#pet-thor">
+                  <div class="polaroid">
+                    <img class="foco-topo" src="https://images.unsplash.com/photo-1721781010133-8eb0e9b23daf?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Thor" width="300" height="255" loading="lazy" />
+                  </div>
+                  <h3>Thor</h3>
+                  <p>Cão filhote, 5 meses, a 5 km</p>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="painel-secao" id="alertas" aria-labelledby="titulo-alertas">
+            <header>
+              <h2 id="titulo-alertas">Alertas da lista de espera</h2>
+              <a class="botao secundario pequeno" href="lista_de_espera.html">Novo alerta</a>
+            </header>
+
+            <div class="alerta-linha">
+              <div>
+                <img src="img/icones/sino.svg" alt="" width="34" height="34" />
+                <p>
+                  Gato filhote, qualquer porte, em Diadema
+                  <small>Ativo desde 30/09/2026</small>
+                </p>
+              </div>
+              <div class="grupo-botoes">
+                <a class="botao secundario pequeno" href="lista_de_espera.html">Editar</a>
+                <a class="botao fantasma pequeno" href="#alerta-pausado">Pausar</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="painel-secao" id="anuncios" aria-labelledby="titulo-anuncios">
+            <header>
+              <h2 id="titulo-anuncios">Meus anúncios de animais perdidos</h2>
+            </header>
+
+            <div class="vazio">
+              <img src="img/icones/pin.svg" alt="" width="44" height="44" />
+              <p>Você não tem anúncios no mural de perdidos e achados. Tomara que continue assim!</p>
+              <a class="botao secundario pequeno" href="reportar-desaparecimento.html">Anunciar animal perdido</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

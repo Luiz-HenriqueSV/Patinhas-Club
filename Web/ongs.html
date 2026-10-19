@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ONGs e protetores | Patinhas Club</title>
+    <meta name="description" content="Conheça as ONGs, abrigos e protetores independentes verificados pelo Patinhas Club e veja como apoiar cada um." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="pagina-ongs">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html" aria-current="page">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="index.html#escolha">Criar conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li aria-current="page">ONGs</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">ONGs e protetores</h1>
+            <p>Todos verificados pela equipe do Patinhas Club</p>
+          </div>
+          <p class="lead">
+            Quem resgata, cuida e encaminha os animais para adoção. Conheça o
+            trabalho de cada um, veja os bichos que estão com eles e descubra como
+            ajudar.
+          </p>
+          <div class="topo-pagina-acoes">
+            <a class="botao primario" href="cadastro-ong.html">Cadastrar minha ONG</a>
+            <a class="botao secundario" href="#verificacao">Como verificamos</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mural-secao" aria-labelledby="titulo-lista">
+        <div class="container">
+          <h2 id="titulo-lista" class="visualmente-oculto">Lista de ONGs e protetores</h2>
+
+          <!-- Filtro feito só com CSS: cada opção esconde as ONGs que não combinam -->
+          <form class="filtros-barra" aria-label="Filtrar ONGs">
+            <div class="filtros-linha">
+              <fieldset class="grupo">
+                <legend>Mostrar quem cuida de</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="filtro-ong" id="o-todas" checked /> Todos os animais</label>
+                  <label class="chip-opcao"><input type="radio" name="filtro-ong" id="o-cao" /> Cães</label>
+                  <label class="chip-opcao"><input type="radio" name="filtro-ong" id="o-gato" /> Gatos</label>
+                  <label class="chip-opcao"><input type="radio" name="filtro-ong" id="o-castracao" /> Faz castração</label>
+                  <label class="chip-opcao"><input type="radio" name="filtro-ong" id="o-lar" /> Tem lar temporário</label>
+                </div>
+              </fieldset>
+            </div>
+          </form>
+
+          <div class="mural-area lista-area">
+            <ul class="lista-ongs">
+              <li>
+                <article class="ong-cartao" id="amigos-de-patas" data-especies="cao gato" data-servicos="adocao castracao">
+                  <div class="ong-topo">
+                    <span class="avatar grande" aria-hidden="true">AP</span>
+                    <div>
+                      <h3>ONG Amigos de Patas</h3>
+                      <p>ONG em Diadema, SP</p>
+                      <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificada</span>
+                    </div>
+                  </div>
+                  <p>Resgata cães e gatos na região central de Diadema e mantém um programa de castração a preço popular.</p>
+                  <dl class="ong-numeros">
+                    <div><dt>para adoção</dt><dd>4</dd></div>
+                    <div><dt>campanha ativa</dt><dd>1</dd></div>
+                    <div><dt>atuando desde</dt><dd>2014</dd></div>
+                  </dl>
+                  <ul class="card-tags" aria-label="Atuação">
+                    <li>Cães</li><li>Gatos</li><li>Adoção</li><li>Castração</li>
+                  </ul>
+                  <div class="grupo-botoes">
+                    <a class="botao escuro pequeno" href="adocao.html#mural">Ver animais</a>
+                    <a class="botao secundario pequeno" href="campanhas.html#racao-inverno">Apoiar</a>
+                  </div>
+                </article>
+              </li>
+
+              <li>
+                <article class="ong-cartao" id="lar-patinhas-felizes" data-especies="cao" data-servicos="adocao lar-temporario">
+                  <div class="ong-topo">
+                    <span class="avatar grande laranja" aria-hidden="true">LP</span>
+                    <div>
+                      <h3>Lar Patinhas Felizes</h3>
+                      <p>Abrigo em São Bernardo do Campo, SP</p>
+                      <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificado</span>
+                    </div>
+                  </div>
+                  <p>Abrigo dedicado a cães idosos e com necessidades especiais. Hoje cuida de 38 animais.</p>
+                  <dl class="ong-numeros">
+                    <div><dt>para adoção</dt><dd>9</dd></div>
+                    <div><dt>campanhas ativas</dt><dd>2</dd></div>
+                    <div><dt>atuando desde</dt><dd>2011</dd></div>
+                  </dl>
+                  <ul class="card-tags" aria-label="Atuação">
+                    <li>Cães</li><li>Idosos</li><li>Lar temporário</li>
+                  </ul>
+                  <div class="grupo-botoes">
+                    <a class="botao escuro pequeno" href="adocao.html#mural">Ver animais</a>
+                    <a class="botao secundario pequeno" href="campanhas.html#cirurgia-brutus">Apoiar</a>
+                  </div>
+                </article>
+              </li>
+
+              <li>
+                <article class="ong-cartao" id="ana-souza" data-especies="gato" data-servicos="adocao castracao lar-temporario">
+                  <div class="ong-topo">
+                    <span class="avatar grande amarelo" aria-hidden="true">AS</span>
+                    <div>
+                      <h3>Protetora Ana Souza</h3>
+                      <p>Protetora independente em Diadema, SP</p>
+                      <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificada</span>
+                    </div>
+                  </div>
+                  <p>Cuida de colônias de gatos de rua: castra, trata e encaminha para adoção os que se dão bem dentro de casa.</p>
+                  <dl class="ong-numeros">
+                    <div><dt>para adoção</dt><dd>5</dd></div>
+                    <div><dt>campanha ativa</dt><dd>1</dd></div>
+                    <div><dt>atuando desde</dt><dd>2019</dd></div>
+                  </dl>
+                  <ul class="card-tags" aria-label="Atuação">
+                    <li>Gatos</li><li>Castração</li><li>Lar temporário</li>
+                  </ul>
+                  <div class="grupo-botoes">
+                    <a class="botao escuro pequeno" href="adocao.html#mural">Ver animais</a>
+                    <a class="botao secundario pequeno" href="campanhas.html#cobertores">Apoiar</a>
+                  </div>
+                </article>
+              </li>
+
+              <li>
+                <article class="ong-cartao" id="miau-seguro" data-especies="gato" data-servicos="adocao lar-temporario">
+                  <div class="ong-topo">
+                    <span class="avatar grande bege" aria-hidden="true">MS</span>
+                    <div>
+                      <h3>Projeto Miau Seguro</h3>
+                      <p>ONG em Santo André, SP</p>
+                      <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificada</span>
+                    </div>
+                  </div>
+                  <p>Foco em filhotes de gato: lares temporários, vacinação e adoção responsável com acompanhamento.</p>
+                  <dl class="ong-numeros">
+                    <div><dt>para adoção</dt><dd>12</dd></div>
+                    <div><dt>campanha ativa</dt><dd>1</dd></div>
+                    <div><dt>atuando desde</dt><dd>2017</dd></div>
+                  </dl>
+                  <ul class="card-tags" aria-label="Atuação">
+                    <li>Gatos</li><li>Filhotes</li><li>Lar temporário</li>
+                  </ul>
+                  <div class="grupo-botoes">
+                    <a class="botao escuro pequeno" href="adocao.html#mural">Ver animais</a>
+                    <a class="botao secundario pequeno" href="campanhas.html#lar-temporario">Apoiar</a>
+                  </div>
+                </article>
+              </li>
+
+              <li>
+                <article class="ong-cartao" id="focinho-amigo" data-especies="cao gato" data-servicos="castracao">
+                  <div class="ong-topo">
+                    <span class="avatar grande marrom" aria-hidden="true">FA</span>
+                    <div>
+                      <h3>Instituto Focinho Amigo</h3>
+                      <p>ONG em Mauá, SP</p>
+                      <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificado</span>
+                    </div>
+                  </div>
+                  <p>Mutirões de castração e atendimento veterinário para animais de famílias de baixa renda.</p>
+                  <dl class="ong-numeros">
+                    <div><dt>para adoção</dt><dd>0</dd></div>
+                    <div><dt>campanha ativa</dt><dd>1</dd></div>
+                    <div><dt>atuando desde</dt><dd>2016</dd></div>
+                  </dl>
+                  <ul class="card-tags" aria-label="Atuação">
+                    <li>Cães</li><li>Gatos</li><li>Castração</li><li>Veterinário</li>
+                  </ul>
+                  <div class="grupo-botoes">
+                    <a class="botao escuro pequeno" href="campanhas.html#mutirao-castracao">Ver mutirão</a>
+                  </div>
+                </article>
+              </li>
+
+              <li>
+                <article class="ong-cartao" id="resgate-abc" data-especies="cao" data-servicos="adocao lar-temporario">
+                  <div class="ong-topo">
+                    <span class="avatar grande" aria-hidden="true">RA</span>
+                    <div>
+                      <h3>Grupo Resgate ABC</h3>
+                      <p>Coletivo de protetores em São Caetano do Sul, SP</p>
+                      <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificado</span>
+                    </div>
+                  </div>
+                  <p>Voluntários que resgatam cães atropelados ou feridos e cuidam da recuperação até a adoção.</p>
+                  <dl class="ong-numeros">
+                    <div><dt>para adoção</dt><dd>6</dd></div>
+                    <div><dt>campanha ativa</dt><dd>1</dd></div>
+                    <div><dt>atuando desde</dt><dd>2020</dd></div>
+                  </dl>
+                  <ul class="card-tags" aria-label="Atuação">
+                    <li>Cães</li><li>Resgate</li><li>Lar temporário</li>
+                  </ul>
+                  <div class="grupo-botoes">
+                    <a class="botao escuro pequeno" href="adocao.html#mural">Ver animais</a>
+                    <a class="botao secundario pequeno" href="campanhas.html#passeio-solidario">Apoiar</a>
+                  </div>
+                </article>
+              </li>
+            </ul>
+            <p class="contagem" data-total="6" data-rotulo="organizações"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="secao secao-bege" id="verificacao" aria-labelledby="titulo-verificacao">
+        <div class="container verificacao">
+          <div>
+            <h2 id="titulo-verificacao">Como verificamos cada ONG</h2>
+            <p>
+              Antes de publicar qualquer animal, a equipe do Patinhas Club confere
+              quem está por trás do perfil. É assim que adotantes sabem que estão
+              falando com quem realmente cuida dos bichos.
+            </p>
+            <a class="link-seta" href="termos.html#regras-ongs">Ler as regras para ONGs</a>
+          </div>
+
+          <ol class="passos passos-coluna">
+            <li>
+              <h3>Documentos</h3>
+              <p>CNPJ da ONG ou CPF do protetor, além do estatuto ou de outro comprovante de atuação.</p>
+            </li>
+            <li>
+              <h3>Conversa com o responsável</h3>
+              <p>Uma chamada rápida para conhecer o trabalho e tirar dúvidas sobre a plataforma.</p>
+            </li>
+            <li>
+              <h3>Acompanhamento</h3>
+              <p>Avaliações de adotantes e denúncias são analisadas. Quem vende animais perde o selo.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="faixa-cta" aria-labelledby="titulo-cta">
+        <div class="container">
+          <div>
+            <p class="lema">Parceria com as ONGs.</p>
+            <h2 id="titulo-cta">Sua ONG ainda não está aqui?</h2>
+            <p>O cadastro é gratuito e a verificação leva até 2 dias úteis.</p>
+          </div>
+          <div class="grupo-botoes">
+            <a class="botao primario grande" href="cadastro-ong.html">Cadastrar minha ONG</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

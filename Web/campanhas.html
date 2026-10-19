@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Campanhas | Patinhas Club</title>
+    <meta name="description" content="Arrecadações, vaquinhas, feiras de adoção e pedidos de voluntários das ONGs parceiras do Patinhas Club." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="pagina-campanhas">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html" aria-current="page">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="index.html#escolha">Criar conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li aria-current="page">Campanhas</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Campanhas</h1>
+            <p>Das ONGs e protetores da sua região</p>
+          </div>
+          <p class="lead">
+            Nem todo mundo pode adotar, mas quase todo mundo pode ajudar: doando
+            ração, indo a uma feira de adoção ou abrindo a casa como lar temporário.
+          </p>
+          <div class="topo-pagina-acoes">
+            <a class="botao escuro" href="#lista">Ver campanhas abertas</a>
+            <a class="botao secundario" href="entrar.html#ong">Sou ONG: criar campanha</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="secao" aria-labelledby="titulo-destaque">
+        <div class="container">
+          <article class="campanha-destaque" id="cirurgia-brutus">
+            <div class="campanha-destaque-foto">
+              <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Brutus, cão idoso do Lar Patinhas Felizes" width="600" height="500" loading="lazy" />
+            </div>
+            <div class="campanha-destaque-corpo">
+              <span class="etiqueta novo sem-ponto">Vaquinha em destaque</span>
+              <h2 id="titulo-destaque">Tratamento das articulações do Brutus</h2>
+              <p class="campanha-ong">Por <a href="ongs.html#lar-patinhas-felizes">Lar Patinhas Felizes</a>, até 31/10/2026</p>
+              <p>
+                Aos 10 anos, o Brutus precisa de fisioterapia e de um remédio
+                contínuo para voltar a passear sem dor. A vaquinha cobre três meses
+                de tratamento enquanto ele espera uma família.
+              </p>
+              <div class="campanha-meta">
+                <progress value="45" max="100" aria-label="Vaquinha do Brutus: 45% da meta">45%</progress>
+                <p><span><strong>R$ 540</strong> de R$ 1.200</span><span>45% da meta</span></p>
+              </div>
+              <details class="card-acao">
+                <summary class="botao primario"><span class="quando-fechado">Quero ajudar o Brutus</span><span class="quando-aberto">Fechar</span></summary>
+                <ol class="ajuda-lista">
+                  <li>Doe qualquer valor pelo Pix que aparece no perfil verificado do abrigo.</li>
+                  <li>Ou leve condroitina e glucosamina para cães na sede, em São Bernardo do Campo.</li>
+                  <li>Compartilhe esta campanha com quem ama cachorro idoso.</li>
+                </ol>
+              </details>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="mural-secao secao-bege" id="lista" aria-labelledby="titulo-lista">
+        <div class="container">
+          <div class="mural-cabecalho">
+            <h2 id="titulo-lista">Campanhas abertas</h2>
+          </div>
+
+          <!-- Filtro feito só com CSS: cada opção esconde as campanhas de outros tipos -->
+          <form class="filtros-barra" aria-label="Filtrar campanhas">
+            <fieldset class="grupo">
+              <legend>Tipo de campanha</legend>
+              <div class="chips">
+                <label class="chip-opcao"><input type="radio" name="filtro-campanha" id="c-todas" checked /> Todas</label>
+                <label class="chip-opcao"><input type="radio" name="filtro-campanha" id="c-arrecadacao" /> Arrecadações</label>
+                <label class="chip-opcao"><input type="radio" name="filtro-campanha" id="c-evento" /> Eventos</label>
+                <label class="chip-opcao"><input type="radio" name="filtro-campanha" id="c-voluntariado" /> Voluntariado</label>
+                <label class="chip-opcao"><input type="radio" name="filtro-campanha" id="c-saude" /> Saúde</label>
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="mural-area lista-area">
+            <ul class="lista-campanhas">
+              <li class="campanha" id="racao-inverno" data-tipo="arrecadacao">
+                <div class="campanha-faixa">
+                  <img src="img/icones/racao.svg" alt="" width="44" height="44" />
+                  <span class="etiqueta sem-ponto">Arrecadação</span>
+                </div>
+                <div class="campanha-corpo">
+                  <h3>Ração para o inverno</h3>
+                  <p class="campanha-ong">Por <a href="ongs.html#amigos-de-patas">ONG Amigos de Patas</a></p>
+                  <p>No frio, os resgatados comem mais. A meta garante ração para os 40 animais da ONG até dezembro.</p>
+                  <div class="campanha-meta">
+                    <progress value="62" max="100" aria-label="Ração para o inverno: 62% da meta">62%</progress>
+                    <p><span><strong>310 kg</strong> de 500 kg</span><span>62%</span></p>
+                  </div>
+                  <ul class="campanha-info">
+                    <li><img src="img/icones/calendario.svg" alt="" width="20" height="20" /> Até 31/10/2026</li>
+                    <li><img src="img/icones/pin.svg" alt="" width="20" height="20" /> Coleta no Centro de Diadema</li>
+                  </ul>
+                  <details class="card-acao">
+                    <summary class="botao secundario largo"><span class="quando-fechado">Quero ajudar</span><span class="quando-aberto">Fechar</span></summary>
+                    <ol class="ajuda-lista">
+                      <li>Ração seca para cães ou gatos adultos, em pacotes fechados.</li>
+                      <li>Entrega na sede de segunda a sábado, das 9h às 17h.</li>
+                      <li>Prefere doar em dinheiro? O Pix está no perfil verificado da ONG.</li>
+                    </ol>
+                  </details>
+                </div>
+              </li>
+
+              <li class="campanha" id="feira-adocao" data-tipo="evento">
+                <div class="campanha-faixa">
+                  <img src="img/icones/calendario.svg" alt="" width="44" height="44" />
+                  <span class="etiqueta sem-ponto">Evento</span>
+                </div>
+                <div class="campanha-corpo">
+                  <h3>Feira de adoção na praça</h3>
+                  <p class="campanha-ong">Por <a href="ongs.html#lar-patinhas-felizes">Lar Patinhas Felizes</a></p>
+                  <p>Mais de 20 cães e gatos vacinados e castrados para conhecer de pertinho. Leve um documento com foto.</p>
+                  <ul class="campanha-info">
+                    <li><img src="img/icones/calendario.svg" alt="" width="20" height="20" /> Sábado, 17/10/2026, das 10h às 16h</li>
+                    <li><img src="img/icones/pin.svg" alt="" width="20" height="20" /> Praça da Moça, Centro de Diadema</li>
+                  </ul>
+                  <details class="card-acao">
+                    <summary class="botao secundario largo"><span class="quando-fechado">Quero ir</span><span class="quando-aberto">Fechar</span></summary>
+                    <ol class="ajuda-lista">
+                      <li>Não precisa se inscrever: é só aparecer.</li>
+                      <li>Quer adotar no dia? Crie sua conta antes para agilizar.</li>
+                      <li>Voluntários para montar as tendas: chegar às 8h30.</li>
+                    </ol>
+                  </details>
+                </div>
+              </li>
+
+              <li class="campanha" id="mutirao-castracao" data-tipo="saude">
+                <div class="campanha-faixa">
+                  <img src="img/icones/saude.svg" alt="" width="44" height="44" />
+                  <span class="etiqueta sem-ponto">Saúde</span>
+                </div>
+                <div class="campanha-corpo">
+                  <h3>Mutirão de castração</h3>
+                  <p class="campanha-ong">Por <a href="ongs.html#focinho-amigo">Instituto Focinho Amigo</a></p>
+                  <p>Castração a preço popular para cães e gatos de famílias de baixa renda, com consulta antes da cirurgia.</p>
+                  <div class="campanha-meta">
+                    <progress value="72" max="100" aria-label="Mutirão de castração: 72% das vagas preenchidas">72%</progress>
+                    <p><span><strong>87</strong> de 120 vagas preenchidas</span><span>72%</span></p>
+                  </div>
+                  <ul class="campanha-info">
+                    <li><img src="img/icones/calendario.svg" alt="" width="20" height="20" /> 25/10/2026</li>
+                    <li><img src="img/icones/pin.svg" alt="" width="20" height="20" /> Mauá, SP</li>
+                  </ul>
+                  <details class="card-acao">
+                    <summary class="botao secundario largo"><span class="quando-fechado">Quero uma vaga</span><span class="quando-aberto">Fechar</span></summary>
+                    <ol class="ajuda-lista">
+                      <li>Inscrição presencial na sede do instituto, com comprovante de residência.</li>
+                      <li>O animal precisa estar em jejum de 8 horas no dia.</li>
+                    </ol>
+                  </details>
+                </div>
+              </li>
+
+              <li class="campanha" id="lar-temporario" data-tipo="voluntariado">
+                <div class="campanha-faixa">
+                  <img src="img/icones/pessoas.svg" alt="" width="44" height="44" />
+                  <span class="etiqueta sem-ponto">Voluntariado</span>
+                </div>
+                <div class="campanha-corpo">
+                  <h3>Lar temporário para filhotes</h3>
+                  <p class="campanha-ong">Por <a href="ongs.html#miau-seguro">Projeto Miau Seguro</a></p>
+                  <p>Filhotes de gato precisam de uma casa por 30 a 60 dias até a adoção. A ONG fornece ração, areia e veterinário.</p>
+                  <div class="campanha-meta">
+                    <progress value="37" max="100" aria-label="Lar temporário: 3 de 8 lares encontrados">37%</progress>
+                    <p><span><strong>3</strong> de 8 lares</span><span>37%</span></p>
+                  </div>
+                  <ul class="campanha-info">
+                    <li><img src="img/icones/calendario.svg" alt="" width="20" height="20" /> Até 15/11/2026</li>
+                    <li><img src="img/icones/pin.svg" alt="" width="20" height="20" /> Santo André e região</li>
+                  </ul>
+                  <details class="card-acao">
+                    <summary class="botao secundario largo"><span class="quando-fechado">Quero ser lar temporário</span><span class="quando-aberto">Fechar</span></summary>
+                    <ol class="ajuda-lista">
+                      <li>Ter um cômodo seguro e telas nas janelas.</li>
+                      <li>Mandar fotos dos filhotes uma vez por semana.</li>
+                      <li>Levar às consultas marcadas pela ONG.</li>
+                    </ol>
+                  </details>
+                </div>
+              </li>
+
+              <li class="campanha" id="cobertores" data-tipo="arrecadacao">
+                <div class="campanha-faixa">
+                  <img src="img/icones/lar.svg" alt="" width="44" height="44" />
+                  <span class="etiqueta sem-ponto">Arrecadação</span>
+                </div>
+                <div class="campanha-corpo">
+                  <h3>Cobertores e caminhas</h3>
+                  <p class="campanha-ong">Por <a href="ongs.html#ana-souza">Protetora Ana Souza</a></p>
+                  <p>Para os gatos das colônias passarem o inverno aquecidos. Servem cobertores usados, limpos e sem rasgos.</p>
+                  <div class="campanha-meta">
+                    <progress value="70" max="100" aria-label="Cobertores e caminhas: 42 de 60 itens">70%</progress>
+                    <p><span><strong>42</strong> de 60 itens</span><span>70%</span></p>
+                  </div>
+                  <ul class="campanha-info">
+                    <li><img src="img/icones/calendario.svg" alt="" width="20" height="20" /> Até 30/11/2026</li>
+                    <li><img src="img/icones/pin.svg" alt="" width="20" height="20" /> Coleta em Diadema</li>
+                  </ul>
+                  <details class="card-acao">
+                    <summary class="botao secundario largo"><span class="quando-fechado">Quero doar</span><span class="quando-aberto">Fechar</span></summary>
+                    <ol class="ajuda-lista">
+                      <li>Combine a entrega pela mensagem do perfil da protetora.</li>
+                      <li>Caminhas de tecido grosso e caixas de transporte também ajudam.</li>
+                    </ol>
+                  </details>
+                </div>
+              </li>
+
+              <li class="campanha" id="passeio-solidario" data-tipo="voluntariado">
+                <div class="campanha-faixa">
+                  <img src="img/icones/pata.svg" alt="" width="44" height="44" />
+                  <span class="etiqueta sem-ponto">Voluntariado</span>
+                </div>
+                <div class="campanha-corpo">
+                  <h3>Passeio solidário com os cães</h3>
+                  <p class="campanha-ong">Por <a href="ongs.html#resgate-abc">Grupo Resgate ABC</a></p>
+                  <p>Uma manhã para levar os cães em recuperação para passear. Ótimo para conhecer um futuro companheiro.</p>
+                  <ul class="campanha-info">
+                    <li><img src="img/icones/calendario.svg" alt="" width="20" height="20" /> Domingo, 08/11/2026, às 9h</li>
+                    <li><img src="img/icones/pin.svg" alt="" width="20" height="20" /> São Caetano do Sul, SP</li>
+                  </ul>
+                  <details class="card-acao">
+                    <summary class="botao secundario largo"><span class="quando-fechado">Quero participar</span><span class="quando-aberto">Fechar</span></summary>
+                    <ol class="ajuda-lista">
+                      <li>Vagas para 15 voluntários a partir de 16 anos.</li>
+                      <li>Use tênis e roupa confortável. A guia fica por conta do grupo.</li>
+                    </ol>
+                  </details>
+                </div>
+              </li>
+            </ul>
+            <p class="contagem" data-total="6" data-rotulo="campanhas"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="faixa-cta" aria-labelledby="titulo-cta">
+        <div class="container">
+          <div>
+            <p class="lema">Parceria com as ONGs.</p>
+            <h2 id="titulo-cta">Sua ONG precisa de ajuda?</h2>
+            <p>Crie uma campanha pelo painel. Ela aparece aqui e no perfil da ONG.</p>
+          </div>
+          <div class="grupo-botoes">
+            <a class="botao primario grande" href="entrar.html#ong">Entrar no painel da ONG</a>
+            <a class="botao claro grande" href="cadastro-ong.html">Cadastrar minha ONG</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

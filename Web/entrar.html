@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entrar | Patinhas Club</title>
+    <meta name="description" content="Entre na sua conta de adotante ou no painel da sua ONG no Patinhas Club." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="pagina-entrar">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao primario pequeno" href="index.html#escolha">Criar conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo" class="entrar">
+      <!-- Âncoras das abas: ficam no topo para a página não "pular" ao trocar de aba -->
+      <span class="alvo" id="adotante"></span>
+      <span class="alvo" id="ong"></span>
+      <span class="alvo" id="recuperar"></span>
+      <span class="alvo" id="link-enviado"></span>
+
+      <div class="entrar-grade">
+        <section class="entrar-form" aria-labelledby="titulo-pagina">
+          <div class="entrar-caixa">
+            <h1 id="titulo-pagina">Que bom te ver de novo</h1>
+            <p>Entre para acompanhar seus pedidos de adoção ou cuidar dos animais da sua ONG.</p>
+
+            <!-- As abas usam :target: o endereço entrar.html#ong já abre a aba da ONG -->
+            <nav class="entrar-abas" aria-label="Tipo de conta">
+              <a href="#adotante">Sou adotante</a>
+              <a href="#ong">Sou ONG ou protetor</a>
+            </nav>
+
+            <!--
+              Protótipo sem back-end: os formulários só levam para a próxima tela
+              (method="get"). Por isso o campo de senha ainda não tem "name": assim
+              a senha não aparece na barra de endereço. Com o back-end pronto, use
+              method="post", o action da API e name="senha".
+            -->
+            <form class="entrar-painel" id="form-adotante" action="minha-conta.html" method="get" aria-label="Entrar como adotante">
+              <div class="campo">
+                <label for="email-adotante">E-mail</label>
+                <input type="email" id="email-adotante" name="email" autocomplete="email" placeholder="voce@email.com" required />
+                <small class="msg-erro">Digite o e-mail que você usou no cadastro.</small>
+              </div>
+
+              <div class="campo">
+                <label for="senha-adotante">Senha</label>
+                <input type="password" id="senha-adotante" autocomplete="current-password" minlength="8" required />
+                <small class="msg-erro">A senha tem pelo menos 8 caracteres.</small>
+              </div>
+
+              <div class="entrar-linha">
+                <span class="campo-checkbox">
+                  <input type="checkbox" id="lembrar-adotante" name="lembrar" value="sim" />
+                  <label for="lembrar-adotante">Continuar conectado</label>
+                </span>
+                <a href="#recuperar">Esqueci minha senha</a>
+              </div>
+
+              <button type="submit" class="botao escuro largo grande">Entrar como adotante</button>
+
+              <p class="entrar-rodape">
+                Ainda não tem conta? <a href="cadastro-adotante.html">Criar conta de adotante</a>
+              </p>
+            </form>
+
+            <form class="entrar-painel" id="form-ong" action="painel-ong.html" method="get" aria-label="Entrar como ONG ou protetor">
+              <div class="campo">
+                <label for="email-ong">E-mail da organização</label>
+                <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required />
+                <small class="msg-erro">Digite o e-mail cadastrado da ONG.</small>
+              </div>
+
+              <div class="campo">
+                <label for="senha-ong">Senha</label>
+                <input type="password" id="senha-ong" autocomplete="current-password" minlength="8" required />
+                <small class="msg-erro">A senha tem pelo menos 8 caracteres.</small>
+              </div>
+
+              <div class="entrar-linha">
+                <span class="campo-checkbox">
+                  <input type="checkbox" id="lembrar-ong" name="lembrar" value="sim" />
+                  <label for="lembrar-ong">Continuar conectado</label>
+                </span>
+                <a href="#recuperar">Esqueci minha senha</a>
+              </div>
+
+              <button type="submit" class="botao primario largo grande">Entrar no painel da ONG</button>
+
+              <p class="entrar-rodape">
+                Sua ONG ainda não está aqui? <a href="cadastro-ong.html">Cadastrar minha ONG</a>
+              </p>
+            </form>
+
+            <form class="entrar-painel" id="form-recuperar" action="entrar.html#link-enviado" method="get" aria-labelledby="titulo-recuperar">
+              <h2 id="titulo-recuperar">Criar uma senha nova</h2>
+              <p>Digite o e-mail da sua conta. Enviamos um link para você criar outra senha.</p>
+
+              <div class="campo">
+                <label for="email-recuperar">E-mail</label>
+                <input type="email" id="email-recuperar" name="email" autocomplete="email" required />
+              </div>
+
+              <div class="form-botoes entrar-linha">
+                <button type="submit" class="botao escuro">Enviar link</button>
+                <a href="#adotante">Voltar para o login</a>
+              </div>
+            </form>
+
+            <div class="entrar-painel" id="painel-link-enviado" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="48" height="48" />
+              <h2>Link enviado</h2>
+              <p>
+                Se existir uma conta com esse e-mail, o link chega em alguns
+                minutos. Vale olhar também a caixa de spam.
+              </p>
+              <a class="botao secundario" href="#adotante">Voltar para o login</a>
+            </div>
+          </div>
+        </section>
+
+        <aside class="entrar-lado" aria-label="Depoimento">
+          <figure>
+            <blockquote>“Ajude aqueles que precisam ser ajudados e ganhe um amigo inesquecível.”</blockquote>
+            <figcaption>Daniel, morador de Diadema</figcaption>
+          </figure>
+
+          <div class="entrar-fotos" aria-hidden="true">
+            <div class="polaroid">
+              <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="" width="200" height="200" />
+            </div>
+            <div class="polaroid">
+              <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="" width="200" height="200" />
+            </div>
+            <div class="polaroid">
+              <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="" width="200" height="200" />
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

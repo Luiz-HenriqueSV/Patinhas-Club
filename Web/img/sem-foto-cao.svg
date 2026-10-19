@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ilustração de cachorro">
+<rect width="400" height="300" fill="#FDF2D9"/>
+<circle cx="200" cy="168" r="112" fill="#FAE3B0"/>
+<g stroke="#3D2416" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="200" cy="164" rx="74" ry="72" fill="#FFFFFF"/>
+<path d="M140 108c-36 4-46 74-14 102 18-2 26-42 24-92z" fill="#7B4A2E"/>
+<path d="M260 108c36 4 46 74 14 102-18-2-26-42-24-92z" fill="#7B4A2E"/>
+<ellipse cx="226" cy="146" rx="20" ry="17" fill="#FAE3B0" stroke="none"/>
+<circle cx="175" cy="148" r="8" fill="#3D2416" stroke="none"/><circle cx="225" cy="148" r="8" fill="#3D2416" stroke="none"/>
+<ellipse cx="200" cy="192" rx="34" ry="25" fill="#FAE3B0" stroke-width="3.5"/>
+<ellipse cx="200" cy="178" rx="13" ry="9" fill="#3D2416" stroke="none"/>
+<path d="M200 187v9m0 0c-5 8-14 8-19 2m19-2c5 8 14 8 19 2" fill="none" stroke-width="3.5"/>
+<path d="M193 203c0 9 14 9 14 0" fill="#E48C0A" stroke-width="3"/>
+</g></svg>

@@ -3,234 +3,383 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="img/favicon_io/favicon.ico" type="image/x-icon">
-    <title>Patinhas Club</title>
+    <title>Patinhas Club | Adoção, ONGs e animais perdidos num só lugar</title>
+    <meta name="description" content="Hub que reúne ONGs, protetores e adotantes: adote um cão ou gato perto de você, cadastre sua ONG, anuncie animais perdidos e apoie campanhas." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
-  <body class="pagina-site pagina-inicial">
-    <nav>
-      <ul>
-        <li><a href="index.html" target="_self">Início</a></li>
-        <li><a href="sobre.html" target="_self">Sobre</a></li>
-        <li><a href="adocao.html" target="_self">Adoção</a></li>
-        <li><a href="animais-perdidos.html" target="_self">Animais Perdidos</a></li>
-        <li><a href="lista_de_espera.html" target="_self">Lista de Espera</a>
-        </li><li><a href="denuncia.html" target="_self">Denúncia</a></li>
-      </ul>
+  <body id="topo" class="pagina-inicial">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-      <img
-        class="logo-patinhas"
-        src="img/path16.svg"
-        alt="Logo Patinhas Club"
-      />
-    </nav>
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
 
-    <main class="pagina">
-      <section id="inicio">
-        <h1>Adotar, resgatar e reencontrar num só lugar.</h1>
-        <p>
-          O Patinhas Club junta ONGs, protetores e adotantes num app com filtros
-          de adoção e anúncios de animais perdidos perto de você.
-        </p>
-        <div class="inicio-acoes">
-          <a href="#adote" class="botao primario">Ver animais para adotar</a>
-          <a href="#lista-de-espera" class="botao secundario"
-            >Entrar na lista de espera</a
-          >
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html" aria-current="page">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="#escolha">Criar conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <!-- ESCOLHA DO PERFIL: o primeiro passo do site é dizer quem você é -->
+      <section class="inicio-hero" id="escolha" aria-labelledby="titulo-inicio">
+        <div class="container">
+          <div class="inicio-titulo">
+            <h1 id="titulo-inicio">Um lar pra cada patinha.</h1>
+            <p>
+              O Patinhas Club junta ONGs, protetores e adotantes num só lugar:
+              adoção com filtros, perdidos e achados perto de você e campanhas
+              de quem faz o resgate acontecer. Como você quer participar?
+            </p>
+          </div>
+
+          <div class="portas">
+            <article class="porta porta-adotante" aria-labelledby="porta-adotante-titulo">
+              <div class="porta-topo">
+                <div class="porta-visual" aria-hidden="true">
+                  <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="" width="200" height="200" />
+                  </div>
+                  <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="" width="200" height="200" />
+                  </div>
+                </div>
+
+                <h2 id="porta-adotante-titulo">Quero adotar</h2>
+                <p class="porta-resumo">
+                  Para adotantes e tutores: encontre cães e gatos de ONGs e
+                  protetores perto de você e acompanhe o pedido até o novo
+                  amigo chegar em casa.
+                </p>
+              </div>
+
+              <ul class="porta-lista">
+                <li>Filtros por espécie, porte, idade e distância</li>
+                <li>Pedido de adoção direto com a ONG</li>
+                <li>Aviso quando chegar um pet com o seu perfil</li>
+              </ul>
+
+              <div class="porta-acoes">
+                <a class="botao escuro grande" href="cadastro-adotante.html">Criar conta de adotante</a>
+                <a class="porta-link" href="adocao.html">Ver animais primeiro</a>
+              </div>
+            </article>
+
+            <article class="porta porta-ong" aria-labelledby="porta-ong-titulo">
+              <div class="porta-topo">
+                <div class="porta-visual" aria-hidden="true">
+                  <div class="polaroid">
+                    <img src="img/denuncia2.jpg" alt="" width="200" height="200" />
+                  </div>
+                  <div class="notificacao">
+                    <img src="img/icones/sino.svg" alt="" width="28" height="28" />
+                    <span><strong>Novo pedido</strong>Juliana quer adotar o Churros</span>
+                  </div>
+                </div>
+
+                <h2 id="porta-ong-titulo">Sou ONG ou protetor</h2>
+                <p class="porta-resumo">
+                  Para ONGs, abrigos e protetores independentes: mostre seus
+                  animais para quem está procurando e organize os pedidos de
+                  adoção num painel só.
+                </p>
+              </div>
+
+              <ul class="porta-lista">
+                <li>Cadastro gratuito, com verificação da ONG</li>
+                <li>Pedidos de adoção organizados por animal</li>
+                <li>Campanhas de arrecadação e feiras de adoção</li>
+              </ul>
+
+              <div class="porta-acoes">
+                <a class="botao primario grande" href="cadastro-ong.html">Cadastrar minha ONG</a>
+                <a class="porta-link" href="entrar.html#ong">Já tenho cadastro</a>
+              </div>
+            </article>
+          </div>
+
+          <p class="inicio-nota">
+            Navegar pelo site é livre. A conta só é pedida na hora de adotar ou de publicar um animal.
+          </p>
         </div>
       </section>
 
-      <section id="adote">
-        <h2>Encontre o pet certo para a sua casa.</h2>
-
-        <form action="#" method="get">
-          <fieldset>
-            <legend>Filtros de adoção</legend>
-
-            <div class="filtro-campo">
-              <label for="especie">Espécie</label>
-              <select id="especie" name="especie">
-                <option value="">Todos</option>
-                <option value="cao">Cães</option>
-                <option value="gato">Gatos</option>
-              </select>
+      <!-- ANIMAIS EM DESTAQUE -->
+      <section class="secao" aria-labelledby="titulo-destaques">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-destaques">Esperando por você</h2>
+              <p>Alguns dos bichos que as ONGs e protetores publicaram esta semana.</p>
             </div>
+            <a class="link-seta" href="adocao.html">Ver todos os animais</a>
+          </div>
 
-            <div class="filtro-campo">
-              <label for="porte">Porte</label>
-              <select id="porte" name="porte">
-                <option value="">Qualquer</option>
-                <option value="pequeno">Pequeno</option>
-                <option value="medio">Médio</option>
-                <option value="grande">Grande</option>
-              </select>
-            </div>
-
-            <div class="filtro-campo">
-              <label for="idade">Idade</label>
-              <select id="idade" name="idade">
-                <option value="">Qualquer</option>
-                <option value="filhote">Filhote</option>
-                <option value="adulto">Adulto</option>
-                <option value="idoso">Idoso</option>
-              </select>
-            </div>
-
-            <div class="filtro-campo">
-              <label for="localizacao">Localização</label>
-              <input
-                type="text"
-                id="localizacao"
-                name="localizacao"
-                placeholder="Cidade ou bairro"
-              />
-            </div>
-
-            <label>
-              <input
-                type="checkbox"
-                name="necessidades-especiais"
-                value="sim"
-              />
-              Necessidades especiais
-            </label>
-
-            <button type="submit">Filtrar</button>
-          </fieldset>
-        </form>
-
-        <ul>
-          <li>
-            <article>
-              <img
-                src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
-                alt="Cão disponível para adoção"
-                width="150"
-              />
-              <h3>Churros</h3>
-              <p>Cão · Pequeno · Adulto</p>
-              <p>A 1,2 km de você</p>
-            </article>
-          </li>
-          <li>
-            <article>
-              <img
-                src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
-                alt="Cão disponível para adoção"
-                width="150"
-              />
-              <h3>Brutus</h3>
-              <p>Cão · Médio · Idoso</p>
-              <p>A 3 km de você</p>
-            </article>
-          </li>
-          <li>
-            <article>
-              <img
-                src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
-                alt="Gata disponível para adoção"
-                width="150"
-              />
-              <h3>Mel</h3>
-              <p>Gato · Pequeno · Adulto</p>
-              <p>A 800 m de você</p>
-            </article>
-          </li>
-          <li>
-            <article>
-              <img
-                src="https://images.unsplash.com/photo-1721781010133-8eb0e9b23daf?auto=format&amp;fit=crop&amp;w=800&amp;q=85"
-                alt="Thor, filhote de Shih Tzu branco e marrom"
-                width="150"
-              />
-              <h3>Thor</h3>
-              <p>Cão · Grande · Filhote</p>
-              <p>A 5 km de você</p>
-            </article>
-          </li>
-        </ul>
+          <ul class="destaques-animais">
+            <li>
+              <a class="mini-animal" href="adocao.html#pet-churros">
+                <div class="polaroid">
+                  <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Churros, cão de porte pequeno" width="400" height="340" loading="lazy" />
+                </div>
+                <h3>Churros</h3>
+                <p>Cão pequeno, 3 anos, a 1,2 km</p>
+              </a>
+            </li>
+            <li>
+              <a class="mini-animal" href="adocao.html#pet-brutus">
+                <div class="polaroid">
+                  <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Brutus, cão idoso de porte médio" width="400" height="340" loading="lazy" />
+                </div>
+                <h3>Brutus</h3>
+                <p>Cão médio, 10 anos, a 3 km</p>
+              </a>
+            </li>
+            <li>
+              <a class="mini-animal" href="adocao.html#pet-mel">
+                <div class="polaroid">
+                  <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Mel, gata adulta" width="400" height="340" loading="lazy" />
+                </div>
+                <h3>Mel</h3>
+                <p>Gata pequena, 2 anos, a 800 m</p>
+              </a>
+            </li>
+            <li>
+              <a class="mini-animal" href="adocao.html#pet-thor">
+                <div class="polaroid">
+                  <img class="foco-topo" src="https://images.unsplash.com/photo-1721781010133-8eb0e9b23daf?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Thor, filhote branco e marrom" width="400" height="340" loading="lazy" />
+                </div>
+                <h3>Thor</h3>
+                <p>Cão filhote, 5 meses, a 5 km</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </section>
 
-      <section id="recursos">
-        <h2>Além da adoção, a comunidade toda entra.</h2>
+      <!-- COMO FUNCIONA: abas feitas só com HTML e CSS (radio + :has) -->
+      <section class="secao secao-bege" aria-labelledby="titulo-como">
+        <div class="container abas">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-como">Como funciona</h2>
+              <p>O caminho é diferente para quem adota e para quem cuida dos animais. Escolha o seu.</p>
+            </div>
+          </div>
 
-        <article>
-          <h3>Perdidos e achados perto de você</h3>
-          <p>
-            Anúncios de animais perdidos e encontrados no mapa da sua região.
-          </p>
-        </article>
+          <div class="abas-controle" role="radiogroup" aria-label="Ver o passo a passo para">
+            <label><input type="radio" name="como-funciona" value="adotante" checked /> Para adotantes</label>
+            <label><input type="radio" name="como-funciona" value="ong" /> Para ONGs e protetores</label>
+          </div>
 
-        <article>
-          <h3>Campanhas para ONGs</h3>
-          <p>Divulgue arrecadações, feiras de adoção e pedidos de ajuda.</p>
-        </article>
+          <div class="aba-painel aba-adotante">
+            <ol class="passos">
+              <li>
+                <h3>Crie sua conta</h3>
+                <p>Conte um pouco da sua rotina e da sua casa. Leva uns dois minutos.</p>
+              </li>
+              <li>
+                <h3>Encontre seu par</h3>
+                <p>Filtre por espécie, porte, idade, distância e convivência com crianças.</p>
+              </li>
+              <li>
+                <h3>Envie o pedido</h3>
+                <p>A ONG recebe suas respostas e responde em até 3 dias úteis.</p>
+              </li>
+              <li>
+                <h3>Visita e adoção</h3>
+                <p>Vocês combinam uma visita, assinam o termo e o novo amigo vai para casa.</p>
+              </li>
+            </ol>
+            <div class="grupo-botoes aba-acoes">
+              <a class="botao escuro" href="cadastro-adotante.html">Criar conta de adotante</a>
+              <a class="link-seta" href="adocao.html">Ver os animais primeiro</a>
+            </div>
+          </div>
 
-        <article>
-          <h3>Um perfil para cada papel</h3>
-          <p>Cadastro próprio para adotantes e para ONGs ou protetores.</p>
-        </article>
+          <div class="aba-painel aba-ong">
+            <ol class="passos">
+              <li>
+                <h3>Cadastre a ONG</h3>
+                <p>Dados da organização, do responsável e da área onde vocês atuam.</p>
+              </li>
+              <li>
+                <h3>Verificação</h3>
+                <p>Conferimos os documentos em até 2 dias úteis e liberamos o perfil.</p>
+              </li>
+              <li>
+                <h3>Publique os animais</h3>
+                <p>Fotos, saúde, temperamento e requisitos de adoção de cada um.</p>
+              </li>
+              <li>
+                <h3>Acompanhe os pedidos</h3>
+                <p>Converse com adotantes, agende visitas e registre as adoções no painel.</p>
+              </li>
+            </ol>
+            <div class="grupo-botoes aba-acoes">
+              <a class="botao primario" href="cadastro-ong.html">Cadastrar minha ONG</a>
+              <a class="link-seta" href="painel-ong.html">Ver como é o painel</a>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="problema">
-        <h2>Hoje, ajudar um animal dá trabalho:</h2>
-        <ul>
-          <li>Animais demais nas ruas</li>
-          <li>ONGs com pouca visibilidade</li>
-          <li>Adoção espalhada e burocrática</li>
-        </ul>
+      <!-- RECURSOS DA COMUNIDADE -->
+      <section class="secao" aria-labelledby="titulo-recursos">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-recursos">Além da adoção, a vizinhança toda ajuda</h2>
+              <p>Ferramentas para quem perdeu, encontrou ou viu um animal precisando de ajuda.</p>
+            </div>
+          </div>
+
+          <ul class="recursos">
+            <li>
+              <div class="icone-caixa"><img src="img/icones/pin.svg" alt="" width="30" height="30" /></div>
+              <h3>Perdidos e achados</h3>
+              <p>Anuncie um animal que sumiu ou avise que encontrou um. Quem mora perto vê primeiro.</p>
+              <a class="link-seta" href="animais-perdidos.html">Ver o mural</a>
+            </li>
+            <li>
+              <div class="icone-caixa"><img src="img/icones/megafone.svg" alt="" width="30" height="30" /></div>
+              <h3>Campanhas das ONGs</h3>
+              <p>Arrecadações de ração, feiras de adoção e pedidos de voluntários na sua região.</p>
+              <a class="link-seta" href="campanhas.html">Ver campanhas</a>
+            </li>
+            <li>
+              <div class="icone-caixa"><img src="img/icones/alerta.svg" alt="" width="30" height="30" /></div>
+              <h3>Denúncia de maus-tratos</h3>
+              <p>Viu um animal abandonado ou em risco? Conte o que aconteceu e as ONGs da região são avisadas.</p>
+              <a class="link-seta" href="denuncia.html">Fazer uma denúncia</a>
+            </li>
+          </ul>
+        </div>
       </section>
 
-      <section id="equipe">
-        <h2>Feito por seis estudantes, em projeto integrador.</h2>
-        <ul>
-          <li><strong>Daniel S. Esteves</strong>: QA, análise e design</li>
-          <li><strong>Gabriel Elias da Silva</strong>: Líder e requisitos</li>
-          <li>
-            <strong>Gabriel M. Silva</strong>: Back-end, logotipo, wireframe
-          </li>
-          <li><strong>Gabriel S. Costa</strong>: Full-stack e arquitetura</li>
-          <li>
-            <strong>Luiz Henrique S. Ventura</strong>: Front-end, banco, design
-          </li>
-          <li>
-            <strong>Willian B. A. de Sousa</strong>: Back-end e Scrum Master
-          </li>
-        </ul>
+      <!-- ONGS PARCEIRAS -->
+      <section class="secao secao-bege" aria-labelledby="titulo-ongs">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-ongs">Quem já cuida dos bichos por aqui</h2>
+              <p>Toda organização passa por verificação antes de publicar animais.</p>
+            </div>
+            <a class="link-seta" href="ongs.html">Conhecer as ONGs</a>
+          </div>
+
+          <ul class="ongs-faixa">
+            <li>
+              <a class="ong-mini" href="ongs.html#amigos-de-patas">
+                <span class="avatar" aria-hidden="true">AP</span>
+                <span><strong>ONG Amigos de Patas</strong><small>Diadema, SP</small></span>
+              </a>
+            </li>
+            <li>
+              <a class="ong-mini" href="ongs.html#lar-patinhas-felizes">
+                <span class="avatar laranja" aria-hidden="true">LP</span>
+                <span><strong>Lar Patinhas Felizes</strong><small>São Bernardo do Campo, SP</small></span>
+              </a>
+            </li>
+            <li>
+              <a class="ong-mini" href="ongs.html#ana-souza">
+                <span class="avatar amarelo" aria-hidden="true">AS</span>
+                <span><strong>Protetora Ana Souza</strong><small>Diadema, SP</small></span>
+              </a>
+            </li>
+            <li>
+              <a class="ong-mini" href="ongs.html#miau-seguro">
+                <span class="avatar bege" aria-hidden="true">MS</span>
+                <span><strong>Projeto Miau Seguro</strong><small>Santo André, SP</small></span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </section>
 
-      <section id="lista-de-espera">
-        <h2>Entre na lista de espera</h2>
-        <p>
-          Deixe seu e-mail e avisaremos quando o Patinhas Club estiver no ar.
-        </p>
-
-        <form action="#" method="post">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" required />
-
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required />
-
-          <label for="perfil">Eu sou</label>
-          <select id="perfil" name="perfil" required>
-            <option value="">Selecione</option>
-            <option value="adotante">Adotante / Tutor</option>
-            <option value="ong">ONG / Protetor</option>
-          </select>
-
-          <button type="submit">Quero entrar na lista</button>
-        </form>
+      <!-- CHAMADA FINAL -->
+      <section class="faixa-cta" aria-labelledby="titulo-cta">
+        <div class="container">
+          <div>
+            <p class="lema">Conforto para os animais, acima de tudo.</p>
+            <h2 id="titulo-cta">Pronto para fazer parte?</h2>
+            <p>É de graça para adotantes e para ONGs. Escolha como quer começar.</p>
+          </div>
+          <div class="grupo-botoes">
+            <a class="botao claro grande" href="cadastro-adotante.html">Quero adotar</a>
+            <a class="botao primario grande" href="cadastro-ong.html">Cadastrar minha ONG</a>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>&copy; Feito por seis estudantes, em projeto integrador</p>
-      <nav aria-label="Links do rodapé">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-        <a href="index.html">Voltar ao topo</a>
-      </nav>
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Criar conta de adotante | Patinhas Club</title>
+    <meta name="description" content="Crie sua conta de adotante no Patinhas Club para pedir adoções, salvar favoritos e receber avisos de animais com o seu perfil." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="pagina-cadastro pagina-cadastro-adotante">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="adocao.html">Adoção</a></li>
+              <li aria-current="page">Criar conta de adotante</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Criar conta de adotante</h1>
+            <p>Leva uns dois minutos</p>
+          </div>
+          <p class="lead">
+            Com a conta, você pede adoções, salva os bichos favoritos e recebe um
+            aviso quando chegar um animal com o perfil que você procura.
+          </p>
+        </div>
+      </section>
+
+      <div class="pagina-formulario">
+        <div class="container cadastro-grade">
+          <aside class="cadastro-lateral" aria-label="Ajuda do cadastro">
+            <nav class="etapas cartao-lateral" aria-label="Etapas do cadastro">
+              <h2>Etapas</h2>
+              <ol>
+                <li><a href="#etapa-1">Seus dados</a></li>
+                <li><a href="#etapa-2">Contato</a></li>
+                <li><a href="#etapa-3">Sua casa</a></li>
+                <li><a href="#etapa-4">Acesso</a></li>
+              </ol>
+              <p class="etapas-legenda">A etapa ganha um visto quando os campos obrigatórios estão preenchidos.</p>
+            </nav>
+
+            <div class="cartao-lateral">
+              <h2>Por que criar conta</h2>
+              <ul class="lista-check">
+                <li>Pedido de adoção com um clique, sem repetir dados</li>
+                <li>Acompanhar a resposta da ONG e a visita</li>
+                <li>Aviso quando chegar um pet com o seu perfil</li>
+              </ul>
+            </div>
+
+            <div class="cartao-lateral">
+              <h2>É ONG ou protetor?</h2>
+              <p>O cadastro de organizações é outro, com verificação.</p>
+              <p><a class="link-seta" href="cadastro-ong.html">Cadastrar minha ONG</a></p>
+            </div>
+          </aside>
+
+          <!--
+            Protótipo sem back-end: ao criar a conta, a pessoa vai para a área
+            "Minha conta" com um aviso de boas-vindas (#boas-vindas). O campo de
+            senha ainda não tem "name" para não aparecer na barra de endereço.
+            Com o back-end pronto: method="post", action da API e name="senha".
+          -->
+          <form class="formulario" action="minha-conta.html#boas-vindas" method="get">
+            <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+            <fieldset class="bloco" id="etapa-1">
+              <legend><span class="bloco-numero" aria-hidden="true">1</span> Seus dados</legend>
+
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="nome">Nome completo <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="nome" name="nome" autocomplete="name" required />
+                </div>
+
+                <div class="campo">
+                  <label for="nascimento">Data de nascimento <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="date" id="nascimento" name="nascimento" autocomplete="bday" max="2008-10-09" required aria-describedby="nascimento-dica" />
+                  <small class="dica" id="nascimento-dica">É preciso ter 18 anos ou mais para adotar.</small>
+                  <small class="msg-erro">Para adotar, é preciso ter 18 anos ou mais.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="cpf">CPF</label>
+                  <input type="text" id="cpf" name="cpf" inputmode="numeric" placeholder="000.000.000-00"
+                    pattern="\d{3}\.?\d{3}\.?\d{3}-?\d{2}" title="CPF com 11 números" aria-describedby="cpf-dica" />
+                  <small class="dica" id="cpf-dica">Opcional agora. A ONG pede no dia da adoção.</small>
+                  <small class="msg-erro">O CPF tem 11 números.</small>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-2">
+              <legend><span class="bloco-numero" aria-hidden="true">2</span> Contato</legend>
+              <p class="bloco-intro">A ONG usa estes dados para responder ao seu pedido.</p>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="email">E-mail <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" required />
+                  <small class="msg-erro">Digite um e-mail válido, como voce@email.com.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="telefone">Telefone ou WhatsApp <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000" required
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                  <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required />
+                </div>
+
+                <div class="campo">
+                  <label for="estado">Estado <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <select id="estado" name="estado" autocomplete="address-level1" required>
+                    <option value="">Selecione</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-3">
+              <legend><span class="bloco-numero" aria-hidden="true">3</span> Sua casa</legend>
+              <p class="bloco-intro">Essas respostas ajudam as ONGs a conhecer você. Nenhuma delas impede uma adoção.</p>
+
+              <fieldset class="grupo">
+                <legend>Onde você mora? <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <div class="opcoes-cartao">
+                  <label class="opcao-cartao">
+                    <input type="radio" name="moradia" value="casa" required />
+                    <img src="img/icones/casa.svg" alt="" width="30" height="30" />
+                    <span><strong>Casa</strong></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                  <label class="opcao-cartao">
+                    <input type="radio" name="moradia" value="casa-quintal" />
+                    <img src="img/icones/quintal.svg" alt="" width="30" height="30" />
+                    <span><strong>Casa com quintal</strong></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                  <label class="opcao-cartao">
+                    <input type="radio" name="moradia" value="apartamento" />
+                    <img src="img/icones/predio.svg" alt="" width="30" height="30" />
+                    <span><strong>Apartamento</strong></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <legend>Já tem animais em casa?</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="cao" /> Cães</label>
+                  <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="gato" /> Gatos</label>
+                  <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="outros" /> Outros bichos</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <legend>Tem crianças em casa?</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="criancas" value="nao" /> Não</label>
+                  <label class="chip-opcao"><input type="radio" name="criancas" value="sim" /> Sim</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <legend>Que bicho você procura?</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="procura" value="cao" /> Cão</label>
+                  <label class="chip-opcao"><input type="checkbox" name="procura" value="gato" /> Gato</label>
+                  <label class="chip-opcao"><input type="checkbox" name="procura" value="ainda-nao-sei" /> Ainda não sei</label>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-4">
+              <legend><span class="bloco-numero" aria-hidden="true">4</span> Acesso</legend>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="senha">Crie uma senha <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="password" id="senha" autocomplete="new-password" minlength="8" required
+                    pattern="(?=.*[A-Za-z])(?=.*\d).{8,}" title="Pelo menos 8 caracteres, com letras e números" aria-describedby="senha-dica" />
+                  <small class="dica" id="senha-dica">Pelo menos 8 caracteres, com letras e números.</small>
+                  <small class="msg-erro">Use pelo menos 8 caracteres, misturando letras e números.</small>
+                </div>
+              </div>
+
+              <div class="campo campo-checkbox">
+                <input type="checkbox" id="termos" name="aceite_termos" value="sim" required />
+                <label for="termos">
+                  Li e aceito os <a href="termos.html#termos" target="_blank">Termos de uso</a> e a
+                  <a href="termos.html#privacidade" target="_blank">Política de privacidade</a>.
+                  <span class="obrigatorio" aria-hidden="true">*</span>
+                </label>
+              </div>
+
+              <div class="campo campo-checkbox">
+                <input type="checkbox" id="alertas" name="alertas" value="sim" checked />
+                <label for="alertas">Quero receber aviso de animais com o meu perfil.</label>
+              </div>
+            </fieldset>
+
+            <div class="form-rodape">
+              <p>Depois de criar a conta, você já pode pedir adoções.</p>
+              <button type="submit" class="botao escuro grande">Criar minha conta</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

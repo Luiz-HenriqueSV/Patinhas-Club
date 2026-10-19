@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastrar animal | Painel da ONG | Patinhas Club</title>
+    <meta name="description" content="Publique um animal para adoção no Patinhas Club com fotos, saúde, temperamento e requisitos." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="area-logada pagina-cadastro pagina-cadastrar-animal">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="conta-chip" href="painel-ong.html">
+            <span class="avatar" aria-hidden="true">AP</span>
+            <span>Amigos de Patas<small>Painel da ONG</small></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="painel-ong.html">Painel da ONG</a></li>
+              <li><a href="painel-ong.html#animais">Meus animais</a></li>
+              <li aria-current="page">Cadastrar animal</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Cadastrar animal</h1>
+            <p>Aparece na vitrine assim que você publicar</p>
+          </div>
+          <p class="lead">
+            Quanto mais completo o perfil, mais fácil encontrar a família certa e
+            menos pedidos que não combinam com o animal.
+          </p>
+        </div>
+      </section>
+
+      <div class="pagina-formulario">
+        <div class="container cadastro-grade">
+          <aside class="cadastro-lateral" aria-label="Ajuda do cadastro">
+            <nav class="etapas cartao-lateral" aria-label="Etapas do cadastro">
+              <h2>Etapas</h2>
+              <ol>
+                <li><a href="#etapa-1">Quem é</a></li>
+                <li><a href="#etapa-2">Saúde</a></li>
+                <li><a href="#etapa-3">Personalidade</a></li>
+                <li><a href="#etapa-4">Fotos</a></li>
+                <li><a href="#etapa-5">Adoção</a></li>
+              </ol>
+              <p class="etapas-legenda">A etapa ganha um visto quando os campos obrigatórios estão preenchidos.</p>
+            </nav>
+
+            <div class="cartao-lateral">
+              <h2>Dicas para boas fotos</h2>
+              <ul class="lista-check">
+                <li>Luz natural, perto de uma janela ou ao ar livre</li>
+                <li>Câmera na altura dos olhos do animal</li>
+                <li>Uma foto de corpo inteiro e uma de rosto</li>
+                <li>Se der, uma brincando ou no colo</li>
+              </ul>
+            </div>
+          </aside>
+
+          <!--
+            Protótipo sem back-end: "Publicar animal" leva de volta ao painel com
+            um aviso de sucesso (painel-ong.html#animal-publicado). O botão de
+            rascunho usa formaction e formnovalidate para salvar sem validar.
+          -->
+          <form class="formulario" action="painel-ong.html#animal-publicado" method="get">
+            <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+            <fieldset class="bloco" id="etapa-1">
+              <legend><span class="bloco-numero" aria-hidden="true">1</span> Quem é</legend>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="nome-animal">Nome <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="nome-animal" name="nome" placeholder="Ex.: Churros" required />
+                </div>
+
+                <div class="campo">
+                  <label for="raca">Raça</label>
+                  <input type="text" id="raca" name="raca" placeholder="Sem raça definida" />
+                </div>
+
+                <div class="campo">
+                  <label for="cor">Cor da pelagem</label>
+                  <input type="text" id="cor" name="cor" placeholder="Ex.: caramelo com peito branco" />
+                </div>
+              </div>
+
+              <fieldset class="grupo">
+                <legend>Espécie <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <div class="opcoes-cartao">
+                  <label class="opcao-cartao">
+                    <input type="radio" name="especie" value="cao" required />
+                    <img src="img/icones/cao.svg" alt="" width="30" height="30" />
+                    <span><strong>Cão</strong></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                  <label class="opcao-cartao">
+                    <input type="radio" name="especie" value="gato" />
+                    <img src="img/icones/gato.svg" alt="" width="30" height="30" />
+                    <span><strong>Gato</strong></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                  <label class="opcao-cartao">
+                    <input type="radio" name="especie" value="outro" />
+                    <img src="img/icones/pata.svg" alt="" width="30" height="30" />
+                    <span><strong>Outro bicho</strong><small>Coelho, ave, roedor...</small></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="campos">
+                <fieldset class="grupo">
+                  <legend>Sexo <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                  <div class="chips">
+                    <label class="chip-opcao"><input type="radio" name="sexo" value="macho" required /> Macho</label>
+                    <label class="chip-opcao"><input type="radio" name="sexo" value="femea" /> Fêmea</label>
+                  </div>
+                </fieldset>
+
+                <div class="campo">
+                  <label for="idade">Idade aproximada <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <select id="idade" name="idade" required>
+                    <option value="">Selecione</option>
+                    <option value="filhote">Filhote (até 1 ano)</option>
+                    <option value="adulto">Adulto (de 1 a 7 anos)</option>
+                    <option value="idoso">Idoso (mais de 7 anos)</option>
+                  </select>
+                </div>
+              </div>
+
+              <fieldset class="grupo">
+                <legend>Porte <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="porte" value="pequeno" required /> Pequeno, até 10 kg</label>
+                  <label class="chip-opcao"><input type="radio" name="porte" value="medio" /> Médio, de 10 a 25 kg</label>
+                  <label class="chip-opcao"><input type="radio" name="porte" value="grande" /> Grande, mais de 25 kg</label>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-2">
+              <legend><span class="bloco-numero" aria-hidden="true">2</span> Saúde</legend>
+              <p class="bloco-intro">Marque o que já foi feito. Isso aparece como etiquetas no anúncio.</p>
+
+              <div class="chips">
+                <label class="chip-opcao"><input type="checkbox" name="saude" value="vacinado" /> Vacinado</label>
+                <label class="chip-opcao"><input type="checkbox" name="saude" value="vermifugado" /> Vermifugado</label>
+                <label class="chip-opcao"><input type="checkbox" name="saude" value="castrado" /> Castrado</label>
+                <label class="chip-opcao"><input type="checkbox" name="saude" value="microchip" /> Com microchip</label>
+                <label class="chip-opcao"><input type="checkbox" name="saude" value="fiv-felv" /> Testado para FIV e FeLV</label>
+              </div>
+
+              <div class="campo campo-checkbox">
+                <input type="checkbox" id="especiais" name="necessidades_especiais" value="sim" />
+                <label for="especiais">Tem necessidades especiais (remédio contínuo, deficiência, dieta...)</label>
+              </div>
+
+              <div class="campo">
+                <label for="cuidados">Cuidados especiais</label>
+                <textarea id="cuidados" name="cuidados" rows="3" placeholder="Ex.: toma remédio para as articulações duas vezes ao dia."></textarea>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-3">
+              <legend><span class="bloco-numero" aria-hidden="true">3</span> Personalidade</legend>
+
+              <fieldset class="grupo">
+                <legend>Como ele é</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="jeito" value="brincalhao" /> Brincalhão</label>
+                  <label class="chip-opcao"><input type="checkbox" name="jeito" value="calmo" /> Calmo</label>
+                  <label class="chip-opcao"><input type="checkbox" name="jeito" value="carinhoso" /> Carinhoso</label>
+                  <label class="chip-opcao"><input type="checkbox" name="jeito" value="timido" /> Tímido</label>
+                  <label class="chip-opcao"><input type="checkbox" name="jeito" value="independente" /> Independente</label>
+                  <label class="chip-opcao"><input type="checkbox" name="jeito" value="agitado" /> Cheio de energia</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <legend>Convive bem com</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="convive" value="criancas" /> Crianças</label>
+                  <label class="chip-opcao"><input type="checkbox" name="convive" value="caes" /> Cães</label>
+                  <label class="chip-opcao"><input type="checkbox" name="convive" value="gatos" /> Gatos</label>
+                </div>
+              </fieldset>
+
+              <div class="campo">
+                <label for="historia">A história dele <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <textarea id="historia" name="historia" rows="4" maxlength="600" required aria-describedby="historia-dica"
+                  placeholder="Ex.: Foi resgatado ainda filhote perto da estação. Adora colo e passeio curto..."></textarea>
+                <small class="dica" id="historia-dica">Escreva como se apresentasse o animal para um amigo. Até 600 caracteres.</small>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-4">
+              <legend><span class="bloco-numero" aria-hidden="true">4</span> Fotos</legend>
+              <p class="bloco-intro">Até 6 fotos. A primeira vira a capa do anúncio.</p>
+
+              <div class="campo">
+                <label for="fotos">Fotos do animal</label>
+                <input type="file" id="fotos" name="fotos" accept="image/*" multiple />
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-5">
+              <legend><span class="bloco-numero" aria-hidden="true">5</span> Adoção</legend>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="cidade-animal">Cidade onde ele está <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="cidade-animal" name="cidade" value="Diadema, SP" required />
+                </div>
+
+                <fieldset class="grupo">
+                  <legend>Taxa de adoção</legend>
+                  <div class="chips">
+                    <label class="chip-opcao"><input type="radio" name="taxa" value="gratuita" checked /> Gratuita</label>
+                    <label class="chip-opcao"><input type="radio" name="taxa" value="voluntaria" /> Contribuição voluntária</label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <fieldset class="grupo">
+                <legend>O que vocês pedem para adotar</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="requisitos" value="telas" /> Telas nas janelas</label>
+                  <label class="chip-opcao"><input type="checkbox" name="requisitos" value="quintal" /> Quintal fechado</label>
+                  <label class="chip-opcao"><input type="checkbox" name="requisitos" value="visita" checked /> Visita antes da adoção</label>
+                  <label class="chip-opcao"><input type="checkbox" name="requisitos" value="termo" checked /> Termo de adoção assinado</label>
+                </div>
+              </fieldset>
+
+              <div class="campo">
+                <label for="observacoes">Recado para quem vai adotar</label>
+                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex.: Ele se adapta melhor em casa com alguém por perto durante o dia."></textarea>
+              </div>
+            </fieldset>
+
+            <div class="form-rodape">
+              <p>Depois de publicado, você pode editar ou pausar o anúncio pelo painel.</p>
+              <div class="form-botoes">
+                <button type="submit" class="botao secundario" formaction="painel-ong.html#rascunho-salvo" formnovalidate>Salvar rascunho</button>
+                <button type="submit" class="botao primario grande">Publicar animal</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
