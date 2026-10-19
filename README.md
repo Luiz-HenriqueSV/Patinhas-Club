@@ -219,6 +219,86 @@ O site segue o `Design Digital/MIV_Patinhas_Club.pdf`:
 
 Toda a estilização fica em `Web/styles/styles.css`, organizada por seções com índice no topo do arquivo. Os ícones estão em `Web/img/icones/`.
 
+
+---
+
+## ▶️ Como executar
+
+1. Baixe ou clone o repositório.
+2. Abra a pasta `Web` e dê dois cliques em `index.html` (ou use a extensão **Live Server** do VS Code).
+3. Com internet, o site carrega as fontes do Google Fonts (Poppins e Delius Swash Caps) e as fotos do Unsplash. Sem internet ele continua funcionando, só que com as fontes do sistema.
+
+Não precisa instalar nada: não tem build, framework nem JavaScript.
+
+---
+
+## 🗺️ Páginas do site
+
+| Página | Para quem | O que faz |
+|---|---|---|
+| `index.html` | Todos | Página inicial com a **escolha de perfil**: "Quero adotar" ou "Sou ONG ou protetor" |
+| `adocao.html` | Adotante | Vitrine de animais com **filtros que funcionam** e formulário de pedido em cada cartão |
+| `lista_de_espera.html` | Adotante | Aviso quando chegar um animal com o perfil procurado |
+| `cadastro-adotante.html` | Adotante | Criação de conta de adotante |
+| `minha-conta.html` | Adotante | Área do adotante: pedidos com andamento, favoritos, alertas e anúncios |
+| `cadastro-ong.html` | ONG | Cadastro de ONG, abrigo ou protetor independente, em 5 etapas |
+| `cadastro-ong-enviado.html` | ONG | Confirmação do cadastro e próximos passos da verificação |
+| `entrar.html` | Todos | Login com abas "Sou adotante" e "Sou ONG" (`entrar.html#ong` já abre a aba da ONG) |
+| `painel-ong.html` | ONG | Painel: números, pedidos de adoção, animais, campanhas e perfil |
+| `cadastrar-animal.html` | ONG | Publicação de animal para adoção (com opção de salvar rascunho) |
+| `nova-campanha.html` | ONG | Criação de campanha: arrecadação, vaquinha, evento, voluntários ou saúde |
+| `ongs.html` | Todos | Diretório das ONGs verificadas, com filtro por espécie e serviço |
+| `campanhas.html` | Todos | Campanhas abertas, com filtro por tipo e progresso da meta |
+| `animais-perdidos.html` | Todos | Mural de perdidos e achados, com filtro e aviso "encontrei este animal" |
+| `reportar-desaparecimento.html` | Todos | Anúncio de animal perdido |
+| `denuncia.html` | Todos | Denúncia de maus-tratos, que pode ser anônima |
+| `sobre.html` | Todos | O projeto, valores, objetivos e equipe |
+| `termos.html` | Todos | Termos de uso, regras para ONGs, adoção responsável e privacidade (LGPD) |
+
+Os dados (animais, ONGs, pedidos e campanhas) são **exemplos** para demonstrar o protótipo.
+
+---
+
+## 🎤 Roteiro para a apresentação
+
+1. **Escolha de perfil:** na página inicial, passe o mouse pelas duas "portas" (adotante e ONG).
+2. **Lado da ONG:** "Cadastrar minha ONG" → preencha o formulário (as etapas da lateral ganham um visto) → "Enviar cadastro para análise" → "Conhecer o painel da ONG".
+3. **Painel:** abra "Ver respostas" de um pedido e clique em "Convidar para visita"; depois "Cadastrar animal" → "Publicar animal" volta para o painel com aviso de sucesso.
+4. **Lado do adotante:** na adoção, use os filtros (a contagem muda na hora) → "Quero adotar" abre o formulário dentro do cartão → envie e veja o aviso.
+5. **Conta:** "Criar conta de adotante" → "Criar minha conta" leva para a área "Minha conta" com mensagem de boas-vindas.
+
+---
+
+## 🧩 Como o site funciona sem JavaScript
+
+A turma usa só HTML e CSS nesta etapa, então todas as interações foram feitas com recursos nativos:
+
+| Interação | Como foi feita |
+|---|---|
+| Filtros da adoção, perdidos, ONGs e campanhas | `input type="radio"`/`checkbox` + seletor `:has()` no CSS, que esconde os cartões que não combinam |
+| Contagem "Mostrando X de Y" | Contador do CSS (`counter-increment`), que só conta os cartões visíveis |
+| Abas do "Como funciona" | `radio` + `:has()` |
+| Abas do login e avisos de sucesso | Pseudo-classe `:target` (o endereço termina com `#ong`, `#pedido-enviado`...) |
+| Formulários que abrem dentro dos cartões e perguntas frequentes | Elemento `<details>` |
+| Etapas do cadastro que ganham visto | `:has(:invalid)` e `:focus-within` |
+| Mensagens de erro nos campos | `:user-invalid` + atributos `required`, `pattern`, `min`, `max` |
+| Movimento dos botões e cartões | `transition`, `transform` e `@keyframes` (desligados para quem pede menos movimento no sistema) |
+
+**Formulários no protótipo:** como ainda não existe back-end, os formulários usam `method="get"` e levam para a próxima tela (por exemplo, `painel-ong.html#animal-publicado`). Os campos de senha ficam sem `name` de propósito, para a senha não aparecer na barra de endereço. Quando a API existir, basta trocar o `action` pela rota do servidor, usar `method="post"` e colocar `name="senha"`.
+
+---
+
+## 🎨 Identidade visual no site
+
+O site segue o `Design Digital/MIV_Patinhas_Club.pdf`:
+
+- **Cores:** Bege `#FAE3B0` (fundos), Marrom `#7B4A2E` (textos de apoio e botões escuros), Turquesa `#00C8DA` (destaques, linhas e ícones), Laranja `#E48C0A` (chamadas e botões principais) e Amarelo Ouro `#FFCC00` (detalhes).
+- **Fontes:** Delius Swash Caps nos títulos de destaque e Poppins no restante.
+- **Logo:** versão principal no cabeçalho e no rodapé, sempre sobre fundo claro e com pelo menos 150 px de largura.
+- Os tons mais escuros de turquesa e marrom usados nos textos existem para manter o contraste mínimo de acessibilidade (WCAG AA).
+
+Toda a estilização fica em `Web/styles/styles.css`, organizada por seções com índice no topo do arquivo. Os ícones estão em `Web/img/icones/`.
+
 ---
 
 ## 🧑‍💻 Equipe
