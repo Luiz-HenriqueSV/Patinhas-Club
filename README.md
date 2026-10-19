@@ -1,5 +1,5 @@
 # 🐾 Patinhas Club
-
+Macacos nao me mordam!
 ### Adotar, resgatar e reencontrar num só lugar.
 
 O **Patinhas Club** conecta ONGs, protetores independentes e adotantes em um único app, com filtros de adoção e anúncios geolocalizados de animais perdidos e encontrados perto de você.
