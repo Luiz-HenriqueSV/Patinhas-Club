@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Ilustração de gato">
+<rect width="400" height="300" fill="#FDF2D9"/>
+<circle cx="200" cy="168" r="112" fill="#FAE3B0"/>
+<g stroke="#3D2416" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+<path d="M138 132 148 58l52 42z" fill="#E48C0A"/><path d="M262 132 252 58l-52 42z" fill="#E48C0A"/>
+<path d="M150 118 156 80l26 22z" fill="#FAE3B0" stroke-width="3"/><path d="M250 118 244 80l-26 22z" fill="#FAE3B0" stroke-width="3"/>
+<ellipse cx="200" cy="168" rx="82" ry="68" fill="#E48C0A"/>
+<ellipse cx="200" cy="196" rx="30" ry="20" fill="#FFF8EC" stroke-width="3"/>
+<ellipse cx="170" cy="160" rx="7" ry="11" fill="#3D2416" stroke="none"/><ellipse cx="230" cy="160" rx="7" ry="11" fill="#3D2416" stroke="none"/>
+<path d="M192 184h16l-8 9z" fill="#7B4A2E" stroke-width="3"/>
+<path d="M200 193v6m0 0c-4 6-11 7-16 2m16-2c4 6 11 7 16 2" fill="none" stroke-width="3.5"/>
+<path d="M158 192l-42-8m42 16-40 4m126-12 42-8m-42 16 40 4" fill="none" stroke-width="3"/>
+</g></svg>

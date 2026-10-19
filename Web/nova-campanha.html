@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nova campanha | Painel da ONG | Patinhas Club</title>
+    <meta name="description" content="Crie uma campanha de arrecadação, vaquinha, feira de adoção ou pedido de voluntários no Patinhas Club." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="area-logada pagina-cadastro pagina-nova-campanha">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="conta-chip" href="painel-ong.html">
+            <span class="avatar" aria-hidden="true">AP</span>
+            <span>Amigos de Patas<small>Painel da ONG</small></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="painel-ong.html">Painel da ONG</a></li>
+              <li><a href="painel-ong.html#campanhas">Campanhas</a></li>
+              <li aria-current="page">Nova campanha</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Nova campanha</h1>
+            <p>Divulgada para quem mora perto da ONG</p>
+          </div>
+          <p class="lead">
+            Peça ração, organize uma feira de adoção ou chame voluntários.
+            Campanhas com meta clara e prazo curto recebem mais ajuda.
+          </p>
+        </div>
+      </section>
+
+      <div class="pagina-formulario">
+        <div class="container cadastro-grade">
+          <aside class="cadastro-lateral" aria-label="Ajuda da campanha">
+            <nav class="etapas cartao-lateral" aria-label="Etapas da campanha">
+              <h2>Etapas</h2>
+              <ol>
+                <li><a href="#etapa-1">Tipo</a></li>
+                <li><a href="#etapa-2">Detalhes</a></li>
+                <li><a href="#etapa-3">Meta e prazo</a></li>
+                <li><a href="#etapa-4">Como ajudar</a></li>
+              </ol>
+              <p class="etapas-legenda">A etapa ganha um visto quando os campos obrigatórios estão preenchidos.</p>
+            </nav>
+
+            <div class="cartao-lateral">
+              <h2>Boas campanhas têm</h2>
+              <ul class="lista-check">
+                <li>Um título que diz o que falta, como “500 kg de ração”</li>
+                <li>Prazo de poucas semanas</li>
+                <li>Passo a passo simples para ajudar</li>
+                <li>Prestação de contas no final</li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Protótipo sem back-end: publicar leva ao painel com o aviso #campanha-criada -->
+          <form class="formulario" action="painel-ong.html#campanha-criada" method="get">
+            <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+            <fieldset class="bloco" id="etapa-1">
+              <legend><span class="bloco-numero" aria-hidden="true">1</span> Tipo de campanha <span class="obrigatorio" aria-hidden="true">*</span></legend>
+
+              <div class="opcoes-cartao">
+                <label class="opcao-cartao">
+                  <input type="radio" name="tipo" value="arrecadacao" required />
+                  <img src="img/icones/racao.svg" alt="" width="30" height="30" />
+                  <span><strong>Arrecadação</strong><small>Ração, cobertores, remédios</small></span>
+                  <span class="marcador" aria-hidden="true"></span>
+                </label>
+                <label class="opcao-cartao">
+                  <input type="radio" name="tipo" value="vaquinha" />
+                  <img src="img/icones/moedas.svg" alt="" width="30" height="30" />
+                  <span><strong>Vaquinha</strong><small>Cirurgias e tratamentos</small></span>
+                  <span class="marcador" aria-hidden="true"></span>
+                </label>
+                <label class="opcao-cartao">
+                  <input type="radio" name="tipo" value="evento" />
+                  <img src="img/icones/calendario.svg" alt="" width="30" height="30" />
+                  <span><strong>Evento ou feira</strong><small>Feiras de adoção, bazares</small></span>
+                  <span class="marcador" aria-hidden="true"></span>
+                </label>
+                <label class="opcao-cartao">
+                  <input type="radio" name="tipo" value="voluntariado" />
+                  <img src="img/icones/pessoas.svg" alt="" width="30" height="30" />
+                  <span><strong>Voluntários</strong><small>Lar temporário, passeios</small></span>
+                  <span class="marcador" aria-hidden="true"></span>
+                </label>
+                <label class="opcao-cartao">
+                  <input type="radio" name="tipo" value="saude" />
+                  <img src="img/icones/saude.svg" alt="" width="30" height="30" />
+                  <span><strong>Saúde</strong><small>Mutirões de castração e vacina</small></span>
+                  <span class="marcador" aria-hidden="true"></span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-2">
+              <legend><span class="bloco-numero" aria-hidden="true">2</span> Detalhes</legend>
+
+              <div class="campo">
+                <label for="titulo-campanha">Título <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <input type="text" id="titulo-campanha" name="titulo" maxlength="70" placeholder="Ex.: Ração para o inverno" required />
+              </div>
+
+              <div class="campo">
+                <label for="descricao">Descrição <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <textarea id="descricao" name="descricao" rows="4" maxlength="500" required
+                  placeholder="Conte por que a campanha existe e para quantos animais a ajuda vai."></textarea>
+              </div>
+
+              <div class="campo">
+                <label for="capa">Imagem de capa</label>
+                <input type="file" id="capa" name="capa" accept="image/*" />
+                <small class="dica">Sem imagem, a campanha usa a cor e o ícone do tipo escolhido.</small>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-3">
+              <legend><span class="bloco-numero" aria-hidden="true">3</span> Meta e prazo</legend>
+
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="meta">Meta</label>
+                  <input type="text" id="meta" name="meta" placeholder="Ex.: 500 kg de ração, R$ 1.200, 8 lares temporários" />
+                </div>
+
+                <div class="campo">
+                  <label for="inicio">Começa em</label>
+                  <input type="date" id="inicio" name="inicio" min="2026-10-09" />
+                </div>
+
+                <div class="campo">
+                  <label for="fim">Termina em <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="date" id="fim" name="fim" min="2026-10-09" required />
+                  <small class="msg-erro">Escolha uma data a partir de hoje.</small>
+                </div>
+
+                <div class="campo campo-largo">
+                  <label for="local">Local</label>
+                  <input type="text" id="local" name="local" placeholder="Para eventos e pontos de coleta. Ex.: Praça da Moça, Diadema" />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-4">
+              <legend><span class="bloco-numero" aria-hidden="true">4</span> Como ajudar</legend>
+
+              <div class="campo">
+                <label for="como-ajudar">Passo a passo para ajudar <span class="obrigatorio" aria-hidden="true">*</span></label>
+                <textarea id="como-ajudar" name="como_ajudar" rows="4" required
+                  placeholder="Ex.: Entregue a ração na sede de segunda a sábado, das 9h às 17h. Doações em dinheiro pelo Pix do perfil da ONG."></textarea>
+              </div>
+
+              <div class="campo">
+                <label for="contato-campanha">Contato para dúvidas</label>
+                <input type="text" id="contato-campanha" name="contato" placeholder="Telefone ou e-mail" />
+              </div>
+            </fieldset>
+
+            <div class="form-rodape">
+              <p>A campanha aparece na página de campanhas e no perfil da ONG.</p>
+              <div class="form-botoes">
+                <button type="submit" class="botao secundario" formaction="painel-ong.html#rascunho-salvo" formnovalidate>Salvar rascunho</button>
+                <button type="submit" class="botao primario grande">Publicar campanha</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

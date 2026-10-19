@@ -2,88 +2,260 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="img/favicon_io/favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sobre | Patinhas Club</title>
+    <meta name="description" content="O Patinhas Club nasceu como Projeto Integrador de seis estudantes para reunir ONGs, protetores e adotantes num só lugar." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
-  <body class="pagina-site pagina-sobre">
-    <header id="topo">
-      <nav>
-        <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="adocao.html">Adoção</a></li>
-        <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
-        <li><a href="lista_de_espera.html">Lista de Espera</a></li>
-        <li><a href="denuncia.html">Denúncia</a></li>
-    </ul>
+  <body id="topo" class="pagina-sobre">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-        <img
-        class="logo-patinhas"
-        src="img/path16.svg"
-        alt="Logo Patinhas Club"
-      />
-      </nav>
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html" aria-current="page">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="index.html#escolha">Criar conta</a>
+        </div>
+      </div>
     </header>
 
-    <main class="pagina">
-      <section>
-        <h2>Sobre Patinhas Club</h2>
-        <img
-          src="img/path16.svg"
-          alt="Logo Patinhas Club"
-          width="200"
-        />
-        <p>
-          A Patinhas Club nasceu em 2026 para aproximar quem ama animais de quem
-          precisa de ajuda. A plataforma conecta ONGs, protetores e adotantes,
-          reunindo informações que facilitam a adoção e o reencontro de animais.
-        </p>
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li aria-current="page">Sobre</li>
+            </ol>
+          </nav>
 
-        <h3>Como queremos tornar isso possível</h3>
-        <ol>
-          <li>
-            Levantar e documentar os requisitos funcionais e não funcionais com
-            ONGs parceiras e tutores.
-          </li>
-          <li>
-            Integrar ferramentas de apoio e divulgação de campanhas para ONGs
-            cadastradas no hub.
-          </li>
-          <li>
-            Realizar testes de usabilidade, integração e aceitação com usuários
-            reais e documentar os resultados.
-          </li>
-        </ol>
+          <div class="sobre-intro">
+            <div>
+              <div class="topo-pagina-titulo">
+                <h1 id="titulo-pagina">Sobre o Patinhas Club</h1>
+                <p>Projeto Integrador, 2026</p>
+              </div>
+              <p class="lead">
+                O Patinhas Club nasceu em 2026 para aproximar quem ama animais de
+                quem precisa de ajuda. A plataforma conecta ONGs, protetores e
+                adotantes, reunindo informações que facilitam a adoção e o
+                reencontro de animais.
+              </p>
+            </div>
+            <img class="logo-grande" src="img/path16.svg" alt="Logo do Patinhas Club: uma patinha com dois cachorros e um aquário" width="360" height="196" />
+          </div>
+        </div>
+      </section>
 
-        <aside>
-          <h3>Impacto local</h3>
-          <p>
-            Queremos aproximar moradores, ONGs e protetores para que mais
-            animais encontrem lares seguros e recebam os cuidados de que
-            precisam.
-          </p>
-        </aside>
+      <section class="secao" aria-labelledby="titulo-problema">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-problema">Por que o projeto existe</h2>
+              <p>
+                No Brasil, adoção, resgate e acolhimento de animais acontecem de
+                forma espalhada e informal. Hoje, ajudar um animal dá trabalho:
+              </p>
+            </div>
+          </div>
 
-        <article>
-          <h3>Depoimento</h3>
-          <blockquote>
-            "Ajude aqueles que precisam ser ajudados e ganhe um amigo
-            inesquecível." — Daniel, morador de Diadema
-          </blockquote>
-        </article>
+          <ul class="problemas">
+            <li><strong>Animais demais nas ruas</strong><span>Superpopulação urbana e alto índice de abandono.</span></li>
+            <li><strong>ONGs com pouca visibilidade</strong><span>Quem resgata tem poucos recursos para divulgar o próprio trabalho.</span></li>
+            <li><strong>Adoção espalhada e burocrática</strong><span>Cada ONG tem um processo, e as informações ficam em lugares diferentes.</span></li>
+            <li><strong>Animais perdidos sem rede</strong><span>Faltava um mural do bairro para quem perdeu e para quem encontrou.</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="secao secao-bege" aria-labelledby="titulo-valores">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-valores">O que guia cada decisão</h2>
+              <p>Os valores do nosso manual de identidade visual valem para o produto inteiro.</p>
+            </div>
+          </div>
+
+          <ul class="valores">
+            <li>
+              <h3>Conforto acima de tudo</h3>
+              <p>O bem-estar do animal vem antes de qualquer outra decisão de marca, produto ou parceria.</p>
+            </li>
+            <li>
+              <h3>Parceria com as ONGs</h3>
+              <p>Apoio real a quem já faz esse trabalho todos os dias. O Patinhas Club existe para amplificar, não substituir.</p>
+            </li>
+            <li>
+              <h3>Sensação de lar</h3>
+              <p>Toda interação deve lembrar aconchego, do primeiro clique até a adoção concluída.</p>
+            </li>
+          </ul>
+
+          <p class="citacao-marca">Conforto para os animais, acima de tudo.</p>
+        </div>
+      </section>
+
+      <section class="secao" aria-labelledby="titulo-objetivos">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-objetivos">Como queremos tornar isso possível</h2>
+              <p>Os objetivos do Projeto Integrador, do levantamento de requisitos aos testes com usuários.</p>
+            </div>
+          </div>
+
+          <ol class="objetivos">
+            <li>Levantar e documentar os requisitos funcionais e não funcionais com ONGs parceiras e tutores.</li>
+            <li>Projetar a interface do aplicativo com foco em acessibilidade e navegação intuitiva.</li>
+            <li>Implementar cadastro e autenticação com perfis distintos: adotante e ONG ou protetor.</li>
+            <li>Desenvolver a central de adoções com filtros de porte, idade, localização e necessidades especiais.</li>
+            <li>Implementar anúncios geolocalizados de animais perdidos e encontrados.</li>
+            <li>Integrar ferramentas de divulgação de campanhas para as ONGs cadastradas.</li>
+            <li>Realizar testes de usabilidade, integração e aceitação com usuários reais e documentar os resultados.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="secao secao-bege" aria-labelledby="titulo-impacto">
+        <div class="container verificacao">
+          <div class="destaque">
+            <h2 id="titulo-impacto">Impacto local</h2>
+            <p>
+              Queremos aproximar moradores, ONGs e protetores para que mais
+              animais encontrem lares seguros e recebam os cuidados de que precisam.
+              Começamos pela nossa região, no ABC paulista.
+            </p>
+          </div>
+
+          <figure class="depoimento">
+            <blockquote>“Ajude aqueles que precisam ser ajudados e ganhe um amigo inesquecível.”</blockquote>
+            <figcaption>Daniel, morador de Diadema</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="secao" id="equipe" aria-labelledby="titulo-equipe">
+        <div class="container">
+          <div class="secao-cabecalho">
+            <div>
+              <h2 id="titulo-equipe">Quem faz o Patinhas Club</h2>
+              <p>Seis estudantes de Desenvolvimento de Software Multiplataforma, em Projeto Integrador.</p>
+            </div>
+          </div>
+
+          <ul class="equipe">
+            <li>
+              <span class="avatar" aria-hidden="true">DE</span>
+              <div><strong>Daniel S. Esteves</strong><span>QA, análise do sistema e design</span></div>
+            </li>
+            <li>
+              <span class="avatar laranja" aria-hidden="true">GE</span>
+              <div><strong>Gabriel Elias da Silva</strong><span>Líder do projeto e levantamento de requisitos</span></div>
+            </li>
+            <li>
+              <span class="avatar amarelo" aria-hidden="true">GM</span>
+              <div><strong>Gabriel M. Silva</strong><span>Back-end, logotipo e wireframe</span></div>
+            </li>
+            <li>
+              <span class="avatar bege" aria-hidden="true">GC</span>
+              <div><strong>Gabriel S. Costa</strong><span>Requisitos, full-stack e arquitetura de software</span></div>
+            </li>
+            <li>
+              <span class="avatar marrom" aria-hidden="true">LV</span>
+              <div><strong>Luiz Henrique S. Ventura</strong><span>Front-end, banco de dados e design digital</span></div>
+            </li>
+            <li>
+              <span class="avatar" aria-hidden="true">WS</span>
+              <div><strong>Willian B. A. de Sousa</strong><span>Back-end, wireframe, Scrum Master e banco de dados</span></div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="faixa-cta" aria-labelledby="titulo-cta">
+        <div class="container">
+          <div>
+            <p class="lema">Um lar pra cada patinha.</p>
+            <h2 id="titulo-cta">Faça parte do Patinhas Club</h2>
+            <p>Adote, cadastre sua ONG ou ajude a encontrar um animal perdido.</p>
+          </div>
+          <div class="grupo-botoes">
+            <a class="botao claro grande" href="index.html#escolha">Começar agora</a>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>&copy; Feito por seis estudantes, em projeto integrador</p>
-      <p>Patinhas Club</p>
-      <nav>
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-        <a href="sobre.html" target="_self">Voltar ao topo</a>
-      </nav>
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

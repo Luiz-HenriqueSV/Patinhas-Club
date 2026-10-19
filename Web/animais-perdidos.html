@@ -3,436 +3,480 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Animais perdidos | Patinhas Club</title>
+    <title>Perdidos e achados | Patinhas Club</title>
+    <meta name="description" content="Mural da comunidade com animais perdidos e encontrados perto de você. Anuncie um animal que sumiu ou avise o tutor de um animal que você viu." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
     <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="shortcut icon" href="img/favicon_io/favicon.ico" type="image/x-icon">
   </head>
-  <body class="pagina-perdidos">
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="adocao.html">Adoção</a></li>
-        <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
-        <li><a href="lista_de_espera.html">Lista de Espera</a></li>
-        <li><a href="denuncia.html">Denúncia</a></li>
-      </ul>
+  <body id="topo" class="pagina-perdidos">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-      <img
-        class="logo-patinhas"
-        src="img/path16.svg"
-        alt="Logo Patinhas Club"
-      />
-    </nav>
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
 
-    <main class="pagina">
-
-      <section class="hero">
-        <div class="hero-texto">
-          <h1>Animais perdidos</h1>
-          <p>
-            Mural da comunidade com os animais desaparecidos perto de você. Viu
-            algum? Nos avise!
-          </p>
-        </div>
-
-        <div class="hero-acoes">
-          <a href="reportar-desaparecimento.html" class="botao primario"
-            >Reportar animal perdido</a
-          >
-          <a href="index.html" class="botao secundario">Voltar para o início</a>
-        </div>
-      </section>
-
-      <section class="filtros">
-        <form class="filtros-form" action="#" method="get">
-          <div class="filtro">
-            <label for="busca-local">Localização</label>
-            <input
-              type="text"
-              id="busca-local"
-              name="local"
-              placeholder="Bairro ou cidade"
-            />
-          </div>
-
-          <div class="filtro">
-            <label for="filtro-especie">Espécie</label>
-            <select id="filtro-especie" name="especie">
-              <option value="">Todas</option>
-              <option value="cao">Cães</option>
-              <option value="gato">Gatos</option>
-              <option value="outro">Outros</option>
-            </select>
-          </div>
-
-          <div class="filtro">
-            <label for="filtro-porte">Porte</label>
-            <select id="filtro-porte" name="porte">
-              <option value="">Todos</option>
-              <option value="pequeno">Pequeno</option>
-              <option value="medio">Médio</option>
-              <option value="grande">Grande</option>
-            </select>
-          </div>
-
-          <div class="filtro">
-            <label for="filtro-status">Situação</label>
-            <select id="filtro-status" name="status">
-              <option value="perdido">Ainda perdidos</option>
-              <option value="encontrado">Já encontrados</option>
-              <option value="todos">Todos</option>
-            </select>
-          </div>
-
-          <button type="submit" class="botao primario">Filtrar</button>
-        </form>
-      </section>
-
-      <section class="mural-secao">
-        <h2>Mural de desaparecidos</h2>
-
-        <div class="mural">
-
-          <article class="card-animal">
-            <div class="card-foto">
-              <img
-                src="img/animalex1.png"
-                alt="Foto do animal desaparecido"
-              />
-              <span class="card-status">Perdido</span>
-            </div>
-
-            <div class="card-info">
-              <h3 class="card-nome">Caramelo</h3>
-              <p class="card-detalhes">Cão - Médio - Adulto</p>
-
-              <div class="card-local">
-                <p><strong>Visto pela última vez em:</strong></p>
-                <p>Rua Manoel da Nóbrega, 123 - Centro, Diadema</p>
-                <p>Data: 28/09/2026 - por volta das 18h</p>
-              </div>
-
-              <p class="card-descricao">
-                Características: pelagem caramelo, coleira azul, mancha branca
-                no peito.
-              </p>
-
-              <p class="card-contato">Contato do tutor: (11) 99544-9612</p>
-            </div>
-
-            <details class="card-encontrado">
-              <summary class="botao secundario">Marcar como encontrado</summary>
-
-              <form id="form-encontrado" class="form-encontrado" action="#" method="post">
-                <h4>Encontrou este animal?</h4>
-
-                <div class="campo">
-                  <label for="enc-onde-1">Onde ele foi encontrado?</label>
-                  <input
-                    type="text"
-                    id="enc-onde-1"
-                    name="onde"
-                    placeholder="Endereço ou ponto de referência"
-                    required
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-quando-1">Quando?</label>
-                  <input
-                    type="datetime-local"
-                    id="enc-quando-1"
-                    name="quando"
-                    required
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-estado-1">Como ele estava?</label>
-                  <select id="enc-estado-1" name="estado" required>
-                    <option value="">Selecione</option>
-                    <option value="bem">Bem, sem ferimentos</option>
-                    <option value="assustado">Assustado</option>
-                    <option value="ferido">Ferido</option>
-                    <option value="desnutrido">Magro ou desidratado</option>
-                  </select>
-                </div>
-
-                <div class="campo">
-                  <label for="enc-obs-1">Conte mais detalhes</label>
-                  <textarea
-                    id="enc-obs-1"
-                    name="observacoes"
-                    rows="4"
-                    placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."
-                  ></textarea>
-                </div>
-
-                <div class="campo">
-                  <label for="enc-foto-1">Foto (opcional)</label>
-                  <input
-                    type="file"
-                    id="enc-foto-1"
-                    name="foto"
-                    accept="image/*"
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-contato-1">Seu contato</label>
-                  <input
-                    type="text"
-                    id="enc-contato-1"
-                    name="contato"
-                    placeholder="Telefone ou e-mail"
-                    required
-                  />
-                </div>
-
-                <div class="form-botoes">
-                  <button type="submit" class="botao primario">
-                    Confirmar que foi encontrado
-                  </button>
-                </div>
-              </form>
-            </details>
-          </article>
-
-          <article class="card-animal">
-            <div class="card-foto">
-              <img
-                src="img/animalex2.png"
-                alt="Foto do animal desaparecido"
-              />
-              <span class="card-status">Perdido</span>
-            </div>
-
-            <div class="card-info">
-              <h3 class="card-nome">Cinzinha</h3>
-              <p class="card-detalhes">Gato - Pequeno - Filhote</p>
-
-              <div class="card-local">
-                <p><strong>Visto pela última vez em:</strong></p>
-                <p>Av. Alda, 456 - Centro, Diadema</p>
-                <p>Data: 30/09/2026 - por volta das 07h</p>
-              </div>
-
-              <p class="card-descricao">
-                Características: pelo tigrado cinza, olhos verdes, sem coleira.
-              </p>
-
-              <p class="card-contato">Contato do tutor: (11) 98776-5432</p>
-            </div>
-
-            <details class="card-encontrado">
-              <summary class="botao secundario">Marcar como encontrado</summary>
-
-              <form id="form-encontrado" class="form-encontrado" action="#" method="post">
-                <h4>Encontrou este animal?</h4>
-
-                <div class="campo">
-                  <label for="enc-onde-2">Onde ele foi encontrado?</label>
-                  <input
-                    type="text"
-                    id="enc-onde-2"
-                    name="onde"
-                    placeholder="Endereço ou ponto de referência"
-                    required
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-quando-2">Quando?</label>
-                  <input
-                    type="datetime-local"
-                    id="enc-quando-2"
-                    name="quando"
-                    required
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-estado-2">Como ele estava?</label>
-                  <select id="enc-estado-2" name="estado" required>
-                    <option value="">Selecione</option>
-                    <option value="bem">Bem, sem ferimentos</option>
-                    <option value="assustado">Assustado</option>
-                    <option value="ferido">Ferido</option>
-                    <option value="desnutrido">Magro ou desidratado</option>
-                  </select>
-                </div>
-
-                <div class="campo">
-                  <label for="enc-obs-2">Conte mais detalhes</label>
-                  <textarea
-                    id="enc-obs-2"
-                    name="observacoes"
-                    rows="4"
-                    placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."
-                  ></textarea>
-                </div>
-
-                <div class="campo">
-                  <label for="enc-foto-2">Foto (opcional)</label>
-                  <input
-                    type="file"
-                    id="enc-foto-2"
-                    name="foto"
-                    accept="image/*"
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-contato-2">Seu contato</label>
-                  <input
-                    type="text"
-                    id="enc-contato-2"
-                    name="contato"
-                    placeholder="Telefone ou e-mail"
-                    required
-                  />
-                </div>
-
-                <div class="form-botoes">
-                  <button type="submit" class="botao primario">
-                    Confirmar que foi encontrado
-                  </button>
-                </div>
-              </form>
-            </details>
-          </article>
-
-          <article class="card-animal">
-            <div class="card-foto">
-              <img
-                src="img/animalex3.png"
-                alt="Foto do animal desaparecido"
-              />
-              <span class="card-status">Perdido</span>
-            </div>
-
-            <div class="card-info">
-              <h3 class="card-nome">Ruby</h3>
-              <p class="card-detalhes">Cão - Grande - Idoso</p>
-
-              <div class="card-local">
-                <p><strong>Visto pela última vez em:</strong></p>
-                <p>Praça da Moça - Centro, Diadema</p>
-                <p>Data: 25/09/2026 - por volta das 20h</p>
-              </div>
-
-              <p class="card-descricao">
-                Características: pelagem preta, focinho grisalho, anda devagar.
-              </p>
-
-              <p class="card-contato">Contato do tutor: (11) 96345-6789</p>
-            </div>
-
-            <details class="card-encontrado">
-              <summary class="botao secundario">Marcar como encontrado</summary>
-
-              <form id="form-encontrado" class="form-encontrado" action="#" method="post">
-                <h4>Encontrou este animal?</h4>
-
-                <div class="campo">
-                  <label for="enc-onde-3">Onde ele foi encontrado?</label>
-                  <input
-                    type="text"
-                    id="enc-onde-3"
-                    name="onde"
-                    placeholder="Endereço ou ponto de referência"
-                    required
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-quando-3">Quando?</label>
-                  <input
-                    type="datetime-local"
-                    id="enc-quando-3"
-                    name="quando"
-                    required
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-estado-3">Como ele estava?</label>
-                  <select id="enc-estado-3" name="estado" required>
-                    <option value="">Selecione</option>
-                    <option value="bem">Bem, sem ferimentos</option>
-                    <option value="assustado">Assustado</option>
-                    <option value="ferido">Ferido</option>
-                    <option value="desnutrido">Magro ou desidratado</option>
-                  </select>
-                </div>
-
-                <div class="campo">
-                  <label for="enc-obs-3">Conte mais detalhes</label>
-                  <textarea
-                    id="enc-obs-3"
-                    name="observacoes"
-                    rows="4"
-                    placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."
-                  ></textarea>
-                </div>
-
-                <div class="campo">
-                  <label for="enc-foto-3">Foto (opcional)</label>
-                  <input
-                    type="file"
-                    id="enc-foto-3"
-                    name="foto"
-                    accept="image/*"
-                  />
-                </div>
-
-                <div class="campo">
-                  <label for="enc-contato-3">Seu contato</label>
-                  <input
-                    type="text"
-                    id="enc-contato-3"
-                    name="contato"
-                    placeholder="Telefone ou e-mail"
-                    required
-                  />
-                </div>
-
-                <div class="form-botoes">
-                  <button type="submit" class="botao primario">
-                    Confirmar que foi encontrado
-                  </button>
-                </div>
-              </form>
-            </details>
-          </article>
-
-        </div>
-        <nav class="paginas" aria-label="Páginas do mural">
-          <a href="#">Anterior</a>
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">Próxima</a>
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html" aria-current="page">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
         </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="index.html#escolha">Criar conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <div class="aviso" id="anuncio-publicado" role="status">
+            <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+            <div class="aviso-texto">
+              <p class="aviso-titulo">Anúncio publicado no mural!</p>
+              <p>Quem mora perto já pode ver. Se alguém encontrar o seu animal, você recebe o aviso no telefone informado.</p>
+            </div>
+            <a class="aviso-fechar" href="#fechar">Fechar</a>
+          </div>
+
+          <div class="aviso" id="aviso-enviado" role="status">
+            <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+            <div class="aviso-texto">
+              <p class="aviso-titulo">Aviso enviado ao tutor</p>
+              <p>Obrigado por ajudar! O tutor recebeu o local, o horário e o seu contato.</p>
+            </div>
+            <a class="aviso-fechar" href="#fechar">Fechar</a>
+          </div>
+
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li aria-current="page">Perdidos e achados</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Perdidos e achados</h1>
+            <p>Mural da vizinhança</p>
+          </div>
+          <p class="lead">
+            Animais desaparecidos perto de você. Viu algum deles? Avise o tutor
+            por aqui. O seu sumiu? Anuncie e a vizinhança ajuda a procurar.
+          </p>
+          <div class="topo-pagina-acoes">
+            <a href="reportar-desaparecimento.html" class="botao primario">Anunciar animal perdido</a>
+            <a href="#dicas" class="botao secundario">Dicas para encontrar</a>
+          </div>
+        </div>
       </section>
 
-      <section class="final">
-        <h2>Seu animal sumiu?</h2>
-        <p>Cadastre o desaparecimento e a vizinhança toda ajuda a procurar.</p>
-        <a href="reportar-desaparecimento.html" class="botao primario"
-          >Reportar animal perdido</a
-        >
+      <!-- FILTROS: funcionam só com CSS (veja "Filtros dos PERDIDOS" no styles.css) -->
+      <section class="filtros-secao" aria-labelledby="titulo-filtros">
+        <div class="container">
+          <form class="filtros-barra">
+            <h2 id="titulo-filtros" class="visualmente-oculto">Filtros do mural</h2>
+
+            <div class="filtros-linha">
+              <fieldset class="grupo">
+                <legend>Espécie</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="especie" id="p-especie-todas" checked /> Todas</label>
+                  <label class="chip-opcao"><input type="radio" name="especie" id="p-especie-cao" /> Cães</label>
+                  <label class="chip-opcao"><input type="radio" name="especie" id="p-especie-gato" /> Gatos</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <legend>Situação</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="situacao" id="p-situacao-todos" checked /> Todos</label>
+                  <label class="chip-opcao"><input type="radio" name="situacao" id="p-situacao-perdido" /> Ainda perdidos</label>
+                  <label class="chip-opcao"><input type="radio" name="situacao" id="p-situacao-encontrado" /> Já encontrados</label>
+                </div>
+              </fieldset>
+
+              <button type="reset" class="botao secundario pequeno">Limpar filtros</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="mural-secao" id="mural" aria-labelledby="titulo-mural">
+        <div class="container mural-area">
+          <div class="mural-cabecalho">
+            <h2 id="titulo-mural">Mural de desaparecidos</h2>
+            <a class="link-seta" href="reportar-desaparecimento.html">Anunciar animal perdido</a>
+          </div>
+
+          <div class="mural">
+            <article class="card-animal card-perdido" id="perdido-caramelo" aria-labelledby="nome-caramelo" data-especie="cao" data-situacao="perdido">
+              <div class="card-foto">
+                <img src="img/animalex1.jpg" alt="Caramelo, cão caramelo de porte médio" width="400" height="300" loading="lazy" />
+                <span class="etiqueta perdido">Perdido</span>
+              </div>
+
+              <div class="card-info">
+                <h3 class="card-nome" id="nome-caramelo">Caramelo</h3>
+                <dl class="atributos">
+                  <div><dt>Espécie</dt><dd>Cão</dd></div>
+                  <div><dt>Porte</dt><dd>Médio</dd></div>
+                  <div><dt>Idade</dt><dd>Adulto</dd></div>
+                  <div><dt>Situação</dt><dd>Perdido</dd></div>
+                </dl>
+                <div class="card-local">
+                  <img src="img/icones/pin.svg" alt="" width="20" height="20" />
+                  <p><strong>Visto pela última vez em</strong> Rua Manoel da Nóbrega, 123, Centro, Diadema<br />28/09/2026, por volta das 18h</p>
+                </div>
+                <p class="card-descricao">Pelagem caramelo, coleira azul e uma mancha branca no peito.</p>
+                <p class="card-contato">Contato do tutor: <a href="tel:+5511995449612">(11) 99544-9612</a></p>
+              </div>
+
+              <details class="card-acao">
+                <summary class="botao secundario largo">
+                  <span class="quando-fechado">Encontrei este animal</span>
+                  <span class="quando-aberto">Fechar formulário</span>
+                </summary>
+
+                <form class="form-cartao" action="animais-perdidos.html#aviso-enviado" method="get">
+                  <input type="hidden" name="animal" value="Caramelo" />
+                  <fieldset class="grupo">
+                    <legend>Encontrou o Caramelo?</legend>
+                    <p class="dica">O tutor recebe o seu aviso na hora, com o contato que você deixar.</p>
+
+                    <div class="campos">
+                      <div class="campo campo-largo">
+                        <label for="enc-onde-1">Onde você viu? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="text" id="enc-onde-1" name="onde" placeholder="Endereço ou ponto de referência" required />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-quando-1">Quando? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="datetime-local" id="enc-quando-1" name="quando" required />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-estado-1">Como estava? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="enc-estado-1" name="estado" required>
+                          <option value="">Selecione</option>
+                          <option value="bem">Bem, sem ferimentos</option>
+                          <option value="assustado">Assustado</option>
+                          <option value="ferido">Ferido</option>
+                          <option value="desnutrido">Magro ou desidratado</option>
+                        </select>
+                      </div>
+
+                      <div class="campo campo-largo">
+                        <label for="enc-obs-1">Mais detalhes</label>
+                        <textarea id="enc-obs-1" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-foto-1">Foto (opcional)</label>
+                        <input type="file" id="enc-foto-1" name="foto" accept="image/*" />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-contato-1">Seu contato <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="text" id="enc-contato-1" name="contato" placeholder="Telefone ou e-mail" required />
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao escuro">Avisar o tutor</button>
+                  </div>
+                </form>
+              </details>
+            </article>
+
+            <article class="card-animal card-perdido" id="perdido-cinzinha" aria-labelledby="nome-cinzinha" data-especie="gato" data-situacao="perdido">
+              <div class="card-foto">
+                <img src="img/animalex2.jpg" alt="Cinzinha, gatinha tigrada cinza" width="400" height="300" loading="lazy" />
+                <span class="etiqueta perdido">Perdida</span>
+              </div>
+
+              <div class="card-info">
+                <h3 class="card-nome" id="nome-cinzinha">Cinzinha</h3>
+                <dl class="atributos">
+                  <div><dt>Espécie</dt><dd>Gato</dd></div>
+                  <div><dt>Porte</dt><dd>Pequeno</dd></div>
+                  <div><dt>Idade</dt><dd>Filhote</dd></div>
+                  <div><dt>Situação</dt><dd>Perdida</dd></div>
+                </dl>
+                <div class="card-local">
+                  <img src="img/icones/pin.svg" alt="" width="20" height="20" />
+                  <p><strong>Visto pela última vez em</strong> Av. Alda, 456, Centro, Diadema<br />30/09/2026, por volta das 7h</p>
+                </div>
+                <p class="card-descricao">Pelo tigrado cinza, olhos verdes, sem coleira.</p>
+                <p class="card-contato">Contato do tutor: <a href="tel:+5511987765432">(11) 98776-5432</a></p>
+              </div>
+
+              <details class="card-acao">
+                <summary class="botao secundario largo">
+                  <span class="quando-fechado">Encontrei este animal</span>
+                  <span class="quando-aberto">Fechar formulário</span>
+                </summary>
+
+                <form class="form-cartao" action="animais-perdidos.html#aviso-enviado" method="get">
+                  <input type="hidden" name="animal" value="Cinzinha" />
+                  <fieldset class="grupo">
+                    <legend>Encontrou a Cinzinha?</legend>
+                    <p class="dica">O tutor recebe o seu aviso na hora, com o contato que você deixar.</p>
+
+                    <div class="campos">
+                      <div class="campo campo-largo">
+                        <label for="enc-onde-2">Onde você viu? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="text" id="enc-onde-2" name="onde" placeholder="Endereço ou ponto de referência" required />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-quando-2">Quando? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="datetime-local" id="enc-quando-2" name="quando" required />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-estado-2">Como estava? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="enc-estado-2" name="estado" required>
+                          <option value="">Selecione</option>
+                          <option value="bem">Bem, sem ferimentos</option>
+                          <option value="assustado">Assustado</option>
+                          <option value="ferido">Ferido</option>
+                          <option value="desnutrido">Magro ou desidratado</option>
+                        </select>
+                      </div>
+
+                      <div class="campo campo-largo">
+                        <label for="enc-obs-2">Mais detalhes</label>
+                        <textarea id="enc-obs-2" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-foto-2">Foto (opcional)</label>
+                        <input type="file" id="enc-foto-2" name="foto" accept="image/*" />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-contato-2">Seu contato <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="text" id="enc-contato-2" name="contato" placeholder="Telefone ou e-mail" required />
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao escuro">Avisar o tutor</button>
+                  </div>
+                </form>
+              </details>
+            </article>
+
+            <article class="card-animal card-perdido" id="perdido-ruby" aria-labelledby="nome-ruby" data-especie="cao" data-situacao="perdido">
+              <div class="card-foto">
+                <img src="img/animalex3.jpg" alt="Ruby, cadela idosa preta de focinho grisalho" width="400" height="300" loading="lazy" />
+                <span class="etiqueta perdido">Perdida</span>
+              </div>
+
+              <div class="card-info">
+                <h3 class="card-nome" id="nome-ruby">Ruby</h3>
+                <dl class="atributos">
+                  <div><dt>Espécie</dt><dd>Cão</dd></div>
+                  <div><dt>Porte</dt><dd>Grande</dd></div>
+                  <div><dt>Idade</dt><dd>Idosa</dd></div>
+                  <div><dt>Situação</dt><dd>Perdida</dd></div>
+                </dl>
+                <div class="card-local">
+                  <img src="img/icones/pin.svg" alt="" width="20" height="20" />
+                  <p><strong>Visto pela última vez em</strong> Praça da Moça, Centro, Diadema<br />25/09/2026, por volta das 20h</p>
+                </div>
+                <p class="card-descricao">Pelagem preta, focinho grisalho, anda devagar.</p>
+                <p class="card-contato">Contato do tutor: <a href="tel:+5511963456789">(11) 96345-6789</a></p>
+              </div>
+
+              <details class="card-acao">
+                <summary class="botao secundario largo">
+                  <span class="quando-fechado">Encontrei este animal</span>
+                  <span class="quando-aberto">Fechar formulário</span>
+                </summary>
+
+                <form class="form-cartao" action="animais-perdidos.html#aviso-enviado" method="get">
+                  <input type="hidden" name="animal" value="Ruby" />
+                  <fieldset class="grupo">
+                    <legend>Encontrou a Ruby?</legend>
+                    <p class="dica">O tutor recebe o seu aviso na hora, com o contato que você deixar.</p>
+
+                    <div class="campos">
+                      <div class="campo campo-largo">
+                        <label for="enc-onde-3">Onde você viu? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="text" id="enc-onde-3" name="onde" placeholder="Endereço ou ponto de referência" required />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-quando-3">Quando? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="datetime-local" id="enc-quando-3" name="quando" required />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-estado-3">Como estava? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="enc-estado-3" name="estado" required>
+                          <option value="">Selecione</option>
+                          <option value="bem">Bem, sem ferimentos</option>
+                          <option value="assustado">Assustado</option>
+                          <option value="ferido">Ferido</option>
+                          <option value="desnutrido">Magro ou desidratado</option>
+                        </select>
+                      </div>
+
+                      <div class="campo campo-largo">
+                        <label for="enc-obs-3">Mais detalhes</label>
+                        <textarea id="enc-obs-3" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-foto-3">Foto (opcional)</label>
+                        <input type="file" id="enc-foto-3" name="foto" accept="image/*" />
+                      </div>
+
+                      <div class="campo">
+                        <label for="enc-contato-3">Seu contato <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input type="text" id="enc-contato-3" name="contato" placeholder="Telefone ou e-mail" required />
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="form-botoes">
+                    <button type="submit" class="botao escuro">Avisar o tutor</button>
+                  </div>
+                </form>
+              </details>
+            </article>
+
+            <article class="card-animal card-perdido card-reencontro" id="perdido-bob" aria-labelledby="nome-bob" data-especie="cao" data-situacao="encontrado">
+              <div class="card-foto">
+                <img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&amp;fit=crop&amp;w=800&amp;q=85" alt="Bob, cão que já voltou para casa" width="400" height="300" loading="lazy" />
+                <span class="etiqueta encontrado">Encontrado</span>
+              </div>
+
+              <div class="card-info">
+                <h3 class="card-nome" id="nome-bob">Bob</h3>
+                <dl class="atributos">
+                  <div><dt>Espécie</dt><dd>Cão</dd></div>
+                  <div><dt>Porte</dt><dd>Médio</dd></div>
+                  <div><dt>Idade</dt><dd>Adulto</dd></div>
+                  <div><dt>Situação</dt><dd>Em casa</dd></div>
+                </dl>
+                <div class="card-local">
+                  <img src="img/icones/coracao.svg" alt="" width="20" height="20" />
+                  <p><strong>Voltou para casa em</strong> 03/10/2026</p>
+                </div>
+                <p class="card-descricao">Uma vizinha viu o anúncio e encontrou o Bob a duas quadras de casa, dois dias depois do sumiço. Obrigado, vizinhança!</p>
+              </div>
+            </article>
+          </div>
+
+          <p class="contagem" data-total="4" data-rotulo="anúncios"></p>
+
+          <nav class="paginas" aria-label="Páginas do mural">
+            <a href="#mural" aria-current="page">1</a>
+            <a href="#mural">2</a>
+            <a href="#mural">3</a>
+            <a href="#mural">Próxima</a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="secao secao-bege" id="dicas" aria-labelledby="titulo-dicas">
+        <div class="container verificacao">
+          <div>
+            <h2 id="titulo-dicas">Seu animal sumiu? Comece por aqui</h2>
+            <p>
+              As primeiras horas são as mais importantes. Enquanto o anúncio roda
+              no mural, faça o caminho que ele costuma fazer.
+            </p>
+            <a class="botao primario" href="reportar-desaparecimento.html">Anunciar no mural</a>
+          </div>
+
+          <ol class="passos passos-coluna">
+            <li>
+              <h3>Procure em silêncio</h3>
+              <p>Ande pelas ruas próximas chamando pelo nome, com calma. Animais assustados se escondem.</p>
+            </li>
+            <li>
+              <h3>Avise a vizinhança</h3>
+              <p>Porteiros, comércios e grupos do bairro. Uma foto recente ajuda muito.</p>
+            </li>
+            <li>
+              <h3>Ligue para abrigos e clínicas</h3>
+              <p>Muita gente leva o animal encontrado ao veterinário mais próximo.</p>
+            </li>
+            <li>
+              <h3>Espalhe cartazes</h3>
+              <p>Com foto, nome e telefone, nos lugares onde ele foi visto pela última vez.</p>
+            </li>
+          </ol>
+        </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <p>&copy; Feito por seis estudantes, em projeto integrador</p>
-      <nav aria-label="Links do rodapé">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-        <a href="index.html">Voltar ao topo</a>
-      </nav>
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

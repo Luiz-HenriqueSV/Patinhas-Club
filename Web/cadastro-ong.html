@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastrar minha ONG | Patinhas Club</title>
+    <meta name="description" content="Cadastre sua ONG, abrigo ou trabalho de proteção animal no Patinhas Club. É gratuito e a verificação leva até 2 dias úteis." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="pagina-cadastro pagina-cadastro-ong">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li><a href="ongs.html">ONGs</a></li>
+              <li aria-current="page">Cadastrar minha ONG</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Cadastrar minha ONG</h1>
+            <p>Gratuito para ONGs, abrigos e protetores</p>
+          </div>
+          <p class="lead">
+            Preencha os dados da organização. A equipe do Patinhas Club confere
+            tudo em até 2 dias úteis e libera o perfil para você publicar
+            animais e campanhas.
+          </p>
+        </div>
+      </section>
+
+      <div class="pagina-formulario">
+        <div class="container cadastro-grade">
+          <aside class="cadastro-lateral" aria-label="Ajuda do cadastro">
+            <nav class="etapas cartao-lateral" aria-label="Etapas do cadastro">
+              <h2>Etapas</h2>
+              <ol>
+                <li><a href="#etapa-1">Sobre a organização</a></li>
+                <li><a href="#etapa-2">Responsável e contato</a></li>
+                <li><a href="#etapa-3">Endereço e atuação</a></li>
+                <li><a href="#etapa-4">Documentos</a></li>
+                <li><a href="#etapa-5">Confirmação</a></li>
+              </ol>
+              <p class="etapas-legenda">A etapa ganha um visto quando os campos obrigatórios estão preenchidos.</p>
+            </nav>
+
+            <div class="cartao-lateral">
+              <h2>O que você vai precisar</h2>
+              <ul class="lista-check">
+                <li>CNPJ da ONG ou CPF, se você for protetor independente</li>
+                <li>Nome e telefone de quem responde pela organização</li>
+                <li>Estatuto ou outro comprovante de atuação (pode enviar depois)</li>
+              </ul>
+            </div>
+
+            <div class="cartao-lateral">
+              <h2>Já tem cadastro?</h2>
+              <p>Entre no painel para publicar animais e ver os pedidos de adoção.</p>
+              <p><a class="link-seta" href="entrar.html#ong">Entrar como ONG</a></p>
+            </div>
+          </aside>
+
+          <!--
+            Protótipo sem back-end: ao enviar, o formulário só leva para a tela
+            de confirmação (method="get"). Quando a API existir, troque o action
+            pela rota do servidor e o method para "post".
+          -->
+          <form class="formulario" action="cadastro-ong-enviado.html" method="get">
+            <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+            <fieldset class="bloco" id="etapa-1">
+              <legend><span class="bloco-numero" aria-hidden="true">1</span> Sobre a organização</legend>
+              <p class="bloco-intro">Essas informações aparecem no perfil público da ONG.</p>
+
+              <fieldset class="grupo">
+                <legend>Tipo de cadastro <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <div class="opcoes-cartao">
+                  <label class="opcao-cartao">
+                    <input type="radio" name="tipo" value="ong" required />
+                    <img src="img/icones/escudo-pata.svg" alt="" width="30" height="30" />
+                    <span><strong>ONG ou associação</strong><small>Organização com CNPJ</small></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                  <label class="opcao-cartao">
+                    <input type="radio" name="tipo" value="protetor" />
+                    <img src="img/icones/coracao.svg" alt="" width="30" height="30" />
+                    <span><strong>Protetor independente</strong><small>Pessoa física, com CPF</small></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                  <label class="opcao-cartao">
+                    <input type="radio" name="tipo" value="abrigo" />
+                    <img src="img/icones/lar.svg" alt="" width="30" height="30" />
+                    <span><strong>Abrigo ou lar temporário</strong><small>Com CNPJ ou CPF</small></span>
+                    <span class="marcador" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="nome-organizacao">Nome da ONG ou do projeto <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="nome-organizacao" name="nome_organizacao" autocomplete="organization" placeholder="Ex.: ONG Amigos de Patas" required />
+                </div>
+
+                <div class="campo">
+                  <label for="documento">CNPJ ou CPF <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="documento" name="documento" inputmode="numeric" placeholder="00.000.000/0000-00" required
+                    pattern="(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})|(\d{3}\.?\d{3}\.?\d{3}-?\d{2})"
+                    title="CNPJ com 14 números ou CPF com 11 números" aria-describedby="documento-dica" />
+                  <small class="dica" id="documento-dica">Com ou sem pontos e traços.</small>
+                  <small class="msg-erro">Confira o número: CNPJ tem 14 dígitos e CPF tem 11.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="fundacao">Ano de início das atividades</label>
+                  <input type="number" id="fundacao" name="ano_fundacao" min="1900" max="2026" placeholder="Ex.: 2014" />
+                </div>
+
+                <div class="campo campo-largo">
+                  <label for="apresentacao">Apresentação <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <textarea id="apresentacao" name="apresentacao" rows="4" maxlength="600" required aria-describedby="apresentacao-dica"
+                    placeholder="Ex.: Resgatamos cães e gatos na região central de Diadema desde 2014..."></textarea>
+                  <small class="dica" id="apresentacao-dica">Conte a história, como vocês trabalham e do que mais precisam. Até 600 caracteres.</small>
+                </div>
+
+                <div class="campo campo-largo">
+                  <label for="logo">Logo ou foto da ONG</label>
+                  <input type="file" id="logo" name="logo" accept="image/*" />
+                  <small class="dica">PNG ou JPG. Se não tiver logo, usamos as iniciais do nome.</small>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-2">
+              <legend><span class="bloco-numero" aria-hidden="true">2</span> Responsável e contato</legend>
+              <p class="bloco-intro">Quem responde pela organização. O telefone não aparece no perfil público.</p>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="responsavel">Nome do responsável <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="responsavel" name="responsavel" autocomplete="name" required />
+                </div>
+
+                <div class="campo">
+                  <label for="cargo">Cargo ou função</label>
+                  <input type="text" id="cargo" name="cargo" placeholder="Ex.: presidente, coordenadora" />
+                </div>
+
+                <div class="campo">
+                  <label for="email-ong">E-mail da organização <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required aria-describedby="email-ong-dica" />
+                  <small class="dica" id="email-ong-dica">Ele vira o login do painel da ONG.</small>
+                  <small class="msg-erro">Digite um e-mail válido, como contato@suaong.org.br.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="telefone-ong">Telefone ou WhatsApp <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="tel" id="telefone-ong" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000" required
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                  <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
+                </div>
+
+                <div class="campo campo-largo">
+                  <label for="rede-social">Site ou rede social</label>
+                  <input type="text" id="rede-social" name="rede_social" placeholder="@suaong ou www.suaong.org.br" />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-3">
+              <legend><span class="bloco-numero" aria-hidden="true">3</span> Endereço e área de atuação</legend>
+              <p class="bloco-intro">Usamos a cidade para mostrar seus animais para quem mora perto.</p>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="cep">CEP <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" required
+                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" />
+                  <small class="msg-erro">O CEP tem 8 números, como 09910-000.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="endereco">Rua e número</label>
+                  <input type="text" id="endereco" name="endereco" autocomplete="street-address" />
+                </div>
+
+                <div class="campo">
+                  <label for="bairro">Bairro <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="bairro" name="bairro" required />
+                </div>
+
+                <div class="campo">
+                  <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required />
+                </div>
+
+                <div class="campo">
+                  <label for="estado">Estado <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <select id="estado" name="estado" autocomplete="address-level1" required>
+                    <option value="">Selecione</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                  </select>
+                </div>
+
+                <div class="campo">
+                  <label for="quantidade">Animais sob cuidado hoje</label>
+                  <select id="quantidade" name="quantidade_animais">
+                    <option value="">Selecione</option>
+                    <option value="ate-10">Até 10</option>
+                    <option value="11-30">De 11 a 30</option>
+                    <option value="31-100">De 31 a 100</option>
+                    <option value="mais-100">Mais de 100</option>
+                  </select>
+                </div>
+
+                <div class="campo campo-largo campo-checkbox">
+                  <input type="checkbox" id="ocultar-endereco" name="ocultar_endereco" value="sim" />
+                  <label for="ocultar-endereco">Não mostrar o endereço no perfil público (só o bairro e a cidade)</label>
+                </div>
+              </div>
+
+              <fieldset class="grupo">
+                <legend>Espécies que vocês atendem</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="especies" value="cao" /> Cães</label>
+                  <label class="chip-opcao"><input type="checkbox" name="especies" value="gato" /> Gatos</label>
+                  <label class="chip-opcao"><input type="checkbox" name="especies" value="outros" /> Outros bichos</label>
+                </div>
+              </fieldset>
+
+              <fieldset class="grupo">
+                <legend>O que vocês fazem</legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="checkbox" name="servicos" value="adocao" /> Adoção</label>
+                  <label class="chip-opcao"><input type="checkbox" name="servicos" value="resgate" /> Resgate</label>
+                  <label class="chip-opcao"><input type="checkbox" name="servicos" value="lar-temporario" /> Lar temporário</label>
+                  <label class="chip-opcao"><input type="checkbox" name="servicos" value="castracao" /> Castração</label>
+                  <label class="chip-opcao"><input type="checkbox" name="servicos" value="veterinario" /> Atendimento veterinário</label>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-4">
+              <legend><span class="bloco-numero" aria-hidden="true">4</span> Documentos para verificação</legend>
+              <p class="bloco-intro">
+                Os documentos são vistos só pela equipe de verificação. Se preferir,
+                envie depois pelo painel: a análise começa quando eles chegarem.
+              </p>
+
+              <div class="campos">
+                <div class="campo">
+                  <label for="doc-identificacao">Cartão CNPJ ou documento do responsável</label>
+                  <input type="file" id="doc-identificacao" name="doc_identificacao" accept=".pdf,image/*" />
+                </div>
+
+                <div class="campo">
+                  <label for="doc-atuacao">Estatuto ou comprovante de atuação</label>
+                  <input type="file" id="doc-atuacao" name="doc_atuacao" accept=".pdf,image/*" />
+                  <small class="dica">Para protetores: fotos de resgates, matérias ou indicação de outra ONG.</small>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-5">
+              <legend><span class="bloco-numero" aria-hidden="true">5</span> Confirmação</legend>
+
+              <div class="campo campo-checkbox">
+                <input type="checkbox" id="termos-ong" name="aceite_termos" value="sim" required />
+                <label for="termos-ong">
+                  Li e aceito os <a href="termos.html#termos" target="_blank">Termos de uso</a> e a
+                  <a href="termos.html#privacidade" target="_blank">Política de privacidade</a>.
+                  <span class="obrigatorio" aria-hidden="true">*</span>
+                </label>
+              </div>
+
+              <div class="campo campo-checkbox">
+                <input type="checkbox" id="declaracao-ong" name="declaracao" value="sim" required />
+                <label for="declaracao-ong">
+                  Declaro que as informações são verdadeiras e que a organização não vende animais.
+                  <span class="obrigatorio" aria-hidden="true">*</span>
+                </label>
+              </div>
+
+              <div class="campo campo-checkbox">
+                <input type="checkbox" id="novidades-ong" name="novidades" value="sim" />
+                <label for="novidades-ong">Quero receber dicas e novidades para ONGs por e-mail.</label>
+              </div>
+            </fieldset>
+
+            <div class="form-rodape">
+              <p>
+                Depois da aprovação, enviamos um link para o e-mail da organização
+                para você criar a senha do painel.
+              </p>
+              <button type="submit" class="botao primario grande">Enviar cadastro para análise</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

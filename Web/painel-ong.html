@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Painel da ONG | Patinhas Club</title>
+    <meta name="description" content="Painel da ONG no Patinhas Club: pedidos de adoção, animais publicados e campanhas." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body id="topo" class="area-logada pagina-painel">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="conta-chip" href="painel-ong.html">
+            <span class="avatar" aria-hidden="true">AP</span>
+            <span>Amigos de Patas<small>Painel da ONG</small></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <div class="container painel">
+        <aside class="painel-lateral" aria-label="Menu do painel">
+          <div class="painel-perfil">
+            <span class="avatar" aria-hidden="true">AP</span>
+            <div>
+              <strong>ONG Amigos de Patas</strong>
+              <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificada</span>
+            </div>
+          </div>
+
+          <nav class="painel-menu" aria-label="Seções do painel">
+            <ul>
+              <li><a href="#visao-geral" aria-current="true">Visão geral</a></li>
+              <li><a href="#pedidos">Pedidos de adoção <span class="contador">2</span></a></li>
+              <li><a href="#animais">Meus animais</a></li>
+              <li><a href="#campanhas">Campanhas</a></li>
+              <li><a href="#perfil">Perfil da ONG</a></li>
+            </ul>
+          </nav>
+
+          <a class="painel-sair" href="index.html">Sair do painel</a>
+        </aside>
+
+        <div class="painel-conteudo">
+          <!-- Avisos que aparecem depois de uma ação (o endereço termina com #nome-do-aviso) -->
+          <div class="avisos">
+            <div class="aviso" id="animal-publicado" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Animal publicado!</p>
+                <p>Ele já aparece na vitrine de adoção para quem mora perto. Os pedidos chegam aqui no painel.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso amarelo" id="rascunho-salvo" role="status">
+              <img src="img/icones/documento.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Rascunho salvo</p>
+                <p>Ele fica guardado aqui no painel. Ninguém vê o rascunho até você publicar.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso" id="campanha-criada" role="status">
+              <img src="img/icones/megafone.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Campanha publicada!</p>
+                <p>Ela já está na página de campanhas. Compartilhe o link para chegar a mais gente.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso" id="visita-agendada" role="status">
+              <img src="img/icones/calendario.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Convite de visita enviado</p>
+                <p>Juliana recebe uma mensagem para escolher o melhor horário. A situação do pedido muda quando ela confirmar.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso amarelo" id="pedido-recusado" role="status">
+              <img src="img/icones/caixa-entrada.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Pedido recusado</p>
+                <p>Enviamos uma mensagem gentil para o adotante, com sugestões de outros animais parecidos.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+          </div>
+
+          <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
+            <div class="painel-topo">
+              <div>
+                <h1 id="titulo-pagina">Olá, Amigos de Patas!</h1>
+                <p>Chegaram 2 pedidos de adoção desde a sua última visita.</p>
+              </div>
+              <div class="grupo-botoes">
+                <a class="botao primario" href="cadastrar-animal.html">Cadastrar animal</a>
+                <a class="botao secundario" href="nova-campanha.html">Nova campanha</a>
+              </div>
+            </div>
+
+            <dl class="estatisticas">
+              <div class="estatistica">
+                <dt>animais para adoção</dt>
+                <dd>4 <img src="img/icones/pata.svg" alt="" width="34" height="34" /></dd>
+              </div>
+              <div class="estatistica">
+                <dt>pedidos novos</dt>
+                <dd>2 <img src="img/icones/caixa-entrada.svg" alt="" width="34" height="34" /></dd>
+              </div>
+              <div class="estatistica">
+                <dt>adoções em 2026</dt>
+                <dd>18 <img src="img/icones/coracao.svg" alt="" width="34" height="34" /></dd>
+              </div>
+              <div class="estatistica">
+                <dt>visitas ao perfil no mês</dt>
+                <dd>1.240 <img src="img/icones/grafico.svg" alt="" width="34" height="34" /></dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="painel-secao" id="pedidos" aria-labelledby="titulo-pedidos">
+            <header>
+              <h2 id="titulo-pedidos">Pedidos de adoção</h2>
+              <span class="etiqueta novo">2 novos</span>
+            </header>
+
+            <div class="tabela-caixa">
+              <table class="tabela">
+                <caption class="visualmente-oculto">Pedidos de adoção recebidos pela ONG</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Adotante</th>
+                    <th scope="col">Animal</th>
+                    <th scope="col">Recebido em</th>
+                    <th scope="col">Situação</th>
+                    <th scope="col"><span class="visualmente-oculto">Detalhes</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="sem-rotulo">
+                      <div class="pessoa">
+                        <span class="avatar bege" aria-hidden="true">JM</span>
+                        <span>Juliana M.<small>Diadema, SP</small></span>
+                      </div>
+                    </td>
+                    <td data-rotulo="Animal">Churros</td>
+                    <td data-rotulo="Recebido em">08/10/2026</td>
+                    <td data-rotulo="Situação"><span class="etiqueta novo">Novo</span></td>
+                    <td class="sem-rotulo">
+                      <details class="pedido-detalhes">
+                        <summary>Ver respostas</summary>
+                        <div class="pedido-respostas">
+                          <dl>
+                            <div><dt>Moradia</dt><dd>Casa com quintal</dd></div>
+                            <div><dt>Outros animais</dt><dd>Uma gata castrada, de 4 anos</dd></div>
+                            <div><dt>Por que quer adotar</dt><dd>“Trabalho de casa e o Churros parece perfeito para fazer companhia.”</dd></div>
+                          </dl>
+                          <div class="grupo-botoes">
+                            <a class="botao escuro pequeno" href="#visita-agendada">Convidar para visita</a>
+                            <a class="botao perigo pequeno" href="#pedido-recusado">Recusar</a>
+                          </div>
+                        </div>
+                      </details>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="sem-rotulo">
+                      <div class="pessoa">
+                        <span class="avatar amarelo" aria-hidden="true">CA</span>
+                        <span>Carlos A.<small>São Bernardo do Campo, SP</small></span>
+                      </div>
+                    </td>
+                    <td data-rotulo="Animal">Thor</td>
+                    <td data-rotulo="Recebido em">07/10/2026</td>
+                    <td data-rotulo="Situação"><span class="etiqueta novo">Novo</span></td>
+                    <td class="sem-rotulo">
+                      <details class="pedido-detalhes">
+                        <summary>Ver respostas</summary>
+                        <div class="pedido-respostas">
+                          <dl>
+                            <div><dt>Moradia</dt><dd>Apartamento com tela nas janelas</dd></div>
+                            <div><dt>Outros animais</dt><dd>Nenhum</dd></div>
+                            <div><dt>Por que quer adotar</dt><dd>“Corro todo dia de manhã e queria um parceiro de treino.”</dd></div>
+                          </dl>
+                          <div class="grupo-botoes">
+                            <a class="botao escuro pequeno" href="#visita-agendada">Convidar para visita</a>
+                            <a class="botao perigo pequeno" href="#pedido-recusado">Recusar</a>
+                          </div>
+                        </div>
+                      </details>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="sem-rotulo">
+                      <div class="pessoa">
+                        <span class="avatar laranja" aria-hidden="true">FR</span>
+                        <span>Fernanda R.<small>Diadema, SP</small></span>
+                      </div>
+                    </td>
+                    <td data-rotulo="Animal">Churros</td>
+                    <td data-rotulo="Recebido em">05/10/2026</td>
+                    <td data-rotulo="Situação"><span class="etiqueta processo">Em conversa</span></td>
+                    <td class="sem-rotulo">
+                      <details class="pedido-detalhes">
+                        <summary>Ver respostas</summary>
+                        <div class="pedido-respostas">
+                          <dl>
+                            <div><dt>Moradia</dt><dd>Apartamento</dd></div>
+                            <div><dt>Outros animais</dt><dd>Nenhum</dd></div>
+                            <div><dt>Por que quer adotar</dt><dd>“Moro sozinha e quero um cachorro tranquilo para os passeios.”</dd></div>
+                          </dl>
+                          <div class="grupo-botoes">
+                            <a class="botao escuro pequeno" href="#visita-agendada">Convidar para visita</a>
+                            <a class="botao perigo pequeno" href="#pedido-recusado">Recusar</a>
+                          </div>
+                        </div>
+                      </details>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="sem-rotulo">
+                      <div class="pessoa">
+                        <span class="avatar" aria-hidden="true">RT</span>
+                        <span>Rafael T.<small>Santo André, SP</small></span>
+                      </div>
+                    </td>
+                    <td data-rotulo="Animal">Pipoca</td>
+                    <td data-rotulo="Recebido em">02/10/2026</td>
+                    <td data-rotulo="Situação"><span class="etiqueta visita">Visita em 12/10, 15h</span></td>
+                    <td class="sem-rotulo">
+                      <details class="pedido-detalhes">
+                        <summary>Ver respostas</summary>
+                        <div class="pedido-respostas">
+                          <dl>
+                            <div><dt>Visita</dt><dd>12/10/2026, às 15h, na sede da ONG</dd></div>
+                            <div><dt>Moradia</dt><dd>Casa com quintal</dd></div>
+                            <div><dt>Levar no dia</dt><dd>Documento com foto e comprovante de residência</dd></div>
+                          </dl>
+                          <div class="grupo-botoes">
+                            <a class="botao secundario pequeno" href="#visita-agendada">Remarcar visita</a>
+                          </div>
+                        </div>
+                      </details>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="sem-rotulo">
+                      <div class="pessoa">
+                        <span class="avatar marrom" aria-hidden="true">BL</span>
+                        <span>Beatriz L.<small>Diadema, SP</small></span>
+                      </div>
+                    </td>
+                    <td data-rotulo="Animal">Luna</td>
+                    <td data-rotulo="Recebido em">20/09/2026</td>
+                    <td data-rotulo="Situação"><span class="etiqueta concluida">Adoção concluída</span></td>
+                    <td class="sem-rotulo">
+                      <details class="pedido-detalhes">
+                        <summary>Ver respostas</summary>
+                        <div class="pedido-respostas">
+                          <dl>
+                            <div><dt>Adoção concluída</dt><dd>27/09/2026</dd></div>
+                            <div><dt>Termo de adoção</dt><dd>Assinado pelas duas partes</dd></div>
+                            <div><dt>Acompanhamento</dt><dd>Mensagem de 30 dias marcada para 27/10</dd></div>
+                          </dl>
+                          <div class="grupo-botoes">
+                            <a class="botao secundario pequeno" href="#pedidos">Baixar termo</a>
+                          </div>
+                        </div>
+                      </details>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="painel-secao" id="animais" aria-labelledby="titulo-animais">
+            <header>
+              <h2 id="titulo-animais">Meus animais</h2>
+              <a class="link-seta" href="adocao.html">Ver na vitrine de adoção</a>
+            </header>
+
+            <ul class="animais-ong">
+              <li>
+                <article class="animal-ong">
+                  <div class="animal-ong-foto">
+                    <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Churros" width="300" height="225" loading="lazy" />
+                    <span class="etiqueta disponivel">Disponível</span>
+                  </div>
+                  <div class="animal-ong-corpo">
+                    <h3>Churros</h3>
+                    <p>2 pedidos, 214 visualizações</p>
+                    <div class="grupo-botoes">
+                      <a class="botao secundario pequeno" href="cadastrar-animal.html">Editar</a>
+                      <a class="botao fantasma pequeno" href="adocao.html#pet-churros">Ver anúncio</a>
+                    </div>
+                  </div>
+                </article>
+              </li>
+              <li>
+                <article class="animal-ong">
+                  <div class="animal-ong-foto">
+                    <img class="foco-topo" src="https://images.unsplash.com/photo-1721781010133-8eb0e9b23daf?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Thor" width="300" height="225" loading="lazy" />
+                    <span class="etiqueta disponivel">Disponível</span>
+                  </div>
+                  <div class="animal-ong-corpo">
+                    <h3>Thor</h3>
+                    <p>1 pedido, 167 visualizações</p>
+                    <div class="grupo-botoes">
+                      <a class="botao secundario pequeno" href="cadastrar-animal.html">Editar</a>
+                      <a class="botao fantasma pequeno" href="adocao.html#pet-thor">Ver anúncio</a>
+                    </div>
+                  </div>
+                </article>
+              </li>
+              <li>
+                <article class="animal-ong">
+                  <div class="animal-ong-foto">
+                    <img src="img/sem-foto-gato.svg" alt="Ilustração no lugar da foto da Pipoca" width="300" height="225" loading="lazy" />
+                    <span class="etiqueta visita">Visita marcada</span>
+                  </div>
+                  <div class="animal-ong-corpo">
+                    <h3>Pipoca</h3>
+                    <p>Visita com Rafael T. em 12/10</p>
+                    <div class="grupo-botoes">
+                      <a class="botao secundario pequeno" href="cadastrar-animal.html">Editar</a>
+                    </div>
+                  </div>
+                </article>
+              </li>
+              <li>
+                <article class="animal-ong">
+                  <div class="animal-ong-foto">
+                    <img src="img/sem-foto-cao.svg" alt="Ilustração no lugar da foto do Fred" width="300" height="225" loading="lazy" />
+                    <span class="etiqueta rascunho">Rascunho</span>
+                  </div>
+                  <div class="animal-ong-corpo">
+                    <h3>Fred</h3>
+                    <p>Faltam fotos e a história dele</p>
+                    <div class="grupo-botoes">
+                      <a class="botao escuro pequeno" href="cadastrar-animal.html">Continuar cadastro</a>
+                    </div>
+                  </div>
+                </article>
+              </li>
+              <li class="animal-novo-item">
+                <a class="animal-novo" href="cadastrar-animal.html">
+                  <span aria-hidden="true">+</span>
+                  Cadastrar outro animal
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <section class="painel-secao" id="campanhas" aria-labelledby="titulo-campanhas">
+            <header>
+              <h2 id="titulo-campanhas">Campanhas</h2>
+              <a class="botao secundario pequeno" href="nova-campanha.html">Nova campanha</a>
+            </header>
+
+            <div class="campanhas-ong">
+              <article class="campanha-linha">
+                <h3>Ração para o inverno <span class="etiqueta ativa">Ativa</span></h3>
+                <p>Arrecadação até 31/10/2026</p>
+                <progress value="62" max="100" aria-label="Ração para o inverno: 62% da meta">62%</progress>
+                <p class="campanha-numeros"><strong>310 kg</strong> de 500 kg</p>
+              </article>
+              <article class="campanha-linha">
+                <h3>Bazar beneficente <span class="etiqueta concluida">Encerrada</span></h3>
+                <p>Evento em 14/09/2026</p>
+                <progress value="100" max="100" aria-label="Bazar beneficente: meta atingida">100%</progress>
+                <p class="campanha-numeros"><strong>R$ 2.380</strong> arrecadados</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="painel-secao" id="perfil" aria-labelledby="titulo-perfil">
+            <div class="perfil-progresso">
+              <div>
+                <h2 id="titulo-perfil">Seu perfil está 80% completo</h2>
+                <p>Perfis completos passam mais confiança para quem vai adotar.</p>
+                <progress value="80" max="100" aria-label="Perfil 80% completo">80%</progress>
+                <ul class="perfil-itens">
+                  <li class="ok">Logo</li>
+                  <li class="ok">Apresentação</li>
+                  <li class="ok">Documentos</li>
+                  <li class="ok">Endereço</li>
+                  <li>Fotos da sede</li>
+                </ul>
+              </div>
+              <a class="botao secundario" href="cadastro-ong.html">Editar perfil</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

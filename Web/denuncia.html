@@ -2,363 +2,363 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Denúncias | Patinhas Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Denunciar maus-tratos | Patinhas Club</title>
+    <meta name="description" content="Denuncie abandono, maus-tratos ou animais em risco. A equipe do Patinhas Club e as ONGs da região analisam cada caso. Pode ser anônimo." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
     <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="shortcut icon" href="img/favicon_io/favicon.ico" type="image/x-icon">
   </head>
-  <body class="pagina-site">
-    <nav>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="adocao.html">Adoção</a></li>
-        <li><a href="animais-perdidos.html">Animais Perdidos</a></li>
-        <li><a href="lista_de_espera.html">Lista de Espera</a></li>
-        <li><a href="denuncia.html">Denúncia</a></li>
-      </ul>
+  <body id="topo" class="pagina-cadastro pagina-denuncia">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
 
-      <img src="img/path16.svg" alt="Logo Patinhas Club" />
-    </nav>
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
 
-    <main class="pagina pagina-reportar"> 
-      <section class="hero">
-        <div class="hero-texto">
-          <h1>Denúncia Animais</h1>
-          <p>Encontrou um animal em situação de abandono, maus-tratos ou outro problema?</p>
-          <p>Prencha o formulario abaixo. As informações serão Analisadas pela nossa equipe e outras ONGs.</p>
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html" aria-current="page">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="index.html#escolha">Criar conta</a>
         </div>
+      </div>
+    </header>
 
-        <div class="hero-imagem">
-          <img
-            src="./img/denuncia.jpg"
-            alt="Cachorro em situação de abandono"
-          />
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <div class="aviso" id="denuncia-enviada" role="status">
+            <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+            <div class="aviso-texto">
+              <p class="aviso-titulo">Denúncia enviada</p>
+              <p>Obrigado por não fechar os olhos. A equipe e as ONGs da região vão analisar o caso. Se você deixou contato, avisamos o andamento.</p>
+            </div>
+            <a class="aviso-fechar" href="#fechar">Fechar</a>
+          </div>
+
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li aria-current="page">Denunciar</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-grade">
+            <div>
+              <div class="topo-pagina-titulo">
+                <h1 id="titulo-pagina">Denunciar maus-tratos</h1>
+                <p>Pode ser anônimo</p>
+              </div>
+              <p class="lead">
+                Encontrou um animal abandonado, em risco ou sofrendo maus-tratos?
+                Conte o que aconteceu. A equipe do Patinhas Club e as ONGs da região
+                analisam cada denúncia.
+              </p>
+            </div>
+
+            <div class="polaroid" aria-hidden="true">
+              <img src="img/denuncia.jpg" alt="" width="230" height="230" />
+            </div>
+          </div>
         </div>
-
       </section>
 
-      <section class="formulario-secao">
-        <form id="form-denuncia" class="form-desaparecimento" action="#" method="post" enctype="multipart/form-data">
-      
-          <fieldset class="bloco bloco-denuncia">
-            <legend>Tipo de Ocorrência/Denuncia</legend>
-            <div class="linha">
+      <div class="pagina-formulario">
+        <div class="container cadastro-grade">
+          <aside class="cadastro-lateral" aria-label="Informações importantes">
+            <div class="destaque alerta">
+              <h2>É uma emergência?</h2>
+              <p>Se o animal está sofrendo agora, ligue <strong>190</strong> (Polícia Militar).</p>
+              <p>
+                Em São Paulo, também dá para registrar na Delegacia Eletrônica de
+                Proteção Animal (DEPA).
+              </p>
+            </div>
+
+            <nav class="etapas cartao-lateral" aria-label="Etapas da denúncia">
+              <h2>Etapas</h2>
+              <ol>
+                <li><a href="#etapa-1">O que aconteceu</a></li>
+                <li><a href="#etapa-2">Sobre o animal</a></li>
+                <li><a href="#etapa-3">Onde aconteceu</a></li>
+                <li><a href="#etapa-4">Seus dados</a></li>
+              </ol>
+              <p class="etapas-legenda">A etapa ganha um visto quando os campos obrigatórios estão preenchidos.</p>
+            </nav>
+
+            <div class="cartao-lateral">
+              <h2>Maus-tratos é crime</h2>
+              <p>
+                Contra cães e gatos, a pena é de 2 a 5 anos de reclusão, além de
+                multa e perda da guarda do animal (Lei 14.064/2020).
+              </p>
+            </div>
+          </aside>
+
+          <!-- Protótipo sem back-end: enviar volta para esta página com o aviso #denuncia-enviada -->
+          <form id="form-denuncia" class="formulario" action="denuncia.html#denuncia-enviada" method="get">
+            <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+            <fieldset class="bloco" id="etapa-1">
+              <legend><span class="bloco-numero" aria-hidden="true">1</span> O que aconteceu</legend>
+
+              <fieldset class="grupo">
+                <legend>Tipo de ocorrência <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="tipo_ocorrencia" value="abandono" required /> Animal abandonado</label>
+                  <label class="chip-opcao"><input type="radio" name="tipo_ocorrencia" value="maus-tratos" /> Suspeita de maus-tratos</label>
+                  <label class="chip-opcao"><input type="radio" name="tipo_ocorrencia" value="risco" /> Animal em situação de risco</label>
+                  <label class="chip-opcao"><input type="radio" name="tipo_ocorrencia" value="adocao-irregular" /> Venda ou adoção irregular</label>
+                  <label class="chip-opcao"><input type="radio" name="tipo_ocorrencia" value="outro" /> Outro</label>
+                </div>
+              </fieldset>
+
+              <div class="campos">
                 <div class="campo">
-                    <div class="tipo-ocorrencia">
-                        <label for="tipo-correncia">Tipo de Ocorrência</label>
-                        <select name="tipo_ocorrencia" id="ocorrencia" required>
-                            <option value="">Selecione o tipo de ocorrência</option>
-                                <option value="abandono">Animal abandonado</option>
-                                <option value="maus-tratos">Suspeita de maus-tratos</option>
-                                <option value="risco">Animal em situação de risco</option>
-                                <option value="adocao-irregular">Adoção irregular</option>
-                                <option value="animal-perdido">Animal perdido/encontrado</option>
-                                <option value="outro">Outro</option>
-                        </select>
-
-                    </div>
+                  <label for="quantidade-animais">Quantos animais? <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="number" id="quantidade-animais" name="quantidade_animais" min="1" value="1" required />
                 </div>
-                <div class="campo">    
-                    <div class="quantidade-animais">
-                        <label for="quantidade-animais">Quantidade animais</label>
-                        <input type="number" 
-                        class="quantidade-animais" 
-                        min="1" 
-                        value="1" 
-                        required>
-                    </div>
-                
+
+                <fieldset class="grupo">
+                  <legend>O animal ainda está no local?</legend>
+                  <div class="chips">
+                    <label class="chip-opcao"><input type="radio" name="ainda_no_local" value="sim" /> Sim</label>
+                    <label class="chip-opcao"><input type="radio" name="ainda_no_local" value="nao" /> Não</label>
+                    <label class="chip-opcao"><input type="radio" name="ainda_no_local" value="nao-sei" /> Não sei</label>
+                  </div>
+                </fieldset>
+
+                <div class="campo campo-largo">
+                  <label for="situacao">Conte o que aconteceu <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <textarea id="situacao" name="situacao_animal" rows="4" required
+                    placeholder="Descreva a situação em que o animal se encontra, há quanto tempo e se alguém já tentou ajudar."></textarea>
                 </div>
-            </div> 
-            
-            <div class="descricao-situacao">
-                <label for="situação" class >Conte o que aconteceu</label>
-                <textarea
-                class="situacao"
-                name="situacao_animal"
-                rows="3"
-                placeholder="Descreva a situação que se encontram"></textarea>
-            </div>
 
-            <div class="campo">
-              <label for="foto">Foto do animal</label>
-              <input
-                type="file"
-                id="foto"
-                name="foto"
-                accept="image/*"
-                required
-              />
-              <small>Use uma foto nítida, de preferência mostrando o rosto e o corpo
-                inteiro.</small>
-            </div>
-
+                <div class="campo campo-largo">
+                  <label for="fotos">Fotos ou vídeos</label>
+                  <input type="file" id="fotos" name="fotos" accept="image/*,video/*" multiple aria-describedby="fotos-dica" />
+                  <small class="dica" id="fotos-dica">Ajudam muito na análise. Não se coloque em risco para registrar.</small>
+                </div>
+              </div>
             </fieldset>
 
-          <fieldset class="bloco bloco-animal">
-            <legend>Informações do animal</legend>
+            <fieldset class="bloco" id="etapa-2">
+              <legend><span class="bloco-numero" aria-hidden="true">2</span> Sobre o animal</legend>
+              <p class="bloco-intro">Se não souber alguma informação, pode deixar em branco.</p>
 
-            <div class="linha">
-              <div class="campo">
-                <label for="especie">Espécie</label>
-                <select id="especie" name="especie" required>
-                  <option value="">Selecione</option>
-                  <option value="cao">Cão</option>
-                  <option value="gato">Gato</option>
-                  <option value="outro">Outro</option>
-                </select>
-              </div>
-
-              <div class="campo">
-                <label for="raca">Raça</label>
-                <input
-                  type="text"
-                  id="raca"
-                  name="raca"
-                  placeholder="Ex.: Vira-lata, Poodle (se não souber, deixe em branco)"
-                />
-              </div>
-            </div>
-
-            <div class="linha">
-              <div class="campo">
-                <label for="porte">Porte</label>
-                <select id="porte" name="porte" required>
-                  <option value="">Selecione</option>
-                  <option value="pequeno">Pequeno</option>
-                  <option value="medio">Médio</option>
-                  <option value="grande">Grande</option>
-                </select>
-              </div>
-
-              <div class="campo">
-                <label for="idade">Idade</label>
-                <select id="idade" name="idade" required>
-                  <option value="">Selecione</option>
-                  <option value="filhote">Filhote</option>
-                  <option value="adulto">Adulto</option>
-                  <option value="idoso">Idoso</option>
-                </select>
-              </div>
-
-              <div class="campo">
-                <label for="sexo">Sexo</label>
-                <select id="sexo" name="sexo" required>
-                  <option value="">Selecione</option>
-                  <option value="desconhecido">Não sei</option>
-                  <option value="macho">Macho</option>
-                  <option value="femea">Fêmea</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="campo">
-              <label for="cor">Cor da pelagem</label>
-              <input
-                type="text"
-                id="cor"
-                name="cor"
-                placeholder="Ex.: caramelo com mancha branca no peito"
-                required/>
-            </div>
-
-            <div class="campo">
-              <label for="caracteristicas">Características e comportamento</label>
-              <textarea id="caracteristicas"
-                name="caracteristicas"
-                rows="4"
-                placeholder="Ex.: coleira azul, manca de uma pata, assustado com estranhos, atende pelo nome..."
-                ></textarea>
-            </div>
-
-            <div class="campo campo-checkbox">
-              <input type="checkbox"
-                id="tem-identificacao"
-                name="tem_identificacao"/>
-                <label for="tem-identificacao">
-                Possuia coleira, plaquinha ou microchip?
-                </label>
-            </div>
-          </fieldset>
-
-          <fieldset class="bloco bloco-local">
-            <legend>Local da ocorrência</legend>
-
-            <div class="campo">
-              <label for="endereco">Endereço ou ponto de referência</label>
-              <input
-                type="text"
-                id="endereco"
-                name="endereco"
-                placeholder="Ex.: Rua Exemplo, 123, perto da padaria"
-                required
-              />
-            </div>
-
-            <div class="linha">
-              <div class="campo">
-                <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" name="bairro" required />
-              </div>
-
-              <div class="campo">
-                <label for="cidade">Cidade</label>
-                <input type="text" id="cidade" name="cidade" required />
-              </div>
-            </div>
-
-
-            <div class="linha">
+              <div class="campos">
                 <div class="campo">
-                    <label for="estado">Estado</label>
-                    <select name="estado" id="estado" required>
-                        <option value="">Selecione o estado</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
+                  <label for="especie">Espécie</label>
+                  <select id="especie" name="especie">
+                    <option value="">Selecione</option>
+                    <option value="cao">Cão</option>
+                    <option value="gato">Gato</option>
+                    <option value="outro">Outro</option>
+                  </select>
                 </div>
 
-                <div class="CEP">
-                    <label for="CEP"> Informe o CEP:</label>
-                    <input type="text"
-                    name="CEP"  id="CEP"
-                    inputmode="numeric"
-                    maxlength="9"
-                    placeholder="00000-000">
+                <div class="campo">
+                  <label for="porte">Porte</label>
+                  <select id="porte" name="porte">
+                    <option value="">Selecione</option>
+                    <option value="pequeno">Pequeno</option>
+                    <option value="medio">Médio</option>
+                    <option value="grande">Grande</option>
+                  </select>
                 </div>
-            </div>
 
+                <div class="campo campo-largo">
+                  <label for="caracteristicas">Cor e características</label>
+                  <input type="text" id="caracteristicas" name="caracteristicas" placeholder="Ex.: caramelo, magro, mancando da pata traseira" />
+                </div>
 
-            
-            
-
-            <div class="linha">
-              <div class="campo">
-                <label for="data-denuncia">Data</label>
-                <input
-                  type="date"
-                  id="data-denuncia"
-                  name="data_denuncia"
-                  required
-                />
+                <div class="campo campo-largo campo-checkbox">
+                  <input type="checkbox" id="tem-identificacao" name="tem_identificacao" value="sim" />
+                  <label for="tem-identificacao">Tinha coleira, plaquinha ou microchip</label>
+                </div>
               </div>
+            </fieldset>
 
-              <div class="campo">
-                <label for="hora-denuncia">Horário aproximado</label>
-                <input
-                  type="time"
-                  id="hora-denuncia"
-                  name="hora_denuncia"
-                />
+            <fieldset class="bloco" id="etapa-3">
+              <legend><span class="bloco-numero" aria-hidden="true">3</span> Onde aconteceu</legend>
+
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="endereco">Endereço ou ponto de referência <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Exemplo, 123, perto da padaria" required />
+                </div>
+
+                <div class="campo">
+                  <label for="bairro">Bairro <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="bairro" name="bairro" required />
+                </div>
+
+                <div class="campo">
+                  <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="cidade" name="cidade" required />
+                </div>
+
+                <div class="campo">
+                  <label for="estado">Estado <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <select id="estado" name="estado" required>
+                    <option value="">Selecione</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                  </select>
+                </div>
+
+                <div class="campo">
+                  <label for="cep">CEP</label>
+                  <input type="text" id="cep" name="cep" inputmode="numeric" placeholder="00000-000" maxlength="9"
+                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" />
+                  <small class="msg-erro">O CEP tem 8 números, como 09910-000.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="data-denuncia">Data <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="date" id="data-denuncia" name="data_denuncia" required />
+                </div>
+
+                <div class="campo">
+                  <label for="hora-denuncia">Horário aproximado</label>
+                  <input type="time" id="hora-denuncia" name="hora_denuncia" />
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco" id="etapa-4">
+              <legend><span class="bloco-numero" aria-hidden="true">4</span> Seus dados</legend>
+              <p class="bloco-intro">
+                Para denunciar de forma anônima, deixe estes campos em branco. Com um
+                contato, conseguimos tirar dúvidas e contar o andamento do caso.
+              </p>
+
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="nome-denunciante">Seu nome</label>
+                  <input type="text" id="nome-denunciante" name="nome" autocomplete="name" />
+                </div>
+
+                <div class="campo">
+                  <label for="telefone">Telefone ou WhatsApp</label>
+                  <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000"
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                  <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="email">E-mail</label>
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" />
+                </div>
+
+                <div class="campo campo-largo campo-checkbox">
+                  <input type="checkbox" id="receber-andamento" name="receber_andamento" value="sim" />
+                  <label for="receber-andamento">Quero receber o andamento da denúncia por e-mail ou WhatsApp</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-rodape">
+              <p>Seus dados nunca são mostrados para a pessoa denunciada.</p>
+              <div class="form-botoes">
+                <button type="reset" class="botao secundario">Limpar campos</button>
+                <button type="submit" class="botao primario grande">Enviar denúncia</button>
               </div>
             </div>
-
-            <div class="campo">
-              <label for="circunstancias">Como ele desapareceu?</label>
-              <textarea
-                id="circunstancias"
-                name="circunstancias"
-                rows="3"
-                placeholder="Ex.: fugiu pelo portão aberto, se assustou com fogos..."
-              ></textarea>
-            </div>
-          </fieldset>
-
-          <!-- Bloco 3: contato -->
-        <fieldset class="bloco bloco-contato">
-            <legend>Seu contato</legend>
-
-            <div class="campo">
-              <label for="nome-tutor">Seu nome</label>
-              <input type="text" id="nome-tutor" name="nome_tutor" required />
-            </div>
-
-            <div class="linha">
-              <div class="campo">
-                <label for="telefone">Telefone / WhatsApp</label>
-                <input
-                  type="tel"
-                  id="telefone"
-                  name="telefone"
-                  placeholder="(00) 00000-0000"
-                  required
-                />
-              </div>
-
-              <div class="campo">
-                <label for="email">E-mail (opcional)</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="seuemail@exemplo.com"
-                />
-              </div>
-            </div>
-
-            <div class="campo campo-checkbox">
-              <label class="checkbox">
-                        <input type="checkbox">
-                        Desejo receber informações sobre o andamento da denúncia.
-                    </label>
-
-
-                    <label class="checkbox">
-                        <input type="checkbox">
-                        Desejo realizar esta denúncia anonimamente.
-                    </label>
-
-
-
-            </div>
-        </fieldset>
-
-
-
-          <div class="form-botoes">
-            <button type="submit" class="botao primario">
-              Enviar Denúncia
-            </button>
-            <button type="reset" class="botao secundario">Limpar campos</button>
-          </div>
-        </form>
-
-      </section>
+          </form>
+        </div>
+      </div>
     </main>
 
-    <footer class="footer">
-      <p>&copy; Feito por seis estudantes, em projeto integrador</p>
-      <nav aria-label="Links do rodapé">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-        <a href="index.html">Voltar ao topo</a>
-      </nav>
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
