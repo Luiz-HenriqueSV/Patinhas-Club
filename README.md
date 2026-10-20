@@ -314,6 +314,18 @@ Projeto desenvolvido por seis estudantes como Projeto Integrador:
 | **Luiz Henrique S. Ventura** | Desenvolvimento front-end, modelagem e estrutura do banco de dados e design digital        |
 | **Willian B. A. de Sousa**   | Desenvolvimento back-end, wireframe, Scrum Master, modelagem e estrutura do banco de dados |
 
+Regras da equipe
+
+• Ninguém faz commit direto na main.
+
+• Cada tarefa é uma branch: feature/nome-da-tarefa.
+
+• Todo PR precisa de revisão de pelo menos 1 colega antes do merge.
+
+• Mensagens de commit no imperativo (Adiciona, Corrige…).
+
+• Rodar git pull antes de começar a trabalhar.
+
 ---
 
 ## 🤲 Contribuição
