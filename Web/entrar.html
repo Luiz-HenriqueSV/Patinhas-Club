@@ -63,11 +63,11 @@
 
             <!--
               Protótipo sem back-end: os formulários só levam para a próxima tela
-              (method="get"). Por isso o campo de senha ainda não tem "name": assim
+              (method="post"). Por isso o campo de senha ainda não tem "name": assim
               a senha não aparece na barra de endereço. Com o back-end pronto, use
               method="post", o action da API e name="senha".
             -->
-            <form class="entrar-painel" id="form-adotante" action="minha-conta.html" method="get" aria-label="Entrar como adotante">
+            <form class="entrar-painel" id="form-adotante" action="minha-conta.html" method="post" aria-label="Entrar como adotante">
               <div class="campo">
                 <label for="email-adotante">E-mail</label>
                 <input type="email" id="email-adotante" name="email" autocomplete="email" placeholder="voce@email.com" required />
@@ -95,7 +95,7 @@
               </p>
             </form>
 
-            <form class="entrar-painel" id="form-ong" action="painel-ong.html" method="get" aria-label="Entrar como ONG ou protetor">
+            <form class="entrar-painel" id="form-ong" action="painel-ong.html" method="post" aria-label="Entrar como ONG ou protetor">
               <div class="campo">
                 <label for="email-ong">E-mail da organização</label>
                 <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required />
@@ -123,7 +123,7 @@
               </p>
             </form>
 
-            <form class="entrar-painel" id="form-recuperar" action="entrar.html#link-enviado" method="get" aria-labelledby="titulo-recuperar">
+            <form class="entrar-painel" id="form-recuperar" action="entrar.html#link-enviado" method="post" aria-labelledby="titulo-recuperar">
               <h2 id="titulo-recuperar">Criar uma senha nova</h2>
               <p>Digite o e-mail da sua conta. Enviamos um link para você criar outra senha.</p>
 
