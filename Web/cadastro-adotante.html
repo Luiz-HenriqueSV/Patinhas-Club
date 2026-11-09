@@ -221,9 +221,17 @@
               <fieldset class="grupo">
                 <legend>Já tem animais em casa?</legend>
                 <div class="chips">
-                  <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="cao" /> Cães</label>
-                  <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="gato" /> Gatos</label>
-                  <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="outros" /> Outros bichos</label>
+                  <label class="chip-opcao"><input type="radio" name="possui_animais" value="nao" /> Não</label>
+                  <label class="chip-opcao"><input type="radio" name="possui_animais" value="sim" /> Sim</label>
+                </div>
+
+                <div class="so-se-sim" role="group" aria-label="Quais animais você já tem?">
+                  <span class="dica">Quais animais você já tem? Pode marcar mais de um.</span>
+                  <div class="chips">
+                    <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="cao" /> Cães</label>
+                    <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="gato" /> Gatos</label>
+                    <label class="chip-opcao"><input type="checkbox" name="tem_animais" value="outros" /> Outros</label>
+                  </div>
                 </div>
               </fieldset>
 
