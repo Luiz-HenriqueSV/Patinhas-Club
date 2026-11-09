@@ -80,8 +80,8 @@
             por aqui. O seu sumiu? Anuncie e a vizinhança ajuda a procurar.
           </p>
           <div class="topo-pagina-acoes">
-            <a href="reportar-desaparecimento.html" class="botao primario">Anunciar animal perdido</a>
-            <a href="#dicas" class="botao secundario">Dicas para encontrar</a>
+            <a href="reportar-desaparecimento.html" class="botao primario">Publicar anúncio</a>
+            <a href="#dicas" class="botao secundario">Ver dicas</a>
           </div>
         </div>
       </section>
@@ -111,7 +111,8 @@
                 </div>
               </fieldset>
 
-              <button type="reset" class="botao secundario pequeno">Limpar filtros</button>
+              <div class="localizador" data-localizador="proximidade" hidden></div>
+              <button type="reset" class="botao secundario pequeno">Limpar</button>
             </div>
           </form>
         </div>
@@ -121,10 +122,10 @@
         <div class="container mural-area">
           <div class="mural-cabecalho">
             <h2 id="titulo-mural">Mural de desaparecidos</h2>
-            <a class="link-seta" href="reportar-desaparecimento.html">Anunciar animal perdido</a>
+            <a class="link-seta" href="reportar-desaparecimento.html">Publicar anúncio</a>
           </div>
 
-          <div class="mural">
+          <div class="mural"><!-- dados:anuncios -->
             <article class="card-animal card-perdido" id="perdido-caramelo" aria-labelledby="nome-caramelo" data-especie="cao" data-situacao="perdido">
               <div class="card-foto">
                 <img src="img/animalex1.jpg" alt="Caramelo, cão caramelo de porte médio" width="400" height="300" loading="lazy" />
@@ -149,8 +150,8 @@
 
               <details class="card-acao">
                 <summary class="botao secundario largo">
-                  <span class="quando-fechado">Encontrei este animal</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Encontrei<span class="visualmente-oculto"> este animal</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="animais-perdidos.html#aviso-enviado" method="post">
@@ -158,6 +159,8 @@
                   <fieldset class="grupo">
                     <legend>Encontrou o Caramelo?</legend>
                     <p class="dica">O tutor recebe o seu aviso na hora, com o contato que você deixar.</p>
+                    <div class="localizador" data-localizador="compacto" data-campos="onde" data-agora="quando" hidden
+                data-texto="Está vendo o animal agora? Use sua localização e o tutor recebe o ponto exato."></div>
 
                     <div class="campos">
                       <div class="campo campo-largo">
@@ -229,8 +232,8 @@
 
               <details class="card-acao">
                 <summary class="botao secundario largo">
-                  <span class="quando-fechado">Encontrei este animal</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Encontrei<span class="visualmente-oculto"> este animal</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="animais-perdidos.html#aviso-enviado" method="post">
@@ -238,6 +241,8 @@
                   <fieldset class="grupo">
                     <legend>Encontrou a Cinzinha?</legend>
                     <p class="dica">O tutor recebe o seu aviso na hora, com o contato que você deixar.</p>
+                    <div class="localizador" data-localizador="compacto" data-campos="onde" data-agora="quando" hidden
+                data-texto="Está vendo o animal agora? Use sua localização e o tutor recebe o ponto exato."></div>
 
                     <div class="campos">
                       <div class="campo campo-largo">
@@ -309,8 +314,8 @@
 
               <details class="card-acao">
                 <summary class="botao secundario largo">
-                  <span class="quando-fechado">Encontrei este animal</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Encontrei<span class="visualmente-oculto"> este animal</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="animais-perdidos.html#aviso-enviado" method="post">
@@ -318,6 +323,8 @@
                   <fieldset class="grupo">
                     <legend>Encontrou a Ruby?</legend>
                     <p class="dica">O tutor recebe o seu aviso na hora, com o contato que você deixar.</p>
+                    <div class="localizador" data-localizador="compacto" data-campos="onde" data-agora="quando" hidden
+                data-texto="Está vendo o animal agora? Use sua localização e o tutor recebe o ponto exato."></div>
 
                     <div class="campos">
                       <div class="campo campo-largo">
@@ -386,7 +393,7 @@
                 <p class="card-descricao">Uma vizinha viu o anúncio e encontrou o Bob a duas quadras de casa, dois dias depois do sumiço. Obrigado, vizinhança!</p>
               </div>
             </article>
-          </div>
+          <!-- /dados:anuncios --></div>
 
           <p class="contagem" data-total="4" data-rotulo="anúncios"></p>
 
@@ -407,7 +414,7 @@
               As primeiras horas são as mais importantes. Enquanto o anúncio roda
               no mural, faça o caminho que ele costuma fazer.
             </p>
-            <a class="botao primario" href="reportar-desaparecimento.html">Anunciar no mural</a>
+            <a class="botao primario" href="reportar-desaparecimento.html">Anunciar</a>
           </div>
 
           <ol class="passos passos-coluna">
@@ -478,6 +485,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

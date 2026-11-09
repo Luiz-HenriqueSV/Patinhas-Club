@@ -90,7 +90,7 @@
             <div class="cartao-lateral">
               <h2>É ONG ou protetor?</h2>
               <p>O cadastro de organizações é outro, com verificação.</p>
-              <p><a class="link-seta" href="cadastro-ong.html">Cadastrar minha ONG</a></p>
+              <p><a class="link-seta" href="cadastro-ong.html">Cadastrar ONG</a></p>
             </div>
           </aside>
 
@@ -100,7 +100,7 @@
             senha ainda não tem "name" para não aparecer na barra de endereço.
             Com o back-end pronto: method="post", action da API e name="senha".
           -->
-          <form class="formulario" action="minha-conta.html#boas-vindas" method="post">
+          <form class="formulario" action="/api/adotantes" method="post" data-prototipo="minha-conta.html#boas-vindas">
             <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
             <fieldset class="bloco" id="etapa-1">
@@ -146,6 +146,8 @@
                     pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
                   <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
                 </div>
+
+                <div class="localizador campo-largo" data-localizador="cidade" hidden></div>
 
                 <div class="campo">
                   <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
@@ -249,7 +251,7 @@
               <div class="campos">
                 <div class="campo">
                   <label for="senha">Crie uma senha <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="password" id="senha" autocomplete="new-password" minlength="8" required
+                  <input type="password" id="senha" name="senha" autocomplete="new-password" minlength="8" required
                     pattern="(?=.*[A-Za-z])(?=.*\d).{8,}" title="Pelo menos 8 caracteres, com letras e números" aria-describedby="senha-dica" />
                   <small class="dica" id="senha-dica">Pelo menos 8 caracteres, com letras e números.</small>
                   <small class="msg-erro">Use pelo menos 8 caracteres, misturando letras e números.</small>
@@ -273,7 +275,7 @@
 
             <div class="form-rodape">
               <p>Depois de criar a conta, você já pode pedir adoções.</p>
-              <button type="submit" class="botao escuro grande">Criar minha conta</button>
+              <button type="submit" class="botao primario grande">Criar conta</button>
             </div>
           </form>
         </div>
@@ -326,6 +328,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

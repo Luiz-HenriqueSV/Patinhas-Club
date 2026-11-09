@@ -104,8 +104,8 @@
             </div>
           </aside>
 
-          <!-- Protótipo sem back-end: enviar volta para esta página com o aviso #inscricao-confirmada -->
-          <form class="formulario" action="lista_de_espera.html#inscricao-confirmada" method="post">
+          <!-- Envia para o servidor (/api/lista-de-espera). Sem o servidor ligado, data-prototipo leva ao aviso do protótipo. -->
+          <form class="formulario" action="/api/lista-de-espera" method="post" data-prototipo="lista_de_espera.html#inscricao-confirmada">
             <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
             <fieldset class="bloco" id="etapa-1">
@@ -114,7 +114,7 @@
               <fieldset class="grupo">
                 <legend>Qual animal? <span class="obrigatorio" aria-hidden="true">*</span></legend>
                 <div class="chips">
-                  <label class="chip-opcao"><input type="radio" name="animal" value="cachorro" required /> Cachorro</label>
+                  <label class="chip-opcao"><input type="radio" name="animal" value="cao" required /> Cachorro</label>
                   <label class="chip-opcao"><input type="radio" name="animal" value="gato" /> Gato</label>
                   <label class="chip-opcao"><input type="radio" name="animal" value="outro" /> Outro</label>
                 </div>
@@ -133,7 +133,6 @@
                 <legend>Idade</legend>
                 <div class="chips">
                   <label class="chip-opcao"><input type="checkbox" name="idade" value="filhote" /> Filhote</label>
-                  <label class="chip-opcao"><input type="checkbox" name="idade" value="jovem" /> Jovem</label>
                   <label class="chip-opcao"><input type="checkbox" name="idade" value="adulto" /> Adulto</label>
                   <label class="chip-opcao"><input type="checkbox" name="idade" value="idoso" /> Idoso</label>
                 </div>
@@ -149,6 +148,8 @@
               </fieldset>
 
               <div class="campos">
+                <div class="localizador campo-largo" data-localizador="cidade" hidden></div>
+
                 <div class="campo">
                   <label for="cidade">Cidade ou região <span class="obrigatorio" aria-hidden="true">*</span></label>
                   <input type="text" id="cidade" name="cidade" autocomplete="address-level2" placeholder="Ex.: Diadema" required />
@@ -202,7 +203,7 @@
               <p>Você pode sair da lista quando quiser, pelo link que vem em cada aviso.</p>
               <div class="form-botoes">
                 <button type="reset" class="botao secundario">Limpar</button>
-                <button type="submit" class="botao escuro grande">Entrar na lista de espera</button>
+                <button type="submit" class="botao primario grande">Entrar na lista</button>
               </div>
             </div>
           </form>
@@ -256,6 +257,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

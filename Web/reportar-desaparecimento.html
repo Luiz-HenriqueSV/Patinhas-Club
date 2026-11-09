@@ -65,7 +65,7 @@
                 para a comunidade ajudar a encontrar.
               </p>
               <div class="topo-pagina-acoes">
-                <a href="animais-perdidos.html" class="botao secundario">Voltar para o mural</a>
+                <a href="animais-perdidos.html" class="botao secundario">Voltar ao mural</a>
               </div>
             </div>
 
@@ -99,8 +99,9 @@
             </div>
           </aside>
 
-          <!-- Protótipo sem back-end: publicar leva ao mural com o aviso #anuncio-publicado -->
-          <form id="form-desaparecimento" class="formulario" action="animais-perdidos.html#anuncio-publicado" method="post">
+          <!-- Envia para o servidor (/api/anuncios). Sem o servidor ligado, data-prototipo leva ao aviso do protótipo. -->
+          <form id="form-desaparecimento" class="formulario" action="/api/anuncios" method="post" enctype="multipart/form-data"
+            data-prototipo="animais-perdidos.html#anuncio-publicado">
             <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
             <fieldset class="bloco" id="etapa-1">
@@ -183,6 +184,9 @@
 
             <fieldset class="bloco" id="etapa-2">
               <legend><span class="bloco-numero" aria-hidden="true">2</span> Onde foi visto pela última vez</legend>
+
+              <div class="localizador" data-localizador="completo" hidden
+                data-texto="Está no lugar onde ele sumiu? Use sua localização e o endereço se preenche sozinho. Se não estiver, digite o CEP ou marque o ponto no mapa."></div>
 
               <div class="campos">
                 <div class="campo campo-largo">
@@ -290,8 +294,8 @@
             <div class="form-rodape">
               <p>Quando o animal voltar para casa, é só marcar o anúncio como encontrado.</p>
               <div class="form-botoes">
-                <button type="reset" class="botao secundario">Limpar campos</button>
-                <button type="submit" class="botao primario grande">Publicar no mural</button>
+                <button type="reset" class="botao secundario">Limpar</button>
+                <button type="submit" class="botao primario grande">Publicar</button>
               </div>
             </div>
           </form>
@@ -345,6 +349,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>
