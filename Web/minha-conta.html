@@ -38,10 +38,10 @@
         </nav>
 
         <div class="cabecalho-acoes">
-          <a class="conta-chip" href="minha-conta.html">
+          <!-- dados:conta --><a class="conta-chip" href="minha-conta.html">
             <span class="avatar bege" aria-hidden="true">JM</span>
             <span>Juliana Mendes<small>Minha conta</small></span>
-          </a>
+          </a><!-- /dados:conta -->
         </div>
       </div>
     </header>
@@ -49,18 +49,18 @@
     <main id="conteudo">
       <div class="container painel">
         <aside class="painel-lateral" aria-label="Menu da conta">
-          <div class="painel-perfil">
+          <!-- dados:perfil --><div class="painel-perfil">
             <span class="avatar bege" aria-hidden="true">JM</span>
             <div>
               <strong>Juliana Mendes</strong>
               <small>Diadema, SP</small>
             </div>
-          </div>
+          </div><!-- /dados:perfil -->
 
           <nav class="painel-menu" aria-label="Seções da conta">
             <ul>
               <li><a href="#visao-geral" aria-current="true">Visão geral</a></li>
-              <li><a href="#pedidos">Meus pedidos <span class="contador">2</span></a></li>
+              <li><a href="#pedidos">Meus pedidos <span class="contador"><!-- dados:contador-pedidos -->2<!-- /dados:contador-pedidos --></span></a></li>
               <li><a href="#favoritos">Favoritos</a></li>
               <li><a href="#alertas">Alertas</a></li>
               <li><a href="#anuncios">Meus anúncios</a></li>
@@ -94,12 +94,12 @@
           <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
             <div class="painel-topo">
               <div>
-                <h1 id="titulo-pagina">Olá, Juliana!</h1>
-                <p>A visita para conhecer a Mel está marcada para domingo.</p>
+                <!-- dados:saudacao --><h1 id="titulo-pagina">Olá, Juliana!</h1>
+                <p>A visita para conhecer a Mel está marcada para domingo.</p><!-- /dados:saudacao -->
               </div>
               <div class="grupo-botoes">
-                <a class="botao escuro" href="adocao.html">Ver animais para adotar</a>
-                <a class="botao secundario" href="cadastro-adotante.html">Editar meus dados</a>
+                <a class="botao escuro" href="adocao.html">Ver animais</a>
+                <a class="botao secundario" href="cadastro-adotante.html">Editar dados</a>
               </div>
             </div>
           </section>
@@ -107,7 +107,7 @@
           <section class="painel-secao" id="pedidos" aria-labelledby="titulo-pedidos">
             <header>
               <h2 id="titulo-pedidos">Meus pedidos de adoção</h2>
-            </header>
+            </header><!-- dados:pedidos -->
 
             <article class="pedido-adotante">
               <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&amp;fit=crop&amp;w=400&amp;q=80" alt="Mel" width="150" height="150" loading="lazy" />
@@ -138,15 +138,15 @@
                 <p class="pedido-proximo"><strong>Próximo passo:</strong> a ONG responde em até 3 dias úteis pelo WhatsApp que você informou.</p>
               </div>
             </article>
-          </section>
+          <!-- /dados:pedidos --></section>
 
           <section class="painel-secao" id="favoritos" aria-labelledby="titulo-favoritos">
             <header>
               <h2 id="titulo-favoritos">Favoritos</h2>
-              <a class="link-seta" href="adocao.html">Ver mais animais</a>
+              <a class="link-seta" href="adocao.html">Ver mais</a>
             </header>
 
-            <ul class="favoritos">
+            <!-- dados:favoritos --><ul class="favoritos">
               <li>
                 <a class="mini-animal" href="adocao.html#pet-brutus">
                   <div class="polaroid">
@@ -165,14 +165,14 @@
                   <p>Cão filhote, 5 meses, a 5 km</p>
                 </a>
               </li>
-            </ul>
+            </ul><!-- /dados:favoritos -->
           </section>
 
           <section class="painel-secao" id="alertas" aria-labelledby="titulo-alertas">
             <header>
               <h2 id="titulo-alertas">Alertas da lista de espera</h2>
               <a class="botao secundario pequeno" href="lista_de_espera.html">Novo alerta</a>
-            </header>
+            </header><!-- dados:alertas -->
 
             <div class="alerta-linha">
               <div>
@@ -187,19 +187,19 @@
                 <a class="botao fantasma pequeno" href="#alerta-pausado">Pausar</a>
               </div>
             </div>
-          </section>
+          <!-- /dados:alertas --></section>
 
           <section class="painel-secao" id="anuncios" aria-labelledby="titulo-anuncios">
             <header>
               <h2 id="titulo-anuncios">Meus anúncios de animais perdidos</h2>
-            </header>
+            </header><!-- dados:anuncios -->
 
             <div class="vazio">
               <img src="img/icones/pin.svg" alt="" width="44" height="44" />
               <p>Você não tem anúncios no mural de perdidos e achados. Tomara que continue assim!</p>
-              <a class="botao secundario pequeno" href="reportar-desaparecimento.html">Anunciar animal perdido</a>
+              <a class="botao secundario pequeno" href="reportar-desaparecimento.html">Publicar anúncio</a>
             </div>
-          </section>
+          <!-- /dados:anuncios --></section>
         </div>
       </div>
     </main>
@@ -250,6 +250,7 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

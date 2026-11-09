@@ -73,7 +73,7 @@
                 esperando uma casa. Filtre, escolha e conheça seu novo amigo.
               </p>
               <div class="topo-pagina-acoes">
-                <a href="#mural" class="botao escuro">Ver animais para adotar</a>
+                <a href="#mural" class="botao escuro">Ver animais</a>
                 <a href="#como-adotar" class="botao secundario">Como funciona</a>
               </div>
             </div>
@@ -137,6 +137,7 @@
                   <label class="chip-opcao"><input type="radio" name="distancia" id="f-distancia-todas" checked /> Qualquer</label>
                   <label class="chip-opcao"><input type="radio" name="distancia" id="f-distancia-1" /> Até 1 km</label>
                   <label class="chip-opcao"><input type="radio" name="distancia" id="f-distancia-3" /> Até 3 km</label>
+                  <div class="localizador" data-localizador="proximidade" hidden></div>
                 </div>
               </fieldset>
 
@@ -151,7 +152,7 @@
 
             <div class="filtros-rodape">
               <p class="dica">Os filtros mudam a lista na hora, sem recarregar a página.</p>
-              <button type="reset" class="botao secundario pequeno">Limpar filtros</button>
+              <button type="reset" class="botao secundario pequeno">Limpar</button>
             </div>
           </form>
         </div>
@@ -161,10 +162,10 @@
         <div class="container mural-area">
           <div class="mural-cabecalho">
             <h2 id="titulo-mural">Esperando por você</h2>
-            <a class="link-seta" href="lista_de_espera.html">Não achou? Entre na lista de espera</a>
+            <a class="link-seta" href="lista_de_espera.html">Lista de espera</a>
           </div>
 
-          <div class="mural">
+          <div class="mural"><!-- dados:animais -->
             <article class="card-animal" id="pet-churros" aria-labelledby="nome-churros"
               data-especie="cao" data-porte="pequeno" data-idade="adulto" data-sexo="macho" data-distancia="3" data-criancas>
               <div class="card-foto">
@@ -191,8 +192,8 @@
 
               <details class="card-acao">
                 <summary class="botao primario largo">
-                  <span class="quando-fechado">Quero adotar o Churros</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Quero adotar<span class="visualmente-oculto"> o Churros</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="adocao.html#pedido-enviado" method="post">
@@ -247,7 +248,7 @@
                   </fieldset>
 
                   <div class="form-botoes">
-                    <button type="submit" class="botao escuro">Enviar pedido de adoção</button>
+                    <button type="submit" class="botao escuro">Enviar pedido</button>
                   </div>
                 </form>
               </details>
@@ -279,8 +280,8 @@
 
               <details class="card-acao">
                 <summary class="botao primario largo">
-                  <span class="quando-fechado">Quero adotar o Brutus</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Quero adotar<span class="visualmente-oculto"> o Brutus</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="adocao.html#pedido-enviado" method="post">
@@ -335,7 +336,7 @@
                   </fieldset>
 
                   <div class="form-botoes">
-                    <button type="submit" class="botao escuro">Enviar pedido de adoção</button>
+                    <button type="submit" class="botao escuro">Enviar pedido</button>
                   </div>
                 </form>
               </details>
@@ -367,8 +368,8 @@
 
               <details class="card-acao">
                 <summary class="botao primario largo">
-                  <span class="quando-fechado">Quero adotar a Mel</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Quero adotar<span class="visualmente-oculto"> a Mel</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="adocao.html#pedido-enviado" method="post">
@@ -423,7 +424,7 @@
                   </fieldset>
 
                   <div class="form-botoes">
-                    <button type="submit" class="botao escuro">Enviar pedido de adoção</button>
+                    <button type="submit" class="botao escuro">Enviar pedido</button>
                   </div>
                 </form>
               </details>
@@ -455,8 +456,8 @@
 
               <details class="card-acao">
                 <summary class="botao primario largo">
-                  <span class="quando-fechado">Quero adotar o Thor</span>
-                  <span class="quando-aberto">Fechar formulário</span>
+                  <span class="quando-fechado">Quero adotar<span class="visualmente-oculto"> o Thor</span></span>
+                  <span class="quando-aberto">Fechar<span class="visualmente-oculto"> formulário</span></span>
                 </summary>
 
                 <form class="form-cartao" action="adocao.html#pedido-enviado" method="post">
@@ -511,12 +512,12 @@
                   </fieldset>
 
                   <div class="form-botoes">
-                    <button type="submit" class="botao escuro">Enviar pedido de adoção</button>
+                    <button type="submit" class="botao escuro">Enviar pedido</button>
                   </div>
                 </form>
               </details>
             </article>
-          </div>
+          <!-- /dados:animais --></div>
 
           <p class="contagem" data-total="4" data-rotulo="animais"></p>
 
@@ -576,7 +577,7 @@
               Adotar é um compromisso para a vida toda. Antes de decidir, pense em
               tempo, espaço e custos com alimentação e veterinário.
             </p>
-            <a class="link-seta" href="termos.html#adocao-responsavel">Ler o compromisso completo</a>
+            <a class="link-seta" href="termos.html#adocao-responsavel">Ler o compromisso</a>
           </aside>
         </div>
       </section>
@@ -617,7 +618,7 @@
             <p>Entre na lista de espera e avisamos quando chegar um animal com o perfil que você procura.</p>
           </div>
           <div class="grupo-botoes">
-            <a href="lista_de_espera.html" class="botao primario grande">Entrar na lista de espera</a>
+            <a href="lista_de_espera.html" class="botao primario grande">Entrar na lista</a>
           </div>
         </div>
       </section>
@@ -669,6 +670,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

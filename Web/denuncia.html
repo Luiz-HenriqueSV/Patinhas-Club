@@ -114,8 +114,9 @@
             </div>
           </aside>
 
-          <!-- Protótipo sem back-end: enviar volta para esta página com o aviso #denuncia-enviada -->
-          <form id="form-denuncia" class="formulario" action="denuncia.html#denuncia-enviada" method="post">
+          <!-- Envia para o servidor (/api/denuncias). Sem o servidor ligado, data-prototipo leva ao aviso do protótipo. -->
+          <form id="form-denuncia" class="formulario" action="/api/denuncias" method="post" enctype="multipart/form-data"
+            data-prototipo="denuncia.html#denuncia-enviada">
             <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
             <fieldset class="bloco" id="etapa-1">
@@ -200,6 +201,9 @@
 
             <fieldset class="bloco" id="etapa-3">
               <legend><span class="bloco-numero" aria-hidden="true">3</span> Onde aconteceu</legend>
+
+              <div class="localizador" data-localizador="completo" data-agora="data_denuncia,hora_denuncia" hidden
+                data-texto="Está no local agora? Use sua localização: o ponto exato ajuda a equipe a chegar mais rápido. Sua identidade continua protegida."></div>
 
               <div class="campos">
                 <div class="campo campo-largo">
@@ -305,7 +309,7 @@
             <div class="form-rodape">
               <p>Seus dados nunca são mostrados para a pessoa denunciada.</p>
               <div class="form-botoes">
-                <button type="reset" class="botao secundario">Limpar campos</button>
+                <button type="reset" class="botao secundario">Limpar</button>
                 <button type="submit" class="botao primario grande">Enviar denúncia</button>
               </div>
             </div>
@@ -360,6 +364,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

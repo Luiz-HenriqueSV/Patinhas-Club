@@ -101,7 +101,8 @@
             de confirmação (method="post"). Quando a API existir, troque o action
             pela rota do servidor e o method para "post".
           -->
-          <form class="formulario" action="cadastro-ong-enviado.html" method="post">
+          <form class="formulario" action="/api/ongs" method="post" enctype="multipart/form-data"
+            data-prototipo="cadastro-ong-enviado.html">
             <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
             <fieldset class="bloco" id="etapa-1">
@@ -205,6 +206,9 @@
 
             <fieldset class="bloco" id="etapa-3">
               <legend><span class="bloco-numero" aria-hidden="true">3</span> Endereço e área de atuação</legend>
+
+              <div class="localizador" data-localizador="completo" hidden
+                data-texto="Está na sede agora? Use a localização para marcar o ponto exato no mapa: é assim que quem procura uma ONG perto de casa encontra vocês. Ou digite o CEP."></div>
               <p class="bloco-intro">Usamos a cidade para mostrar seus animais para quem mora perto.</p>
 
               <div class="campos">
@@ -354,7 +358,7 @@
                 Depois da aprovação, enviamos um link para o e-mail da organização
                 para você criar a senha do painel.
               </p>
-              <button type="submit" class="botao primario grande">Enviar cadastro para análise</button>
+              <button type="submit" class="botao primario grande">Enviar cadastro</button>
             </div>
           </form>
         </div>
@@ -407,6 +411,9 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/geo-nucleo.js" defer></script>
+    <script src="scripts/localizacao.js" defer></script>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

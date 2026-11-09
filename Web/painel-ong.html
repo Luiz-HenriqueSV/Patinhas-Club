@@ -38,10 +38,10 @@
         </nav>
 
         <div class="cabecalho-acoes">
-          <a class="conta-chip" href="painel-ong.html">
+          <!-- dados:conta --><a class="conta-chip" href="painel-ong.html">
             <span class="avatar" aria-hidden="true">AP</span>
             <span>Amigos de Patas<small>Painel da ONG</small></span>
-          </a>
+          </a><!-- /dados:conta -->
         </div>
       </div>
     </header>
@@ -49,18 +49,18 @@
     <main id="conteudo">
       <div class="container painel">
         <aside class="painel-lateral" aria-label="Menu do painel">
-          <div class="painel-perfil">
+          <!-- dados:perfil --><div class="painel-perfil">
             <span class="avatar" aria-hidden="true">AP</span>
             <div>
               <strong>ONG Amigos de Patas</strong>
               <span class="selo-verificado"><img src="img/icones/escudo-check.svg" alt="" width="20" height="20" /> Verificada</span>
             </div>
-          </div>
+          </div><!-- /dados:perfil -->
 
           <nav class="painel-menu" aria-label="Seções do painel">
             <ul>
               <li><a href="#visao-geral" aria-current="true">Visão geral</a></li>
-              <li><a href="#pedidos">Pedidos de adoção <span class="contador">2</span></a></li>
+              <li><a href="#pedidos">Pedidos <span class="contador"><!-- dados:contador-pedidos -->2<!-- /dados:contador-pedidos --></span></a></li>
               <li><a href="#animais">Meus animais</a></li>
               <li><a href="#campanhas">Campanhas</a></li>
               <li><a href="#perfil">Perfil da ONG</a></li>
@@ -122,8 +122,8 @@
           <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
             <div class="painel-topo">
               <div>
-                <h1 id="titulo-pagina">Olá, Amigos de Patas!</h1>
-                <p>Chegaram 2 pedidos de adoção desde a sua última visita.</p>
+                <!-- dados:saudacao --><h1 id="titulo-pagina">Olá, Amigos de Patas!</h1>
+                <p>Chegaram 2 pedidos de adoção desde a sua última visita.</p><!-- /dados:saudacao -->
               </div>
               <div class="grupo-botoes">
                 <a class="botao primario" href="cadastrar-animal.html">Cadastrar animal</a>
@@ -131,7 +131,7 @@
               </div>
             </div>
 
-            <dl class="estatisticas">
+            <dl class="estatisticas"><!-- dados:estatisticas -->
               <div class="estatistica">
                 <dt>animais para adoção</dt>
                 <dd>4 <img src="img/icones/pata.svg" alt="" width="34" height="34" /></dd>
@@ -148,13 +148,13 @@
                 <dt>visitas ao perfil no mês</dt>
                 <dd>1.240 <img src="img/icones/grafico.svg" alt="" width="34" height="34" /></dd>
               </div>
-            </dl>
+            <!-- /dados:estatisticas --></dl>
           </section>
 
           <section class="painel-secao" id="pedidos" aria-labelledby="titulo-pedidos">
             <header>
               <h2 id="titulo-pedidos">Pedidos de adoção</h2>
-              <span class="etiqueta novo">2 novos</span>
+              <!-- dados:novos --><span class="etiqueta novo">2 novos</span><!-- /dados:novos -->
             </header>
 
             <div class="tabela-caixa">
@@ -169,7 +169,7 @@
                     <th scope="col"><span class="visualmente-oculto">Detalhes</span></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody><!-- dados:pedidos -->
                   <tr>
                     <td class="sem-rotulo">
                       <div class="pessoa">
@@ -190,7 +190,7 @@
                             <div><dt>Por que quer adotar</dt><dd>“Trabalho de casa e o Churros parece perfeito para fazer companhia.”</dd></div>
                           </dl>
                           <div class="grupo-botoes">
-                            <a class="botao escuro pequeno" href="#visita-agendada">Convidar para visita</a>
+                            <a class="botao escuro pequeno" href="#visita-agendada">Marcar visita</a>
                             <a class="botao perigo pequeno" href="#pedido-recusado">Recusar</a>
                           </div>
                         </div>
@@ -217,7 +217,7 @@
                             <div><dt>Por que quer adotar</dt><dd>“Corro todo dia de manhã e queria um parceiro de treino.”</dd></div>
                           </dl>
                           <div class="grupo-botoes">
-                            <a class="botao escuro pequeno" href="#visita-agendada">Convidar para visita</a>
+                            <a class="botao escuro pequeno" href="#visita-agendada">Marcar visita</a>
                             <a class="botao perigo pequeno" href="#pedido-recusado">Recusar</a>
                           </div>
                         </div>
@@ -244,7 +244,7 @@
                             <div><dt>Por que quer adotar</dt><dd>“Moro sozinha e quero um cachorro tranquilo para os passeios.”</dd></div>
                           </dl>
                           <div class="grupo-botoes">
-                            <a class="botao escuro pequeno" href="#visita-agendada">Convidar para visita</a>
+                            <a class="botao escuro pequeno" href="#visita-agendada">Marcar visita</a>
                             <a class="botao perigo pequeno" href="#pedido-recusado">Recusar</a>
                           </div>
                         </div>
@@ -303,7 +303,7 @@
                       </details>
                     </td>
                   </tr>
-                </tbody>
+                <!-- /dados:pedidos --></tbody>
               </table>
             </div>
           </section>
@@ -311,10 +311,10 @@
           <section class="painel-secao" id="animais" aria-labelledby="titulo-animais">
             <header>
               <h2 id="titulo-animais">Meus animais</h2>
-              <a class="link-seta" href="adocao.html">Ver na vitrine de adoção</a>
+              <a class="link-seta" href="adocao.html">Ver na vitrine</a>
             </header>
 
-            <ul class="animais-ong">
+            <ul class="animais-ong"><!-- dados:animais -->
               <li>
                 <article class="animal-ong">
                   <div class="animal-ong-foto">
@@ -372,7 +372,7 @@
                     <h3>Fred</h3>
                     <p>Faltam fotos e a história dele</p>
                     <div class="grupo-botoes">
-                      <a class="botao escuro pequeno" href="cadastrar-animal.html">Continuar cadastro</a>
+                      <a class="botao escuro pequeno" href="cadastrar-animal.html">Continuar</a>
                     </div>
                   </div>
                 </article>
@@ -383,7 +383,7 @@
                   Cadastrar outro animal
                 </a>
               </li>
-            </ul>
+            <!-- /dados:animais --></ul>
           </section>
 
           <section class="painel-secao" id="campanhas" aria-labelledby="titulo-campanhas">
@@ -392,7 +392,7 @@
               <a class="botao secundario pequeno" href="nova-campanha.html">Nova campanha</a>
             </header>
 
-            <div class="campanhas-ong">
+            <div class="campanhas-ong"><!-- dados:campanhas -->
               <article class="campanha-linha">
                 <h3>Ração para o inverno <span class="etiqueta ativa">Ativa</span></h3>
                 <p>Arrecadação até 31/10/2026</p>
@@ -405,11 +405,11 @@
                 <progress value="100" max="100" aria-label="Bazar beneficente: meta atingida">100%</progress>
                 <p class="campanha-numeros"><strong>R$ 2.380</strong> arrecadados</p>
               </article>
-            </div>
+            <!-- /dados:campanhas --></div>
           </section>
 
           <section class="painel-secao" id="perfil" aria-labelledby="titulo-perfil">
-            <div class="perfil-progresso">
+            <!-- dados:perfil-progresso --><div class="perfil-progresso">
               <div>
                 <h2 id="titulo-perfil">Seu perfil está 80% completo</h2>
                 <p>Perfis completos passam mais confiança para quem vai adotar.</p>
@@ -423,7 +423,7 @@
                 </ul>
               </div>
               <a class="botao secundario" href="cadastro-ong.html">Editar perfil</a>
-            </div>
+            </div><!-- /dados:perfil-progresso -->
           </section>
         </div>
       </div>
@@ -475,6 +475,7 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

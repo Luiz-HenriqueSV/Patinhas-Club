@@ -67,7 +67,7 @@
               a senha não aparece na barra de endereço. Com o back-end pronto, use
               method="post", o action da API e name="senha".
             -->
-            <form class="entrar-painel" id="form-adotante" action="minha-conta.html" method="post" aria-label="Entrar como adotante">
+            <form class="entrar-painel" id="form-adotante" action="/api/entrar" method="post" data-prototipo="minha-conta.html" aria-label="Entrar como adotante">
               <div class="campo">
                 <label for="email-adotante">E-mail</label>
                 <input type="email" id="email-adotante" name="email" autocomplete="email" placeholder="voce@email.com" required />
@@ -76,7 +76,7 @@
 
               <div class="campo">
                 <label for="senha-adotante">Senha</label>
-                <input type="password" id="senha-adotante" autocomplete="current-password" minlength="8" required />
+                <input type="password" id="senha-adotante" name="senha" autocomplete="current-password" minlength="8" required />
                 <small class="msg-erro">A senha tem pelo menos 8 caracteres.</small>
               </div>
 
@@ -88,14 +88,14 @@
                 <a href="#recuperar">Esqueci minha senha</a>
               </div>
 
-              <button type="submit" class="botao escuro largo grande">Entrar como adotante</button>
+              <button type="submit" class="botao primario largo grande">Entrar</button>
 
               <p class="entrar-rodape">
                 Ainda não tem conta? <a href="cadastro-adotante.html">Criar conta de adotante</a>
               </p>
             </form>
 
-            <form class="entrar-painel" id="form-ong" action="painel-ong.html" method="post" aria-label="Entrar como ONG ou protetor">
+            <form class="entrar-painel" id="form-ong" action="/api/entrar" method="post" data-prototipo="painel-ong.html" aria-label="Entrar como ONG ou protetor">
               <div class="campo">
                 <label for="email-ong">E-mail da organização</label>
                 <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required />
@@ -104,7 +104,7 @@
 
               <div class="campo">
                 <label for="senha-ong">Senha</label>
-                <input type="password" id="senha-ong" autocomplete="current-password" minlength="8" required />
+                <input type="password" id="senha-ong" name="senha" autocomplete="current-password" minlength="8" required />
                 <small class="msg-erro">A senha tem pelo menos 8 caracteres.</small>
               </div>
 
@@ -116,14 +116,14 @@
                 <a href="#recuperar">Esqueci minha senha</a>
               </div>
 
-              <button type="submit" class="botao primario largo grande">Entrar no painel da ONG</button>
+              <button type="submit" class="botao primario largo grande">Entrar</button>
 
               <p class="entrar-rodape">
                 Sua ONG ainda não está aqui? <a href="cadastro-ong.html">Cadastrar minha ONG</a>
               </p>
             </form>
 
-            <form class="entrar-painel" id="form-recuperar" action="entrar.html#link-enviado" method="post" aria-labelledby="titulo-recuperar">
+            <form class="entrar-painel" id="form-recuperar" action="/api/senha/recuperar" method="post" data-prototipo="entrar.html#link-enviado" aria-labelledby="titulo-recuperar">
               <h2 id="titulo-recuperar">Criar uma senha nova</h2>
               <p>Digite o e-mail da sua conta. Enviamos um link para você criar outra senha.</p>
 
@@ -145,7 +145,7 @@
                 Se existir uma conta com esse e-mail, o link chega em alguns
                 minutos. Vale olhar também a caixa de spam.
               </p>
-              <a class="botao secundario" href="#adotante">Voltar para o login</a>
+              <a class="botao secundario" href="#adotante">Voltar</a>
             </div>
           </div>
         </section>
@@ -217,6 +217,7 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>

@@ -38,10 +38,10 @@
         </nav>
 
         <div class="cabecalho-acoes">
-          <a class="conta-chip" href="painel-ong.html">
+          <!-- dados:conta --><a class="conta-chip" href="painel-ong.html">
             <span class="avatar" aria-hidden="true">AP</span>
             <span>Amigos de Patas<small>Painel da ONG</small></span>
-          </a>
+          </a><!-- /dados:conta -->
         </div>
       </div>
     </header>
@@ -99,7 +99,8 @@
             um aviso de sucesso (painel-ong.html#animal-publicado). O botão de
             rascunho usa formaction e formnovalidate para salvar sem validar.
           -->
-          <form class="formulario" action="painel-ong.html#animal-publicado" method="post">
+          <form class="formulario" action="/api/ong/animais" method="post" enctype="multipart/form-data"
+            data-prototipo="painel-ong.html#animal-publicado">
             <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
 
             <fieldset class="bloco" id="etapa-1">
@@ -278,8 +279,8 @@
             <div class="form-rodape">
               <p>Depois de publicado, você pode editar ou pausar o anúncio pelo painel.</p>
               <div class="form-botoes">
-                <button type="submit" class="botao secundario" formaction="painel-ong.html#rascunho-salvo" formnovalidate>Salvar rascunho</button>
-                <button type="submit" class="botao primario grande">Publicar animal</button>
+                <button type="submit" class="botao secundario" formaction="/api/ong/animais?rascunho=1" data-prototipo="painel-ong.html#rascunho-salvo" formnovalidate>Salvar rascunho</button>
+                <button type="submit" class="botao primario grande">Publicar</button>
               </div>
             </div>
           </form>
@@ -333,6 +334,7 @@
         </div>
       </div>
     </footer>
+    <script src="scripts/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   </body>
 </html>
