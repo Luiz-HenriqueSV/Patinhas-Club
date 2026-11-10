@@ -9,7 +9,8 @@
     "start": "node src/servidor.js",
     "dev": "node --watch src/servidor.js",
     "banco": "node src/criar-banco.js",
-    "test": "node --test"
+    "test": "node --test",
+    "teste:fluxos": "node teste/ponta-a-ponta.js"
   },
   "engines": {
     "node": ">=20.12"
