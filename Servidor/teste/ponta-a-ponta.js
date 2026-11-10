@@ -1,4 +1,5 @@
-// Testes de ponta a ponta: chat, suporte, administração, favoritos e conta, falando com o servidor de verdade.
+// Testes de ponta a ponta, falando com o servidor de verdade: cadastros, anúncios, denúncias, animais,
+// campanhas, lista de espera, chat, suporte, administração, favoritos, conta e todas as páginas.
 // Como rodar (na pasta Servidor):
 //   1. npm run banco            (o teste espera o banco com os dados de demonstração, recém-criado)
 //   2. npm start                (em outro terminal)
@@ -32,6 +33,18 @@ class Navegador {
     return { status: res.status, texto, json: dadosJson, local: res.headers.get('location') };
   }
   post(caminho, dados, extra) { return this.pedir(caminho, { metodo: 'POST', dados, ...extra }); }
+  /** Formulário com arquivos e caixas marcadas (multipart), como o navegador envia. */
+  async enviar(caminho, campos, arquivos = {}) {
+    const corpo = new FormData();
+    for (const [k, v] of Object.entries(campos)) for (const x of [].concat(v)) corpo.append(k, String(x));
+    for (const [k, lista] of Object.entries(arquivos)) for (const a of [].concat(lista)) corpo.append(k, new Blob([a.dados], { type: a.tipo }), a.nome);
+    const res = await fetch(BASE + caminho, { method: 'POST', body: corpo, redirect: 'manual', headers: { Cookie: this.cabecalhoCookie, Accept: 'application/json' } });
+    this.guardar(res);
+    const texto = await res.text();
+    let json = null;
+    try { json = JSON.parse(texto); } catch { /* html */ }
+    return { status: res.status, texto, json };
+  }
   pagina(caminho) { return this.pedir(caminho, { json: false }); }
   async entrar(email, senha = 'patinhas123') {
     const r = await this.post('/api/entrar', { email, senha });
@@ -74,6 +87,14 @@ class Navegador {
     throw new Error(`${this.nome}: evento ${tipo} não chegou`);
   }
 }
+
+const FOTO = { nome: 'foto.png', tipo: 'image/png', dados: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', 'base64') };
+const PDF = { nome: 'documento.pdf', tipo: 'application/pdf', dados: Buffer.from('%PDF-1.4\n1 0 obj<<>>endobj\ntrailer<<>>\n%%EOF\n') };
+const dia = (deslocamento) => {
+  const d = new Date(Date.now() + deslocamento * 86400000);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
+const LOCAL = { endereco: 'Rua Augusta, 500', bairro: 'Consolação', cidade: 'São Paulo', estado: 'SP', cep: '01305-000' };
 
 async function teste(nome, fn) {
   try { await fn(); ok += 1; console.log(`  ok  ${nome}`); } catch (e) { falhas.push(nome); console.log(`  FALHOU  ${nome}\n        ${e.message.split('\n').slice(0, 4).join('\n        ')}`); }
@@ -306,6 +327,167 @@ async function teste(nome, fn) {
     const a = await adotante.pagina('/minha-conta.html');
     const b = await adotante.pagina('/minha-conta.html');
     assert.ok((a.texto.match(/class="novidades"/g) || []).length >= (b.texto.match(/class="novidades"/g) || []).length);
+  });
+
+
+  /* ---------- cadastros e formulários do site ---------- */
+  const nova = new Navegador('nova adotante');
+
+  await teste('cadastro de adotante cria a conta e já entra (cidade sem acento é a mesma cidade)', async () => {
+    const r = await nova.enviar('/api/adotantes', {
+      nome: 'Marina Teste', nascimento: '1995-05-20', cpf: '529.982.247-25', email: 'nova.adotante@patinhasclub.test',
+      telefone: '(11) 98765-4321', cidade: 'sao paulo', estado: 'SP', moradia: 'apartamento', tem_animais: ['gato'],
+      procura: ['cao', 'gato'], senha: 'senhaforte123', aceite_termos: 'on',
+    });
+    assert.equal(r.status, 200, r.texto);
+    assert.equal(r.json.redirecionar, '/minha-conta.html#boas-vindas');
+    const sessao = (await nova.pedir('/api/sessao')).json.usuario;
+    assert.equal(sessao.email, 'nova.adotante@patinhasclub.test');
+    assert.equal(sessao.cidade, 'São Paulo', 'usou a cidade que já existia');
+  });
+
+  await teste('e-mail ou CPF repetido volta com o erro no campo, sem gravar nada pela metade', async () => {
+    const base = {
+      nome: 'Repetida', nascimento: '1990-01-10', telefone: '(11) 91234-5678', cidade: 'Campinas', estado: 'SP',
+      moradia: 'casa', senha: 'senhaforte123', aceite_termos: 'on',
+    };
+    const email = await visitante.enviar('/api/adotantes', { ...base, email: 'NOVA.ADOTANTE@patinhasclub.test' });
+    assert.equal(email.status, 422);
+    assert.match(email.json.erros.email, /Já existe uma conta com este e-mail/);
+    const cpf = await visitante.enviar('/api/adotantes', { ...base, email: 'repetida@patinhasclub.test', cpf: '529.982.247-25' });
+    assert.equal(cpf.status, 422);
+    assert.match(cpf.json.erros.cpf, /CPF já tem uma conta/);
+    const depois = await new Navegador('repetida').enviar('/api/adotantes', { ...base, email: 'repetida@patinhasclub.test' });
+    assert.equal(depois.status, 200, 'o usuário da tentativa com CPF repetido foi desfeito');
+  });
+
+  await teste('cadastro de ONG com logo e documento fica aguardando a validação da equipe', async () => {
+    const r = await visitante.enviar('/api/ongs', {
+      tipo: 'ong', nome_organizacao: 'Amigos de Quatro Patas', documento: '11.222.333/0001-81', ano_fundacao: '2015',
+      apresentacao: 'Resgatamos e cuidamos de cães e gatos na zona sul.', responsavel: 'Paula Lima', email: 'quatro.patas@patinhasclub.test',
+      telefone: '(11) 3333-4444', ...LOCAL, especies: ['cao', 'gato'], servicos: ['adocao', 'resgate'], aceite_termos: 'on', declaracao: 'on',
+    }, { logo: FOTO, doc_identificacao: PDF });
+    assert.equal(r.status, 200, r.texto);
+    assert.equal(r.json.redirecionar, '/cadastro-ong-enviado.html');
+    assert.match((await admin.pagina('/admin.html')).texto, /Amigos de Quatro Patas/);
+  });
+
+  let anuncioId;
+  await teste('anúncio de animal perdido com foto entra no mural e recebe aviso de quem viu', async () => {
+    const r = await nova.enviar('/api/anuncios', {
+      nome_animal: 'Bolinha', especie: 'cao', porte: 'pequeno', idade: 'adulto', sexo: 'femea', cor: 'caramelo',
+      caracteristicas: 'Coleira vermelha', nome_tutor: 'Marina Teste', telefone: '(11) 98765-4321', autoriza_contato: 'on',
+      ...LOCAL, data_desaparecimento: dia(-1), hora_desaparecimento: '18:30',
+    }, { foto: FOTO });
+    assert.equal(r.status, 200, r.texto);
+    const mural = await visitante.pagina('/animais-perdidos.html');
+    const m = /id="anuncio-(\d+)"[\s\S]*?Bolinha/.exec(mural.texto) || /Bolinha[\s\S]*?\/api\/anuncios\/(\d+)\/avisos/.exec(mural.texto);
+    assert.ok(m, 'Bolinha aparece no mural com o formulário de aviso');
+    anuncioId = m[1];
+    const aviso = await visitante.post(`/api/anuncios/${anuncioId}/avisos`, {
+      onde: 'Praça perto do metrô', quando: `${dia(0)}T08:15`, estado: 'assustado', contato: '(11) 97777-6666',
+    });
+    assert.equal(aviso.status, 200, aviso.texto);
+  });
+
+  await teste('dono marca o anúncio como resolvido; outra pessoa não consegue', async () => {
+    assert.equal((await adotante.post(`/api/anuncios/${anuncioId}/resolver`, { desfecho: 'x' })).status, 404);
+    const r = await nova.post(`/api/anuncios/${anuncioId}/resolver`, { desfecho: 'Voltou para casa!' });
+    assert.equal(r.status, 200, r.texto);
+  });
+
+  await teste('denúncia com foto vai para a fila da equipe e a foto não fica pública', async () => {
+    const r = await visitante.enviar('/api/denuncias', {
+      tipo_ocorrencia: 'abandono', quantidade_animais: '3', ainda_no_local: 'sim',
+      situacao_animal: 'Filhotes deixados numa caixa na calçada.', especie: 'gato', ...LOCAL, data_denuncia: dia(0),
+      receber_andamento: 'on', email: 'quem.viu@patinhasclub.test',
+    }, { fotos: [FOTO, FOTO] });
+    assert.equal(r.status, 200, r.texto);
+    const fila = (await admin.pagina('/admin.html')).texto;
+    assert.match(fila, /Filhotes deixados numa caixa/);
+    const midia = /\/api\/admin\/midias\/(\d+)/.exec(fila);
+    assert.ok(midia, 'a equipe vê a foto pelo endereço protegido');
+    assert.equal((await admin.pedir(midia[0], { json: false })).status, 200);
+    assert.equal((await visitante.pedir(midia[0])).status, 401);
+  });
+
+  await teste('ONG salva rascunho, o banco barra publicar incompleto e o animal completo vai para a vitrine', async () => {
+    const rascunho = await ong.enviar('/api/ong/animais?rascunho=1', { nome: 'Pipoca', especie: 'gato' }, { fotos: FOTO });
+    assert.equal(rascunho.status, 200, rascunho.texto);
+    const barrado = await ong.post(`/api/ong/animais/${rascunho.json.id}/publicar`, {});
+    assert.equal(barrado.status, 422);
+    assert.match(barrado.json.mensagem, /Complete sexo, porte, idade e a história/);
+    const completo = await ong.enviar('/api/ong/animais', {
+      nome: 'Biscoito', especie: 'cao', sexo: 'macho', idade: 'filhote', porte: 'medio', historia: 'Resgatado na chuva, muito brincalhão.',
+      cidade: 'São Paulo', saude: ['vacinado', 'vermifugado'], jeito: ['brincalhao', 'carinhoso'], convive: ['criancas', 'caes'],
+    }, { fotos: [FOTO, FOTO] });
+    assert.equal(completo.status, 200, completo.texto);
+    assert.match((await visitante.pagina('/adocao.html')).texto, /Biscoito/);
+  });
+
+  await teste('ONG cria campanha e ela aparece na página de campanhas', async () => {
+    const r = await ong.post('/api/ong/campanhas', {
+      tipo: 'arrecadacao', titulo: 'Ração para o inverno', descricao: 'Juntando ração para 40 animais.', meta: '300 kg',
+      fim: dia(30), como_ajudar: 'Entregue no abrigo ou faça um Pix.',
+    });
+    assert.equal(r.status, 200, r.texto);
+    assert.match((await visitante.pagina('/campanhas.html')).texto, /Ração para o inverno/);
+  });
+
+  await teste('lista de espera inscreve com conta e o adotante pausa o alerta', async () => {
+    const r = await nova.enviar('/api/lista-de-espera', {
+      animal: 'gato', porte: ['pequeno', 'medio'], idade: ['filhote'], cidade: 'Campinas', uf: 'SP',
+      nome: 'Marina Teste', email: 'nova.adotante@patinhasclub.test', avisar_por: ['email'], termos: 'on',
+    });
+    assert.equal(r.status, 200, r.texto);
+    const conta = (await nova.pagina('/minha-conta.html')).texto;
+    const alerta = /\/api\/alertas\/(\d+)\/pausar/.exec(conta);
+    assert.ok(alerta, 'o alerta aparece na conta com o botão de pausar');
+    assert.equal((await nova.post(alerta[0], {})).status, 200);
+  });
+
+  await teste('pedido de adoção sem conta é aceito com os dados de contato', async () => {
+    const vitrine = (await visitante.pagina('/adocao.html')).texto;
+    const animal = /\/api\/animais\/(\d+)\/pedidos/.exec(vitrine);
+    assert.ok(animal, 'a vitrine tem o formulário de interesse');
+    const r = await new Navegador('sem conta').post(animal[0], {
+      nome: 'Carlos Visitante', telefone: '(11) 95555-4444', moradia: 'casa-quintal', mensagem: 'Tenho quintal grande.', termo: 'on',
+    });
+    assert.equal(r.status, 200, r.texto);
+  });
+
+  await teste('recuperar senha responde igual exista ou não a conta, e link inválido é recusado', async () => {
+    const existe = await visitante.post('/api/senha/recuperar', { email: 'adotante@patinhasclub.test' });
+    const naoExiste = await visitante.post('/api/senha/recuperar', { email: 'ninguem@patinhasclub.test' });
+    assert.equal(existe.status, 200);
+    assert.deepEqual(existe.json, naoExiste.json);
+    const link = await visitante.pagina('/redefinir-senha?token=invalido');
+    assert.notEqual(link.status, 500);
+    assert.doesNotMatch(link.texto, /Algo deu errado/);
+  });
+
+  await teste('todas as páginas abrem sem erro para visitante, adotante, ONG e equipe (com e sem localização)', async () => {
+    const fs = require('node:fs');
+    const path = require('node:path');
+    const paginas = fs.readdirSync(path.join(__dirname, '..', '..', 'Web')).filter((f) => f.endsWith('.html'));
+    const problemas = [];
+    for (const quem of [visitante, nova, ong, admin]) {
+      for (const p of paginas) {
+        for (const busca of ['', '?lat=-23.5505&lon=-46.6333']) {
+          const r = await quem.pagina(`/${p}${busca}`);
+          if (r.status >= 500 || /Algo deu errado/.test(r.texto)) problemas.push(`${quem.nome} ${p}${busca}: ${r.status}`);
+        }
+      }
+    }
+    assert.deepEqual(problemas, []);
+  });
+
+  await teste('busca por perto mostra a distância calculada no banco, da mais perto para a mais longe', async () => {
+    const r = await visitante.pagina('/adocao.html?lat=-23.5505&lon=-46.6333');
+    const metros = [...r.texto.matchAll(/A ([\d.,]+) (km|m) de você/g)]
+      .map(([, n, u]) => Number(n.replace(/\./g, '').replace(',', '.')) * (u === 'km' ? 1000 : 1));
+    assert.ok(metros.length >= 2, 'os cartões mostram a distância');
+    assert.deepEqual(metros, [...metros].sort((a, b) => a - b));
   });
 
   for (const n of [ong, adotante]) n.parar && n.parar.abort();
