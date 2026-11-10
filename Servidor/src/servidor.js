@@ -4,6 +4,7 @@
 //   npm start         http://localhost:3000
 const express = require('express');
 const session = require('express-session');
+const { SessoesNoBanco } = require('./servicos/sessoes');
 const config = require('./config');
 const { pool } = require('./banco');
 const { receber, descartar } = require('./servicos/arquivos');
@@ -32,6 +33,7 @@ app.use('/uploads', express.static(config.pastas.uploads, { index: false, maxAge
 
 app.use(session({
   name: 'patinhas.sid',
+  store: new SessoesNoBanco(),
   secret: config.segredoSessao,
   resave: false,
   saveUninitialized: false,
@@ -46,11 +48,20 @@ app.use('/api/denuncias', (req, res, next) => {
 });
 app.use('/api', receber);
 
+// Diagnóstico rápido: http://localhost:3000/api/saude mostra se o banco está respondendo
+app.get('/api/saude', async (req, res) => {
+  const banco = await pool.query('SELECT COUNT(*) AS n FROM usuarios').then(() => 'conectado', (e) => e.code || 'desligado');
+  res.set('Cache-Control', 'no-store').status(banco === 'conectado' ? 200 : 503).json({ ok: banco === 'conectado', banco });
+});
+
 app.use('/api/localizacao', limitar({ maximo: 120, janelaMs: 60 * 1000 }), require('./rotas/localizacao'));
 app.use(require('./rotas/contas'));
 app.use(require('./rotas/ocorrencias'));
 app.use(require('./rotas/adocao'));
 app.use(require('./rotas/ong').rotas);
+app.use(require('./rotas/conversas'));
+app.use(require('./rotas/suporte').rotas);
+app.use(require('./rotas/admin'));
 app.use(require('./rotas/paginas'));
 
 app.use((req, res) => {
@@ -99,12 +110,27 @@ app.use((erro, req, res, next) => {
   }));
 });
 
+/** Na primeira vez que o servidor sobe, o banco "patinhas" ainda não existe: ele é criado sozinho. */
+async function prepararBanco() {
+  try {
+    await pool.query('SELECT 1 FROM usuarios LIMIT 1');
+    console.log('Banco de dados conectado.');
+  } catch (e) {
+    if (e.code === 'ER_BAD_DB_ERROR' || e.code === 'ER_NO_SUCH_TABLE') {
+      console.log('Banco "patinhas" não encontrado: criando com os dados de exemplo...');
+      await require('./criar-banco').criarBanco({ silencioso: true });
+      console.log('Banco criado e conectado.');
+    } else {
+      console.warn(`Atenção: sem conexão com o banco (${e.code || e.message}).`);
+      console.warn('  Ligue o MySQL (no XAMPP, botão Start do MySQL) e confira o arquivo Servidor/.env.');
+    }
+  }
+}
+
 if (require.main === module) {
   app.listen(config.porta, () => {
     console.log(`Patinhas Club rodando em http://localhost:${config.porta}`);
-    pool.query('SELECT 1')
-      .then(() => console.log('Banco de dados conectado.'))
-      .catch((e) => console.warn(`Atenção: sem conexão com o banco (${e.code || e.message}). Ligue o MySQL e rode "npm run banco".`));
+    prepararBanco().catch((e) => console.error(`Não foi possível criar o banco: ${e.message}`));
   });
 }
 
