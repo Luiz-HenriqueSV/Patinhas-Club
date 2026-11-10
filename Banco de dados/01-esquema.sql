@@ -174,6 +174,7 @@ CREATE TABLE ongs (
   quantidade_animais ENUM('ate-10','11-30','31-100','mais-100') NULL,
   status_verificacao ENUM('pendente','verificada','recusada') NOT NULL DEFAULT 'pendente',
   verificada_em      DATETIME          NULL,
+  motivo_recusa      VARCHAR(255)      NULL COMMENT 'Preenchido quando a equipe recusa o cadastro',
   recebe_novidades   BOOLEAN           NOT NULL DEFAULT FALSE,
   PRIMARY KEY (usuario_id),
   UNIQUE KEY uq_ongs_documento (documento),
@@ -181,6 +182,14 @@ CREATE TABLE ongs (
   CONSTRAINT fk_ongs_usuario_id  FOREIGN KEY (usuario_id)  REFERENCES usuarios (id) ON DELETE CASCADE,
   CONSTRAINT fk_ongs_endereco_id FOREIGN KEY (endereco_id) REFERENCES enderecos (id),
   CONSTRAINT ck_ongs_ano CHECK (ano_fundacao IS NULL OR ano_fundacao BETWEEN 1900 AND 2100)
+) ENGINE=InnoDB;
+
+-- Equipe do Patinhas Club: valida ONGs, analisa denúncias e atende o suporte
+CREATE TABLE administradores (
+  usuario_id INT UNSIGNED NOT NULL,
+  nome       VARCHAR(120) NOT NULL,
+  PRIMARY KEY (usuario_id),
+  CONSTRAINT fk_administradores_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE ong_documentos (
@@ -544,6 +553,7 @@ CREATE TABLE denuncias (
   denunciante_email    VARCHAR(150)      NULL,
   receber_andamento    BOOLEAN           NOT NULL DEFAULT FALSE,
   status               ENUM('recebida','em_analise','encaminhada','arquivada') NOT NULL DEFAULT 'recebida',
+  parecer              VARCHAR(500)      NULL COMMENT 'Anotação da equipe ao analisar',
   criado_em            DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   KEY idx_denuncias_status (status, criado_em),
@@ -564,7 +574,95 @@ CREATE TABLE denuncia_midias (
 
 
 -- -----------------------------------------------------------------------------
--- 9. VIEWS (consultas prontas usadas pelo site)
+-- 9. CONVERSAS (chat entre adotante e ONG)
+-- Uma conversa por par adotante + ONG, como numa lista de contatos: o animal
+-- em pauta pode mudar, mas o histórico fica num lugar só.
+-- "leu_ate" guarda o id da última mensagem que cada lado já viu. O que o outro
+-- lado escreveu depois disso conta como não lido.
+-- -----------------------------------------------------------------------------
+
+CREATE TABLE conversas (
+  id                 INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  adotante_id        INT UNSIGNED NOT NULL,
+  ong_id             INT UNSIGNED NOT NULL,
+  animal_id          INT UNSIGNED NULL COMMENT 'Animal mais recente sobre o qual estão falando',
+  adotante_leu_ate   INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'id da última mensagem vista pelo adotante',
+  ong_leu_ate        INT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'id da última mensagem vista pela ONG',
+  ultima_mensagem_em DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  criado_em          DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_conversas_par (adotante_id, ong_id),
+  KEY idx_conversas_ong (ong_id, ultima_mensagem_em),
+  KEY idx_conversas_adotante (adotante_id, ultima_mensagem_em),
+  CONSTRAINT fk_conversas_adotante_id FOREIGN KEY (adotante_id) REFERENCES adotantes (usuario_id) ON DELETE CASCADE,
+  CONSTRAINT fk_conversas_ong_id      FOREIGN KEY (ong_id)      REFERENCES ongs (usuario_id)      ON DELETE CASCADE,
+  CONSTRAINT fk_conversas_animal_id   FOREIGN KEY (animal_id)   REFERENCES animais (id)           ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE mensagens (
+  id          INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+  conversa_id INT UNSIGNED  NOT NULL,
+  autor       ENUM('adotante','ong') NOT NULL,
+  tipo        ENUM('texto','aviso')  NOT NULL DEFAULT 'texto' COMMENT 'aviso = registro automático (pedido enviado, visita marcada...)',
+  texto       VARCHAR(1000) NOT NULL,
+  enviada_em  DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_mensagens_conversa (conversa_id, id),
+  CONSTRAINT fk_mensagens_conversa_id FOREIGN KEY (conversa_id) REFERENCES conversas (id) ON DELETE CASCADE,
+  CONSTRAINT ck_mensagens_texto CHECK (CHAR_LENGTH(TRIM(texto)) > 0)
+) ENGINE=InnoDB;
+
+
+-- -----------------------------------------------------------------------------
+-- 10. SUPORTE (central de ajuda)
+-- Qualquer pessoa abre um chamado, com ou sem conta, e acompanha pelo protocolo.
+-- -----------------------------------------------------------------------------
+
+CREATE TABLE chamados_suporte (
+  id            INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  protocolo     CHAR(12)     NOT NULL COMMENT 'Código de acompanhamento, ex.: SUP-7K2M9QXA',
+  usuario_id    INT UNSIGNED NULL COMMENT 'NULL quando aberto sem login',
+  nome          VARCHAR(120) NOT NULL,
+  email         VARCHAR(150) NOT NULL,
+  categoria     ENUM('conta','adocao','ong','anuncio','denuncia','sugestao','outro') NOT NULL,
+  assunto       VARCHAR(150) NOT NULL,
+  status        ENUM('aberto','respondido','resolvido') NOT NULL DEFAULT 'aberto',
+  criado_em     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  atualizado_em DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_chamados_protocolo (protocolo),
+  KEY idx_chamados_status (status, atualizado_em),
+  KEY idx_chamados_usuario (usuario_id),
+  CONSTRAINT fk_chamados_suporte_usuario_id FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE chamado_mensagens (
+  id         INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+  chamado_id INT UNSIGNED  NOT NULL,
+  autor      ENUM('solicitante','equipe') NOT NULL,
+  admin_id   INT UNSIGNED  NULL COMMENT 'Quem da equipe respondeu',
+  texto      VARCHAR(2000) NOT NULL,
+  enviada_em DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_chamado_mensagens_chamado (chamado_id, id),
+  CONSTRAINT fk_chamado_mensagens_chamado_id FOREIGN KEY (chamado_id) REFERENCES chamados_suporte (id)       ON DELETE CASCADE,
+  CONSTRAINT fk_chamado_mensagens_admin_id   FOREIGN KEY (admin_id)   REFERENCES administradores (usuario_id) ON DELETE SET NULL,
+  CONSTRAINT ck_chamado_mensagens_texto CHECK (CHAR_LENGTH(TRIM(texto)) > 0)
+) ENGINE=InnoDB;
+
+
+-- Sessões de login (o servidor guarda aqui em vez da memória)
+CREATE TABLE sessoes (
+  id        VARCHAR(128) NOT NULL COMMENT 'Identificador do cookie patinhas.sid',
+  dados     TEXT         NOT NULL COMMENT 'Conteúdo da sessão em JSON (quem entrou, protocolos de suporte)',
+  expira_em DATETIME     NOT NULL,
+  PRIMARY KEY (id),
+  KEY idx_sessoes_expira (expira_em)
+) ENGINE=InnoDB;
+
+
+-- -----------------------------------------------------------------------------
+-- 11. VIEWS (consultas prontas usadas pelo site)
 -- -----------------------------------------------------------------------------
 
 -- Animais com espécie, ONG, cidade e coordenadas (do animal ou, se não tiver, da ONG)
@@ -603,9 +701,24 @@ SELECT an.id, an.usuario_id, an.tipo, an.nome_animal, an.raca, an.porte, an.faix
   JOIN cidades c   ON c.id = e.cidade_id
   JOIN estados est ON est.id = c.estado_id;
 
+-- Lista de conversas com os nomes, a última mensagem e as não lidas de cada lado
+CREATE VIEW vw_conversas AS
+SELECT c.id, c.adotante_id, c.ong_id, c.animal_id, c.adotante_leu_ate, c.ong_leu_ate, c.ultima_mensagem_em,
+       ad.nome AS adotante_nome, o.nome AS ong_nome, o.tipo AS ong_tipo, a.nome AS animal_nome, a.sexo AS animal_sexo,
+       (SELECT m.texto FROM mensagens m WHERE m.conversa_id = c.id ORDER BY m.id DESC LIMIT 1) AS ultima_texto,
+       (SELECT m.autor FROM mensagens m WHERE m.conversa_id = c.id ORDER BY m.id DESC LIMIT 1) AS ultima_autor,
+       (SELECT COUNT(*) FROM mensagens m
+         WHERE m.conversa_id = c.id AND m.autor = 'ong' AND m.id > c.adotante_leu_ate) AS nao_lidas_adotante,
+       (SELECT COUNT(*) FROM mensagens m
+         WHERE m.conversa_id = c.id AND m.autor = 'adotante' AND m.id > c.ong_leu_ate) AS nao_lidas_ong
+  FROM conversas c
+  JOIN adotantes ad   ON ad.usuario_id = c.adotante_id
+  JOIN ongs o         ON o.usuario_id = c.ong_id
+  LEFT JOIN animais a ON a.id = c.animal_id;
+
 
 -- -----------------------------------------------------------------------------
--- 10. GATILHOS (regras que o próprio banco garante)
+-- 12. GATILHOS (regras que o próprio banco garante)
 -- Escritos com um comando só, sem DELIMITER, para rodar em qualquer cliente.
 -- -----------------------------------------------------------------------------
 
@@ -632,3 +745,22 @@ FOR EACH ROW
      AND NEW.status_atual <> OLD.status_atual
      AND (NEW.status_atual = 'aprovado'
           OR (NEW.status_atual = 'visita_agendada' AND status = 'disponivel'));
+
+-- Mensagem nova: sobe a conversa na lista e já conta como lida para quem escreveu
+CREATE TRIGGER trg_mensagens_conversa
+AFTER INSERT ON mensagens
+FOR EACH ROW
+  UPDATE conversas
+     SET ultima_mensagem_em = NEW.enviada_em,
+         adotante_leu_ate   = IF(NEW.autor = 'adotante', NEW.id, adotante_leu_ate),
+         ong_leu_ate        = IF(NEW.autor = 'ong', NEW.id, ong_leu_ate)
+   WHERE id = NEW.conversa_id;
+
+-- Resposta da equipe deixa o chamado "respondido"; resposta de quem abriu reabre o chamado
+CREATE TRIGGER trg_chamado_mensagens_status
+AFTER INSERT ON chamado_mensagens
+FOR EACH ROW
+  UPDATE chamados_suporte
+     SET status        = IF(NEW.autor = 'equipe', 'respondido', 'aberto'),
+         atualizado_em = NEW.enviada_em
+   WHERE id = NEW.chamado_id;
