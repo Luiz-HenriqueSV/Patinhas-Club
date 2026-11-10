@@ -7,6 +7,8 @@ const { concluir, exigir } = require('../util/resposta');
 const { criarEndereco, completarCoordenadas } = require('../servicos/enderecos');
 const { arquivo, arquivos, caminho } = require('../servicos/arquivos');
 const { notificar, enviarEmail } = require('../servicos/mensagens');
+const { registrarAviso } = require('../servicos/conversas');
+const { genero } = require('../modelos');
 
 const rotas = express.Router();
 rotas.use('/api/ong', exigir('ong'));
@@ -130,7 +132,7 @@ rotas.post('/api/ong/campanhas', async (req, res) => {
 
 const MENSAGEM_STATUS = {
   em_analise: 'A ONG está analisando o seu pedido.',
-  visita_agendada: 'A ONG quer conhecer você! Combine a visita pelo WhatsApp.',
+  visita_agendada: 'A ONG quer conhecer você! Combine o dia da visita pelo chat, em Mensagens.',
   aprovado: 'Adoção aprovada! Combine com a ONG o dia de buscar o seu novo amigo.',
   recusado: 'A ONG não pôde seguir com o seu pedido desta vez.',
 };
@@ -144,7 +146,7 @@ rotas.post('/api/ong/pedidos/:id/status', async (req, res) => {
   // Confere o dono antes: o UPDATE não pode citar "animais" porque o gatilho do banco
   // atualiza essa tabela (o MySQL não deixa a mesma instrução fazer as duas coisas).
   const [pedido] = await consulta(
-    `SELECT p.id, p.adotante_id, p.email, a.nome AS animal FROM pedidos_adocao p JOIN animais a ON a.id = p.animal_id
+    `SELECT p.id, p.adotante_id, p.email, p.animal_id, a.nome AS animal, a.sexo FROM pedidos_adocao p JOIN animais a ON a.id = p.animal_id
       WHERE p.id = ? AND a.ong_id = ?`,
     [id, req.session.usuario.id],
   );
@@ -154,8 +156,37 @@ rotas.post('/api/ong/pedidos/:id/status', async (req, res) => {
   const titulo = `Pedido para ${pedido.animal}: novidade`;
   notificar(pedido.adotante_id, 'pedido_adocao', titulo, MENSAGEM_STATUS[status], 'minha-conta.html#pedidos');
   enviarEmail(pedido.email, titulo, MENSAGEM_STATUS[status]);
+  const artigo = genero(pedido.sexo, 'o', 'a');
+  const registro = {
+    em_analise: 'A ONG começou a analisar o pedido.',
+    visita_agendada: `Visita marcada para conhecer ${artigo} ${pedido.animal}.`,
+    aprovado: `Adoção ${genero(pedido.sexo, 'do', 'da')} ${pedido.animal} aprovada!`,
+    recusado: 'A ONG não pôde seguir com o pedido desta vez.',
+  }[status];
+  await registrarAviso({ adotanteId: pedido.adotante_id, ongId: req.session.usuario.id, animalId: pedido.animal_id, autor: 'ong', texto: registro });
   const destino = { visita_agendada: '#visita-agendada', recusado: '#pedido-recusado' }[status] || '#pedidos';
   concluir(req, res, `painel-ong.html${destino}`);
+});
+
+/* ---------- Perfil público da ONG ---------- */
+
+rotas.post('/api/ong/perfil', async (req, res) => {
+  const l = leitor(req.body);
+  const d = {
+    apresentacao: l.texto('apresentacao', { obrigatorio: true, max: 2000, multilinha: true }),
+    telefone: l.telefone('telefone', { obrigatorio: true }),
+    redeSocial: l.texto('rede_social', { max: 150 }),
+    ocultar: l.marcado('ocultar_endereco'),
+  };
+  const logo = arquivo(req, 'logo');
+  l.validar();
+  const u = req.session.usuario;
+  await consulta(
+    `UPDATE ongs SET apresentacao = ?, telefone = ?, rede_social = ?, ocultar_endereco = ?${logo ? ', logo_url = ?' : ''}
+      WHERE usuario_id = ?`,
+    [d.apresentacao, d.telefone, d.redeSocial, d.ocultar, ...(logo ? [caminho(logo)] : []), u.id],
+  );
+  concluir(req, res, 'painel-ong.html#perfil-salvo');
 });
 
 module.exports = { rotas };

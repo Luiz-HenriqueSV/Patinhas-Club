@@ -3,12 +3,13 @@ const express = require('express');
 const config = require('../config');
 const { consulta, transacao } = require('../banco');
 const { leitor, ErroValidacao, ErroHttp } = require('../util/validacao');
-const { gerarHashSenha, conferirSenha, gerarToken, hashToken } = require('../util/seguranca');
-const { concluir, iniciarSessao, limitar } = require('../util/resposta');
+const { gerarHashSenha, conferirSenha, hashToken } = require('../util/seguranca');
+const { concluir, exigir, inicioDe, iniciarSessao, limitar } = require('../util/resposta');
 const { criarEndereco, completarCoordenadas } = require('../servicos/enderecos');
 const { arquivo, caminho } = require('../servicos/arquivos');
 const { enviarEmail, linkAbsoluto } = require('../servicos/mensagens');
 const { paginaSimples, esc, telefoneBr } = require('../util/html');
+const { criarLinkDeSenha } = require('../servicos/senhas');
 
 const rotas = express.Router();
 const limiteLogin = limitar({ maximo: 10, janelaMs: 60 * 1000 });
@@ -17,12 +18,6 @@ async function registrarTermos(q, usuarioId, tipos, ip) {
   for (const tipo of tipos) {
     await q('INSERT INTO termos_aceite (usuario_id, tipo, versao, ip) VALUES (?, ?, ?, ?)', [usuarioId, tipo, config.versaoTermos, ip || null]);
   }
-}
-
-async function criarLinkDeSenha(q, usuarioId, horas) {
-  const token = gerarToken();
-  await q('INSERT INTO recuperacao_senha (usuario_id, token_hash, expira_em) VALUES (?, ?, NOW() + INTERVAL ? HOUR)', [usuarioId, hashToken(token), horas]);
-  return `/redefinir-senha?token=${token}`;
 }
 
 /* ---------- Cadastro de adotante ---------- */
@@ -128,7 +123,7 @@ rotas.post('/api/ongs', async (req, res) => {
   enviarEmail(d.email, 'Recebemos o cadastro no Patinhas Club',
     `Olá, ${d.responsavel}! Recebemos o cadastro de ${d.nome} e a equipe vai conferir os documentos em até 3 dias úteis.`);
   if (!config.producao) {
-    console.info(`[cadastro de ONG] Para testar sem esperar a análise:\n  UPDATE ongs SET status_verificacao = 'verificada', verificada_em = NOW() WHERE usuario_id = ${r.id};\n  Criar senha: ${linkAbsoluto(req, r.link)}`);
+    console.info(`[cadastro de ONG] Para aprovar, entre com admin@patinhasclub.test (senha patinhas123) e use "Validar ONGs".\n  Depois de aprovada, a senha é criada por este link: ${linkAbsoluto(req, r.link)}`);
   }
   concluir(req, res, 'cadastro-ong-enviado.html');
 });
@@ -145,10 +140,11 @@ rotas.post('/api/entrar', limiteLogin, async (req, res) => {
   l.validar();
 
   const [u] = await consulta(
-    `SELECT u.id, u.tipo, u.senha_hash, u.ativo, COALESCE(a.nome, o.nome) AS nome, o.status_verificacao
+    `SELECT u.id, u.tipo, u.senha_hash, u.ativo, COALESCE(a.nome, o.nome, adm.nome) AS nome, o.status_verificacao
        FROM usuarios u
        LEFT JOIN adotantes a ON a.usuario_id = u.id
        LEFT JOIN ongs o ON o.usuario_id = u.id
+       LEFT JOIN administradores adm ON adm.usuario_id = u.id
       WHERE u.email = ?`,
     [email],
   );
@@ -164,7 +160,7 @@ rotas.post('/api/entrar', limiteLogin, async (req, res) => {
   }
   await consulta('UPDATE usuarios SET ultimo_acesso = NOW() WHERE id = ?', [u.id]);
   await iniciarSessao(req, u, l.marcado('lembrar'));
-  concluir(req, res, u.tipo === 'ong' ? 'painel-ong.html' : 'minha-conta.html');
+  concluir(req, res, inicioDe(u));
 });
 
 rotas.get('/sair', (req, res) => {
@@ -180,11 +176,12 @@ rotas.get('/api/sessao', async (req, res) => {
   const s = req.session.usuario;
   if (!s) return res.json({ usuario: null });
   const [u] = await consulta(
-    `SELECT u.id, u.tipo, u.email, COALESCE(a.nome, o.responsavel) AS nome, COALESCE(a.telefone, o.telefone) AS telefone,
+    `SELECT u.id, u.tipo, u.email, COALESCE(a.nome, o.responsavel, adm.nome) AS nome, COALESCE(a.telefone, o.telefone) AS telefone,
             c.nome AS cidade, e.sigla AS uf
        FROM usuarios u
        LEFT JOIN adotantes a ON a.usuario_id = u.id
        LEFT JOIN ongs o ON o.usuario_id = u.id
+       LEFT JOIN administradores adm ON adm.usuario_id = u.id
        LEFT JOIN enderecos en ON en.id = COALESCE(a.endereco_id, o.endereco_id)
        LEFT JOIN cidades c ON c.id = en.cidade_id
        LEFT JOIN estados e ON e.id = c.estado_id
@@ -260,15 +257,49 @@ rotas.post('/api/senha/redefinir', limiteLogin, async (req, res) => {
     await q('UPDATE recuperacao_senha SET usado_em = NOW() WHERE id = ?', [pedido.id]);
   });
   const [u] = await consulta(
-    `SELECT u.id, u.tipo, COALESCE(a.nome, o.nome) AS nome, o.status_verificacao FROM usuarios u
-       LEFT JOIN adotantes a ON a.usuario_id = u.id LEFT JOIN ongs o ON o.usuario_id = u.id WHERE u.id = ?`,
+    `SELECT u.id, u.tipo, COALESCE(a.nome, o.nome, adm.nome) AS nome, o.status_verificacao FROM usuarios u
+       LEFT JOIN adotantes a ON a.usuario_id = u.id LEFT JOIN ongs o ON o.usuario_id = u.id
+       LEFT JOIN administradores adm ON adm.usuario_id = u.id WHERE u.id = ?`,
     [pedido.usuario_id],
   );
   if (u.tipo === 'ong' && u.status_verificacao !== 'verificada') {
     return concluir(req, res, 'cadastro-ong-enviado.html');
   }
   await iniciarSessao(req, u);
-  return concluir(req, res, u.tipo === 'ong' ? 'painel-ong.html' : 'minha-conta.html');
+  return concluir(req, res, inicioDe(u));
+});
+
+/* ---------- Minha conta: dados e senha ---------- */
+
+rotas.post('/api/conta/dados', exigir('adotante'), async (req, res) => {
+  const l = leitor(req.body);
+  const d = {
+    nome: l.texto('nome', { obrigatorio: true, max: 120 }),
+    telefone: l.telefone('telefone', { obrigatorio: true }),
+    moradia: l.opcao('moradia', ['casa', 'casa-quintal', 'apartamento'], { obrigatorio: true }),
+    alertas: l.marcado('recebe_alertas'),
+  };
+  l.validar();
+  const u = req.session.usuario;
+  await consulta('UPDATE adotantes SET nome = ?, telefone = ?, moradia = ?, recebe_alertas = ? WHERE usuario_id = ?',
+    [d.nome, d.telefone, d.moradia, d.alertas, u.id]);
+  req.session.usuario = { ...u, nome: d.nome }; // o nome do cabeçalho muda na hora
+  concluir(req, res, 'minha-conta.html#dados-salvos');
+});
+
+rotas.post('/api/conta/senha', exigir('adotante', 'ong', 'admin'), limiteLogin, async (req, res) => {
+  const l = leitor(req.body);
+  const atual = String(req.body?.senha_atual ?? '');
+  if (!atual) l.erro('senha_atual', 'Digite a senha que você usa hoje.');
+  const nova = l.senha('senha');
+  l.validar();
+  const u = req.session.usuario;
+  const [linha] = await consulta('SELECT senha_hash FROM usuarios WHERE id = ?', [u.id]);
+  if (!linha || !linha.senha_hash || !(await conferirSenha(atual, linha.senha_hash))) {
+    throw new ErroValidacao({ senha_atual: 'A senha atual não confere.' }, 'A senha atual não confere.');
+  }
+  await consulta('UPDATE usuarios SET senha_hash = ? WHERE id = ?', [await gerarHashSenha(nova), u.id]);
+  concluir(req, res, `${inicioDe(u)}#senha-trocada`);
 });
 
 module.exports = rotas;

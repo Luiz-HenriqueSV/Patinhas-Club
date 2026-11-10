@@ -6,7 +6,12 @@ const express = require('express');
 const config = require('../config');
 const { consulta } = require('../banco');
 const m = require('../modelos');
+const a = require('../modelos-atendimento');
 const { trocarBloco, esc, iniciais, diaDaSemana, diaMes, horaCurta } = require('../util/html');
+const { inicioDe } = require('../util/resposta');
+const { ladoDe, totalNaoLidas, marcarLida } = require('../servicos/conversas');
+const { podeVer, PROTOCOLO } = require('./suporte');
+const { telefoneBr } = require('../util/html');
 
 const rotas = express.Router();
 const cache = new Map();
@@ -33,7 +38,37 @@ const distancia = (p, tabela) => (p
 
 const ou = (itens, modelo, vazio) => (itens.length ? itens.map(modelo).join('\n') : vazio);
 
+/** Avisos da conta: os mais recentes aparecem na visão geral e passam a contar como lidos. */
+async function novidadesDe(usuarioId) {
+  const lista = await consulta(
+    'SELECT id, tipo, titulo, mensagem, link, criado_em FROM notificacoes WHERE usuario_id = ? AND lida = FALSE ORDER BY id DESC LIMIT 4',
+    [usuarioId],
+  );
+  if (lista.length) await consulta('UPDATE notificacoes SET lida = TRUE WHERE usuario_id = ? AND id <= ?', [usuarioId, lista[0].id]);
+  return m.novidades(lista);
+}
+
 const PAGINAS = {
+  async 'index.html'(html) {
+    const [animais, ongs] = await Promise.all([
+      consulta(
+        `SELECT v.* FROM vw_animais_vitrine v
+          WHERE v.status = 'disponivel' AND v.ong_status = 'verificada' ORDER BY v.criado_em DESC LIMIT 4`,
+      ),
+      consulta(
+        `SELECT o.usuario_id AS id, o.nome, c.nome AS cidade, e.sigla AS uf,
+                (SELECT COUNT(*) FROM animais a WHERE a.ong_id = o.usuario_id AND a.status = 'disponivel') AS animais
+           FROM ongs o JOIN enderecos en ON en.id = o.endereco_id JOIN cidades c ON c.id = en.cidade_id
+           JOIN estados e ON e.id = c.estado_id
+          WHERE o.status_verificacao = 'verificada' ORDER BY animais DESC, o.verificada_em LIMIT 4`,
+      ),
+    ]);
+    let s = html;
+    if (animais.length) s = trocarBloco(s, 'destaques', `${animais.map(m.favorito).join('')}\n          `);
+    if (ongs.length) s = trocarBloco(s, 'ongs-faixa', `${ongs.map(m.ongMini).join('')}\n          `);
+    return s;
+  },
+
   async 'adocao.html'(html, req) {
     const p = posicao(req.query);
     const d = distancia(p, 'v');
@@ -46,7 +81,12 @@ const PAGINAS = {
         LIMIT 60`,
       [...d.params, ...(ongId ? [ongId] : [])],
     );
-    let saida = trocarBloco(html, 'animais', ou(animais, (a, i) => m.cartaoAnimal(a, i + 1), m.vazio(
+    const u = req.session.usuario;
+    const favoritos = new Set(u && u.tipo === 'adotante'
+      ? (await consulta('SELECT animal_id FROM favoritos WHERE adotante_id = ?', [u.id])).map((f) => f.animal_id)
+      : []);
+    const extras = { conta: u ? u.tipo : null, favoritos };
+    let saida = trocarBloco(html, 'animais', ou(animais, (a, i) => m.cartaoAnimal(a, i + 1, extras), m.vazio(
       'Nenhum animal disponível por aqui agora. Entre na lista de espera e avisamos quando chegar um com o seu perfil.',
       '<a class="botao secundario pequeno" href="lista_de_espera.html">Entrar na lista</a>',
     )));
@@ -107,7 +147,8 @@ const PAGINAS = {
   async 'minha-conta.html'(html, req, res) {
     const u = req.session.usuario;
     const [perfil] = await consulta(
-      `SELECT a.nome, c.nome AS cidade, e.sigla AS uf FROM adotantes a
+      `SELECT a.nome, a.telefone, a.moradia, a.recebe_alertas, u.email, c.nome AS cidade, e.sigla AS uf FROM adotantes a
+         JOIN usuarios u ON u.id = a.usuario_id
          LEFT JOIN enderecos en ON en.id = a.endereco_id
          LEFT JOIN cidades c ON c.id = en.cidade_id
          LEFT JOIN estados e ON e.id = c.estado_id
@@ -121,7 +162,7 @@ const PAGINAS = {
     }
     const [pedidos, favoritos, alertas, anuncios] = await Promise.all([
       consulta(
-        `SELECT p.id, p.status_atual, p.criado_em, v.nome AS animal, v.sexo, v.especie, v.foto_url, v.foto_enquadramento, v.ong_nome,
+        `SELECT p.id, p.status_atual, p.criado_em, p.animal_id, v.ong_id, v.nome AS animal, v.sexo, v.especie, v.foto_url, v.foto_enquadramento, v.ong_nome,
                 (SELECT vi.data_hora FROM visitas vi WHERE vi.pedido_id = p.id AND vi.status = 'agendada'
                   ORDER BY vi.data_hora LIMIT 1) AS visita
            FROM pedidos_adocao p JOIN vw_animais_vitrine v ON v.id = p.animal_id
@@ -164,13 +205,16 @@ const PAGINAS = {
       : m.vazio('Os animais que você favoritar aparecem aqui.', '', 'coracao'));
     s = trocarBloco(s, 'alertas', ou(alertas, m.alertaLinha, m.vazio('Você ainda não tem alertas da lista de espera.', '', 'sino')));
     if (anuncios.length) s = trocarBloco(s, 'anuncios', anuncios.map(m.anuncioLinha).join(''));
+    s = trocarBloco(s, 'novidades', await novidadesDe(u.id));
+    s = trocarBloco(s, 'dados', `${m.formDadosAdotante(perfil)}${m.formSenha()}\n          `);
     return s;
   },
 
   async 'painel-ong.html'(html, req, res) {
     const u = req.session.usuario;
     const [ong] = await consulta(
-      `SELECT o.usuario_id AS id, o.nome, o.tipo, o.logo_url, o.apresentacao, en.logradouro, en.latitude,
+      `SELECT o.usuario_id AS id, o.nome, o.tipo, o.logo_url, o.apresentacao, o.telefone, o.rede_social, o.ocultar_endereco,
+              en.logradouro, en.latitude,
               (SELECT COUNT(*) FROM ong_documentos d WHERE d.ong_id = o.usuario_id) AS documentos
          FROM ongs o JOIN enderecos en ON en.id = o.endereco_id WHERE o.usuario_id = ?`,
       [u.id],
@@ -182,7 +226,7 @@ const PAGINAS = {
     }
     const [pedidos, animais, campanhas, [numeros]] = await Promise.all([
       consulta(
-        `SELECT p.id, p.nome, p.telefone, p.email, p.moradia, p.outros_animais, p.mensagem, p.status_atual, p.criado_em,
+        `SELECT p.id, p.adotante_id, p.nome, p.telefone, p.email, p.moradia, p.outros_animais, p.mensagem, p.status_atual, p.criado_em,
                 a.nome AS animal, c.nome AS cidade, e.sigla AS uf
            FROM pedidos_adocao p
            JOIN animais a ON a.id = p.animal_id
@@ -238,29 +282,183 @@ const PAGINAS = {
     s = trocarBloco(s, 'campanhas', ou(campanhas, m.campanhaOng, m.vazio('Nenhuma campanha ainda.',
       '<a class="botao secundario pequeno" href="nova-campanha.html">Criar campanha</a>', 'megafone')));
     s = trocarBloco(s, 'perfil-progresso', m.progressoPerfil(ong));
+    s = trocarBloco(s, 'perfil-form', `${m.formPerfilOng(ong)}${m.formSenha()}\n          `);
+    s = trocarBloco(s, 'novidades', await novidadesDe(u.id));
     return s;
+  },
+
+  /* Central de ajuda: mostra o chamado pedido (?chamado=) para quem pode ver e a lista de chamados da pessoa. */
+  async 'ajuda.html'(html, req) {
+    const u = req.session.usuario;
+    const protocolos = req.session.chamados || [];
+    let s = html;
+    const pedido = String(req.query.chamado || '').toUpperCase();
+    if (PROTOCOLO.test(pedido)) {
+      const [chamado] = await consulta('SELECT * FROM chamados_suporte WHERE protocolo = ?', [pedido]);
+      if (chamado && podeVer(req, chamado)) {
+        const lista = await consulta('SELECT autor, texto, enviada_em FROM chamado_mensagens WHERE chamado_id = ? ORDER BY id', [chamado.id]);
+        s = trocarBloco(s, 'chamado', a.chamadoAberto(chamado, lista));
+      } else {
+        s = trocarBloco(s, 'chamado', `
+        <section class="secao chamado-secao" id="chamado" aria-label="Chamado">
+          <div class="container-estreito"><p class="aviso-inline">Para ver o chamado ${esc(pedido)}, confirme o e-mail usado em “Acompanhar chamado”, mais abaixo.</p></div>
+        </section>`);
+      }
+    }
+    const meus = (u && u.tipo !== 'admin') || protocolos.length
+      ? await consulta(
+        `SELECT protocolo, assunto, status, atualizado_em FROM chamados_suporte
+          WHERE ${u && u.tipo !== 'admin' ? 'usuario_id = ? OR ' : ''}protocolo IN (?) ORDER BY atualizado_em DESC LIMIT 6`,
+        [...(u && u.tipo !== 'admin' ? [u.id] : []), protocolos.length ? protocolos : ['']],
+      )
+      : [];
+    return trocarBloco(s, 'meus-chamados', a.meusChamados(meus));
+  },
+
+  /* Administração: tudo o que espera a equipe, do mais antigo para o mais novo. */
+  async 'admin.html'(html, req) {
+    const [ongs, denuncias, chamados, [n]] = await Promise.all([
+      consulta(
+        `SELECT o.usuario_id AS id, o.tipo, o.nome, o.documento, o.apresentacao, o.responsavel, o.cargo, o.telefone, u.email, u.criado_em,
+                c.nome AS cidade, e.sigla AS uf
+           FROM ongs o JOIN usuarios u ON u.id = o.usuario_id
+           LEFT JOIN enderecos en ON en.id = o.endereco_id LEFT JOIN cidades c ON c.id = en.cidade_id LEFT JOIN estados e ON e.id = c.estado_id
+          WHERE o.status_verificacao = 'pendente' ORDER BY u.criado_em LIMIT 20`,
+      ),
+      consulta(
+        `SELECT d.*, en.bairro, c.nome AS cidade, e.sigla AS uf
+           FROM denuncias d JOIN enderecos en ON en.id = d.endereco_id
+           LEFT JOIN cidades c ON c.id = en.cidade_id LEFT JOIN estados e ON e.id = c.estado_id
+          ORDER BY d.status IN ('encaminhada','arquivada'), d.criado_em DESC LIMIT 20`,
+      ),
+      consulta(
+        `SELECT * FROM chamados_suporte
+          ORDER BY FIELD(status, 'aberto', 'respondido', 'resolvido'), atualizado_em DESC LIMIT 20`,
+      ),
+      consulta(
+        `SELECT (SELECT COUNT(*) FROM ongs WHERE status_verificacao = 'pendente') AS ongs,
+                (SELECT COUNT(*) FROM ongs WHERE status_verificacao = 'verificada') AS verificadas,
+                (SELECT COUNT(*) FROM denuncias WHERE status = 'recebida') AS denuncias,
+                (SELECT COUNT(*) FROM chamados_suporte WHERE status = 'aberto') AS chamados`,
+      ),
+    ]);
+    const ids = (lista) => (lista.length ? lista.map((x) => x.id) : [0]);
+    const [documentos, midias, mensagens] = await Promise.all([
+      consulta('SELECT id, ong_id, tipo FROM ong_documentos WHERE ong_id IN (?) ORDER BY id', [ids(ongs)]),
+      consulta('SELECT id, denuncia_id, tipo FROM denuncia_midias WHERE denuncia_id IN (?) ORDER BY id', [ids(denuncias)]),
+      consulta('SELECT chamado_id, autor, texto, enviada_em FROM chamado_mensagens WHERE chamado_id IN (?) ORDER BY id', [ids(chamados)]),
+    ]);
+    const de = (lista, campo, id) => lista.filter((x) => x[campo] === id);
+    const pendencias = [
+      n.ongs && `${n.ongs} ${n.ongs === 1 ? 'cadastro de ONG' : 'cadastros de ONG'}`,
+      n.denuncias && `${n.denuncias} ${n.denuncias === 1 ? 'denúncia nova' : 'denúncias novas'}`,
+      n.chamados && `${n.chamados} ${n.chamados === 1 ? 'chamado aberto' : 'chamados abertos'}`,
+    ].filter(Boolean);
+    const frase = pendencias.length
+      ? `Esperando a equipe: ${pendencias.join(', ').replace(/, ([^,]*)$/, ' e $1')}.`
+      : 'Tudo em dia por aqui.';
+    let s = trocarBloco(html, 'saudacao', `\n              <h1 id="titulo-pagina">Administração</h1>\n              <p>${esc(frase)}</p>\n            `);
+    s = trocarBloco(s, 'estatisticas', [
+      m.estatistica('ONGs para validar', n.ongs, 'escudo-check'),
+      m.estatistica('denúncias novas', n.denuncias, 'alerta'),
+      m.estatistica('chamados abertos', n.chamados, 'conversa'),
+      m.estatistica('ONGs verificadas', n.verificadas, 'lar'),
+    ].join(''));
+    s = trocarBloco(s, 'contador-ongs', String(n.ongs));
+    s = trocarBloco(s, 'contador-denuncias', String(n.denuncias));
+    s = trocarBloco(s, 'contador-chamados', String(n.chamados));
+    s = trocarBloco(s, 'ongs', ou(ongs.map((o) => ({ ...o, telefone_formatado: telefoneBr(o.telefone) })),
+      (o) => a.cartaoOngPendente(o, de(documentos, 'ong_id', o.id)), a.adminVazio('Nenhum cadastro esperando validação.')));
+    s = trocarBloco(s, 'denuncias', ou(denuncias.map((d) => ({ ...d, telefone_formatado: telefoneBr(d.denunciante_telefone) })),
+      (d) => a.cartaoDenuncia(d, de(midias, 'denuncia_id', d.id)), a.adminVazio('Nenhuma denúncia por enquanto.')));
+    s = trocarBloco(s, 'chamados', ou(chamados, (c) => a.cartaoChamadoAdmin(c, de(mensagens, 'chamado_id', c.id)),
+      a.adminVazio('Nenhum chamado de suporte.')));
+    return trocarBloco(s, 'novidades', await novidadesDe(req.session.usuario.id));
+  },
+
+  /* Chat: a mesma página serve o adotante e a ONG; o "lado" diz quais colunas cada um usa. */
+  async 'mensagens.html'(html, req) {
+    const u = req.session.usuario;
+    const lado = ladoDe(u);
+    const conversas = await consulta(
+      `SELECT * FROM vw_conversas WHERE ${lado.coluna} = ? ORDER BY ultima_mensagem_em DESC, id DESC LIMIT 100`,
+      [u.id],
+    );
+    const pedida = Number(req.query.c) || 0;
+    const atual = conversas.find((c) => c.id === pedida) || conversas[0] || null;
+    let conversa = a.conversaVazia(lado);
+    if (atual) {
+      const [mensagens, [pedido]] = await Promise.all([
+        consulta(
+          `SELECT * FROM (SELECT id, autor, tipo, texto, enviada_em FROM mensagens
+                           WHERE conversa_id = ? ORDER BY id DESC LIMIT 200) ultimas ORDER BY id`,
+          [atual.id],
+        ),
+        atual.animal_id
+          ? consulta('SELECT id, status_atual FROM pedidos_adocao WHERE adotante_id = ? AND animal_id = ? ORDER BY criado_em DESC LIMIT 1',
+            [atual.adotante_id, atual.animal_id])
+          : Promise.resolve([]),
+      ]);
+      // Abrir pelo link (?c=) conta como leitura. A conversa escolhida sozinha só é marcada
+      // pelo conversas.js quando está de fato na tela (no celular ela começa escondida).
+      if (pedida === atual.id && Number(atual[lado.naoLidas]) > 0) {
+        await marcarLida(atual, lado);
+        atual[lado.naoLidas] = 0;
+      }
+      conversa = a.conversaAberta(atual, lado, mensagens, pedido);
+    }
+    const aberta = Boolean(atual && atual.id === pedida);
+    const [inicio, rotulo] = lado.eu === 'ong' ? ['painel-ong.html', 'Meu painel'] : ['minha-conta.html', 'Minha conta'];
+    let s = trocarBloco(html, 'chat-abre', `<div class="container chat${aberta ? '' : ' so-lista'}" data-chat data-eu="${lado.eu}" data-conversa="${atual ? atual.id : ''}">`);
+    s = trocarBloco(s, 'chat-inicio', `<a class="link-seta" href="${inicio}">${rotulo}</a>`);
+    s = trocarBloco(s, 'conversas', conversas.length
+      ? `${conversas.map((c) => a.itemConversa(c, lado, Boolean(atual && c.id === atual.id))).join('')}\n          `
+      : a.semConversas(lado));
+    return trocarBloco(s, 'conversa', conversa);
   },
 };
 
 const ERROS_DE_CONEXAO = new Set(['ECONNREFUSED', 'ER_ACCESS_DENIED_ERROR', 'ER_BAD_DB_ERROR', 'ER_NO_SUCH_TABLE', 'PROTOCOL_CONNECTION_LOST', 'ETIMEDOUT', 'ENOTFOUND']);
-// Páginas que exigem login e de que tipo
-const EXIGE = { 'minha-conta.html': 'adotante', 'painel-ong.html': 'ong', 'cadastrar-animal.html': 'ong', 'nova-campanha.html': 'ong' };
+// Páginas que exigem login e os tipos de conta aceitos
+const EXIGE = {
+  'minha-conta.html': ['adotante'],
+  'painel-ong.html': ['ong'],
+  'cadastrar-animal.html': ['ong'],
+  'nova-campanha.html': ['ong'],
+  'mensagens.html': ['adotante', 'ong'],
+  'admin.html': ['admin'],
+};
 const PRIVADAS = new Set(Object.keys(EXIGE));
+const ROTULO_CONTA = { adotante: 'Minha conta', ong: 'Painel da ONG', admin: 'Administração' };
+const ACOES_DO_CABECALHO = /(<div class="cabecalho-acoes">)[\s\S]*?(<\/div>)/;
 
-/** Ajustes de todas as páginas: avisa o JavaScript que o servidor está ligado e troca "Entrar" pela conta. */
-function ajustesGerais(html, req) {
-  let saida = html.replace('<body', '<body data-servidor').replace(/class="painel-sair" href="index\.html"/g, 'class="painel-sair" href="/sair"');
+const contadorMensagens = (n) => `<span class="contador" data-nao-lidas${n ? '' : ' hidden'}>${n}</span>`;
+
+/**
+ * Ajustes de todas as páginas: avisa o JavaScript que o servidor está ligado e, para quem
+ * entrou, troca "Entrar / Criar conta" pelo atalho da conta e pelo botão de mensagens.
+ */
+async function ajustesGerais(html, req) {
+  let saida = html.replace(/class="painel-sair" href="index\.html"/g, 'class="painel-sair" href="/sair"');
   const u = req.session.usuario;
-  if (u) {
-    const [destino, rotulo] = u.tipo === 'ong' ? ['painel-ong.html', 'Meu painel'] : ['minha-conta.html', 'Minha conta'];
-    saida = saida.replace('<a class="botao fantasma pequeno" href="entrar.html">Entrar</a>', `<a class="botao fantasma pequeno" href="${destino}">${rotulo}</a>`);
-    const nome = u.tipo === 'ong' ? u.nome.replace(/^(ONG|Projeto|Instituto|Grupo)\s+/i, '') : u.nome;
-    saida = trocarBloco(saida, 'conta', `<a class="conta-chip" href="${destino}">
-            <span class="avatar${u.tipo === 'ong' ? '' : ' bege'}" aria-hidden="true">${esc(iniciais(u.nome))}</span>
-            <span>${esc(nome)}<small>${u.tipo === 'ong' ? 'Painel da ONG' : 'Minha conta'}</small></span>
-          </a>`);
-  }
-  return saida;
+  if (!u) return saida.replace('<body', '<body data-servidor');
+
+  const destino = inicioDe(u);
+  const conversa = u.tipo === 'adotante' || u.tipo === 'ong';
+  const naoLidas = conversa ? await totalNaoLidas(u).catch(() => 0) : 0;
+  const nome = u.tipo === 'ong' ? u.nome.replace(/^(ONG|Projeto|Instituto|Grupo)\s+/i, '') : u.nome;
+  const avatar = { ong: '', admin: ' marrom' }[u.tipo] ?? ' bege';
+  const mensagens = conversa
+    ? `<a class="cabecalho-mensagens" href="mensagens.html" aria-label="Mensagens${naoLidas ? `: ${naoLidas} não ${naoLidas === 1 ? 'lida' : 'lidas'}` : ''}">${contadorMensagens(naoLidas)}</a>\n          `
+    : '';
+  const conta = `${mensagens}<a class="conta-chip" href="${destino}">
+            <span class="avatar${avatar}" aria-hidden="true">${esc(iniciais(u.nome))}</span>
+            <span>${esc(nome)}<small>${ROTULO_CONTA[u.tipo]}</small></span>
+          </a>`;
+  saida = saida
+    .replace('<body', `<body data-servidor data-conta="${u.tipo}"`)
+    .replace(ACOES_DO_CABECALHO, (tudo, abre, fecha) => `${abre}\n          ${conta}\n        ${fecha}`);
+  return trocarBloco(saida, 'contador-mensagens', contadorMensagens(naoLidas));
 }
 
 rotas.get(/^\/(?:([\w-]+\.html))?$/, async (req, res, next) => {
@@ -274,9 +472,8 @@ rotas.get(/^\/(?:([\w-]+\.html))?$/, async (req, res, next) => {
   }
   const exige = EXIGE[nome];
   const u = req.session.usuario;
-  if (exige && (!u || u.tipo !== exige)) {
-    const certo = u ? (u.tipo === 'ong' ? '/painel-ong.html' : '/minha-conta.html') : (exige === 'ong' ? '/entrar.html#ong' : '/entrar.html');
-    return res.redirect(303, certo);
+  if (exige && (!u || !exige.includes(u.tipo))) {
+    return res.redirect(303, u ? `/${inicioDe(u)}` : (exige[0] === 'ong' ? '/entrar.html#ong' : '/entrar.html'));
   }
   const montar = PAGINAS[nome];
   if (montar) {
@@ -290,7 +487,7 @@ rotas.get(/^\/(?:([\w-]+\.html))?$/, async (req, res, next) => {
       html = html.replace(/(<main[^>]*>)/, '$1\n<p class="aviso-sem-banco" role="status">Sem conexão com o banco de dados: mostrando os exemplos do protótipo.</p>');
     }
   }
-  return res.type('html').set('Cache-Control', PRIVADAS.has(nome) ? 'no-store' : 'no-cache').send(ajustesGerais(html, req));
+  return res.type('html').set('Cache-Control', PRIVADAS.has(nome) || u ? 'no-store' : 'no-cache').send(await ajustesGerais(html, req));
 });
 
 module.exports = rotas;

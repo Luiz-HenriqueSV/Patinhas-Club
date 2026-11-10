@@ -2,10 +2,12 @@
 const express = require('express');
 const { consulta } = require('../banco');
 const { leitor, idDaRota, ErroHttp, ErroValidacao } = require('../util/validacao');
-const { concluir, exigir } = require('../util/resposta');
+const { concluir, exigir, querJson } = require('../util/resposta');
 const { idDaCidade } = require('../servicos/enderecos');
 const { notificar, enviarEmail } = require('../servicos/mensagens');
 const { telefoneBr } = require('../util/html');
+const { registrarAviso } = require('../servicos/conversas');
+const { genero } = require('../modelos');
 
 const rotas = express.Router();
 const ABERTOS = "('enviado','em_analise','visita_agendada')";
@@ -27,7 +29,7 @@ rotas.post('/api/animais/:id/pedidos', async (req, res) => {
   l.validar();
 
   const [animal] = await consulta(
-    `SELECT a.id, a.nome, a.ong_id, u.email AS email_ong
+    `SELECT a.id, a.nome, a.sexo, a.ong_id, u.email AS email_ong
        FROM animais a JOIN ongs o ON o.usuario_id = a.ong_id JOIN usuarios u ON u.id = o.usuario_id
       WHERE a.id = ? AND a.status IN ('disponivel','em_processo') AND o.status_verificacao = 'verificada'`,
     [animalId],
@@ -54,7 +56,26 @@ rotas.post('/api/animais/:id/pedidos', async (req, res) => {
   const resumo = `${d.nome} quer adotar ${animal.nome}. Contato: ${telefoneBr(d.telefone)}${d.email ? `, ${d.email}` : ''}.`;
   notificar(animal.ong_id, 'pedido_adocao', `Novo pedido para ${animal.nome}`, resumo, 'painel-ong.html#pedidos');
   enviarEmail(animal.email_ong, `Novo pedido de adoção para ${animal.nome}`, `${resumo}\nVeja as respostas no painel da ONG.`);
+  // Com conta, o pedido já abre a conversa com a ONG (o primeiro registro é o próprio pedido)
+  await registrarAviso({
+    adotanteId, ongId: animal.ong_id, animalId, autor: 'adotante',
+    texto: `Pedido de adoção ${genero(animal.sexo, 'do', 'da')} ${animal.nome} enviado.`,
+  });
   concluir(req, res, 'adocao.html#pedido-enviado');
+});
+
+/* ---------- Favoritos (coração no cartão do animal) ---------- */
+
+rotas.post('/api/favoritos/:id', exigir('adotante'), async (req, res) => {
+  const animalId = idDaRota(req.params.id);
+  const u = req.session.usuario;
+  const [animal] = await consulta("SELECT id FROM animais WHERE id = ? AND status <> 'rascunho'", [animalId]);
+  if (!animal) throw new ErroHttp(404, 'Animal não encontrado.');
+  const apagou = await consulta('DELETE FROM favoritos WHERE adotante_id = ? AND animal_id = ?', [u.id, animalId]);
+  const favorito = !apagou.affectedRows;
+  if (favorito) await consulta('INSERT IGNORE INTO favoritos (adotante_id, animal_id) VALUES (?, ?)', [u.id, animalId]);
+  if (querJson(req)) return res.json({ ok: true, favorito });
+  return res.redirect(303, `/adocao.html#pet-${animalId}`);
 });
 
 /* ---------- Lista de espera ---------- */

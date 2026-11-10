@@ -20,6 +20,7 @@
 
   document.addEventListener('submit', async (evento) => {
     const form = evento.target;
+    if (form.hasAttribute('data-proprio')) return; // o chat (conversas.js) cuida do próprio envio
     const botao = evento.submitter;
     const acao = (botao && botao.getAttribute('formaction')) || form.getAttribute('action');
     if (!ehApi(acao)) return;
@@ -45,10 +46,11 @@
       const corpo = await resposta.json().catch(() => null);
       if (!corpo) throw new TypeError('Resposta sem JSON');
       if (corpo.ok) {
-        form.reset();
-        return irPara(corpo.redirecionar);
+        if (form.hasAttribute('data-favorito')) return marcarFavorito(form, corpo.favorito);
+        if (!form.hasAttribute('data-manter')) form.reset();
+        return irPara(corpo.redirecionar, { recarregar: true });
       }
-      if (resposta.status === 401 && corpo.redirecionar) return irPara(corpo.redirecionar); // precisa entrar
+      if ([401, 403].includes(resposta.status) && corpo.redirecionar) return irPara(corpo.redirecionar); // precisa entrar
       mostrarErros(form, corpo);
     } catch (erro) {
       mostrarErros(form, { mensagem: 'Não foi possível falar com o servidor. Confira sua conexão e tente de novo.' });
@@ -64,15 +66,33 @@
     setTimeout(() => { form.reset(); irPara(destino); }, 1400);
   }
 
-  function irPara(url) {
+  /**
+   * Vai para o endereço que o servidor mandou. Quando é a própria página (ex.: painel#pedido-recusado),
+   * recarrega para mostrar os dados novos do banco, já com o aviso do #endereço aberto.
+   */
+  function irPara(url, { recarregar = false } = {}) {
     if (!url) return;
     const alvo = new URL(url, location.href);
     if (alvo.pathname === location.pathname && alvo.search === location.search) {
+      if (recarregar && comServidor()) {
+        history.replaceState(null, '', alvo.href);
+        location.reload();
+        return;
+      }
       if (alvo.hash === location.hash) location.hash = '';
       location.hash = alvo.hash;
     } else {
       location.assign(alvo.href);
     }
+  }
+
+  /** Coração do cartão: troca na hora, sem recarregar a vitrine. */
+  function marcarFavorito(form, marcado) {
+    const botao = form.querySelector('button');
+    const nome = (botao.getAttribute('aria-label') || '').replace(/^(Tirar |Favoritar )/, '').replace(/ dos favoritos$/, '');
+    botao.setAttribute('aria-pressed', String(marcado));
+    botao.setAttribute('aria-label', marcado ? `Tirar ${nome} dos favoritos` : `Favoritar ${nome}`);
+    avisarRodape(marcado ? `${nome} está nos seus favoritos.` : `${nome} saiu dos favoritos.`);
   }
 
   /* ---------- Erros ---------- */
@@ -134,7 +154,7 @@
 
   async function preencherContato() {
     const formularios = [...document.querySelectorAll('form[action^="/api/"]')]
-      .filter((f) => !/^\/api\/(adotantes|ongs|entrar|senha)/.test(f.getAttribute('action')));
+      .filter((f) => !/^\/api\/(adotantes|ongs|entrar|senha|conta|admin|conversas|favoritos|ong\/perfil)/.test(f.getAttribute('action')));
     if (!formularios.length || !comServidor()) return;
     const sessao = await fetch('/api/sessao', { headers: { Accept: 'application/json' }, credentials: 'same-origin' })
       .then((r) => (r.ok ? r.json() : null)).catch(() => null);
