@@ -1,0 +1,835 @@
+/* ==========================================================================
+   PATINHAS CLUB  |  Atendimento
+   --------------------------------------------------------------------------
+   Estilos das páginas que só existem com o site "vivo":
+     1. Chat entre adotante e ONG      (mensagens.html)
+     2. Chamados de suporte            (ajuda.html e admin.html)
+     3. Central de ajuda               (ajuda.html)
+     4. Administração                  (admin.html)
+   Usa as cores, fontes e medidas definidas em styles.css (seção 1, Variáveis).
+   ========================================================================== */
+
+:root {
+  --icone-enviar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233D2416' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.5 3.5 10.6 13.4'/%3E%3Cpath d='M20.5 3.5 14.3 20.3l-3.7-6.9-6.9-3.7z'/%3E%3C/svg%3E");
+  --icone-voltar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233D2416' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5.5'/%3E%3Cpath d='m11 6-6 6 6 6'/%3E%3C/svg%3E");
+}
+
+/* 1. CHAT ================================================================= */
+
+.pagina-mensagens main {
+  background: var(--canvas);
+}
+
+/* Duas colunas: lista de conversas e conversa aberta. A altura acompanha a tela
+   para o campo de escrever ficar sempre visível, como num aplicativo de mensagens. */
+.chat {
+  display: grid;
+  grid-template-columns: minmax(270px, 350px) minmax(0, 1fr);
+  gap: 20px;
+  /* --altura-cabecalho vem do conversas.js (o cabeçalho muda de altura com a largura da tela) */
+  height: clamp(480px, 100dvh - var(--altura-cabecalho, 98px) - 12px, 860px);
+  padding-block: 22px;
+  scroll-margin-top: 0;
+}
+
+.chat-lista,
+.chat-conversa {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--branco);
+  border: 1px solid var(--borda-caixa);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-caixa);
+}
+
+.chat-lista-topo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.chat-lista-topo h1 {
+  margin: 0;
+  color: var(--marrom);
+  font-family: var(--fonte-destaque);
+  font-size: 1.7rem;
+  line-height: 1.1;
+}
+
+.conversas {
+  flex: 1;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.conversa-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  color: var(--texto);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.conversa-item:hover {
+  background: var(--bege-fundo);
+}
+
+.conversa-item.ativa {
+  background: var(--bege-claro);
+  box-shadow: inset 4px 0 0 var(--turquesa);
+}
+
+.conversa-item .avatar {
+  width: 46px;
+  height: 46px;
+  font-size: 0.9rem;
+}
+
+.conversa-texto {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.conversa-texto strong,
+.conversa-texto small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversa-texto strong {
+  font-size: 0.94rem;
+  font-weight: 600;
+}
+
+.conversa-sobre {
+  color: var(--texto-suave);
+  font-weight: 500;
+}
+
+.conversa-texto small {
+  color: var(--texto-suave);
+  font-size: 0.84rem;
+}
+
+.conversa-item.nao-lida .conversa-texto small {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.conversa-meta {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+}
+
+.conversa-meta time {
+  color: var(--texto-suave);
+  font-size: 0.76rem;
+}
+
+.conversas-vazio .vazio {
+  margin: 8px;
+  padding: 28px 18px;
+}
+
+.chat-ajuda {
+  margin: 0;
+  padding: 11px 20px;
+  color: var(--texto-suave);
+  border-top: 1px solid var(--borda);
+  font-size: 0.84rem;
+}
+
+/* Conversa aberta */
+.chat-topo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.chat-topo .avatar {
+  width: 44px;
+  height: 44px;
+  font-size: 0.85rem;
+}
+
+.chat-quem {
+  flex: 1;
+  min-width: 0;
+}
+
+.chat-quem h2 {
+  margin: 0;
+  overflow: hidden;
+  font-family: var(--fonte-texto);
+  font-size: 1.04rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-quem p {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 2px 0 0;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+.chat-voltar {
+  display: none;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-left: -6px;
+  color: var(--marrom);
+  border-radius: 50%;
+}
+
+.chat-voltar::before,
+.chat-enviar::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  background-color: currentColor;
+  -webkit-mask: var(--icone) center / contain no-repeat;
+  mask: var(--icone) center / contain no-repeat;
+}
+
+.chat-voltar { --icone: var(--icone-voltar); }
+.chat-enviar { --icone: var(--icone-enviar); }
+
+.chat-voltar:hover {
+  background: var(--bege-claro);
+}
+
+.chat-estado {
+  margin: 0;
+  padding: 6px 18px;
+  color: var(--alerta);
+  background: var(--alerta-fundo);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mensagens {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 0;
+  margin: 0;
+  padding: 16px 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  background: var(--bege-fundo);
+}
+
+.mensagens:focus-visible {
+  outline: 3px solid var(--turquesa);
+  outline-offset: -3px;
+}
+
+.msg {
+  display: grid;
+  max-width: min(76%, 560px);
+}
+
+.msg p {
+  margin: 0;
+  padding: 9px 14px;
+  border-radius: 18px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.msg time {
+  margin-top: 2px;
+  color: var(--texto-suave);
+  font-size: 0.72rem;
+}
+
+.msg.outra {
+  align-self: flex-start;
+  justify-items: start;
+}
+
+.msg.outra p {
+  background: var(--branco);
+  border: 1px solid var(--borda-caixa);
+  border-bottom-left-radius: 6px;
+}
+
+.msg.minha {
+  align-self: flex-end;
+  justify-items: end;
+}
+
+.msg.minha p {
+  color: var(--branco);
+  background: var(--marrom);
+  border-bottom-right-radius: 6px;
+}
+
+.msg.minha.vista time::after {
+  content: " · Visto";
+}
+
+.msg.enviando p {
+  opacity: 0.65;
+}
+
+.msg.falhou p {
+  color: var(--erro);
+  background: var(--erro-fundo);
+  border: 1px solid var(--erro);
+}
+
+.msg.falhou time {
+  color: var(--erro);
+  font-weight: 600;
+}
+
+/* Registro automático do andamento da adoção ("Pedido enviado", "Visita marcada") */
+.msg.aviso {
+  grid-auto-flow: column;
+  align-items: center;
+  align-self: center;
+  gap: 8px;
+  max-width: 92%;
+  margin-block: 4px;
+  padding: 5px 14px;
+  background: var(--bege-claro);
+  border: 1px dashed var(--borda-forte);
+  border-radius: var(--raio-pilula);
+}
+
+.msg.aviso p {
+  padding: 0;
+  color: var(--marrom);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.msg.aviso time {
+  margin: 0;
+}
+
+.msg-dia {
+  align-self: center;
+  margin: 8px 0 2px;
+}
+
+.msg-dia span {
+  padding: 3px 12px;
+  color: var(--texto-suave);
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pilula);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.msg-fim {
+  flex: none;
+  height: 1px;
+}
+
+.chat-dica {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 7px 18px;
+  color: var(--marrom-escuro);
+  background: var(--turquesa-claro);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.chat-dica img {
+  flex: none;
+}
+
+.chat-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--branco);
+  border-top: 1px solid var(--borda);
+}
+
+.chat-form textarea {
+  flex: 1;
+  min-height: 46px;
+  max-height: 140px;
+  padding: 10px 16px;
+  border-radius: 23px;
+  line-height: 1.4;
+  resize: none;
+}
+
+.chat-enviar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  color: var(--marrom-escuro);
+  background: var(--laranja);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 3px 0 var(--laranja-sombra);
+  cursor: pointer;
+  transition: transform 0.15s var(--suave), box-shadow 0.15s;
+}
+
+.chat-enviar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 0 var(--laranja-sombra);
+}
+
+.chat-enviar:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.chat-enviar:focus-visible {
+  outline: 3px solid var(--turquesa-escuro);
+  outline-offset: 3px;
+}
+
+.chat-sem-conversa {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  padding: 24px;
+  background: var(--bege-fundo);
+}
+
+.chat-sem-conversa .vazio {
+  max-width: 420px;
+  background: var(--branco);
+}
+
+/* No celular aparece uma coisa de cada vez: a lista ou a conversa */
+@media (max-width: 860px) {
+  /* No celular o cabeçalho não fica preso no topo: a conversa ocupa a tela toda */
+  .chat {
+    grid-template-columns: minmax(0, 1fr);
+    height: clamp(420px, 100dvh, 860px);
+    padding-block: 8px;
+  }
+
+  .chat.so-lista .chat-conversa,
+  .chat:not(.so-lista) .chat-lista {
+    display: none;
+  }
+
+  .chat-voltar {
+    display: grid;
+  }
+
+  .chat-topo .botao {
+    display: none;
+  }
+
+  .msg {
+    max-width: 88%;
+  }
+}
+
+/* 2. CHAMADOS DE SUPORTE ================================================== */
+
+.chamado-secao {
+  padding-block: 36px 0;
+  scroll-margin-top: 110px;
+}
+
+.chamado {
+  padding: clamp(18px, 3vw, 28px);
+  background: var(--branco);
+  border: 1px solid var(--borda-caixa);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-caixa);
+}
+
+.chamado-topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+
+.chamado-topo h2 {
+  margin: 2px 0 4px;
+  font-size: 1.3rem;
+}
+
+.chamado-topo p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.chamado-protocolo strong {
+  padding: 2px 10px;
+  color: var(--marrom-escuro);
+  background: var(--bege);
+  border-radius: var(--raio-pilula);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  user-select: all;
+}
+
+.aviso-inline {
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  color: var(--marrom-escuro);
+  background: var(--turquesa-claro);
+  border-radius: var(--raio-p);
+  font-size: 0.9rem;
+}
+
+.mensagens-chamado {
+  flex: none;
+  max-height: 420px;
+  margin: 16px 0;
+  padding: 14px;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-p);
+}
+
+.mensagens-chamado .msg {
+  max-width: min(86%, 620px);
+}
+
+.msg-autor {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.msg.outra .msg-autor {
+  color: var(--turquesa-escuro);
+}
+
+.chamado-resposta {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.chamado-resposta textarea,
+.form-compacto textarea {
+  min-height: 84px;
+}
+
+.form-compacto {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.form-compacto .campo {
+  margin: 0;
+}
+
+.meus-chamados {
+  padding: 20px 22px;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+}
+
+.meus-chamados h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.meus-chamados ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chamado-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  margin-inline: -10px;
+  color: var(--texto);
+  border-radius: var(--raio-p);
+  text-decoration: none;
+}
+
+.chamado-linha:hover {
+  background: var(--bege-fundo);
+}
+
+.chamado-linha strong,
+.chamado-linha small {
+  display: block;
+}
+
+.chamado-linha strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.chamado-linha small {
+  color: var(--texto-suave);
+  font-size: 0.78rem;
+}
+
+/* 3. CENTRAL DE AJUDA ===================================================== */
+
+.busca-ajuda {
+  display: grid;
+  gap: 6px;
+  max-width: 520px;
+  margin: 22px 0 4px;
+}
+
+.busca-ajuda label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.busca-ajuda input {
+  border-radius: var(--raio-pilula);
+  padding-inline: 20px;
+}
+
+.secao-temas {
+  padding-block: 40px 0;
+}
+
+.temas-ajuda {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.temas-ajuda a {
+  display: grid;
+  gap: 4px;
+  height: 100%;
+  padding: 20px;
+  color: var(--texto);
+  background: var(--branco);
+  border: 1px solid var(--borda-caixa);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-caixa);
+  text-decoration: none;
+  transition: transform 0.25s var(--suave), border-color 0.2s;
+}
+
+.temas-ajuda a:hover {
+  border-color: var(--turquesa);
+  transform: translateY(-3px);
+}
+
+.temas-ajuda img {
+  margin-bottom: 6px;
+}
+
+.temas-ajuda span {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.secao-faq {
+  padding-block: 48px 64px;
+}
+
+.secao-faq h2 {
+  margin-bottom: 8px;
+}
+
+.faq-grupo {
+  margin-top: 28px;
+  scroll-margin-top: 120px;
+}
+
+.faq-grupo h3 {
+  margin: 0 0 10px;
+  color: var(--marrom);
+  font-size: 1.15rem;
+}
+
+.busca-vazia {
+  padding: 14px 18px;
+  background: var(--alerta-fundo);
+  border-radius: var(--raio-p);
+}
+
+.pagina-ajuda .pagina-formulario {
+  scroll-margin-top: 100px;
+}
+
+.formulario-titulo {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+/* 4. ADMINISTRAÇÃO ======================================================== */
+
+.admin-cartao {
+  display: grid;
+  gap: 14px;
+  padding: 20px 22px;
+  background: var(--branco);
+  border: 1px solid var(--borda-caixa);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra-caixa);
+}
+
+.admin-cartao + .admin-cartao {
+  margin-top: 16px;
+}
+
+.admin-cartao > header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-cartao > header > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-cartao h3 {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.admin-cartao > header p,
+.admin-cartao > p {
+  margin: 0;
+}
+
+.admin-cartao > header p {
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+}
+
+.admin-dados {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 24px;
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--bege-fundo);
+  border-radius: var(--raio-p);
+}
+
+.admin-dados dt {
+  color: var(--texto-suave);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.admin-dados dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.admin-cartao .grupo-botoes {
+  align-items: flex-start;
+}
+
+.admin-recusar[open] {
+  flex-basis: 100%;
+}
+
+.admin-recusar summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.admin-recusar summary::-webkit-details-marker {
+  display: none;
+}
+
+.admin-recusar[open] summary {
+  display: none;
+}
+
+.admin-linha {
+  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr) auto;
+  align-items: end;
+  margin-top: 0;
+}
+
+.admin-cartao .mensagens-chamado {
+  margin: 0;
+}
+
+.admin-vazio {
+  padding: 22px;
+  color: var(--texto-suave);
+  background: var(--branco);
+  border: 2px dashed var(--bege-borda);
+  border-radius: var(--raio);
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .admin-linha {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .admin-cartao > header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .temas-ajuda a,
+  .chat-enviar {
+    transition: none;
+  }
+
+  .temas-ajuda a:hover,
+  .chat-enviar:hover {
+    transform: none;
+  }
+}

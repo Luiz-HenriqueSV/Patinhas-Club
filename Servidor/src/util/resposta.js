@@ -10,12 +10,22 @@ function concluir(req, res, destino, extras = {}) {
   return res.redirect(303, url);
 }
 
-/** Bloqueia a rota para quem não entrou com o tipo de conta certo. */
-function exigir(tipo) {
+/** Página inicial de cada tipo de conta. */
+const INICIO = { adotante: 'minha-conta.html', ong: 'painel-ong.html', admin: 'admin.html' };
+const inicioDe = (usuario) => INICIO[usuario && usuario.tipo] || 'entrar.html';
+
+/** Bloqueia a rota para quem não entrou com um dos tipos de conta aceitos. */
+function exigir(...tipos) {
   return (req, res, next) => {
     const u = req.session.usuario;
-    if (u && u.tipo === tipo) return next();
-    const entrar = tipo === 'ong' ? '/entrar.html#ong' : '/entrar.html';
+    if (u && tipos.includes(u.tipo)) return next();
+    // Já entrou, mas com outro tipo de conta: não é falta de login, é falta de permissão
+    if (u) {
+      const casa = `/${inicioDe(u)}`;
+      if (querJson(req)) return res.status(403).json({ ok: false, mensagem: 'Esta ação não está disponível para o seu tipo de conta.', redirecionar: casa });
+      return res.redirect(303, casa);
+    }
+    const entrar = tipos[0] === 'ong' ? '/entrar.html#ong' : '/entrar.html';
     if (querJson(req)) return res.status(401).json({ ok: false, mensagem: 'Entre na sua conta para continuar.', redirecionar: entrar });
     return res.redirect(303, entrar);
   };
@@ -47,4 +57,4 @@ function limitar({ maximo, janelaMs }) {
   };
 }
 
-module.exports = { querJson, concluir, exigir, iniciarSessao, limitar };
+module.exports = { querJson, concluir, exigir, inicioDe, iniciarSessao, limitar };

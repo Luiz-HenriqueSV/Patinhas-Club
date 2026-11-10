@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mensagens | Patinhas Club</title>
+    <meta name="description" content="Converse com as ONGs e os adotantes sem sair do Patinhas Club." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/atendimento.css" />
+  </head>
+  <body id="topo" class="area-logada pagina-mensagens">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <!-- dados:conta --><a class="conta-chip" href="minha-conta.html">
+            <span class="avatar bege" aria-hidden="true">JM</span>
+            <span>Juliana Mendes<small>Minha conta</small></span>
+          </a><!-- /dados:conta -->
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <!-- Com o servidor ligado, os blocos "dados:" abaixo são trocados pelas conversas do banco. -->
+      <!-- dados:chat-abre --><div class="container chat" data-chat data-eu="adotante" data-conversa="2"><!-- /dados:chat-abre -->
+        <aside class="chat-lista" aria-labelledby="titulo-pagina">
+          <header class="chat-lista-topo">
+            <h1 id="titulo-pagina">Mensagens</h1>
+            <!-- dados:chat-inicio --><a class="link-seta" href="minha-conta.html">Minha conta</a><!-- /dados:chat-inicio -->
+          </header>
+
+          <ul class="conversas" aria-label="Suas conversas"><!-- dados:conversas -->
+            <li>
+              <a class="conversa-item ativa" href="mensagens.html" data-conversa="2" aria-current="true">
+                <span class="avatar" aria-hidden="true">AP</span>
+                <span class="conversa-texto">
+                  <strong>ONG Amigos de Patas<span class="conversa-sobre"> · Churros</span></strong>
+                  <small>Oi, Juliana! Convive sim: ele divide o lar temporário…</small>
+                </span>
+                <span class="conversa-meta">
+                  <time>18:35</time>
+                  <span class="contador" hidden>0</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="conversa-item" href="mensagens.html" data-conversa="1">
+                <span class="avatar" aria-hidden="true">AS</span>
+                <span class="conversa-texto">
+                  <strong>Protetora Ana Souza<span class="conversa-sobre"> · Mel</span></strong>
+                  <small>Você: Combinado, até lá!</small>
+                </span>
+                <span class="conversa-meta">
+                  <time>05/11</time>
+                  <span class="contador" hidden>0</span>
+                </span>
+              </a>
+            </li>
+          <!-- /dados:conversas --></ul>
+
+          <p class="chat-ajuda">Problema em uma conversa? <a href="ajuda.html#falar">Fale com o suporte</a></p>
+        </aside>
+
+        <section class="chat-conversa" aria-label="Conversa aberta"><!-- dados:conversa -->
+          <header class="chat-topo">
+            <a class="chat-voltar" href="mensagens.html" aria-label="Voltar para a lista de conversas"></a>
+            <span class="avatar" aria-hidden="true">AP</span>
+            <div class="chat-quem">
+              <h2 id="chat-titulo">ONG Amigos de Patas</h2>
+              <p>Sobre o Churros <span class="etiqueta novo">Aguardando a ONG</span></p>
+            </div>
+            <a class="botao fantasma pequeno" href="adocao.html#pet-churros">Ver anúncio</a>
+          </header>
+
+          <ol class="mensagens" id="mensagens" role="log" aria-labelledby="chat-titulo" tabindex="0">
+            <li class="msg-dia"><span>Ontem</span></li>
+            <li class="msg aviso" data-id="8"><p>Pedido de adoção do Churros enviado.</p><time>20:35</time></li>
+            <li class="msg minha vista" data-id="9"><p><span class="visualmente-oculto">Você: </span>Olá! O Churros convive bem com gatos?</p><time>21:35</time></li>
+            <li class="msg-dia"><span>Hoje</span></li>
+            <li class="msg outra" data-id="10"><p><span class="visualmente-oculto">ONG Amigos de Patas: </span>Oi, Juliana! Convive sim: ele divide o lar temporário com duas gatas. Quer conhecer o Churros no sábado?</p><time>18:35</time></li>
+            <li class="msg-fim" id="fim" aria-hidden="true"></li>
+          </ol>
+
+          <p class="chat-dica">
+            <img src="img/icones/escudo-pata.svg" alt="" width="22" height="22" />
+            <span>A adoção é sempre gratuita ou com taxa voluntária. Desconfie de pedidos de pagamento e <a href="ajuda.html#falar">avise o suporte</a>.</span>
+          </p>
+
+          <form class="chat-form" action="/api/conversas/2/mensagens" method="post" data-proprio>
+            <label class="visualmente-oculto" for="chat-texto">Mensagem para ONG Amigos de Patas</label>
+            <textarea id="chat-texto" name="texto" rows="1" maxlength="1000" placeholder="Escreva uma mensagem" required></textarea>
+            <button type="submit" class="chat-enviar" aria-label="Enviar mensagem"></button>
+          </form>
+        <!-- /dados:conversa --></section>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/app.js" defer></script>
+    <script src="scripts/conversas.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  </body>
+</html>
