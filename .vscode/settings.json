@@ -1,0 +1,5 @@
+{
+  // A pasta .node guarda o Node.js portátil baixado pelo iniciar.bat: não precisa aparecer
+  "files.exclude": { ".node": true },
+  "search.exclude": { ".node": true, "Servidor/dados": true }
+}
