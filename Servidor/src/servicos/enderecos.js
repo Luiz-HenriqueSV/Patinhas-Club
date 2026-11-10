@@ -4,6 +4,8 @@ const geo = require('./geocodificacao');
 const { consulta } = require('../banco');
 const { ErroValidacao, nomeProprio } = require('../util/validacao');
 
+const semAcento = (texto) => String(texto).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+
 /**
  * Acha a cidade ou cria se ainda não existe. Sem a UF, procura pelo nome no
  * banco e, se não achar, pergunta ao mapa em que estado ela fica.
@@ -21,9 +23,15 @@ async function idDaCidade(q, { cidade, uf, ibge = null }) {
   const [estado] = await q('SELECT id FROM estados WHERE sigla = ?', [sigla]);
   if (!estado) throw new ErroValidacao({ estado: 'Escolha um estado válido.' });
 
-  const nome = /[A-ZÀ-Ú]/.test(cidade) ? cidade : nomeProprio(cidade);
-  await q('INSERT IGNORE INTO cidades (estado_id, nome, codigo_ibge) VALUES (?, ?, ?)', [estado.id, nome, ibge || null]);
-  let [linha] = await q('SELECT id, codigo_ibge FROM cidades WHERE estado_id = ? AND nome = ?', [estado.id, nome]);
+  // "Sao Paulo" e "São Paulo" são a mesma cidade: compara sem acento e sem maiúsculas
+  const procurada = semAcento(cidade);
+  const doEstado = await q('SELECT id, nome, codigo_ibge FROM cidades WHERE estado_id = ?', [estado.id]);
+  let linha = doEstado.find((c) => semAcento(c.nome) === procurada);
+  if (!linha) {
+    const nome = /[A-ZÀ-Ú]/.test(cidade) ? cidade : nomeProprio(cidade);
+    await q('INSERT IGNORE INTO cidades (estado_id, nome, codigo_ibge) VALUES (?, ?, ?)', [estado.id, nome, ibge || null]);
+    [linha] = await q('SELECT id, codigo_ibge FROM cidades WHERE estado_id = ? AND nome = ?', [estado.id, nome]);
+  }
   if (!linha && ibge) [linha] = await q('SELECT id, codigo_ibge FROM cidades WHERE codigo_ibge = ?', [ibge]);
   if (!linha) throw new ErroValidacao({ cidade: 'Não foi possível registrar essa cidade.' });
   if (ibge && !linha.codigo_ibge) await q('UPDATE cidades SET codigo_ibge = ? WHERE id = ?', [ibge, linha.id]);
