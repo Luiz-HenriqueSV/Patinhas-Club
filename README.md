@@ -1,8 +1,4 @@
 # 🐾 Patinhas Club
-Macacos nao me mordam!
-macacos me mordam
-
-Macacos me mordam
 
 ### Adotar, resgatar e reencontrar num só lugar.
 
@@ -135,8 +131,8 @@ Cadastro e autenticação com perfis próprios para **adotantes** e para **ONGs/
 
 | Camada                | Tecnologia                                 |
 | --------------------- | ------------------------------------------ |
-| Front-end             | HTML5 e CSS3 (nesta etapa, sem JavaScript) |
-| Back-end              | _a definir_                                |
+| Front-end             | HTML5 e CSS3, JavaScript                   |
+| Back-end              | JavaScript                                |
 | Banco de dados        | MySQL                                      |
 | Design / Prototipação | Figma, INkscape, Photopea                  |
 
@@ -342,25 +338,3 @@ Sugestões e melhorias são bem-vindas! Para contribuir:
 **Feito com 💚 para quem ama os bichinhos.**
 
 🐾 _Patinhas Club: adotar, resgatar e reencontrar._
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Linha 352 XD --- teste23
