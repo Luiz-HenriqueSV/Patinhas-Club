@@ -150,9 +150,9 @@ Cadastro e autenticação com perfis próprios para **adotantes**, **ONGs/protet
 | Camada                | Tecnologia                                 |
 | --------------------- | ------------------------------------------ |
 | Front-end             | HTML5 e CSS3; JavaScript na localização, no chat e no envio dos formulários |
-| Back-end              | Node.js 20+ com Express 5                  |
+| Back-end              | Node.js 22+ com Express 5                  |
 | Tempo real            | Server-Sent Events (SSE), sem biblioteca extra |
-| Banco de dados        | MySQL 8 (ou MariaDB 10.4+, o do XAMPP), inclusive para as sessões de login |
+| Banco de dados        | Scripts em MySQL. Roda no banco embutido (SQLite do próprio Node, sem instalar nada) ou no MySQL 8/MariaDB do XAMPP; as sessões de login também ficam no banco |
 | Mapas e endereços     | Leaflet + OpenStreetMap, Nominatim e ViaCEP |
 | Design / Prototipação | Figma, Inkscape, Photopea                  |
 
@@ -162,14 +162,20 @@ Cadastro e autenticação com perfis próprios para **adotantes**, **ONGs/protet
 
 **Só o visual (protótipo):** abra `Web/index.html` com a extensão **Live Server** do VS Code. Os formulários seguem o fluxo do protótipo (nada é salvo) e o localizador funciona, falando direto com o OpenStreetMap e a ViaCEP.
 
-**Completo, com banco de dados (o jeito mais rápido):**
+**Completo, com banco de dados — sem instalar nada:**
 
-1. Instale o [Node.js](https://nodejs.org) 20 ou mais novo e o XAMPP (ou o MySQL 8).
-2. Abra o XAMPP e clique em **Start** no MySQL.
-3. Dê dois cliques em **`iniciar.bat`** (no Linux ou macOS, rode `./iniciar.sh`). Ele instala o que falta, cria o `.env` e abre o site em http://localhost:3000.
-4. Na primeira vez, o servidor **cria o banco `patinhas` sozinho** com os dados de demonstração.
+1. Dê dois cliques em **`iniciar.bat`** (no Linux ou macOS, `./iniciar.sh`).
+2. Pronto: o navegador abre sozinho em http://localhost:3000.
 
-**Pelo terminal:** na pasta `Servidor`, copie `.env.exemplo` para `.env` (ajuste usuário e senha do MySQL se não forem os do XAMPP) e rode:
+Na primeira vez ele precisa de internet e faz três coisas sozinho: baixa um **Node.js portátil só para a pasta do projeto** (pasta `.node`, cerca de 30 MB, só se o computador não tiver o Node 22.13 ou mais novo; nada é instalado no Windows), instala as bibliotecas do servidor e **cria o banco** com os dados de demonstração. Das outras vezes liga em segundos, até sem internet.
+
+**Pelo VS Code:** abra a pasta do projeto e aperte **Ctrl+Shift+B** (tarefa *Iniciar Patinhas Club*), ou **F5** para ligar com o depurador (pontos de parada no código do `Servidor` funcionam). Para voltar o banco aos dados de exemplo: *Terminal > Executar Tarefa > Recriar banco de dados e iniciar* (ou `iniciar.bat banco`). A extensão recomendada **SQLite Viewer** abre o arquivo `Servidor/dados/patinhas.db` e mostra as tabelas.
+
+**O banco embutido:** é o SQLite que já vem dentro do Node, guardado no arquivo `Servidor/dados/patinhas.db`. Os scripts continuam em MySQL (`Banco de dados/01-esquema.sql` e `02-dados-iniciais.sql`) e o servidor traduz na hora o que muda (`AUTO_INCREMENT`, `ENUM`, `INSERT IGNORE`, `INTERVAL`, `ON DUPLICATE KEY UPDATE`...), então o mesmo SQL roda nos dois. Se alguém da equipe mudar os scripts, o servidor avisa ao ligar e basta rodar `iniciar.bat banco`.
+
+**Com o MySQL do XAMPP (opcional):** ligue o MySQL no XAMPP, coloque `BANCO=mysql` no arquivo `Servidor/.env` (usuário e senha do MySQL também ficam lá) e use o `iniciar.bat` normalmente. O banco `patinhas` é criado sozinho na primeira vez.
+
+**Pelo terminal (com Node 22.13+ instalado):** na pasta `Servidor`:
 
 ```bash
 npm install
@@ -187,7 +193,7 @@ Contas de teste (senha `patinhas123`):
 
 Para conferir a conexão com o banco, abra http://localhost:3000/api/saude (`"banco": "conectado"`).
 
-Se preferir rodar o SQL na mão (Workbench, phpMyAdmin), execute `Banco de dados/01-esquema.sql` e depois `02-dados-iniciais.sql`.
+No MySQL, se preferir rodar o SQL na mão (Workbench, phpMyAdmin), execute `Banco de dados/01-esquema.sql` e depois `02-dados-iniciais.sql`.
 
 **No celular:** a localização do navegador só funciona em endereço seguro (`https://` ou `localhost`). Para testar o GPS de verdade no celular, publique o site com HTTPS ou use um túnel como `npx localtunnel --port 3000`.
 
@@ -369,9 +375,9 @@ O servidor (`Servidor/`, Node.js + Express) entrega as páginas da pasta `Web` t
 | `POST /api/admin/ongs/:id/aprovar` · `POST /api/admin/ongs/:id/recusar` · `POST /api/admin/denuncias/:id` · `POST /api/admin/chamados/:id/mensagens` · `GET /api/admin/documentos/:id` | Administração (exige conta da equipe) |
 | `GET /api/saude` | Diz se o banco está conectado |
 
-Segurança: senhas com `scrypt`, sessão guardada no MySQL com cookie `httpOnly` e `SameSite`, cada área liberada só para o tipo de conta certo, limite de tentativas no login, consultas sempre com parâmetros (`?`), todo texto do banco escapado no HTML e documentos enviados fora da pasta pública.
+Segurança: senhas com `scrypt`, sessão guardada no banco com cookie `httpOnly` e `SameSite`, cada área liberada só para o tipo de conta certo, limite de tentativas no login, consultas sempre com parâmetros (`?`), todo texto do banco escapado no HTML e documentos enviados fora da pasta pública.
 
-Testes: `npm test` (unidade, sem banco) e `npm run teste:fluxos` (ponta a ponta: chat, suporte, administração, favoritos e conta; precisa do servidor ligado e do banco recém-criado com `npm run banco`).
+Testes: `npm test` (unidade, inclusive a tradução do SQL para o banco embutido) e `npm run teste:fluxos` (ponta a ponta: cadastros com fotos e documentos, anúncios, denúncias, animais, campanhas, lista de espera, chat, suporte, administração e todas as páginas; precisa do servidor ligado e do banco recém-criado com `npm run banco`).
 
 ---
 
