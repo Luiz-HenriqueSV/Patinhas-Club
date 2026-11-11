@@ -109,17 +109,17 @@
               <div class="campos">
                 <div class="campo">
                   <label for="nome-animal">Nome <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="nome-animal" name="nome" placeholder="Ex.: Churros" required />
+                  <input type="text" id="nome-animal" name="nome" placeholder="Ex.: Churros" required maxlength="80" />
                 </div>
 
                 <div class="campo">
                   <label for="raca">Raça</label>
-                  <input type="text" id="raca" name="raca" placeholder="Sem raça definida" />
+                  <input type="text" id="raca" name="raca" placeholder="Sem raça definida" maxlength="60" />
                 </div>
 
                 <div class="campo">
                   <label for="cor">Cor da pelagem</label>
-                  <input type="text" id="cor" name="cor" placeholder="Ex.: caramelo com peito branco" />
+                  <input type="text" id="cor" name="cor" placeholder="Ex.: caramelo com peito branco" maxlength="80" />
                 </div>
               </div>
 
@@ -196,7 +196,7 @@
 
               <div class="campo">
                 <label for="cuidados">Cuidados especiais</label>
-                <textarea id="cuidados" name="cuidados" rows="3" placeholder="Ex.: toma remédio para as articulações duas vezes ao dia."></textarea>
+                <textarea id="cuidados" name="cuidados" rows="3" placeholder="Ex.: toma remédio para as articulações duas vezes ao dia." maxlength="2000"></textarea>
               </div>
             </fieldset>
 
@@ -248,7 +248,7 @@
               <div class="campos">
                 <div class="campo">
                   <label for="cidade-animal">Cidade onde ele está <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="cidade-animal" name="cidade" value="Diadema, SP" required />
+                  <input type="text" id="cidade-animal" name="cidade" value="Diadema, SP" required maxlength="100" />
                 </div>
 
                 <fieldset class="grupo">
@@ -272,7 +272,7 @@
 
               <div class="campo">
                 <label for="observacoes">Recado para quem vai adotar</label>
-                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex.: Ele se adapta melhor em casa com alguém por perto durante o dia."></textarea>
+                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex.: Ele se adapta melhor em casa com alguém por perto durante o dia." maxlength="2000"></textarea>
               </div>
             </fieldset>
 

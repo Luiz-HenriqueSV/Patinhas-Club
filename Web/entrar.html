@@ -70,13 +70,13 @@
             <form class="entrar-painel" id="form-adotante" action="/api/entrar" method="post" data-prototipo="minha-conta.html" aria-label="Entrar como adotante">
               <div class="campo">
                 <label for="email-adotante">E-mail</label>
-                <input type="email" id="email-adotante" name="email" autocomplete="email" placeholder="voce@email.com" required />
+                <input type="email" id="email-adotante" name="email" autocomplete="email" placeholder="voce@email.com" required maxlength="150" />
                 <small class="msg-erro">Digite o e-mail que você usou no cadastro.</small>
               </div>
 
               <div class="campo">
                 <label for="senha-adotante">Senha</label>
-                <input type="password" id="senha-adotante" name="senha" autocomplete="current-password" minlength="8" required />
+                <input type="password" id="senha-adotante" name="senha" autocomplete="current-password" minlength="8" required maxlength="128" />
                 <small class="msg-erro">A senha tem pelo menos 8 caracteres.</small>
               </div>
 
@@ -98,13 +98,13 @@
             <form class="entrar-painel" id="form-ong" action="/api/entrar" method="post" data-prototipo="painel-ong.html" aria-label="Entrar como ONG ou protetor">
               <div class="campo">
                 <label for="email-ong">E-mail da organização</label>
-                <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required />
+                <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required maxlength="150" />
                 <small class="msg-erro">Digite o e-mail cadastrado da ONG.</small>
               </div>
 
               <div class="campo">
                 <label for="senha-ong">Senha</label>
-                <input type="password" id="senha-ong" name="senha" autocomplete="current-password" minlength="8" required />
+                <input type="password" id="senha-ong" name="senha" autocomplete="current-password" minlength="8" required maxlength="128" />
                 <small class="msg-erro">A senha tem pelo menos 8 caracteres.</small>
               </div>
 
@@ -129,7 +129,7 @@
 
               <div class="campo">
                 <label for="email-recuperar">E-mail</label>
-                <input type="email" id="email-recuperar" name="email" autocomplete="email" required />
+                <input type="email" id="email-recuperar" name="email" autocomplete="email" required maxlength="150" />
               </div>
 
               <div class="form-botoes entrar-linha">

@@ -249,7 +249,7 @@
                 </div>
                 <div class="campo">
                   <label for="dados-telefone">Telefone ou WhatsApp</label>
-                  <input type="tel" id="dados-telefone" name="telefone" value="(11) 98765-0007" autocomplete="tel" required />
+                  <input type="tel" id="dados-telefone" name="telefone" value="(11) 98765-0007" autocomplete="tel" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" placeholder="(11) 91234-5678" />
                 </div>
                 <div class="campo">
                   <label for="dados-email">E-mail</label>
@@ -272,11 +272,11 @@
               <div class="campos">
                 <div class="campo">
                   <label for="senha-atual">Senha atual</label>
-                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required />
+                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required maxlength="128" />
                 </div>
                 <div class="campo">
                   <label for="senha-nova">Nova senha</label>
-                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" />
+                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" maxlength="128" />
                   <small class="dica" id="senha-nova-dica">Pelo menos 8 caracteres.</small>
                 </div>
               </div>

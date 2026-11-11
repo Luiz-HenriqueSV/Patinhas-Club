@@ -150,6 +150,68 @@
     avisarRodape.relogio = setTimeout(() => caixa.classList.remove('visivel'), 4000);
   }
 
+  /* ---------- Campos com formato: CPF, CNPJ, telefone, CEP e números ---------- */
+  // Aceitam só números, no tamanho que o banco guarda, e mostram o formato
+  // enquanto a pessoa digita (sem JavaScript, o pattern do HTML confere no envio).
+  const FORMATOS = {
+    cpf: () => '000.000.000-00',
+    cnpj: () => '00.000.000/0000-00',
+    documento: (d) => (d.length > 11 ? '00.000.000/0000-00' : '000.000.000-00'),
+    telefone: (d) => (d.length > 10 ? '(00) 00000-0000' : '(00) 0000-0000'),
+    cep: () => '00000-000',
+  };
+  const anteriores = new WeakMap();
+
+  function aplicarFormato(formato, digitos) {
+    let saida = '';
+    let i = 0;
+    for (const c of formato) {
+      if (i >= digitos.length) break;
+      saida += c === '0' ? digitos[i++] : c;
+    }
+    return saida;
+  }
+
+  function mascarar(campo, evento) {
+    const tipo = campo.dataset.mascara;
+    if (!tipo || (tipo !== 'numero' && !FORMATOS[tipo])) return;
+    const antes = campo.value;
+    const cursor = typeof campo.selectionStart === 'number' ? campo.selectionStart : antes.length;
+    let noCursor = antes.slice(0, cursor).replace(/\D/g, '').length;
+    let digitos = antes.replace(/\D/g, '');
+    const anterior = anteriores.get(campo);
+    // Apagou só um separador ("-", ".", ")"): apaga também o número antes dele
+    if (evento && evento.inputType === 'deleteContentBackward' && anterior !== undefined
+        && digitos === anterior.replace(/\D/g, '') && noCursor > 0) {
+      digitos = digitos.slice(0, noCursor - 1) + digitos.slice(noCursor);
+      noCursor -= 1;
+    }
+    let novo;
+    if (tipo === 'numero') {
+      novo = digitos.slice(0, Number(campo.getAttribute('maxlength')) || 10);
+    } else {
+      const maximo = FORMATOS[tipo]('0'.repeat(14)).split('0').length - 1;
+      digitos = digitos.slice(0, maximo);
+      novo = aplicarFormato(FORMATOS[tipo](digitos), digitos);
+    }
+    anteriores.set(campo, novo);
+    if (novo === antes) return;
+    campo.value = novo;
+    if (document.activeElement === campo) {
+      let pos = 0;
+      for (let vistos = 0; pos < novo.length && vistos < noCursor; pos++) if (/\d/.test(novo[pos])) vistos++;
+      campo.setSelectionRange(pos, pos);
+    }
+  }
+
+  // Na captura, antes dos outros scripts lerem o campo (a busca de CEP, por exemplo)
+  document.addEventListener('input', (e) => {
+    if (e.target instanceof HTMLInputElement && e.target.dataset.mascara) mascarar(e.target, e);
+  }, true);
+  const mascararTodos = () => document.querySelectorAll('input[data-mascara]').forEach((c) => mascarar(c));
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mascararTodos);
+  else mascararTodos();
+
   /* ---------- Quem está logado não precisa digitar o contato de novo ---------- */
 
   async function preencherContato() {
@@ -167,7 +229,7 @@
       if (/lista-de-espera|ong\/animais/.test(acao)) Object.assign(campos, { cidade: u.cidade, estado: u.uf });
       for (const [nome, valor] of Object.entries(campos)) {
         const el = form.querySelector(`[name="${nome}"]:not([type="hidden"])`);
-        if (el && valor && !el.value) el.value = valor;
+        if (el && valor && !el.value) { el.value = valor; mascarar(el); }
       }
     }
   }

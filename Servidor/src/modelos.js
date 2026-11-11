@@ -142,19 +142,19 @@ function cartaoAnimal(a, n, { conta = null, favoritos = new Set() } = {}) {
                     <div class="campos">
                       <div class="campo">
                         <label for="adotar-nome-${n}">Seu nome <span class="obrigatorio" aria-hidden="true">*</span></label>
-                        <input type="text" id="adotar-nome-${n}" name="nome" autocomplete="name" required />
+                        <input type="text" id="adotar-nome-${n}" name="nome" autocomplete="name" required maxlength="120" />
                       </div>
 
                       <div class="campo">
                         <label for="adotar-tel-${n}">Telefone ou WhatsApp <span class="obrigatorio" aria-hidden="true">*</span></label>
                         <input type="tel" id="adotar-tel-${n}" name="telefone" placeholder="(11) 90000-0000" autocomplete="tel" required
-                          pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" title="DDD e número, como (11) 90000-0000" />
+                          pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" title="DDD e número, como (11) 90000-0000" maxlength="15" inputmode="tel" data-mascara="telefone" />
                         <small class="msg-erro">Coloque o DDD e o número.</small>
                       </div>
 
                       <div class="campo">
                         <label for="adotar-email-${n}">E-mail</label>
-                        <input type="email" id="adotar-email-${n}" name="email" placeholder="voce@email.com" autocomplete="email" />
+                        <input type="email" id="adotar-email-${n}" name="email" placeholder="voce@email.com" autocomplete="email" maxlength="150" />
                       </div>
 
                       <div class="campo">
@@ -218,7 +218,7 @@ function formEncontrei(a, n, nome) {
                     <div class="campos">
                       <div class="campo campo-largo">
                         <label for="enc-onde-${n}">Onde você viu? <span class="obrigatorio" aria-hidden="true">*</span></label>
-                        <input type="text" id="enc-onde-${n}" name="onde" placeholder="Endereço ou ponto de referência" required />
+                        <input type="text" id="enc-onde-${n}" name="onde" placeholder="Endereço ou ponto de referência" required maxlength="200" />
                       </div>
 
                       <div class="campo">
@@ -239,7 +239,7 @@ function formEncontrei(a, n, nome) {
 
                       <div class="campo campo-largo">
                         <label for="enc-obs-${n}">Mais detalhes</label>
-                        <textarea id="enc-obs-${n}" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+                        <textarea id="enc-obs-${n}" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..." maxlength="1000"></textarea>
                       </div>
 
                       <div class="campo">
@@ -249,7 +249,7 @@ function formEncontrei(a, n, nome) {
 
                       <div class="campo">
                         <label for="enc-contato-${n}">Seu contato <span class="obrigatorio" aria-hidden="true">*</span></label>
-                        <input type="text" id="enc-contato-${n}" name="contato" placeholder="Telefone ou e-mail" required />
+                        <input type="text" id="enc-contato-${n}" name="contato" placeholder="Telefone ou e-mail" required maxlength="150" />
                       </div>
                     </div>
                   </fieldset>
@@ -688,7 +688,7 @@ const formDadosAdotante = (d) => `
                 </div>
                 <div class="campo">
                   <label for="dados-telefone">Telefone ou WhatsApp</label>
-                  <input type="tel" id="dados-telefone" name="telefone" value="${esc(telefoneBr(d.telefone))}" autocomplete="tel" required />
+                  <input type="tel" id="dados-telefone" name="telefone" value="${esc(telefoneBr(d.telefone))}" autocomplete="tel" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" placeholder="(11) 91234-5678" />
                 </div>
                 <div class="campo">
                   <label for="dados-email">E-mail</label>
@@ -713,11 +713,11 @@ const formSenha = () => `
               <div class="campos">
                 <div class="campo">
                   <label for="senha-atual">Senha atual</label>
-                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required />
+                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required maxlength="128" />
                 </div>
                 <div class="campo">
                   <label for="senha-nova">Nova senha</label>
-                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" />
+                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" maxlength="128" />
                   <small class="dica" id="senha-nova-dica">Pelo menos 8 caracteres.</small>
                 </div>
               </div>
@@ -736,7 +736,7 @@ const formPerfilOng = (o) => `
                 </div>
                 <div class="campo">
                   <label for="perfil-telefone">Telefone ou WhatsApp</label>
-                  <input type="tel" id="perfil-telefone" name="telefone" value="${esc(telefoneBr(o.telefone))}" required />
+                  <input type="tel" id="perfil-telefone" name="telefone" value="${esc(telefoneBr(o.telefone))}" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" placeholder="(11) 91234-5678" />
                 </div>
                 <div class="campo">
                   <label for="perfil-rede">Rede social ou site</label>
