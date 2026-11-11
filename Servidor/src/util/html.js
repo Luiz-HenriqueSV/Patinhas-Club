@@ -50,6 +50,24 @@ function horaCurta(texto) {
   return `${Number(m[1])}h${m[2] === '00' ? '' : m[2]}`;
 }
 
+/** "2026-10-08 14:30:00" -> "14:30" */
+const horaMinuto = (texto) => String(texto || '').slice(11, 16);
+
+/** Dia de calendário anterior a "2026-10-08" -> "2026-10-07" */
+function diaAnterior(dia) {
+  const d = new Date(`${dia}T12:00:00Z`);
+  d.setUTCDate(d.getUTCDate() - 1);
+  return d.toISOString().slice(0, 10);
+}
+
+/** "Hoje", "Ontem" ou a data por extenso curto, comparando com o dia de hoje ("2026-10-08"). */
+function rotuloDia(texto, hoje) {
+  const dia = String(texto || '').slice(0, 10);
+  if (dia === hoje) return 'Hoje';
+  if (dia === diaAnterior(hoje)) return 'Ontem';
+  return dataBr(dia);
+}
+
 /** "11995449612" -> "(11) 99544-9612" */
 function telefoneBr(d) {
   const s = String(d || '');
@@ -111,5 +129,5 @@ function paginaSimples({ titulo, mensagem = '', erros = null, corpo = '', voltar
 }
 
 module.exports = {
-  esc, trocarBloco, dataBr, diaMes, diaDaSemana, horaCurta, telefoneBr, telLink, numeroBr, iniciais, resumo, paginaSimples,
+  esc, trocarBloco, dataBr, diaMes, diaDaSemana, horaCurta, horaMinuto, rotuloDia, diaAnterior, telefoneBr, telLink, numeroBr, iniciais, resumo, paginaSimples,
 };

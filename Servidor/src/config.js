@@ -19,11 +19,17 @@ module.exports = {
   producao,
   segredoSessao: segredo || 'patinhas-segredo-so-para-desenvolvimento',
   banco: {
-    host: process.env.DB_HOST || 'localhost',
-    port: Number(process.env.DB_PORTA) || 3306,
-    user: process.env.DB_USUARIO || 'root',
-    password: process.env.DB_SENHA || '',
-    database: process.env.DB_NOME || 'patinhas',
+    // "embutido" (padrão): SQLite que vem dentro do Node, sem instalar nada; o banco é um arquivo.
+    // "mysql": MySQL/MariaDB de verdade (XAMPP), com os dados de acesso abaixo.
+    tipo: String(process.env.BANCO || 'embutido').trim().toLowerCase() === 'mysql' ? 'mysql' : 'embutido',
+    arquivo: path.resolve(raiz, process.env.BANCO_ARQUIVO || path.join('dados', 'patinhas.db')),
+    mysql: {
+      host: process.env.DB_HOST || 'localhost',
+      port: Number(process.env.DB_PORTA) || 3306,
+      user: process.env.DB_USUARIO || 'root',
+      password: process.env.DB_SENHA || '',
+      database: process.env.DB_NOME || 'patinhas',
+    },
   },
   pastas: {
     web: path.join(raiz, '..', 'Web'),

@@ -1,0 +1,4 @@
+{
+  // SQLite Viewer: clique em Servidor/dados/patinhas.db para ver as tabelas do banco dentro do VS Code
+  "recommendations": ["qwtel.sqlite-viewer"]
+}

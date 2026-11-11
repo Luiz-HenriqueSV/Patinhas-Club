@@ -64,6 +64,9 @@
               <li><a href="#favoritos">Favoritos</a></li>
               <li><a href="#alertas">Alertas</a></li>
               <li><a href="#anuncios">Meus anúncios</a></li>
+              <li><a href="#dados">Meus dados</a></li>
+              <li><a href="mensagens.html">Mensagens <!-- dados:contador-mensagens --><span class="contador" data-nao-lidas>1</span><!-- /dados:contador-mensagens --></a></li>
+              <li><a href="ajuda.html">Ajuda</a></li>
             </ul>
           </nav>
 
@@ -89,6 +92,24 @@
               </div>
               <a class="aviso-fechar" href="#fechar">Fechar</a>
             </div>
+
+            <div class="aviso" id="dados-salvos" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Dados atualizados</p>
+                <p>As ONGs passam a ver os dados novos nos próximos pedidos.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso" id="senha-trocada" role="status">
+              <img src="img/icones/escudo-check.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Senha trocada</p>
+                <p>Use a senha nova da próxima vez que entrar.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
           </div>
 
           <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
@@ -99,9 +120,22 @@
               </div>
               <div class="grupo-botoes">
                 <a class="botao escuro" href="adocao.html">Ver animais</a>
-                <a class="botao secundario" href="cadastro-adotante.html">Editar dados</a>
+                <a class="botao secundario" href="#dados">Editar dados</a>
               </div>
             </div>
+            <!-- dados:novidades -->
+            <div class="novidades-bloco">
+              <h2 class="visualmente-oculto">Novidades</h2>
+              <ul class="novidades">
+                <li>
+                  <a href="mensagens.html">
+                    <img src="img/icones/pata.svg" alt="" width="30" height="30" />
+                    <span><strong>Pedido para Mel: novidade</strong><small>A ONG quer conhecer você! Combine o dia da visita pelo chat, em Mensagens.</small></span>
+                    <time datetime="2026-11-08T10:00:00">08/11</time>
+                  </a>
+                </li>
+              </ul>
+            </div><!-- /dados:novidades -->
           </section>
 
           <section class="painel-secao" id="pedidos" aria-labelledby="titulo-pedidos">
@@ -135,7 +169,7 @@
                   <li>Visita</li>
                   <li>Adoção</li>
                 </ol>
-                <p class="pedido-proximo"><strong>Próximo passo:</strong> a ONG responde em até 3 dias úteis pelo WhatsApp que você informou.</p>
+                <p class="pedido-proximo"><strong>Próximo passo:</strong> a ONG responde em até 3 dias úteis, pelo chat em Mensagens ou pelo telefone que você informou.</p>
               </div>
             </article>
           <!-- /dados:pedidos --></section>
@@ -200,6 +234,55 @@
               <a class="botao secundario pequeno" href="reportar-desaparecimento.html">Publicar anúncio</a>
             </div>
           <!-- /dados:anuncios --></section>
+
+          <section class="painel-secao" id="dados" aria-labelledby="titulo-dados">
+            <header>
+              <h2 id="titulo-dados">Meus dados</h2>
+            </header>
+            <!-- dados:dados -->
+            <form class="painel-form" action="/api/conta/dados" method="post" data-manter data-prototipo="minha-conta.html#dados-salvos">
+              <h3>Dados pessoais</h3>
+              <div class="campos">
+                <div class="campo">
+                  <label for="dados-nome">Nome completo</label>
+                  <input type="text" id="dados-nome" name="nome" value="Juliana Mendes" autocomplete="name" maxlength="120" required />
+                </div>
+                <div class="campo">
+                  <label for="dados-telefone">Telefone ou WhatsApp</label>
+                  <input type="tel" id="dados-telefone" name="telefone" value="(11) 98765-0007" autocomplete="tel" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" placeholder="(11) 91234-5678" />
+                </div>
+                <div class="campo">
+                  <label for="dados-email">E-mail</label>
+                  <input type="email" id="dados-email" value="adotante@patinhasclub.test" disabled aria-describedby="dados-email-dica" />
+                  <small class="dica" id="dados-email-dica">Para trocar o e-mail, fale com o suporte.</small>
+                </div>
+                <div class="campo">
+                  <label for="dados-moradia">Onde você mora</label>
+                  <select id="dados-moradia" name="moradia" required><option value="casa" selected>Casa</option><option value="casa-quintal">Casa com quintal</option><option value="apartamento">Apartamento</option></select>
+                </div>
+                <div class="campo campo-largo campo-checkbox">
+                  <input type="checkbox" id="dados-alertas" name="recebe_alertas" value="sim" checked />
+                  <label for="dados-alertas">Quero receber por e-mail os avisos da lista de espera</label>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao primario">Salvar dados</button></div>
+            </form>
+            <form class="painel-form" action="/api/conta/senha" method="post" data-prototipo="minha-conta.html#dados-salvos">
+              <h3>Trocar a senha</h3>
+              <div class="campos">
+                <div class="campo">
+                  <label for="senha-atual">Senha atual</label>
+                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required maxlength="128" />
+                </div>
+                <div class="campo">
+                  <label for="senha-nova">Nova senha</label>
+                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" maxlength="128" />
+                  <small class="dica" id="senha-nova-dica">Pelo menos 8 caracteres.</small>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao secundario">Trocar senha</button></div>
+            </form><!-- /dados:dados -->
+          </section>
         </div>
       </div>
     </main>
@@ -239,6 +322,7 @@
             <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
             <li><a href="ongs.html">ONGs parceiras</a></li>
             <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
           </ul>
         </nav>
       </div>

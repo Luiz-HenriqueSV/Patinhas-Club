@@ -110,7 +110,7 @@
               <div class="campos">
                 <div class="campo">
                   <label for="nome-animal">Nome do animal <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="nome-animal" name="nome_animal" placeholder="Ex.: Thor" required />
+                  <input type="text" id="nome-animal" name="nome_animal" placeholder="Ex.: Thor" required maxlength="80" />
                 </div>
 
                 <div class="campo">
@@ -125,7 +125,7 @@
 
                 <div class="campo">
                   <label for="raca">Raça</label>
-                  <input type="text" id="raca" name="raca" placeholder="Se não souber, deixe em branco" />
+                  <input type="text" id="raca" name="raca" placeholder="Se não souber, deixe em branco" maxlength="60" />
                 </div>
 
                 <div class="campo">
@@ -160,13 +160,13 @@
 
                 <div class="campo campo-largo">
                   <label for="cor">Cor da pelagem <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="cor" name="cor" placeholder="Ex.: caramelo com mancha branca no peito" required />
+                  <input type="text" id="cor" name="cor" placeholder="Ex.: caramelo com mancha branca no peito" required maxlength="80" />
                 </div>
 
                 <div class="campo campo-largo">
                   <label for="caracteristicas">Características e comportamento</label>
                   <textarea id="caracteristicas" name="caracteristicas" rows="4"
-                    placeholder="Ex.: coleira azul, manca de uma pata, assustado com estranhos, atende pelo nome..."></textarea>
+                    placeholder="Ex.: coleira azul, manca de uma pata, assustado com estranhos, atende pelo nome..." maxlength="1000"></textarea>
                 </div>
 
                 <div class="campo campo-largo campo-checkbox">
@@ -191,17 +191,17 @@
               <div class="campos">
                 <div class="campo campo-largo">
                   <label for="endereco">Endereço ou ponto de referência <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Exemplo, 123, perto da padaria" required />
+                  <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Exemplo, 123, perto da padaria" required maxlength="150" />
                 </div>
 
                 <div class="campo">
                   <label for="bairro">Bairro <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="bairro" name="bairro" required />
+                  <input type="text" id="bairro" name="bairro" required maxlength="80" />
                 </div>
 
                 <div class="campo">
                   <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required />
+                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required maxlength="100" />
                 </div>
 
                 <div class="campo">
@@ -241,7 +241,7 @@
                 <div class="campo">
                   <label for="cep">CEP</label>
                   <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9"
-                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" />
+                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" data-mascara="cep" />
                   <small class="msg-erro">O CEP tem 8 números, como 09910-000.</small>
                 </div>
 
@@ -258,7 +258,7 @@
                 <div class="campo campo-largo">
                   <label for="circunstancias">Como ele desapareceu?</label>
                   <textarea id="circunstancias" name="circunstancias" rows="3"
-                    placeholder="Ex.: fugiu pelo portão aberto, se assustou com fogos..."></textarea>
+                    placeholder="Ex.: fugiu pelo portão aberto, se assustou com fogos..." maxlength="1000"></textarea>
                 </div>
               </div>
             </fieldset>
@@ -269,19 +269,19 @@
               <div class="campos">
                 <div class="campo campo-largo">
                   <label for="nome-tutor">Seu nome <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="nome-tutor" name="nome_tutor" autocomplete="name" required />
+                  <input type="text" id="nome-tutor" name="nome_tutor" autocomplete="name" required maxlength="120" />
                 </div>
 
                 <div class="campo">
                   <label for="telefone">Telefone ou WhatsApp <span class="obrigatorio" aria-hidden="true">*</span></label>
                   <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000" required
-                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" maxlength="15" inputmode="tel" data-mascara="telefone" />
                   <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
                 </div>
 
                 <div class="campo">
                   <label for="email">E-mail</label>
-                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" />
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" maxlength="150" />
                 </div>
 
                 <div class="campo campo-largo campo-checkbox">
@@ -338,6 +338,7 @@
             <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
             <li><a href="ongs.html">ONGs parceiras</a></li>
             <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
           </ul>
         </nav>
       </div>

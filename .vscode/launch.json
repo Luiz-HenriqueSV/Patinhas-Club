@@ -1,0 +1,15 @@
+{
+  // F5 liga o site com o depurador do VS Code: pontos de parada no código do Servidor funcionam.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Iniciar Patinhas Club (F5, com depurador)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "bash iniciar.sh",
+      "windows": { "command": "cmd /d /c iniciar.bat" },
+      "cwd": "${workspaceFolder}",
+      "env": { "SEM_PAUSA": "1" }
+    }
+  ]
+}

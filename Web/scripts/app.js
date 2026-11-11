@@ -20,6 +20,7 @@
 
   document.addEventListener('submit', async (evento) => {
     const form = evento.target;
+    if (form.hasAttribute('data-proprio')) return; // o chat (conversas.js) cuida do próprio envio
     const botao = evento.submitter;
     const acao = (botao && botao.getAttribute('formaction')) || form.getAttribute('action');
     if (!ehApi(acao)) return;
@@ -45,10 +46,11 @@
       const corpo = await resposta.json().catch(() => null);
       if (!corpo) throw new TypeError('Resposta sem JSON');
       if (corpo.ok) {
-        form.reset();
-        return irPara(corpo.redirecionar);
+        if (form.hasAttribute('data-favorito')) return marcarFavorito(form, corpo.favorito);
+        if (!form.hasAttribute('data-manter')) form.reset();
+        return irPara(corpo.redirecionar, { recarregar: true });
       }
-      if (resposta.status === 401 && corpo.redirecionar) return irPara(corpo.redirecionar); // precisa entrar
+      if ([401, 403].includes(resposta.status) && corpo.redirecionar) return irPara(corpo.redirecionar); // precisa entrar
       mostrarErros(form, corpo);
     } catch (erro) {
       mostrarErros(form, { mensagem: 'Não foi possível falar com o servidor. Confira sua conexão e tente de novo.' });
@@ -64,15 +66,33 @@
     setTimeout(() => { form.reset(); irPara(destino); }, 1400);
   }
 
-  function irPara(url) {
+  /**
+   * Vai para o endereço que o servidor mandou. Quando é a própria página (ex.: painel#pedido-recusado),
+   * recarrega para mostrar os dados novos do banco, já com o aviso do #endereço aberto.
+   */
+  function irPara(url, { recarregar = false } = {}) {
     if (!url) return;
     const alvo = new URL(url, location.href);
     if (alvo.pathname === location.pathname && alvo.search === location.search) {
+      if (recarregar && comServidor()) {
+        history.replaceState(null, '', alvo.href);
+        location.reload();
+        return;
+      }
       if (alvo.hash === location.hash) location.hash = '';
       location.hash = alvo.hash;
     } else {
       location.assign(alvo.href);
     }
+  }
+
+  /** Coração do cartão: troca na hora, sem recarregar a vitrine. */
+  function marcarFavorito(form, marcado) {
+    const botao = form.querySelector('button');
+    const nome = (botao.getAttribute('aria-label') || '').replace(/^(Tirar |Favoritar )/, '').replace(/ dos favoritos$/, '');
+    botao.setAttribute('aria-pressed', String(marcado));
+    botao.setAttribute('aria-label', marcado ? `Tirar ${nome} dos favoritos` : `Favoritar ${nome}`);
+    avisarRodape(marcado ? `${nome} está nos seus favoritos.` : `${nome} saiu dos favoritos.`);
   }
 
   /* ---------- Erros ---------- */
@@ -130,11 +150,73 @@
     avisarRodape.relogio = setTimeout(() => caixa.classList.remove('visivel'), 4000);
   }
 
+  /* ---------- Campos com formato: CPF, CNPJ, telefone, CEP e números ---------- */
+  // Aceitam só números, no tamanho que o banco guarda, e mostram o formato
+  // enquanto a pessoa digita (sem JavaScript, o pattern do HTML confere no envio).
+  const FORMATOS = {
+    cpf: () => '000.000.000-00',
+    cnpj: () => '00.000.000/0000-00',
+    documento: (d) => (d.length > 11 ? '00.000.000/0000-00' : '000.000.000-00'),
+    telefone: (d) => (d.length > 10 ? '(00) 00000-0000' : '(00) 0000-0000'),
+    cep: () => '00000-000',
+  };
+  const anteriores = new WeakMap();
+
+  function aplicarFormato(formato, digitos) {
+    let saida = '';
+    let i = 0;
+    for (const c of formato) {
+      if (i >= digitos.length) break;
+      saida += c === '0' ? digitos[i++] : c;
+    }
+    return saida;
+  }
+
+  function mascarar(campo, evento) {
+    const tipo = campo.dataset.mascara;
+    if (!tipo || (tipo !== 'numero' && !FORMATOS[tipo])) return;
+    const antes = campo.value;
+    const cursor = typeof campo.selectionStart === 'number' ? campo.selectionStart : antes.length;
+    let noCursor = antes.slice(0, cursor).replace(/\D/g, '').length;
+    let digitos = antes.replace(/\D/g, '');
+    const anterior = anteriores.get(campo);
+    // Apagou só um separador ("-", ".", ")"): apaga também o número antes dele
+    if (evento && evento.inputType === 'deleteContentBackward' && anterior !== undefined
+        && digitos === anterior.replace(/\D/g, '') && noCursor > 0) {
+      digitos = digitos.slice(0, noCursor - 1) + digitos.slice(noCursor);
+      noCursor -= 1;
+    }
+    let novo;
+    if (tipo === 'numero') {
+      novo = digitos.slice(0, Number(campo.getAttribute('maxlength')) || 10);
+    } else {
+      const maximo = FORMATOS[tipo]('0'.repeat(14)).split('0').length - 1;
+      digitos = digitos.slice(0, maximo);
+      novo = aplicarFormato(FORMATOS[tipo](digitos), digitos);
+    }
+    anteriores.set(campo, novo);
+    if (novo === antes) return;
+    campo.value = novo;
+    if (document.activeElement === campo) {
+      let pos = 0;
+      for (let vistos = 0; pos < novo.length && vistos < noCursor; pos++) if (/\d/.test(novo[pos])) vistos++;
+      campo.setSelectionRange(pos, pos);
+    }
+  }
+
+  // Na captura, antes dos outros scripts lerem o campo (a busca de CEP, por exemplo)
+  document.addEventListener('input', (e) => {
+    if (e.target instanceof HTMLInputElement && e.target.dataset.mascara) mascarar(e.target, e);
+  }, true);
+  const mascararTodos = () => document.querySelectorAll('input[data-mascara]').forEach((c) => mascarar(c));
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mascararTodos);
+  else mascararTodos();
+
   /* ---------- Quem está logado não precisa digitar o contato de novo ---------- */
 
   async function preencherContato() {
     const formularios = [...document.querySelectorAll('form[action^="/api/"]')]
-      .filter((f) => !/^\/api\/(adotantes|ongs|entrar|senha)/.test(f.getAttribute('action')));
+      .filter((f) => !/^\/api\/(adotantes|ongs|entrar|senha|conta|admin|conversas|favoritos|ong\/perfil)/.test(f.getAttribute('action')));
     if (!formularios.length || !comServidor()) return;
     const sessao = await fetch('/api/sessao', { headers: { Accept: 'application/json' }, credentials: 'same-origin' })
       .then((r) => (r.ok ? r.json() : null)).catch(() => null);
@@ -147,7 +229,7 @@
       if (/lista-de-espera|ong\/animais/.test(acao)) Object.assign(campos, { cidade: u.cidade, estado: u.uf });
       for (const [nome, valor] of Object.entries(campos)) {
         const el = form.querySelector(`[name="${nome}"]:not([type="hidden"])`);
-        if (el && valor && !el.value) el.value = valor;
+        if (el && valor && !el.value) { el.value = valor; mascarar(el); }
       }
     }
   }

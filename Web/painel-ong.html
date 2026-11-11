@@ -64,6 +64,8 @@
               <li><a href="#animais">Meus animais</a></li>
               <li><a href="#campanhas">Campanhas</a></li>
               <li><a href="#perfil">Perfil da ONG</a></li>
+              <li><a href="mensagens.html">Mensagens <!-- dados:contador-mensagens --><span class="contador" data-nao-lidas>1</span><!-- /dados:contador-mensagens --></a></li>
+              <li><a href="ajuda.html">Ajuda</a></li>
             </ul>
           </nav>
 
@@ -117,6 +119,24 @@
               </div>
               <a class="aviso-fechar" href="#fechar">Fechar</a>
             </div>
+
+            <div class="aviso" id="perfil-salvo" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Perfil atualizado</p>
+                <p>As mudanças já aparecem na página de ONGs.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+
+            <div class="aviso" id="senha-trocada" role="status">
+              <img src="img/icones/escudo-check.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Senha trocada</p>
+                <p>Use a senha nova da próxima vez que entrar.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
           </div>
 
           <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
@@ -149,6 +169,19 @@
                 <dd>1.240 <img src="img/icones/grafico.svg" alt="" width="34" height="34" /></dd>
               </div>
             <!-- /dados:estatisticas --></dl>
+            <!-- dados:novidades -->
+            <div class="novidades-bloco">
+              <h2 class="visualmente-oculto">Novidades</h2>
+              <ul class="novidades">
+                <li>
+                  <a href="mensagens.html">
+                    <img src="img/icones/pata.svg" alt="" width="30" height="30" />
+                    <span><strong>Novo pedido para Churros</strong><small>Juliana Mendes quer adotar Churros. A conversa já está em Mensagens.</small></span>
+                    <time datetime="2026-11-08T10:00:00">08/11</time>
+                  </a>
+                </li>
+              </ul>
+            </div><!-- /dados:novidades -->
           </section>
 
           <section class="painel-secao" id="pedidos" aria-labelledby="titulo-pedidos">
@@ -422,8 +455,51 @@
                   <li>Fotos da sede</li>
                 </ul>
               </div>
-              <a class="botao secundario" href="cadastro-ong.html">Editar perfil</a>
+              <a class="botao secundario" href="#editar-perfil">Editar perfil</a>
             </div><!-- /dados:perfil-progresso -->
+            <!-- dados:perfil-form -->
+            <form class="painel-form" id="editar-perfil" action="/api/ong/perfil" method="post" enctype="multipart/form-data" data-manter data-prototipo="painel-ong.html#perfil-salvo">
+              <h3>Dados do perfil público</h3>
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="perfil-apresentacao">Apresentação</label>
+                  <textarea id="perfil-apresentacao" name="apresentacao" rows="5" maxlength="2000" required>Somos um grupo de voluntários de Diadema que resgata cães e gatos em situação de abandono, cuida da saúde de cada um e encontra famílias responsáveis.</textarea>
+                </div>
+                <div class="campo">
+                  <label for="perfil-telefone">Telefone ou WhatsApp</label>
+                  <input type="tel" id="perfil-telefone" name="telefone" value="(11) 99888-7766" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" placeholder="(11) 91234-5678" />
+                </div>
+                <div class="campo">
+                  <label for="perfil-rede">Rede social ou site</label>
+                  <input type="text" id="perfil-rede" name="rede_social" value="@amigosdepatas" maxlength="150" placeholder="@suaong" />
+                </div>
+                <div class="campo">
+                  <label for="perfil-logo">Trocar a logo</label>
+                  <input type="file" id="perfil-logo" name="logo" accept="image/png,image/jpeg,image/webp" />
+                  <small class="dica">PNG, JPG ou WEBP.</small>
+                </div>
+                <div class="campo campo-checkbox">
+                  <input type="checkbox" id="perfil-ocultar" name="ocultar_endereco" value="sim" />
+                  <label for="perfil-ocultar">Mostrar só o bairro e a cidade no site</label>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao primario">Salvar perfil</button></div>
+            </form>
+            <form class="painel-form" action="/api/conta/senha" method="post" data-prototipo="painel-ong.html#perfil-salvo">
+              <h3>Trocar a senha</h3>
+              <div class="campos">
+                <div class="campo">
+                  <label for="senha-atual">Senha atual</label>
+                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required maxlength="128" />
+                </div>
+                <div class="campo">
+                  <label for="senha-nova">Nova senha</label>
+                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" maxlength="128" />
+                  <small class="dica" id="senha-nova-dica">Pelo menos 8 caracteres.</small>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao secundario">Trocar senha</button></div>
+            </form><!-- /dados:perfil-form -->
           </section>
         </div>
       </div>
@@ -464,6 +540,7 @@
             <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
             <li><a href="ongs.html">ONGs parceiras</a></li>
             <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
           </ul>
         </nav>
       </div>

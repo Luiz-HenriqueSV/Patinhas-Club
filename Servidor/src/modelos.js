@@ -53,7 +53,32 @@ const vazio = (texto, link = '', icone = 'pata') => `
 
 /* ---------- Adoção ---------- */
 
-function cartaoAnimal(a, n) {
+/** Coração no canto da foto: só o adotante favorita; quem não entrou vai para o login. */
+function botaoFavorito(a, conta, marcado) {
+  if (conta && conta !== 'adotante') return '';
+  const nome = esc(a.nome);
+  if (!conta) {
+    return `<a class="card-favorito" href="entrar.html" aria-label="Entre na sua conta para favoritar ${genero(a.sexo, 'o', 'a')} ${nome}"></a>`;
+  }
+  return `<form class="card-favorito" action="/api/favoritos/${a.id}" method="post" data-favorito>
+                  <button type="submit" aria-pressed="${marcado}" aria-label="${marcado ? `Tirar ${nome} dos favoritos` : `Favoritar ${nome}`}"></button>
+                </form>`;
+}
+
+/** Conversa com a ONG direto do anúncio (o histórico fica em Mensagens). */
+function botaoConversar(a, conta) {
+  if (conta === 'adotante') {
+    return `<form class="card-conversar" action="/api/conversas" method="post">
+                  <input type="hidden" name="ong_id" value="${a.ong_id}" />
+                  <input type="hidden" name="animal_id" value="${a.id}" />
+                  <button type="submit">Conversar com a ONG</button>
+                </form>`;
+  }
+  if (!conta) return '<p class="card-conversar"><a class="link-conversar" href="entrar.html">Entre para conversar com a ONG</a></p>';
+  return '';
+}
+
+function cartaoAnimal(a, n, { conta = null, favoritos = new Set() } = {}) {
   const id = `pet-${a.id}`;
   const status = { em_processo: ['processo', 'Em processo'], adotado: ['adotado', 'Adotado'] }[a.status] || ['disponivel', 'Disponível'];
   const saude = lista(a.saude);
@@ -82,6 +107,7 @@ function cartaoAnimal(a, n) {
               <div class="card-foto">
                 <img${a.foto_enquadramento === 'topo' ? ' class="foco-topo"' : ''} src="${esc(foto(a.foto_url, a.especie, 800))}" alt="${nome}, ${esc(nomeEspecie(a.especie, a.sexo))} de porte ${esc(portePorExtenso(a.porte, 'macho'))}" width="400" height="300" loading="lazy" />
                 <span class="etiqueta ${status[0]}">${status[1]}</span>
+                ${botaoFavorito(a, conta, favoritos.has(a.id))}
               </div>
 
               <div class="card-info">
@@ -99,6 +125,7 @@ function cartaoAnimal(a, n) {
                 <p class="card-descricao">${esc(resumo(a.historia))}</p>
                 ${tags.length ? `<ul class="card-tags" aria-label="Saúde e convivência de ${nome}">${tags.map((t) => `<li>${t}</li>`).join('')}</ul>` : ''}
                 <p class="card-contato">Cuidado por <a href="ongs.html#ong-${a.ong_id}">${esc(a.ong_nome)}</a></p>
+                ${botaoConversar(a, conta)}
               </div>
 
               <details class="card-acao">
@@ -115,19 +142,19 @@ function cartaoAnimal(a, n) {
                     <div class="campos">
                       <div class="campo">
                         <label for="adotar-nome-${n}">Seu nome <span class="obrigatorio" aria-hidden="true">*</span></label>
-                        <input type="text" id="adotar-nome-${n}" name="nome" autocomplete="name" required />
+                        <input type="text" id="adotar-nome-${n}" name="nome" autocomplete="name" required maxlength="120" />
                       </div>
 
                       <div class="campo">
                         <label for="adotar-tel-${n}">Telefone ou WhatsApp <span class="obrigatorio" aria-hidden="true">*</span></label>
                         <input type="tel" id="adotar-tel-${n}" name="telefone" placeholder="(11) 90000-0000" autocomplete="tel" required
-                          pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" title="DDD e número, como (11) 90000-0000" />
+                          pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" title="DDD e número, como (11) 90000-0000" maxlength="15" inputmode="tel" data-mascara="telefone" />
                         <small class="msg-erro">Coloque o DDD e o número.</small>
                       </div>
 
                       <div class="campo">
                         <label for="adotar-email-${n}">E-mail</label>
-                        <input type="email" id="adotar-email-${n}" name="email" placeholder="voce@email.com" autocomplete="email" />
+                        <input type="email" id="adotar-email-${n}" name="email" placeholder="voce@email.com" autocomplete="email" maxlength="150" />
                       </div>
 
                       <div class="campo">
@@ -191,7 +218,7 @@ function formEncontrei(a, n, nome) {
                     <div class="campos">
                       <div class="campo campo-largo">
                         <label for="enc-onde-${n}">Onde você viu? <span class="obrigatorio" aria-hidden="true">*</span></label>
-                        <input type="text" id="enc-onde-${n}" name="onde" placeholder="Endereço ou ponto de referência" required />
+                        <input type="text" id="enc-onde-${n}" name="onde" placeholder="Endereço ou ponto de referência" required maxlength="200" />
                       </div>
 
                       <div class="campo">
@@ -212,7 +239,7 @@ function formEncontrei(a, n, nome) {
 
                       <div class="campo campo-largo">
                         <label for="enc-obs-${n}">Mais detalhes</label>
-                        <textarea id="enc-obs-${n}" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..."></textarea>
+                        <textarea id="enc-obs-${n}" name="observacoes" rows="3" placeholder="Ex.: estava com a coleira, está comigo agora, já levei ao veterinário..." maxlength="1000"></textarea>
                       </div>
 
                       <div class="campo">
@@ -222,7 +249,7 @@ function formEncontrei(a, n, nome) {
 
                       <div class="campo">
                         <label for="enc-contato-${n}">Seu contato <span class="obrigatorio" aria-hidden="true">*</span></label>
-                        <input type="text" id="enc-contato-${n}" name="contato" placeholder="Telefone ou e-mail" required />
+                        <input type="text" id="enc-contato-${n}" name="contato" placeholder="Telefone ou e-mail" required maxlength="150" />
                       </div>
                     </div>
                   </fieldset>
@@ -411,8 +438,8 @@ function etapasDoPedido(p) {
 function proximoPasso(p) {
   const animal = `${genero(p.sexo, 'o', 'a')} ${p.animal}`;
   return {
-    enviado: 'a ONG responde em até 3 dias úteis pelo WhatsApp que você informou.',
-    em_analise: 'responda a ONG pelo WhatsApp para combinar a visita.',
+    enviado: 'a ONG responde em até 3 dias úteis, pelo chat em Mensagens ou pelo telefone que você informou.',
+    em_analise: 'responda a ONG pelo chat, em Mensagens, para combinar a visita.',
     visita_agendada: 'leve um documento com foto e um comprovante de residência na visita.',
     aprovado: `combine com a ONG o dia de buscar ${animal}. Boas-vindas à família!`,
   }[p.status_atual] || 'este pedido foi encerrado. Que tal conhecer outros animais esperando por um lar?';
@@ -430,6 +457,11 @@ function pedidoAdotante(p) {
                   ${etapasDoPedido(p)}
                 </ol>
                 <p class="pedido-proximo"><strong>Próximo passo:</strong> ${esc(proximoPasso(p))}</p>
+                <form class="pedido-conversar" action="/api/conversas" method="post">
+                  <input type="hidden" name="ong_id" value="${p.ong_id}" />
+                  <input type="hidden" name="animal_id" value="${p.animal_id}" />
+                  <button type="submit" class="link-conversar">Conversar com ${esc(comArtigo(p.ong_nome))}</button>
+                </form>
               </div>
             </article>`;
 }
@@ -540,7 +572,7 @@ function linhaPedidoOng(p, n) {
                             <div><dt>Outros animais</dt><dd>${p.outros_animais ? 'Sim' : 'Nenhum'}</dd></div>
                             ${p.mensagem ? `<div><dt>Por que quer adotar</dt><dd>“${esc(p.mensagem)}”</dd></div>` : ''}
                           </dl>
-                          ${botoes ? `<div class="grupo-botoes">${botoes}</div>` : ''}
+                          <div class="grupo-botoes">${botoes}${p.adotante_id ? `<form action="/api/conversas" method="post"><input type="hidden" name="adotante_id" value="${p.adotante_id}" /><button type="submit" class="botao secundario pequeno">Conversar</button></form>` : ''}</div>
                         </div>
                       </details>
                     </td>
@@ -607,13 +639,126 @@ function progressoPerfil(o) {
                   ${itens.map(([nome, ok]) => `<li${ok ? ' class="ok"' : ''}>${nome}</li>`).join('\n                  ')}
                 </ul>
               </div>
-              <a class="botao secundario" href="cadastro-ong.html">Editar perfil</a>
+              <a class="botao secundario" href="#editar-perfil">Editar perfil</a>
             </div>`;
 }
+
+/* ---------- Página inicial ---------- */
+
+const ongMini = (o, i) => `
+            <li>
+              <a class="ong-mini" href="ongs.html#ong-${o.id}">
+                <span class="avatar ${CORES_AVATAR[i % CORES_AVATAR.length]}" aria-hidden="true">${esc(iniciais(o.nome))}</span>
+                <span><strong>${esc(o.nome)}</strong><small>${esc(o.cidade)}, ${esc(o.uf)}</small></span>
+              </a>
+            </li>`;
+
+/* ---------- Avisos da conta (tabela notificacoes) ---------- */
+
+const ICONE_AVISO = { pedido_adocao: 'pata', campanha: 'megafone', anuncio: 'pin', sistema: 'sino' };
+function novidades(lista) {
+  if (!lista.length) return '';
+  return `
+            <div class="novidades-bloco">
+              <h2 class="visualmente-oculto">Novidades</h2>
+              <ul class="novidades">${lista.map((n) => `
+                <li>
+                  <a href="${esc(n.link || '#visao-geral')}">
+                    <img src="img/icones/${ICONE_AVISO[n.tipo] || 'sino'}.svg" alt="" width="30" height="30" />
+                    <span><strong>${esc(n.titulo)}</strong><small>${esc(n.mensagem)}</small></span>
+                    <time datetime="${String(n.criado_em).replace(' ', 'T')}">${diaMes(n.criado_em)}</time>
+                  </a>
+                </li>`).join('')}
+              </ul>
+            </div>`;
+}
+
+/* ---------- Meus dados (adotante) e senha ---------- */
+
+const opcoesMoradia = (atual) => Object.entries(MORADIA)
+  .map(([v, r]) => `<option value="${v}"${v === atual ? ' selected' : ''}>${r}</option>`).join('');
+
+const formDadosAdotante = (d) => `
+            <form class="painel-form" action="/api/conta/dados" method="post" data-manter>
+              <h3>Dados pessoais</h3>
+              <div class="campos">
+                <div class="campo">
+                  <label for="dados-nome">Nome completo</label>
+                  <input type="text" id="dados-nome" name="nome" value="${esc(d.nome)}" autocomplete="name" maxlength="120" required />
+                </div>
+                <div class="campo">
+                  <label for="dados-telefone">Telefone ou WhatsApp</label>
+                  <input type="tel" id="dados-telefone" name="telefone" value="${esc(telefoneBr(d.telefone))}" autocomplete="tel" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" placeholder="(11) 91234-5678" />
+                </div>
+                <div class="campo">
+                  <label for="dados-email">E-mail</label>
+                  <input type="email" id="dados-email" value="${esc(d.email)}" disabled aria-describedby="dados-email-dica" />
+                  <small class="dica" id="dados-email-dica">Para trocar o e-mail, fale com o suporte.</small>
+                </div>
+                <div class="campo">
+                  <label for="dados-moradia">Onde você mora</label>
+                  <select id="dados-moradia" name="moradia" required>${opcoesMoradia(d.moradia)}</select>
+                </div>
+                <div class="campo campo-largo campo-checkbox">
+                  <input type="checkbox" id="dados-alertas" name="recebe_alertas" value="sim"${d.recebe_alertas ? ' checked' : ''} />
+                  <label for="dados-alertas">Quero receber por e-mail os avisos da lista de espera</label>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao primario">Salvar dados</button></div>
+            </form>`;
+
+const formSenha = () => `
+            <form class="painel-form" action="/api/conta/senha" method="post">
+              <h3>Trocar a senha</h3>
+              <div class="campos">
+                <div class="campo">
+                  <label for="senha-atual">Senha atual</label>
+                  <input type="password" id="senha-atual" name="senha_atual" autocomplete="current-password" required maxlength="128" />
+                </div>
+                <div class="campo">
+                  <label for="senha-nova">Nova senha</label>
+                  <input type="password" id="senha-nova" name="senha" autocomplete="new-password" minlength="8" required aria-describedby="senha-nova-dica" maxlength="128" />
+                  <small class="dica" id="senha-nova-dica">Pelo menos 8 caracteres.</small>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao secundario">Trocar senha</button></div>
+            </form>`;
+
+/* ---------- Perfil público da ONG ---------- */
+
+const formPerfilOng = (o) => `
+            <form class="painel-form" id="editar-perfil" action="/api/ong/perfil" method="post" enctype="multipart/form-data" data-manter>
+              <h3>Dados do perfil público</h3>
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="perfil-apresentacao">Apresentação</label>
+                  <textarea id="perfil-apresentacao" name="apresentacao" rows="5" maxlength="2000" required>${esc(o.apresentacao)}</textarea>
+                </div>
+                <div class="campo">
+                  <label for="perfil-telefone">Telefone ou WhatsApp</label>
+                  <input type="tel" id="perfil-telefone" name="telefone" value="${esc(telefoneBr(o.telefone))}" required maxlength="15" inputmode="tel" data-mascara="telefone" pattern="\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}" placeholder="(11) 91234-5678" />
+                </div>
+                <div class="campo">
+                  <label for="perfil-rede">Rede social ou site</label>
+                  <input type="text" id="perfil-rede" name="rede_social" value="${esc(o.rede_social || '')}" maxlength="150" placeholder="@suaong" />
+                </div>
+                <div class="campo">
+                  <label for="perfil-logo">Trocar a logo</label>
+                  <input type="file" id="perfil-logo" name="logo" accept="image/png,image/jpeg,image/webp" />
+                  <small class="dica">PNG, JPG ou WEBP.</small>
+                </div>
+                <div class="campo campo-checkbox">
+                  <input type="checkbox" id="perfil-ocultar" name="ocultar_endereco" value="sim"${o.ocultar_endereco ? ' checked' : ''} />
+                  <label for="perfil-ocultar">Mostrar só o bairro e a cidade no site</label>
+                </div>
+              </div>
+              <div class="form-botoes"><button type="submit" class="botao primario">Salvar perfil</button></div>
+            </form>`;
 
 module.exports = {
   vazio, cartaoAnimal, cartaoPerdido, cartaoOng, cartaoCampanha,
   perfilAdotante, pedidoAdotante, favorito, alertaLinha, anuncioLinha,
   perfilOng, estatistica, linhaPedidoOng, animalOng, campanhaOng, progressoPerfil,
-  comArtigo, genero,
+  comArtigo, genero, SITUACAO_PEDIDO, SITUACAO_ONG, MORADIA,
+  novidades, formDadosAdotante, formSenha, formPerfilOng, ongMini,
 };

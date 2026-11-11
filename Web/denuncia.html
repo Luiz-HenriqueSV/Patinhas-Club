@@ -136,7 +136,7 @@
               <div class="campos">
                 <div class="campo">
                   <label for="quantidade-animais">Quantos animais? <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="number" id="quantidade-animais" name="quantidade_animais" min="1" value="1" required />
+                  <input type="text" id="quantidade-animais" name="quantidade_animais" value="1" required inputmode="numeric" data-mascara="numero" maxlength="3" pattern="[1-9]\d{0,2}" />
                 </div>
 
                 <fieldset class="grupo">
@@ -151,7 +151,7 @@
                 <div class="campo campo-largo">
                   <label for="situacao">Conte o que aconteceu <span class="obrigatorio" aria-hidden="true">*</span></label>
                   <textarea id="situacao" name="situacao_animal" rows="4" required
-                    placeholder="Descreva a situação em que o animal se encontra, há quanto tempo e se alguém já tentou ajudar."></textarea>
+                    placeholder="Descreva a situação em que o animal se encontra, há quanto tempo e se alguém já tentou ajudar." maxlength="3000"></textarea>
                 </div>
 
                 <div class="campo campo-largo">
@@ -189,7 +189,7 @@
 
                 <div class="campo campo-largo">
                   <label for="caracteristicas">Cor e características</label>
-                  <input type="text" id="caracteristicas" name="caracteristicas" placeholder="Ex.: caramelo, magro, mancando da pata traseira" />
+                  <input type="text" id="caracteristicas" name="caracteristicas" placeholder="Ex.: caramelo, magro, mancando da pata traseira" maxlength="255" />
                 </div>
 
                 <div class="campo campo-largo campo-checkbox">
@@ -208,17 +208,17 @@
               <div class="campos">
                 <div class="campo campo-largo">
                   <label for="endereco">Endereço ou ponto de referência <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Exemplo, 123, perto da padaria" required />
+                  <input type="text" id="endereco" name="endereco" placeholder="Ex.: Rua Exemplo, 123, perto da padaria" required maxlength="150" />
                 </div>
 
                 <div class="campo">
                   <label for="bairro">Bairro <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="bairro" name="bairro" required />
+                  <input type="text" id="bairro" name="bairro" required maxlength="80" />
                 </div>
 
                 <div class="campo">
                   <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="cidade" name="cidade" required />
+                  <input type="text" id="cidade" name="cidade" required maxlength="100" />
                 </div>
 
                 <div class="campo">
@@ -258,7 +258,7 @@
                 <div class="campo">
                   <label for="cep">CEP</label>
                   <input type="text" id="cep" name="cep" inputmode="numeric" placeholder="00000-000" maxlength="9"
-                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" />
+                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" data-mascara="cep" />
                   <small class="msg-erro">O CEP tem 8 números, como 09910-000.</small>
                 </div>
 
@@ -284,19 +284,19 @@
               <div class="campos">
                 <div class="campo campo-largo">
                   <label for="nome-denunciante">Seu nome</label>
-                  <input type="text" id="nome-denunciante" name="nome" autocomplete="name" />
+                  <input type="text" id="nome-denunciante" name="nome" autocomplete="name" maxlength="120" />
                 </div>
 
                 <div class="campo">
                   <label for="telefone">Telefone ou WhatsApp</label>
                   <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000"
-                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" maxlength="15" inputmode="tel" data-mascara="telefone" />
                   <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
                 </div>
 
                 <div class="campo">
                   <label for="email">E-mail</label>
-                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" />
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" maxlength="150" />
                 </div>
 
                 <div class="campo campo-largo campo-checkbox">
@@ -353,6 +353,7 @@
             <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
             <li><a href="ongs.html">ONGs parceiras</a></li>
             <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
           </ul>
         </nav>
       </div>

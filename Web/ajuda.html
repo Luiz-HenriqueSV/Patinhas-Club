@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Central de ajuda | Patinhas Club</title>
+    <meta name="description" content="Perguntas frequentes e contato com o suporte do Patinhas Club." />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/atendimento.css" />
+  </head>
+  <body id="topo" class="pagina-ajuda">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <a class="botao fantasma pequeno" href="entrar.html">Entrar</a>
+          <a class="botao primario pequeno so-tela-grande" href="index.html#escolha">Criar conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <section class="topo-pagina" aria-labelledby="titulo-pagina">
+        <div class="container">
+          <nav class="migalhas" aria-label="Você está em">
+            <ol>
+              <li><a href="index.html">Início</a></li>
+              <li aria-current="page">Ajuda</li>
+            </ol>
+          </nav>
+
+          <div class="topo-pagina-titulo">
+            <h1 id="titulo-pagina">Central de ajuda</h1>
+            <p>Respostas rápidas e contato com a equipe</p>
+          </div>
+          <p class="lead">
+            Veja as perguntas mais comuns ou escreva para o suporte. Você recebe
+            um protocolo e acompanha a resposta por aqui.
+          </p>
+
+          <div class="busca-ajuda" role="search" hidden>
+            <label for="busca-ajuda">Buscar nas perguntas</label>
+            <input type="search" id="busca-ajuda" placeholder="Ex.: senha, visita, anúncio" autocomplete="off" />
+          </div>
+
+          <div class="topo-pagina-acoes">
+            <a class="botao primario" href="#falar">Falar com o suporte</a>
+            <a class="botao secundario" href="#acompanhar">Acompanhar chamado</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Com o servidor ligado, o chamado aberto ou consultado aparece aqui. -->
+      <!-- dados:chamado --><!-- /dados:chamado -->
+
+      <div class="container">
+        <div class="avisos">
+          <div class="aviso" id="chamado-enviado" role="status">
+            <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+            <div class="aviso-texto">
+              <p class="aviso-titulo">Chamado enviado!</p>
+              <p>Com o servidor ligado, você recebe um protocolo e acompanha a resposta nesta página.</p>
+            </div>
+            <a class="aviso-fechar" href="#fechar">Fechar</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="secao secao-temas" aria-labelledby="titulo-temas">
+        <div class="container">
+          <h2 id="titulo-temas" class="visualmente-oculto">Temas de ajuda</h2>
+          <ul class="temas-ajuda">
+            <li><a href="#ajuda-adocao"><img src="img/icones/pata.svg" alt="" width="40" height="40" /><strong>Adoção</strong><span>Pedidos, visitas, chat e lista de espera</span></a></li>
+            <li><a href="#ajuda-conta"><img src="img/icones/escudo-check.svg" alt="" width="40" height="40" /><strong>Conta e acesso</strong><span>Senha, dados e privacidade</span></a></li>
+            <li><a href="#ajuda-ongs"><img src="img/icones/lar.svg" alt="" width="40" height="40" /><strong>ONGs e protetores</strong><span>Cadastro, verificação e painel</span></a></li>
+            <li><a href="#ajuda-comunidade"><img src="img/icones/pin.svg" alt="" width="40" height="40" /><strong>Perdidos e denúncias</strong><span>Anúncios, avisos e protocolo</span></a></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="secao secao-faq" aria-labelledby="titulo-faq">
+        <div class="container-estreito">
+          <h2 id="titulo-faq">Perguntas frequentes</h2>
+          <p class="busca-vazia" role="status" hidden>Nenhuma pergunta com essas palavras. Tente outro termo ou <a href="#falar">fale com o suporte</a>.</p>
+
+            <div class="faq-grupo" id="ajuda-adocao">
+              <h3>Adoção</h3>
+              <div class="faq">
+              <details>
+                <summary>Como faço para adotar?</summary>
+                <p>Escolha o animal em <a href="adocao.html">Adotar</a>, toque em “Quero adotar” e responda às perguntas. A ONG recebe o pedido, conversa com você pelo chat do site e pode marcar uma visita antes de aprovar.</p>
+              </details>
+              <details>
+                <summary>Preciso ter conta para pedir uma adoção?</summary>
+                <p>Não. Mas com a conta você acompanha cada etapa em <a href="minha-conta.html">Minha conta</a> e fala com a ONG pelo chat, sem precisar passar o seu telefone antes da hora.</p>
+              </details>
+              <details>
+                <summary>A adoção é paga?</summary>
+                <p>Não. O Patinhas Club não permite a venda de animais. Algumas ONGs pedem uma taxa voluntária para ajudar nos custos: ela é opcional e aparece no anúncio. Se alguém cobrar para entregar um animal, <a href="#falar">avise o suporte</a>.</p>
+              </details>
+              <details>
+                <summary>Quem decide se o meu pedido é aprovado?</summary>
+                <p>A ONG ou o protetor que cuida do animal. O Patinhas Club aproxima as pessoas e registra cada etapa, mas a decisão é sempre de quem resgatou.</p>
+              </details>
+              <details>
+                <summary>Como falo com a ONG?</summary>
+                <p>Entre na sua conta e use o botão “Conversar com a ONG” no anúncio do animal ou no seu pedido. As conversas ficam em <a href="mensagens.html">Mensagens</a> e chegam na hora para os dois lados.</p>
+              </details>
+              <details>
+                <summary>Não encontrei o animal que procuro. E agora?</summary>
+                <p>Entre na <a href="lista_de_espera.html">lista de espera</a>: você diz o perfil que procura e recebe um aviso quando chegar um animal parecido.</p>
+              </details>
+              </div>
+            </div>
+            <div class="faq-grupo" id="ajuda-conta">
+              <h3>Conta e acesso</h3>
+              <div class="faq">
+              <details>
+                <summary>Esqueci minha senha. O que eu faço?</summary>
+                <p>Na tela <a href="entrar.html#recuperar">Entrar</a>, escolha “Esqueci minha senha” e informe o seu e-mail. O link para criar uma senha nova vale por 1 hora e só funciona uma vez.</p>
+              </details>
+              <details>
+                <summary>Como altero meus dados?</summary>
+                <p>Em <a href="minha-conta.html#dados">Minha conta, Meus dados</a>, você muda nome, telefone, moradia e senha. As ONGs fazem o mesmo em Perfil da ONG, no painel.</p>
+              </details>
+              <details>
+                <summary>O que o Patinhas Club faz com os meus dados?</summary>
+                <p>Usamos só o necessário para a adoção acontecer, como manda a LGPD. O seu telefone aparece apenas para a ONG que recebeu o seu pedido. Os detalhes estão em <a href="termos.html">Termos e privacidade</a>.</p>
+              </details>
+              <details>
+                <summary>Como excluo a minha conta?</summary>
+                <p>Abra um chamado em “Conta e acesso” com o e-mail da conta. A equipe confirma com você e apaga os seus dados.</p>
+              </details>
+              </div>
+            </div>
+            <div class="faq-grupo" id="ajuda-ongs">
+              <h3>ONGs e protetores</h3>
+              <div class="faq">
+              <details>
+                <summary>Como cadastro a minha ONG ou o meu trabalho como protetor?</summary>
+                <p>Preencha o <a href="cadastro-ong.html">cadastro</a> com os dados e os documentos. A equipe confere tudo e, quando aprova, envia por e-mail o link para você criar a senha.</p>
+              </details>
+              <details>
+                <summary>Por que o meu cadastro ainda está em análise?</summary>
+                <p>Toda organização é conferida por uma pessoa da equipe antes de aparecer no site. Isso protege os animais e quem adota. Se passou do prazo, abra um chamado em “ONGs e protetores”.</p>
+              </details>
+              <details>
+                <summary>Como publico um animal para adoção?</summary>
+                <p>No painel, escolha “Cadastrar animal”. Para publicar, o anúncio precisa de foto, sexo, porte, idade e a história do animal. Se faltar algo, salve como rascunho e termine depois.</p>
+              </details>
+              <details>
+                <summary>Como respondo aos pedidos de adoção?</summary>
+                <p>Em Pedidos, no painel, você lê as respostas, conversa com o adotante pelo chat e marca visita, aprova ou recusa. Cada mudança avisa o adotante e fica registrada na conversa.</p>
+              </details>
+              </div>
+            </div>
+            <div class="faq-grupo" id="ajuda-comunidade">
+              <h3>Perdidos, achados e denúncias</h3>
+              <div class="faq">
+              <details>
+                <summary>Como anuncio um animal perdido?</summary>
+                <p>Em <a href="animais-perdidos.html">Perdidos e achados</a>, escolha “Publicar anúncio”. O botão “Usar minha localização” preenche o endereço sozinho, e o mural mostra só a região aproximada.</p>
+              </details>
+              <details>
+                <summary>Vi um animal que está no mural. Como aviso?</summary>
+                <p>Abra o anúncio e escolha “Encontrei este animal”. Diga onde e quando viu: o aviso vai direto para quem publicou.</p>
+              </details>
+              <details>
+                <summary>Como denuncio maus-tratos?</summary>
+                <p>Use a página <a href="denuncia.html">Denunciar</a>. A denúncia pode ser anônima e você recebe um número de protocolo. Se o animal corre risco agora, ligue 190.</p>
+              </details>
+              <details>
+                <summary>Como acompanho a minha denúncia?</summary>
+                <p>Marque “Quero receber o andamento” ao enviar e deixe um telefone ou e-mail. A equipe avisa quando a denúncia for analisada ou encaminhada.</p>
+              </details>
+              </div>
+            </div>
+        </div>
+      </section>
+
+      <div class="pagina-formulario" id="falar">
+        <div class="container cadastro-grade">
+          <aside class="cadastro-lateral" aria-label="Outras formas de ajuda">
+            <div class="destaque alerta">
+              <h2>É uma emergência?</h2>
+              <p>Animal em risco agora: ligue <strong>190</strong>. Para maus-tratos e abandono, use a página <a href="denuncia.html">Denunciar</a>.</p>
+            </div>
+
+            <!-- dados:meus-chamados --><!-- /dados:meus-chamados -->
+
+            <div class="cartao-lateral" id="acompanhar">
+              <h2>Acompanhar chamado</h2>
+              <p>Já abriu um chamado? Informe o protocolo e o e-mail usado.</p>
+              <form class="form-compacto" action="/api/suporte/acompanhar" method="post" data-prototipo="ajuda.html#chamado-enviado">
+                <div class="campo">
+                  <label for="acompanhar-protocolo">Protocolo</label>
+                  <input type="text" id="acompanhar-protocolo" name="protocolo" placeholder="SUP-XXXXXXXX" maxlength="12" autocapitalize="characters" required />
+                </div>
+                <div class="campo">
+                  <label for="acompanhar-email">E-mail</label>
+                  <input type="email" id="acompanhar-email" name="email" autocomplete="email" required maxlength="150" />
+                </div>
+                <button type="submit" class="botao secundario largo">Ver chamado</button>
+              </form>
+            </div>
+          </aside>
+
+          <form id="form-suporte" class="formulario" action="/api/suporte/chamados" method="post" data-prototipo="ajuda.html#chamado-enviado">
+            <h2 class="formulario-titulo">Fale com o suporte</h2>
+            <p class="aviso-obrigatorios">Campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+
+            <fieldset class="bloco">
+              <legend><span class="bloco-numero" aria-hidden="true">1</span> Como podemos ajudar?</legend>
+
+              <fieldset class="grupo">
+                <legend>Assunto <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <div class="chips">
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="adocao" required /> Adoção</label>
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="conta" /> Conta e acesso</label>
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="ong" /> ONGs e protetores</label>
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="anuncio" /> Perdidos e achados</label>
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="denuncia" /> Denúncias</label>
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="sugestao" /> Sugestão</label>
+                  <label class="chip-opcao"><input type="radio" name="categoria" value="outro" /> Outro</label>
+                </div>
+              </fieldset>
+
+              <div class="campos">
+                <div class="campo campo-largo">
+                  <label for="suporte-assunto">Resumo em uma frase <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="suporte-assunto" name="assunto" maxlength="150" placeholder="Ex.: não consigo criar a senha" required />
+                </div>
+
+                <div class="campo campo-largo">
+                  <label for="suporte-mensagem">Conte o que aconteceu <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <textarea id="suporte-mensagem" name="mensagem" rows="5" maxlength="2000" aria-describedby="suporte-dica" required></textarea>
+                  <small class="dica" id="suporte-dica">Nunca informe a sua senha. Se for sobre um pedido ou anúncio, diga o nome do animal.</small>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="bloco">
+              <legend><span class="bloco-numero" aria-hidden="true">2</span> Para onde vai a resposta</legend>
+              <div class="campos">
+                <div class="campo">
+                  <label for="suporte-nome">Seu nome <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="text" id="suporte-nome" name="nome" autocomplete="name" maxlength="120" required />
+                </div>
+                <div class="campo">
+                  <label for="suporte-email">E-mail <span class="obrigatorio" aria-hidden="true">*</span></label>
+                  <input type="email" id="suporte-email" name="email" autocomplete="email" placeholder="voce@email.com" required maxlength="150" />
+                </div>
+              </div>
+            </fieldset>
+
+            <div class="form-rodape">
+              <p>Você recebe um protocolo para acompanhar a resposta.</p>
+              <div class="form-botoes">
+                <button type="submit" class="botao primario grande">Enviar ao suporte</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/app.js" defer></script>
+    <script src="scripts/ajuda.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  </body>
+</html>

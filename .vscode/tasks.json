@@ -1,0 +1,30 @@
+{
+  // Ctrl+Shift+B liga o site (mesmo que dar dois cliques no iniciar.bat).
+  // As outras tarefas ficam em Terminal > Executar Tarefa...
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Iniciar Patinhas Club",
+      "detail": "Na primeira vez baixa o que faltar e cria o banco; depois abre http://localhost:3000",
+      "type": "process",
+      "command": "bash",
+      "args": ["iniciar.sh"],
+      "windows": { "command": "cmd.exe", "args": ["/d", "/c", "iniciar.bat"] },
+      "options": { "cwd": "${workspaceFolder}", "env": { "SEM_PAUSA": "1" } },
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Recriar banco de dados e iniciar",
+      "detail": "Apaga o banco e cria de novo com os dados de exemplo (pasta Banco de dados)",
+      "type": "process",
+      "command": "bash",
+      "args": ["iniciar.sh", "banco"],
+      "windows": { "command": "cmd.exe", "args": ["/d", "/c", "iniciar.bat", "banco"] },
+      "options": { "cwd": "${workspaceFolder}", "env": { "SEM_PAUSA": "1" } },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    }
+  ]
+}

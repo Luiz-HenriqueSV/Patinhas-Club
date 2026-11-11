@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Administração | Patinhas Club</title>
+    <meta name="description" content="Área da equipe do Patinhas Club: validação de ONGs, denúncias e suporte." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#FAE3B0" />
+    <link rel="icon" href="img/favicon_io/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="img/favicon_io/apple-touch-icon.png" />
+    <link rel="manifest" href="img/favicon_io/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&amp;family=Poppins:wght@400;500;600;700&amp;display=swap" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/atendimento.css" />
+  </head>
+  <body id="topo" class="area-logada pagina-admin">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="cabecalho">
+      <div class="container cabecalho-interno">
+        <a class="marca" href="index.html">
+          <img src="img/path16.svg" alt="Patinhas Club, ir para a página inicial" width="150" height="82" />
+        </a>
+
+        <nav class="menu" aria-label="Menu principal">
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="adocao.html">Adotar</a></li>
+            <li><a href="ongs.html">ONGs</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar</a></li>
+            <li><a href="sobre.html">Sobre</a></li>
+          </ul>
+        </nav>
+
+        <div class="cabecalho-acoes">
+          <!-- dados:conta --><a class="conta-chip" href="admin.html">
+            <span class="avatar marrom" aria-hidden="true">EP</span>
+            <span>Equipe<small>Administração</small></span>
+          </a><!-- /dados:conta -->
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <div class="container painel">
+        <aside class="painel-lateral" aria-label="Menu da administração">
+          <!-- dados:perfil --><div class="painel-perfil">
+            <span class="avatar marrom" aria-hidden="true">EP</span>
+            <div>
+              <strong>Equipe Patinhas Club</strong>
+              <small>Administração</small>
+            </div>
+          </div><!-- /dados:perfil -->
+
+          <nav class="painel-menu" aria-label="Seções da administração">
+            <ul>
+              <li><a href="#visao-geral" aria-current="true">Visão geral</a></li>
+              <li><a href="#ongs">Validar ONGs <span class="contador"><!-- dados:contador-ongs -->1<!-- /dados:contador-ongs --></span></a></li>
+              <li><a href="#denuncias">Denúncias <span class="contador"><!-- dados:contador-denuncias -->1<!-- /dados:contador-denuncias --></span></a></li>
+              <li><a href="#chamados">Chamados <span class="contador"><!-- dados:contador-chamados -->1<!-- /dados:contador-chamados --></span></a></li>
+            </ul>
+          </nav>
+
+          <a class="painel-sair" href="index.html">Sair</a>
+        </aside>
+
+        <div class="painel-conteudo">
+          <!-- Avisos que aparecem depois de uma ação (o endereço termina com #nome-do-aviso) -->
+          <div class="avisos">
+            <div class="aviso" id="ong-aprovada" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Cadastro aprovado</p>
+                <p>A organização já aparece no site e recebeu por e-mail o link para criar a senha.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+            <div class="aviso amarelo" id="ong-recusada" role="status">
+              <img src="img/icones/documento.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Cadastro recusado</p>
+                <p>A organização foi avisada por e-mail com o motivo informado.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+            <div class="aviso" id="denuncia-atualizada" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Denúncia atualizada</p>
+                <p>A situação e a anotação da equipe foram gravadas.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+            <div class="aviso" id="chamado-respondido" role="status">
+              <img src="img/icones/check-circulo.svg" alt="" width="38" height="38" />
+              <div class="aviso-texto">
+                <p class="aviso-titulo">Resposta enviada</p>
+                <p>A pessoa recebe a resposta por e-mail e na Central de ajuda.</p>
+              </div>
+              <a class="aviso-fechar" href="#fechar">Fechar</a>
+            </div>
+          </div>
+
+          <section class="painel-secao" id="visao-geral" aria-labelledby="titulo-pagina">
+            <div class="painel-topo">
+              <div>
+                <!-- dados:saudacao --><h1 id="titulo-pagina">Administração</h1>
+                <p>1 cadastro de ONG, 1 denúncia e 1 chamado aguardam a equipe.</p><!-- /dados:saudacao -->
+              </div>
+            </div>
+
+            <dl class="estatisticas"><!-- dados:estatisticas -->
+              <div class="estatistica">
+                <dt>ONGs para validar</dt>
+                <dd>1 <img src="img/icones/escudo-check.svg" alt="" width="34" height="34" /></dd>
+              </div>
+              <div class="estatistica">
+                <dt>denúncias novas</dt>
+                <dd>1 <img src="img/icones/alerta.svg" alt="" width="34" height="34" /></dd>
+              </div>
+              <div class="estatistica">
+                <dt>chamados abertos</dt>
+                <dd>1 <img src="img/icones/conversa.svg" alt="" width="34" height="34" /></dd>
+              </div>
+              <div class="estatistica">
+                <dt>ONGs verificadas</dt>
+                <dd>6 <img src="img/icones/lar.svg" alt="" width="34" height="34" /></dd>
+              </div>
+            <!-- /dados:estatisticas --></dl>
+            <!-- dados:novidades --><!-- /dados:novidades -->
+          </section>
+
+          <section class="painel-secao" id="ongs" aria-labelledby="titulo-ongs">
+            <header>
+              <h2 id="titulo-ongs">Cadastros aguardando validação</h2>
+            </header><!-- dados:ongs -->
+            <article class="admin-cartao">
+              <header>
+                <span class="avatar" aria-hidden="true">RB</span>
+                <div>
+                  <h3>Recanto dos Bigodes</h3>
+                  <p>Abrigo · CNPJ 11.444.777/0001-61 · Ribeirão Pires, SP</p>
+                </div>
+                <span class="etiqueta analise">Aguardando</span>
+              </header>
+              <p>Abrigo de gatos resgatados em Ribeirão Pires. Cuidamos de cerca de 25 animais com a ajuda de voluntários.</p>
+              <dl class="admin-dados">
+                <div><dt>Responsável</dt><dd>Paulo Henrique Souza, Fundador</dd></div>
+                <div><dt>Contato</dt><dd>(11) 94000-1010 · recanto@patinhasclub.test</dd></div>
+                <div><dt>Documentos</dt><dd>Identificação · Comprovante de atuação</dd></div>
+              </dl>
+              <div class="grupo-botoes">
+                <form action="/api/admin/ongs/10/aprovar" method="post" data-prototipo="admin.html#ong-aprovada"><button type="submit" class="botao escuro pequeno">Aprovar cadastro</button></form>
+                <details class="admin-recusar">
+                  <summary class="botao perigo pequeno">Recusar</summary>
+                  <form class="form-compacto" action="/api/admin/ongs/10/recusar" method="post" data-prototipo="admin.html#ong-recusada">
+                    <div class="campo">
+                      <label for="motivo-10">Motivo (a organização recebe por e-mail)</label>
+                      <textarea id="motivo-10" name="motivo" rows="2" maxlength="255" required></textarea>
+                    </div>
+                    <button type="submit" class="botao perigo pequeno">Confirmar recusa</button>
+                  </form>
+                </details>
+              </div>
+            </article>
+          <!-- /dados:ongs --></section>
+
+          <section class="painel-secao" id="denuncias" aria-labelledby="titulo-denuncias">
+            <header>
+              <h2 id="titulo-denuncias">Denúncias</h2>
+            </header><!-- dados:denuncias -->
+            <article class="admin-cartao">
+              <header>
+                <img src="img/icones/alerta.svg" alt="" width="44" height="44" />
+                <div>
+                  <h3>Suspeita de maus-tratos · protocolo 1</h3>
+                  <p>Centro, Diadema, SP · recebida ontem</p>
+                </div>
+                <span class="etiqueta novo">Nova</span>
+              </header>
+              <p>Cachorro preso em corrente curta no quintal, sem água e sem abrigo do sol. Late o dia inteiro.</p>
+              <form class="form-compacto admin-linha" action="/api/admin/denuncias/1" method="post" data-prototipo="admin.html#denuncia-atualizada">
+                <div class="campo">
+                  <label for="den-status-1">Situação</label>
+                  <select id="den-status-1" name="status">
+                    <option value="recebida" selected>Recebida</option>
+                    <option value="em_analise">Em análise</option>
+                    <option value="encaminhada">Encaminhada às autoridades</option>
+                    <option value="arquivada">Arquivada</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="den-parecer-1">Anotação da equipe</label>
+                  <input type="text" id="den-parecer-1" name="parecer" maxlength="500" />
+                </div>
+                <button type="submit" class="botao escuro pequeno">Salvar</button>
+              </form>
+            </article>
+          <!-- /dados:denuncias --></section>
+
+          <section class="painel-secao" id="chamados" aria-labelledby="titulo-chamados">
+            <header>
+              <h2 id="titulo-chamados">Chamados de suporte</h2>
+            </header><!-- dados:chamados -->
+            <article class="admin-cartao">
+              <header>
+                <span class="avatar bege" aria-hidden="true">CP</span>
+                <div>
+                  <h3>Não recebi o e-mail para criar a senha</h3>
+                  <p>Carlos Pereira · Conta e acesso · SUP-3F8T6WPL</p>
+                </div>
+                <span class="etiqueta analise">Aguardando a equipe</span>
+              </header>
+              <ol class="mensagens mensagens-chamado">
+                <li class="msg outra"><p><strong class="msg-autor">Quem abriu o chamado</strong>Cadastrei meu abrigo há três dias e ainda não recebi o link para criar a senha.</p><time>09/11/2026 às 15:35</time></li>
+              </ol>
+              <form class="form-compacto" action="/api/admin/chamados/2/mensagens" method="post" data-prototipo="admin.html#chamado-respondido">
+                <div class="campo">
+                  <label for="resposta-2">Resposta</label>
+                  <textarea id="resposta-2" name="texto" rows="3" maxlength="2000" required></textarea>
+                </div>
+                <div class="grupo-botoes">
+                  <button type="submit" class="botao escuro pequeno">Responder</button>
+                  <button type="submit" class="botao secundario pequeno" name="resolver" value="sim">Responder e encerrar</button>
+                </div>
+              </form>
+            </article>
+          <!-- /dados:chamados --></section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="container rodape-grade">
+        <div class="rodape-marca">
+          <img src="img/path16.svg" alt="Patinhas Club" width="170" height="93" loading="lazy" />
+          <p class="lema">Um lar pra cada patinha.</p>
+          <p>Hub que reúne ONGs, protetores e adotantes para adotar, resgatar e reencontrar animais.</p>
+        </div>
+
+        <nav aria-labelledby="rodape-adotantes">
+          <h2 id="rodape-adotantes">Para adotantes</h2>
+          <ul>
+            <li><a href="adocao.html">Animais para adoção</a></li>
+            <li><a href="lista_de_espera.html">Lista de espera</a></li>
+            <li><a href="cadastro-adotante.html">Criar conta de adotante</a></li>
+            <li><a href="minha-conta.html">Minha conta</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-ongs">
+          <h2 id="rodape-ongs">Para ONGs e protetores</h2>
+          <ul>
+            <li><a href="cadastro-ong.html">Cadastrar minha ONG</a></li>
+            <li><a href="entrar.html#ong">Entrar como ONG</a></li>
+            <li><a href="painel-ong.html">Painel da ONG</a></li>
+            <li><a href="campanhas.html">Campanhas</a></li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="rodape-comunidade">
+          <h2 id="rodape-comunidade">Comunidade</h2>
+          <ul>
+            <li><a href="animais-perdidos.html">Perdidos e achados</a></li>
+            <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
+            <li><a href="ongs.html">ONGs parceiras</a></li>
+            <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="rodape-base">
+        <div class="container">
+          <p>© 2026 Patinhas Club. Projeto Integrador de Desenvolvimento de Software Multiplataforma. Dados de exemplo.</p>
+          <p><a href="termos.html">Termos e privacidade</a> &nbsp;·&nbsp; <a href="#topo">Voltar ao topo</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="scripts/app.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  </body>
+</html>

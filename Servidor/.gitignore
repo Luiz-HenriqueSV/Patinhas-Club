@@ -4,3 +4,5 @@ uploads/*
 privado/*
 !uploads/.gitkeep
 !privado/.gitkeep
+# Banco embutido: é criado sozinho a partir da pasta "Banco de dados"
+dados/

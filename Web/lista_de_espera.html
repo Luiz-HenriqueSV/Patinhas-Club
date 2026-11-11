@@ -152,7 +152,7 @@
 
                 <div class="campo">
                   <label for="cidade">Cidade ou região <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" placeholder="Ex.: Diadema" required />
+                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" placeholder="Ex.: Diadema" required maxlength="100" />
                 </div>
               </div>
 
@@ -168,19 +168,19 @@
               <div class="campos">
                 <div class="campo campo-largo">
                   <label for="nome">Seu nome <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="nome" name="nome" autocomplete="name" required />
+                  <input type="text" id="nome" name="nome" autocomplete="name" required maxlength="120" />
                 </div>
 
                 <div class="campo">
                   <label for="email">E-mail <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" required />
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="voce@email.com" required maxlength="150" />
                   <small class="msg-erro">Digite um e-mail válido, como voce@email.com.</small>
                 </div>
 
                 <div class="campo">
                   <label for="telefone">Telefone ou WhatsApp</label>
                   <input type="tel" id="telefone" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000"
-                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" maxlength="15" inputmode="tel" data-mascara="telefone" />
                   <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
                 </div>
               </div>
@@ -246,6 +246,7 @@
             <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
             <li><a href="ongs.html">ONGs parceiras</a></li>
             <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
           </ul>
         </nav>
       </div>

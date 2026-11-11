@@ -1,11 +1,15 @@
-// Patinhas Club — servidor (Node.js + Express + MySQL)
+// Patinhas Club — servidor (Node.js + Express + banco SQL)
+// O jeito fácil é o iniciar.bat (ou a tarefa "Iniciar Patinhas Club" do VS Code), que faz tudo.
+// À mão:
 //   npm install       instala as dependências
-//   npm run banco     cria o banco com os dados de demonstração
-//   npm start         http://localhost:3000
+//   npm start         http://localhost:3000 (cria o banco sozinho na primeira vez)
+//   npm run banco     recria o banco com os dados de demonstração
+const path = require('node:path');
 const express = require('express');
 const session = require('express-session');
+const { SessoesNoBanco } = require('./servicos/sessoes');
 const config = require('./config');
-const { pool } = require('./banco');
+const { pool, embutido } = require('./banco');
 const { receber, descartar } = require('./servicos/arquivos');
 const { ErroValidacao } = require('./util/validacao');
 const { querJson, limitar } = require('./util/resposta');
@@ -32,6 +36,7 @@ app.use('/uploads', express.static(config.pastas.uploads, { index: false, maxAge
 
 app.use(session({
   name: 'patinhas.sid',
+  store: new SessoesNoBanco(),
   secret: config.segredoSessao,
   resave: false,
   saveUninitialized: false,
@@ -46,11 +51,20 @@ app.use('/api/denuncias', (req, res, next) => {
 });
 app.use('/api', receber);
 
+// Diagnóstico rápido: http://localhost:3000/api/saude mostra se o banco está respondendo
+app.get('/api/saude', async (req, res) => {
+  const banco = await pool.query('SELECT COUNT(*) AS n FROM usuarios').then(() => 'conectado', (e) => e.code || 'desligado');
+  res.set('Cache-Control', 'no-store').status(banco === 'conectado' ? 200 : 503).json({ ok: banco === 'conectado', banco });
+});
+
 app.use('/api/localizacao', limitar({ maximo: 120, janelaMs: 60 * 1000 }), require('./rotas/localizacao'));
 app.use(require('./rotas/contas'));
 app.use(require('./rotas/ocorrencias'));
 app.use(require('./rotas/adocao'));
 app.use(require('./rotas/ong').rotas);
+app.use(require('./rotas/conversas'));
+app.use(require('./rotas/suporte').rotas);
+app.use(require('./rotas/admin'));
 app.use(require('./rotas/paginas'));
 
 app.use((req, res) => {
@@ -62,7 +76,7 @@ app.use((req, res) => {
   }));
 });
 
-const ERROS_DE_BANCO = new Set(['ECONNREFUSED', 'ER_ACCESS_DENIED_ERROR', 'ER_BAD_DB_ERROR', 'ER_NO_SUCH_TABLE', 'PROTOCOL_CONNECTION_LOST', 'ETIMEDOUT', 'ENOTFOUND']);
+const ERROS_DE_BANCO = new Set(['ER_NODE_ANTIGO', 'ER_BANCO_EMBUTIDO', 'ER_LOCK_WAIT_TIMEOUT', 'ECONNREFUSED', 'ER_ACCESS_DENIED_ERROR', 'ER_BAD_DB_ERROR', 'ER_NO_SUCH_TABLE', 'PROTOCOL_CONNECTION_LOST', 'ETIMEDOUT', 'ENOTFOUND']);
 const DUPLICADOS = {
   uq_usuarios_email: ['email', 'Já existe uma conta com este e-mail. Entre ou recupere a senha.'],
   uq_adotantes_cpf: ['cpf', 'Este CPF já tem uma conta.'],
@@ -81,7 +95,7 @@ app.use((erro, req, res, next) => {
   } else if (e.type === 'entity.too.large') {
     e = Object.assign(new Error('O formulário ficou grande demais.'), { status: 413 });
   } else if (ERROS_DE_BANCO.has(e.code)) {
-    console.error(`[banco] ${e.code}: ${e.message}\n  Confira se o MySQL está ligado, os dados do .env e se você rodou "npm run banco".`);
+    console.error(`[banco] ${e.code}: ${e.message}\n  ${embutido ? 'Feche o servidor e rode "iniciar.bat banco" para recriar o banco.' : 'Confira se o MySQL está ligado, os dados do .env e se você rodou "npm run banco".'}`);
     e = Object.assign(new Error('O banco de dados não está respondendo agora. Tente de novo em instantes.'), { status: 503 });
   }
   const status = e.status || 500;
@@ -99,13 +113,60 @@ app.use((erro, req, res, next) => {
   }));
 });
 
+/** Na primeira vez que o servidor sobe, o banco ainda não existe: ele é criado sozinho. */
+async function prepararBanco() {
+  const { criarBanco, versaoDosScripts, caminhoLegivel } = require('./criar-banco');
+  try {
+    await pool.query('SELECT 1 FROM usuarios LIMIT 1');
+  } catch (e) {
+    if (e.code === 'ER_BAD_DB_ERROR' || e.code === 'ER_NO_SUCH_TABLE') {
+      console.log('Criando o banco de dados com os dados de exemplo (só na primeira vez)...');
+      await criarBanco({ silencioso: true });
+      return;
+    }
+    if (embutido) {
+      console.warn(`Atenção: o banco embutido não abriu.\n  ${e.message.split('\n')[0]}`);
+    } else {
+      console.warn(`Atenção: sem conexão com o MySQL (${e.code || e.message}).`);
+      console.warn('  Ligue o MySQL (no XAMPP, botão Start do MySQL) e confira o arquivo Servidor/.env,');
+      console.warn('  ou apague a linha BANCO=mysql do .env para usar o banco embutido, que não precisa instalar nada.');
+    }
+    return;
+  }
+  if (!embutido) { console.log('Banco de dados MySQL conectado.'); return; }
+  const [versao] = await pool.query('SELECT versao FROM _versao_scripts').then(([l]) => l, () => []);
+  console.log(`Banco de dados pronto (${caminhoLegivel()}).`);
+  if (!versao || versao.versao !== versaoDosScripts()) {
+    console.warn('Aviso: os arquivos da pasta "Banco de dados" mudaram depois que este banco foi criado.');
+    console.warn('  Para atualizar, feche o servidor e rode "iniciar.bat banco" (volta aos dados de exemplo).');
+  }
+}
+
+/** Abre o site no navegador padrão (iniciar.bat passa --abrir). */
+function abrirNavegador(url) {
+  const comando = { win32: `start "" "${url}"`, darwin: `open "${url}"` }[process.platform] || `xdg-open "${url}"`;
+  require('node:child_process').exec(comando, () => {}); // se não abrir, o endereço já está no terminal
+}
+
 if (require.main === module) {
-  app.listen(config.porta, () => {
-    console.log(`Patinhas Club rodando em http://localhost:${config.porta}`);
-    pool.query('SELECT 1')
-      .then(() => console.log('Banco de dados conectado.'))
-      .catch((e) => console.warn(`Atenção: sem conexão com o banco (${e.code || e.message}). Ligue o MySQL e rode "npm run banco".`));
-  });
+  const url = `http://localhost:${config.porta}`;
+  const abrir = process.argv.includes('--abrir');
+  prepararBanco()
+    .catch((e) => console.error(`Não foi possível criar o banco: ${e.message}`))
+    .finally(() => {
+      const servidor = app.listen(config.porta);
+      servidor.on('listening', () => {
+        console.log(`\nPatinhas Club rodando em ${url}   (para parar: Ctrl+C)\n`);
+        if (abrir) abrirNavegador(url);
+      });
+      servidor.on('error', (e) => {
+        if (e.code !== 'EADDRINUSE') throw e;
+        console.error(`\nA porta ${config.porta} já está em uso: o Patinhas Club já está aberto em outra janela?`);
+        console.error('  Feche a outra janela ou troque PORTA no arquivo Servidor/.env.');
+        if (abrir) abrirNavegador(url);
+        process.exitCode = 1;
+      });
+    });
 }
 
 module.exports = app;

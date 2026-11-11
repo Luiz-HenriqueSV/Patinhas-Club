@@ -2,17 +2,18 @@
   "name": "patinhas-club-servidor",
   "version": "1.0.0",
   "private": true,
-  "description": "Servidor do Patinhas Club: formulários, contas, páginas com dados do banco e API de localização.",
+  "description": "Servidor do Patinhas Club: formulários, contas, páginas com dados do banco (embutido ou MySQL) e API de localização.",
   "main": "src/servidor.js",
   "type": "commonjs",
   "scripts": {
     "start": "node src/servidor.js",
     "dev": "node --watch src/servidor.js",
     "banco": "node src/criar-banco.js",
-    "test": "node --test"
+    "test": "node --test",
+    "teste:fluxos": "node teste/ponta-a-ponta.js"
   },
   "engines": {
-    "node": ">=20.12"
+    "node": ">=22.13"
   },
   "dependencies": {
     "express": "^5.1.0",

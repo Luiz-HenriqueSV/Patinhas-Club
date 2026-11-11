@@ -136,21 +136,21 @@
               <div class="campos">
                 <div class="campo campo-largo">
                   <label for="nome-organizacao">Nome da ONG ou do projeto <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="nome-organizacao" name="nome_organizacao" autocomplete="organization" placeholder="Ex.: ONG Amigos de Patas" required />
+                  <input type="text" id="nome-organizacao" name="nome_organizacao" autocomplete="organization" placeholder="Ex.: ONG Amigos de Patas" required maxlength="150" />
                 </div>
 
                 <div class="campo">
                   <label for="documento">CNPJ ou CPF <span class="obrigatorio" aria-hidden="true">*</span></label>
                   <input type="text" id="documento" name="documento" inputmode="numeric" placeholder="00.000.000/0000-00" required
                     pattern="(\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2})|(\d{3}\.?\d{3}\.?\d{3}-?\d{2})"
-                    title="CNPJ com 14 números ou CPF com 11 números" aria-describedby="documento-dica" />
+                    title="CNPJ com 14 números ou CPF com 11 números" aria-describedby="documento-dica" maxlength="18" data-mascara="documento" />
                   <small class="dica" id="documento-dica">Com ou sem pontos e traços.</small>
                   <small class="msg-erro">Confira o número: CNPJ tem 14 dígitos e CPF tem 11.</small>
                 </div>
 
                 <div class="campo">
                   <label for="fundacao">Ano de início das atividades</label>
-                  <input type="number" id="fundacao" name="ano_fundacao" min="1900" max="2026" placeholder="Ex.: 2014" />
+                  <input type="text" id="fundacao" name="ano_fundacao" placeholder="Ex.: 2014" inputmode="numeric" data-mascara="numero" maxlength="4" pattern="(19|20)\d{2}" />
                 </div>
 
                 <div class="campo campo-largo">
@@ -175,17 +175,17 @@
               <div class="campos">
                 <div class="campo">
                   <label for="responsavel">Nome do responsável <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="responsavel" name="responsavel" autocomplete="name" required />
+                  <input type="text" id="responsavel" name="responsavel" autocomplete="name" required maxlength="120" />
                 </div>
 
                 <div class="campo">
                   <label for="cargo">Cargo ou função</label>
-                  <input type="text" id="cargo" name="cargo" placeholder="Ex.: presidente, coordenadora" />
+                  <input type="text" id="cargo" name="cargo" placeholder="Ex.: presidente, coordenadora" maxlength="60" />
                 </div>
 
                 <div class="campo">
                   <label for="email-ong">E-mail da organização <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required aria-describedby="email-ong-dica" />
+                  <input type="email" id="email-ong" name="email" autocomplete="email" placeholder="contato@suaong.org.br" required aria-describedby="email-ong-dica" maxlength="150" />
                   <small class="dica" id="email-ong-dica">Ele vira o login do painel da ONG.</small>
                   <small class="msg-erro">Digite um e-mail válido, como contato@suaong.org.br.</small>
                 </div>
@@ -193,13 +193,13 @@
                 <div class="campo">
                   <label for="telefone-ong">Telefone ou WhatsApp <span class="obrigatorio" aria-hidden="true">*</span></label>
                   <input type="tel" id="telefone-ong" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000" required
-                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" />
+                    pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}" title="DDD e número, como (11) 90000-0000" maxlength="15" inputmode="tel" data-mascara="telefone" />
                   <small class="msg-erro">Coloque o DDD e o número, como (11) 90000-0000.</small>
                 </div>
 
                 <div class="campo campo-largo">
                   <label for="rede-social">Site ou rede social</label>
-                  <input type="text" id="rede-social" name="rede_social" placeholder="@suaong ou www.suaong.org.br" />
+                  <input type="text" id="rede-social" name="rede_social" placeholder="@suaong ou www.suaong.org.br" maxlength="150" />
                 </div>
               </div>
             </fieldset>
@@ -215,23 +215,23 @@
                 <div class="campo">
                   <label for="cep">CEP <span class="obrigatorio" aria-hidden="true">*</span></label>
                   <input type="text" id="cep" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9" required
-                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" />
+                    pattern="\d{5}-?\d{3}" title="CEP com 8 números" data-mascara="cep" />
                   <small class="msg-erro">O CEP tem 8 números, como 09910-000.</small>
                 </div>
 
                 <div class="campo">
                   <label for="endereco">Rua e número</label>
-                  <input type="text" id="endereco" name="endereco" autocomplete="street-address" />
+                  <input type="text" id="endereco" name="endereco" autocomplete="street-address" maxlength="150" />
                 </div>
 
                 <div class="campo">
                   <label for="bairro">Bairro <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="bairro" name="bairro" required />
+                  <input type="text" id="bairro" name="bairro" required maxlength="80" />
                 </div>
 
                 <div class="campo">
                   <label for="cidade">Cidade <span class="obrigatorio" aria-hidden="true">*</span></label>
-                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required />
+                  <input type="text" id="cidade" name="cidade" autocomplete="address-level2" required maxlength="100" />
                 </div>
 
                 <div class="campo">
@@ -400,6 +400,7 @@
             <li><a href="denuncia.html">Denunciar maus-tratos</a></li>
             <li><a href="ongs.html">ONGs parceiras</a></li>
             <li><a href="sobre.html">Sobre o projeto</a></li>
+            <li><a href="ajuda.html">Central de ajuda</a></li>
           </ul>
         </nav>
       </div>

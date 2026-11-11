@@ -260,3 +260,84 @@ INSERT INTO campanhas (id, ong_id, tipo, titulo, descricao, meta_texto, meta_val
    'Bazar de roupas e objetos doados, com toda a renda revertida para os resgatados.',
    NULL, NULL, 'R$', 2380, CURDATE() - INTERVAL 50 DAY, CURDATE() - INTERVAL 50 DAY, 'Sede da ONG, Diadema',
    'Doe roupas e objetos em bom estado.', 'encerrada');
+
+
+-- -----------------------------------------------------------------------------
+-- Demonstração: equipe do Patinhas Club, ONG aguardando validação e denúncias
+-- -----------------------------------------------------------------------------
+
+INSERT INTO usuarios (id, tipo, email, senha_hash) VALUES
+  (9,  'admin', 'admin@patinhasclub.test',   'scrypt$16384$8$1$8QouoNokiD5q0czQb+B4kg==$IAvQD1AQI2BkQvNhHPpKBVc6xWEPVN0xXveZ+XNAH7aosR5SjGHbmpGwO04DtX1UoQWNY0OqmW2bYIvmyALLRQ=='),
+  (10, 'ong',   'recanto@patinhasclub.test', NULL);
+
+INSERT INTO administradores (usuario_id, nome) VALUES (9, 'Equipe Patinhas Club');
+
+INSERT INTO enderecos (id, cidade_id, logradouro, numero, bairro, referencia, latitude, longitude, precisao_m, origem) VALUES
+  (13, 6, 'Rua das Hortênsias', '48', 'Centro', NULL, -23.711200, -46.413600, NULL, 'cep'),
+  (14, 1, 'Rua Oriente Monti', '300', 'Centro', 'Perto do ponto de ônibus', -23.686900, -46.620400, 15, 'gps'),
+  (15, 2, NULL, NULL, 'Rudge Ramos', 'Terreno ao lado do mercado', -23.655900, -46.573300, NULL, 'mapa');
+
+-- Cadastro ainda sem senha: a equipe aprova no painel e o link para criar a senha vai por e-mail
+INSERT INTO ongs (usuario_id, tipo, nome, documento, ano_fundacao, apresentacao, responsavel, cargo, telefone,
+                  rede_social, endereco_id, ocultar_endereco, quantidade_animais, status_verificacao, verificada_em, recebe_novidades) VALUES
+  (10, 'abrigo', 'Recanto dos Bigodes', '11444777000161', 2021,
+   'Abrigo de gatos resgatados em Ribeirão Pires. Cuidamos de cerca de 25 animais com a ajuda de voluntários.',
+   'Paulo Henrique Souza', 'Fundador', '11940001010', '@recantodosbigodes', 13, FALSE, '11-30', 'pendente', NULL, TRUE);
+
+INSERT INTO ong_documentos (ong_id, tipo, arquivo) VALUES
+  (10, 'identificacao', 'privado/exemplo-identificacao.pdf'), (10, 'atuacao', 'privado/exemplo-atuacao.pdf');
+INSERT INTO ong_especie (ong_id, especie_id) VALUES (10, 2);
+
+INSERT INTO denuncias (usuario_id, endereco_id, tipo_ocorrencia, quantidade_animais, ainda_no_local, situacao_animal, especie_id, porte,
+                       caracteristicas, data_ocorrencia, hora_ocorrencia, denunciante_nome, denunciante_telefone, denunciante_email,
+                       receber_andamento, status, criado_em) VALUES
+  (NULL, 14, 'maus-tratos', 1, 'sim', 'Cachorro preso em corrente curta no quintal, sem água e sem abrigo do sol. Late o dia inteiro.',
+   1, 'medio', 'Caramelo, com coleira vermelha', CURDATE() - INTERVAL 1 DAY, '14:30:00', NULL, NULL, NULL, FALSE, 'recebida', NOW() - INTERVAL 20 HOUR),
+  (7, 15, 'abandono', 3, 'nao-sei', 'Três filhotes deixados em uma caixa de papelão no terreno. Estavam magros e com frio.',
+   2, 'pequeno', 'Dois rajados e um preto', CURDATE() - INTERVAL 4 DAY, NULL, 'Juliana Mendes', '11987650007', 'adotante@patinhasclub.test',
+   TRUE, 'em_analise', NOW() - INTERVAL 90 HOUR);
+
+
+-- -----------------------------------------------------------------------------
+-- Demonstração: conversas entre adotantes e ONGs
+-- O gatilho atualiza a data e o "leu até" da conversa a cada mensagem.
+-- -----------------------------------------------------------------------------
+
+INSERT INTO conversas (id, adotante_id, ong_id, animal_id, criado_em) VALUES
+  (1, 7, 3, 3, NOW() - INTERVAL 144 HOUR),
+  (2, 7, 1, 1, NOW() - INTERVAL 24 HOUR),
+  (3, 8, 1, 4, NOW() - INTERVAL 72 HOUR);
+
+INSERT INTO mensagens (id, conversa_id, autor, tipo, texto, enviada_em) VALUES
+  (1,  1, 'adotante', 'aviso', 'Pedido de adoção da Mel enviado.', NOW() - INTERVAL 144 HOUR),
+  (2,  1, 'ong',      'texto', 'Oi, Juliana! Obrigada pelo interesse na Mel. Ela é carinhosa e se dá bem com outros gatos. Como é a sua casa?', NOW() - INTERVAL 120 HOUR),
+  (3,  1, 'adotante', 'texto', 'Oi, Ana! Moro em casa com quintal telado e já tenho uma gata castrada de 4 anos.', NOW() - INTERVAL 119 HOUR),
+  (4,  1, 'ong',      'texto', 'Perfeito! Podemos marcar uma visita para vocês se conhecerem?', NOW() - INTERVAL 96 HOUR),
+  (5,  1, 'adotante', 'texto', 'Claro! Posso no sábado à tarde.', NOW() - INTERVAL 95 HOUR),
+  (6,  1, 'ong',      'aviso', 'Visita marcada para conhecer a Mel.', NOW() - INTERVAL 94 HOUR),
+  (7,  1, 'adotante', 'texto', 'Combinado, até lá!', NOW() - INTERVAL 93 HOUR),
+  (8,  2, 'adotante', 'aviso', 'Pedido de adoção do Churros enviado.', NOW() - INTERVAL 24 HOUR),
+  (9,  2, 'adotante', 'texto', 'Olá! O Churros convive bem com gatos?', NOW() - INTERVAL 23 HOUR),
+  (10, 2, 'ong',      'texto', 'Oi, Juliana! Convive sim: ele divide o lar temporário com duas gatas. Quer conhecer o Churros no sábado?', NOW() - INTERVAL 2 HOUR),
+  (11, 3, 'adotante', 'aviso', 'Pedido de adoção do Thor enviado.', NOW() - INTERVAL 72 HOUR),
+  (12, 3, 'ong',      'texto', 'Olá, Rafael! Estamos analisando o seu pedido. O Thor tem bastante energia: você costuma passear todos os dias?', NOW() - INTERVAL 48 HOUR),
+  (13, 3, 'adotante', 'texto', 'Passeio sim! Corro no parque toda manhã e ele pode ir comigo.', NOW() - INTERVAL 3 HOUR);
+
+
+-- -----------------------------------------------------------------------------
+-- Demonstração: chamados de suporte (o gatilho ajusta a situação a cada resposta)
+-- -----------------------------------------------------------------------------
+
+INSERT INTO chamados_suporte (id, protocolo, usuario_id, nome, email, categoria, assunto, criado_em) VALUES
+  (1, 'SUP-7K2M9QXA', 7,    'Juliana Mendes', 'adotante@patinhasclub.test', 'adocao', 'Posso remarcar a visita?', NOW() - INTERVAL 50 HOUR),
+  (2, 'SUP-3F8T6WPL', NULL, 'Carlos Pereira', 'carlos@exemplo.test',        'conta',  'Não recebi o e-mail para criar a senha', NOW() - INTERVAL 5 HOUR),
+  (3, 'SUP-9B4H2RDN', 1,    'Carla Nogueira', 'ong@patinhasclub.test',      'ong',    'Como destacar uma campanha?', NOW() - INTERVAL 200 HOUR);
+
+INSERT INTO chamado_mensagens (chamado_id, autor, admin_id, texto, enviada_em) VALUES
+  (1, 'solicitante', NULL, 'Marquei uma visita para conhecer a Mel, mas vou precisar mudar o dia. Como faço?', NOW() - INTERVAL 50 HOUR),
+  (1, 'equipe',      9,    'Oi, Juliana! É só combinar o novo dia com a protetora pelo chat, em Mensagens. Ela atualiza a visita no painel dela.', NOW() - INTERVAL 44 HOUR),
+  (2, 'solicitante', NULL, 'Cadastrei meu abrigo há três dias e ainda não recebi o link para criar a senha.', NOW() - INTERVAL 5 HOUR),
+  (3, 'solicitante', NULL, 'Queria que a campanha de ração aparecesse em destaque na página de campanhas.', NOW() - INTERVAL 200 HOUR),
+  (3, 'equipe',      9,    'Oi, Carla! O destaque fica com a campanha aberta que termina primeiro. Vale revisar a data final da sua.', NOW() - INTERVAL 190 HOUR);
+
+UPDATE chamados_suporte SET status = 'resolvido' WHERE id = 3;

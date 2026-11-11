@@ -1,0 +1,3 @@
+# Arquivos .bat precisam de quebra de linha do Windows para rodar no Prompt de Comando
+*.bat text eol=crlf
+*.sh text eol=lf
