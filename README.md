@@ -130,8 +130,8 @@ Cadastro e autenticação com perfis próprios para **adotantes** e para **ONGs/
 
 | Camada                | Tecnologia                                 |
 | --------------------- | ------------------------------------------ |
-| Front-end             | HTML5 e CSS3 (nesta etapa, sem JavaScript) |
-| Back-end              | _a definir_                                |
+| Front-end             | HTML5 e CSS3, JavaScript                   |
+| Back-end              | JavaScript                                 |
 | Banco de dados        | MySQL                                      |
 | Design / Prototipação | Figma, INkscape, Photopea                  |
 
